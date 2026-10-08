@@ -12,7 +12,7 @@ This version runs inside Anki Desktop. Choose B1, B2 or C1; the selected level c
 6. Choose Prepare one new exercise. Read the supported example, play any audio, and confirm that you understand the target and surrounding language.
 7. Choose Study due / new cards in Anki, then Study Now. Enter or recall your answer, reveal the reference, and choose your own Anki rating.
 
-The daily default is 15 active minutes, at most six new knowledge units and eight new cards. You can prepare a specific format or lower-level repair from Home. Stage changes do not reset these caps or remove introduced reviews. Related reverse-direction cards are separated across study days.
+The daily default is 15 active minutes, at most six new knowledge units and eight new cards. You can prepare a specific format or lower-level repair from Home. Stage changes do not reset these caps or remove introduced reviews. Related reverse-direction cards are separated across study days. Heavy due workloads pause new admission; it resumes after two study dates below the recovery threshold, or through the explicit Home override. Daily time and new-card caps still apply.
 
 ## While studying
 

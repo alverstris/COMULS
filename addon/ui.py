@@ -22,6 +22,7 @@ from .core import (AUDIO_TYPES, ENTRY_LEVELS, EXERCISE_TYPES, LEVELS,
 from .collection import (get_state, save_state, exercise_notes, prepare_exercise,
     mark_familiarised, activate_exercise, ensure_deck, stage_change, stats)
 from .telemetry import LocalData
+from .workload import update_backlog
 
 ROOT = Path(__file__).resolve().parent
 _controller = None
@@ -67,6 +68,7 @@ class CourseController:
         self.last_tick = time.monotonic()
         self.last_flush = self.last_tick
         self.busy = False
+        self.hard_streak = 0
         self.closed = False
         self.clock = QTimer(mw)
         self.clock.setInterval(1000)
@@ -97,6 +99,8 @@ class CourseController:
         if not self.window:
             self.window = CourseWindow(self)
         self.window.refresh()
+        if not self.state().get("stage_confirmed", False):
+            self.window.tabs.setCurrentIndex(1)
         self.window.show()
         self.window.raise_()
         self.window.activateWindow()
@@ -151,6 +155,10 @@ class CourseController:
         state = self.state()
         counts = stats(mw.col)
         day, record = self.today()
+        updated = update_backlog(state, day, counts.get("due", 0) * 25, state.get("budget_minutes", 15) * 60)
+        if updated != state and not self.busy:
+            save_state(mw.col, updated)
+            state = updated
         units, admitted, seen_units = set(), 0, set()
         first_days = {}
         for note in exercise_notes(mw.col).values():
@@ -177,14 +185,47 @@ class CourseController:
         if self.closed or not mw.col:
             return
         try:
-            self.local.record(event, self.state().get("diagnostics", False))
+            self.local.record(event, self.state().get("diagnostics", False) or event.get("event") == "report")
         except OSError:
             tooltip("COMULS could not save local diagnostics. Native reviews are unaffected.")
+        if event.get("event") == "report":
+            tooltip("Problem recorded locally. Export study data if you choose to share it.")
         if event.get("event") == "question":
             if self.budget()["remaining_seconds"] <= 0:
                 QTimer.singleShot(0, self.on_budget_limit)
+            elif self.hard_streak >= 3 and event.get("type") in ("sentence_transcription", "sentence_transformation"):
+                QTimer.singleShot(0, self.offer_break)
         elif event.get("event") == "native_grade":
+            kind = self.by_id.get(event.get("exercise_id"), {}).get("type")
+            self.hard_streak = self.hard_streak + 1 if kind in ("sentence_transcription", "sentence_transformation") else 0
             self.flush_time()
+            state = self.state()
+            counts = stats(mw.col)
+            state = update_backlog(state, mw.col.sched.today, counts.get("due", 0) * 25,
+                state.get("budget_minutes", 15) * 60, completed=True)
+            save_state(mw.col, state)
+
+    def offer_break(self):
+        if self.closed or mw.state != "review" or not self.current_is_comuls():
+            return
+        self.hard_streak = 0
+        if QMessageBox.question(mw, "A useful stopping point",
+            "You have completed several demanding cards. Take a break now?",
+            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No,
+            QMessageBox.StandardButton.Yes) == QMessageBox.StandardButton.Yes:
+            av_player.stop_and_clear_queue()
+            mw.moveToState("deckBrowser")
+            self.show()
+
+    def resume_new_today(self):
+        if not self.require_manager():
+            return
+        state = self.state()
+        state["backlog_override_day"] = mw.col.sched.today
+        save_state(mw.col, state)
+        self.on_event({"event": "backlog_override"})
+        self.window.refresh()
+        showInfo("New learning may resume today if the level, familiarity, daily caps and remaining time allow it.", parent=self.window)
 
     def on_budget_limit(self):
         if self.closed or not mw.col or mw.state != "review" or not self.current_is_comuls():
@@ -273,6 +314,10 @@ class CourseController:
         if not self.require_manager() or self.busy:
             return
         state, budget = self.state(), self.budget()
+        if not state.get("stage_confirmed", False):
+            self.window.tabs.setCurrentIndex(1)
+            showInfo("Choose B1, B2 or C1 and click Use this level first.", parent=self.window)
+            return
         notes = exercise_notes(mw.col)
         day = mw.col.sched.today
         candidates, blocked = [], {}
@@ -329,7 +374,7 @@ class CourseController:
                                "and check that the surrounding language makes sense."))
         text = QTextBrowser()
         text.setPlainText("\n\n".join(str(exercise.get(k, "")) for k in
-            ("prompt", "audio_text", "answer", "target_meaning", "carrier_meaning", "explanation") if exercise.get(k)))
+            ("prompt", "audio_text", "answer", "target_meaning", "english_support", "carrier_meaning", "explanation") if exercise.get(k)))
         layout.addWidget(text)
         heard = {"value": exercise["type"] not in AUDIO_TYPES}
         if exercise.get("audio_text") or exercise.get("audio_file"):
@@ -375,9 +420,16 @@ class CourseController:
                     lambda _nid: tooltip("Added to Anki practice. Use Study due / new cards when ready.", parent=self.window))
 
     def change_stage(self, stage):
-        if not self.require_manager() or stage == self.state()["stage"]:
+        if not self.require_manager():
             return
-        self.mutate("Change COMULS entry level", lambda col: stage_change(col, stage, self.catalog))
+        def apply(col):
+            result = stage_change(col, stage, self.catalog)
+            state = get_state(col)
+            state["stage_confirmed"] = True
+            save_state(col, state)
+            return result
+        self.mutate("Change COMULS entry level", apply,
+            lambda _result: self.window.tabs.setCurrentIndex(0))
 
     def preview(self, exercise):
         dialog = QDialog(self.window or mw)
@@ -497,6 +549,7 @@ class CourseWindow(QDialog):
         button("Prepare one new exercise", lambda: self.c.prepare_next(self.activity.currentData()), self.home_layout)
         button("Prepare lower-level repair", lambda: self.c.prepare_next(self.activity.currentData(), True), self.home_layout)
         button("Check French audio", self.c.audio_check, self.home_layout)
+        button("Resume new learning today despite backlog", self.c.resume_new_today, self.home_layout)
         self.home_layout.addWidget(label("Prepare only what fits today. Anki schedules the cards you have introduced. "
             "Show the answer and choose Again / Hard / Good / Easy yourself; COMULS never rates for you."))
         self.home_layout.addStretch()

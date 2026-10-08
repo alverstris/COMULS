@@ -254,6 +254,8 @@ class ReviewerHookTests(unittest.TestCase):
         with patch.object(self.module, "validate_message",
                           side_effect=AssertionError("Should not parse")):
             self.assertEqual(self.integration._web_message((False, None),
+                                                           "comuls:{", None), (True, None))
+            self.assertEqual(self.integration._web_message((False, None),
                                                            "comuls:{", foreign), (True, None))
             self.reviewer.card = SimpleNamespace(id=124)
             self.assertEqual(self.integration._web_message((False, None),

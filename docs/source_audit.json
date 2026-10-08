@@ -1,0 +1,149 @@
+{
+  "schema_version": 1,
+  "source": {
+    "path": "/home/runner/work/COMULS/COMULS/outputs/french_vocabulary_b1_c1.csv",
+    "sha256": "094216cdd2269e8398734360799aa39aab33174bd90594d88c79f74d4ee9bb44",
+    "bytes": 42149306
+  },
+  "purpose": "Audit unchanged vocabulary inventory; not generated course content.",
+  "source_modified": false,
+  "headers": [
+    "entry_id",
+    "vocabulary",
+    "entry_type",
+    "cefr_level",
+    "tags",
+    "definition_language",
+    "definition_status",
+    "definition_coverage",
+    "sense_count",
+    "definition",
+    "senses_json",
+    "part_of_speech",
+    "gender",
+    "required_constructions",
+    "base_entry_id",
+    "vocabulary_source",
+    "vocabulary_source_url",
+    "vocabulary_license",
+    "source_cefr_level",
+    "level_basis",
+    "band_basis",
+    "definition_source",
+    "definition_source_url",
+    "card_ready",
+    "inflection_aliases_json",
+    "headword_normalization_json",
+    "sense_preservation_requirements_json",
+    "expression_meaning_relation_ids_json",
+    "source_phrase_variants_json"
+  ],
+  "observed_sense_keys": [
+    "aliases",
+    "card_preparation_status",
+    "card_ready",
+    "context_provenance",
+    "context_sentence",
+    "definition",
+    "definition_language",
+    "display_order",
+    "entry_id",
+    "expression_meaning_blocking_relation_ids",
+    "expression_meaning_note_generation_blocked",
+    "expression_meaning_relation_ids",
+    "family_relation_review",
+    "gender",
+    "grammatical_realizations",
+    "part_of_speech",
+    "property_action_relation",
+    "property_category_repair",
+    "quality_correction_receipt",
+    "required_construction",
+    "semantic_label",
+    "sense_cefr_level",
+    "sense_id",
+    "sense_level_status",
+    "source_claims",
+    "source_disagreement",
+    "translation_provenance",
+    "usage",
+    "verification_status"
+  ],
+  "counts": {
+    "parent_rows": 10407,
+    "unique_parent_ids": 10407,
+    "sense_records": 24608,
+    "unique_sense_ids": 24608,
+    "duplicate_parent_id_occurrences": 0,
+    "conflicting_parent_id_occurrences": 0,
+    "duplicate_sense_id_occurrences": 0,
+    "conflicting_sense_id_occurrences": 0
+  },
+  "classification": {
+    "status": "complete",
+    "explicit_fields_observed": [
+      "entry_type"
+    ],
+    "counts": {
+      "word_families": 10037,
+      "expressions": 370,
+      "unknown": 0,
+      "conflicting_explicit_labels": 0
+    }
+  },
+  "parent_field_counts": {
+    "cefr_level": {
+      "B1": 1057,
+      "B1/B2": 810,
+      "B2": 2793,
+      "B2/C1": 2459,
+      "C1": 3288
+    },
+    "definition_language": {
+      "en": 3675,
+      "fr": 6732
+    }
+  },
+  "sense_field_counts": {
+    "definition_language": {
+      "en": 9370,
+      "fr": 15238
+    },
+    "sense_cefr_level": {
+      "null": 24608
+    }
+  },
+  "card_ready": {
+    "parents": {
+      "false": 10407
+    },
+    "senses": {
+      "false": 24608
+    }
+  },
+  "json_fields_checked": {
+    "parent.expression_meaning_relation_ids_json": 10407,
+    "parent.headword_normalization_json": 10407,
+    "parent.inflection_aliases_json": 10407,
+    "parent.sense_preservation_requirements_json": 10407,
+    "parent.senses_json": 10407,
+    "parent.source_phrase_variants_json": 10407
+  },
+  "reference_scope": "Embedded alias, realization and relation JSON is parsed without rewriting. External relationship targets are not assumed to be contained in this inventory.",
+  "readme_comparison": {
+    "parent_rows": {
+      "documented": 10407,
+      "observed": 10407,
+      "matches": true
+    },
+    "sense_records": {
+      "documented": 24608,
+      "observed": 24608,
+      "matches": true
+    }
+  },
+  "errors": [],
+  "error_count": 0,
+  "warnings": [],
+  "status": "passed"
+}

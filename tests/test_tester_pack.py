@@ -44,3 +44,14 @@ class TesterPackTests(unittest.TestCase):
             self.assertTrue(all(not any(p in t["text"] for p in ".,;:!?") for t in tokens))
             result = core.evaluate_answer(e, [t["id"] for t in tokens])
             self.assertEqual(result["status"], "correct")
+
+    def test_definition_assignments_are_frozen_per_unit(self):
+        pack = core.load_pack(ROOT / "addon/data/tester.json")
+        for stage, expected in (("B1", 0), ("B2", 1), ("C1", 2)):
+            units = {}
+            for e in pack["exercises"]:
+                if e["type"] in ("meaning_recall", "french_form_recall") and e["origin_entry_level"] == stage:
+                    if e["unit_id"] in units:
+                        self.assertEqual(units[e["unit_id"]], e["definition_language"])
+                    units[e["unit_id"]] = e["definition_language"]
+            self.assertEqual(sum(lang == "fr" for lang in units.values()), expected)

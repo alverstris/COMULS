@@ -39,7 +39,8 @@
         "expression_ratings": "Existing source expression ratings unchanged."
       },
       "origin_entry_level": "B1",
-      "estimated_seconds": 15
+      "estimated_seconds": 15,
+      "carrier_help_reveals_target": false
     },
     {
       "id": "ctx_b1_vocabulary_cloze_02",
@@ -76,7 +77,8 @@
         "expression_ratings": "Existing source expression ratings unchanged."
       },
       "origin_entry_level": "B1",
-      "estimated_seconds": 15
+      "estimated_seconds": 15,
+      "carrier_help_reveals_target": false
     },
     {
       "id": "ctx_b1_vocabulary_cloze_03",
@@ -113,7 +115,8 @@
         "expression_ratings": "Existing source expression ratings unchanged."
       },
       "origin_entry_level": "B1",
-      "estimated_seconds": 15
+      "estimated_seconds": 15,
+      "carrier_help_reveals_target": false
     },
     {
       "id": "ctx_b1_grammar_cloze_01",
@@ -150,7 +153,8 @@
         "expression_ratings": "Existing source expression ratings unchanged."
       },
       "origin_entry_level": "B1",
-      "estimated_seconds": 18
+      "estimated_seconds": 18,
+      "carrier_help_reveals_target": false
     },
     {
       "id": "ctx_b1_grammar_cloze_02",
@@ -187,7 +191,8 @@
         "expression_ratings": "Existing source expression ratings unchanged."
       },
       "origin_entry_level": "B1",
-      "estimated_seconds": 18
+      "estimated_seconds": 18,
+      "carrier_help_reveals_target": false
     },
     {
       "id": "ctx_b1_grammar_cloze_03",
@@ -224,7 +229,8 @@
         "expression_ratings": "Existing source expression ratings unchanged."
       },
       "origin_entry_level": "B1",
-      "estimated_seconds": 18
+      "estimated_seconds": 18,
+      "carrier_help_reveals_target": false
     },
     {
       "id": "ctx_b1_grammar_meaning_choice_01",
@@ -277,7 +283,8 @@
         "expression_ratings": "Existing source expression ratings unchanged."
       },
       "origin_entry_level": "B1",
-      "estimated_seconds": 12
+      "estimated_seconds": 12,
+      "carrier_help_reveals_target": false
     },
     {
       "id": "ctx_b1_grammar_meaning_choice_02",
@@ -330,7 +337,8 @@
         "expression_ratings": "Existing source expression ratings unchanged."
       },
       "origin_entry_level": "B1",
-      "estimated_seconds": 12
+      "estimated_seconds": 12,
+      "carrier_help_reveals_target": false
     },
     {
       "id": "ctx_b1_grammar_meaning_choice_03",
@@ -383,7 +391,8 @@
         "expression_ratings": "Existing source expression ratings unchanged."
       },
       "origin_entry_level": "B1",
-      "estimated_seconds": 12
+      "estimated_seconds": 12,
+      "carrier_help_reveals_target": false
     },
     {
       "id": "ctx_b1_sentence_transformation_01",
@@ -420,7 +429,8 @@
         "expression_ratings": "Existing source expression ratings unchanged."
       },
       "origin_entry_level": "B1",
-      "estimated_seconds": 40
+      "estimated_seconds": 40,
+      "carrier_help_reveals_target": false
     },
     {
       "id": "ctx_b1_sentence_transformation_02",
@@ -457,7 +467,8 @@
         "expression_ratings": "Existing source expression ratings unchanged."
       },
       "origin_entry_level": "B1",
-      "estimated_seconds": 40
+      "estimated_seconds": 40,
+      "carrier_help_reveals_target": false
     },
     {
       "id": "ctx_b1_sentence_transformation_03",
@@ -494,7 +505,8 @@
         "expression_ratings": "Existing source expression ratings unchanged."
       },
       "origin_entry_level": "B1",
-      "estimated_seconds": 40
+      "estimated_seconds": 40,
+      "carrier_help_reveals_target": false
     },
     {
       "id": "ctx_b2_vocabulary_cloze_01",
@@ -530,7 +542,8 @@
         "expression_ratings": "Existing source expression ratings unchanged."
       },
       "origin_entry_level": "B2",
-      "estimated_seconds": 15
+      "estimated_seconds": 15,
+      "carrier_help_reveals_target": false
     },
     {
       "id": "ctx_b2_vocabulary_cloze_02",
@@ -566,7 +579,8 @@
         "expression_ratings": "Existing source expression ratings unchanged."
       },
       "origin_entry_level": "B2",
-      "estimated_seconds": 15
+      "estimated_seconds": 15,
+      "carrier_help_reveals_target": false
     },
     {
       "id": "ctx_b2_vocabulary_cloze_03",
@@ -602,7 +616,8 @@
         "expression_ratings": "Existing source expression ratings unchanged."
       },
       "origin_entry_level": "B2",
-      "estimated_seconds": 15
+      "estimated_seconds": 15,
+      "carrier_help_reveals_target": false
     },
     {
       "id": "ctx_b2_grammar_cloze_01",
@@ -638,7 +653,8 @@
         "expression_ratings": "Existing source expression ratings unchanged."
       },
       "origin_entry_level": "B2",
-      "estimated_seconds": 18
+      "estimated_seconds": 18,
+      "carrier_help_reveals_target": false
     },
     {
       "id": "ctx_b2_grammar_cloze_02",
@@ -674,7 +690,8 @@
         "expression_ratings": "Existing source expression ratings unchanged."
       },
       "origin_entry_level": "B2",
-      "estimated_seconds": 18
+      "estimated_seconds": 18,
+      "carrier_help_reveals_target": false
     },
     {
       "id": "ctx_b2_grammar_cloze_03",
@@ -710,7 +727,8 @@
         "expression_ratings": "Existing source expression ratings unchanged."
       },
       "origin_entry_level": "B2",
-      "estimated_seconds": 18
+      "estimated_seconds": 18,
+      "carrier_help_reveals_target": false
     },
     {
       "id": "ctx_b2_grammar_meaning_choice_01",
@@ -762,7 +780,8 @@
         "expression_ratings": "Existing source expression ratings unchanged."
       },
       "origin_entry_level": "B2",
-      "estimated_seconds": 12
+      "estimated_seconds": 12,
+      "carrier_help_reveals_target": false
     },
     {
       "id": "ctx_b2_grammar_meaning_choice_02",
@@ -814,7 +833,8 @@
         "expression_ratings": "Existing source expression ratings unchanged."
       },
       "origin_entry_level": "B2",
-      "estimated_seconds": 12
+      "estimated_seconds": 12,
+      "carrier_help_reveals_target": false
     },
     {
       "id": "ctx_b2_grammar_meaning_choice_03",
@@ -866,7 +886,8 @@
         "expression_ratings": "Existing source expression ratings unchanged."
       },
       "origin_entry_level": "B2",
-      "estimated_seconds": 12
+      "estimated_seconds": 12,
+      "carrier_help_reveals_target": false
     },
     {
       "id": "ctx_b2_sentence_transformation_01",
@@ -902,7 +923,8 @@
         "expression_ratings": "Existing source expression ratings unchanged."
       },
       "origin_entry_level": "B2",
-      "estimated_seconds": 40
+      "estimated_seconds": 40,
+      "carrier_help_reveals_target": false
     },
     {
       "id": "ctx_b2_sentence_transformation_02",
@@ -938,7 +960,8 @@
         "expression_ratings": "Existing source expression ratings unchanged."
       },
       "origin_entry_level": "B2",
-      "estimated_seconds": 40
+      "estimated_seconds": 40,
+      "carrier_help_reveals_target": false
     },
     {
       "id": "ctx_b2_sentence_transformation_03",
@@ -974,7 +997,8 @@
         "expression_ratings": "Existing source expression ratings unchanged."
       },
       "origin_entry_level": "B2",
-      "estimated_seconds": 40
+      "estimated_seconds": 40,
+      "carrier_help_reveals_target": false
     },
     {
       "id": "ctx_c1_vocabulary_cloze_01",
@@ -1009,7 +1033,8 @@
         "expression_ratings": "Existing source expression ratings unchanged."
       },
       "origin_entry_level": "C1",
-      "estimated_seconds": 15
+      "estimated_seconds": 15,
+      "carrier_help_reveals_target": false
     },
     {
       "id": "ctx_c1_vocabulary_cloze_02",
@@ -1044,7 +1069,8 @@
         "expression_ratings": "Existing source expression ratings unchanged."
       },
       "origin_entry_level": "C1",
-      "estimated_seconds": 15
+      "estimated_seconds": 15,
+      "carrier_help_reveals_target": false
     },
     {
       "id": "ctx_c1_vocabulary_cloze_03",
@@ -1079,7 +1105,8 @@
         "expression_ratings": "Existing source expression ratings unchanged."
       },
       "origin_entry_level": "C1",
-      "estimated_seconds": 15
+      "estimated_seconds": 15,
+      "carrier_help_reveals_target": false
     },
     {
       "id": "ctx_c1_grammar_cloze_01",
@@ -1114,7 +1141,8 @@
         "expression_ratings": "Existing source expression ratings unchanged."
       },
       "origin_entry_level": "C1",
-      "estimated_seconds": 18
+      "estimated_seconds": 18,
+      "carrier_help_reveals_target": false
     },
     {
       "id": "ctx_c1_grammar_cloze_02",
@@ -1149,7 +1177,8 @@
         "expression_ratings": "Existing source expression ratings unchanged."
       },
       "origin_entry_level": "C1",
-      "estimated_seconds": 18
+      "estimated_seconds": 18,
+      "carrier_help_reveals_target": false
     },
     {
       "id": "ctx_c1_grammar_cloze_03",
@@ -1184,7 +1213,8 @@
         "expression_ratings": "Existing source expression ratings unchanged."
       },
       "origin_entry_level": "C1",
-      "estimated_seconds": 18
+      "estimated_seconds": 18,
+      "carrier_help_reveals_target": false
     },
     {
       "id": "ctx_c1_grammar_meaning_choice_01",
@@ -1235,7 +1265,8 @@
         "expression_ratings": "Existing source expression ratings unchanged."
       },
       "origin_entry_level": "C1",
-      "estimated_seconds": 12
+      "estimated_seconds": 12,
+      "carrier_help_reveals_target": false
     },
     {
       "id": "ctx_c1_grammar_meaning_choice_02",
@@ -1286,7 +1317,8 @@
         "expression_ratings": "Existing source expression ratings unchanged."
       },
       "origin_entry_level": "C1",
-      "estimated_seconds": 12
+      "estimated_seconds": 12,
+      "carrier_help_reveals_target": false
     },
     {
       "id": "ctx_c1_grammar_meaning_choice_03",
@@ -1337,7 +1369,8 @@
         "expression_ratings": "Existing source expression ratings unchanged."
       },
       "origin_entry_level": "C1",
-      "estimated_seconds": 12
+      "estimated_seconds": 12,
+      "carrier_help_reveals_target": false
     },
     {
       "id": "ctx_c1_sentence_transformation_01",
@@ -1373,7 +1406,8 @@
         "expression_ratings": "Existing source expression ratings unchanged."
       },
       "origin_entry_level": "C1",
-      "estimated_seconds": 40
+      "estimated_seconds": 40,
+      "carrier_help_reveals_target": false
     },
     {
       "id": "ctx_c1_sentence_transformation_02",
@@ -1408,7 +1442,8 @@
         "expression_ratings": "Existing source expression ratings unchanged."
       },
       "origin_entry_level": "C1",
-      "estimated_seconds": 40
+      "estimated_seconds": 40,
+      "carrier_help_reveals_target": false
     },
     {
       "id": "ctx_c1_sentence_transformation_03",
@@ -1443,7 +1478,8 @@
         "expression_ratings": "Existing source expression ratings unchanged."
       },
       "origin_entry_level": "C1",
-      "estimated_seconds": 40
+      "estimated_seconds": 40,
+      "carrier_help_reveals_target": false
     },
     {
       "id": "pilot_b1_meaning_recall_1",
@@ -1479,7 +1515,9 @@
         "level_basis": "provisional task estimate"
       },
       "origin_entry_level": "B1",
-      "estimated_seconds": 8
+      "estimated_seconds": 8,
+      "carrier_help_reveals_target": true,
+      "definition_language": "en"
     },
     {
       "id": "pilot_b1_french_form_recall_1",
@@ -1515,7 +1553,9 @@
         "level_basis": "provisional task estimate"
       },
       "origin_entry_level": "B1",
-      "estimated_seconds": 12
+      "estimated_seconds": 12,
+      "carrier_help_reveals_target": false,
+      "definition_language": "en"
     },
     {
       "id": "pilot_b1_meaning_recall_2",
@@ -1551,7 +1591,9 @@
         "level_basis": "provisional task estimate"
       },
       "origin_entry_level": "B1",
-      "estimated_seconds": 8
+      "estimated_seconds": 8,
+      "carrier_help_reveals_target": true,
+      "definition_language": "en"
     },
     {
       "id": "pilot_b1_french_form_recall_2",
@@ -1587,7 +1629,9 @@
         "level_basis": "provisional task estimate"
       },
       "origin_entry_level": "B1",
-      "estimated_seconds": 12
+      "estimated_seconds": 12,
+      "carrier_help_reveals_target": false,
+      "definition_language": "en"
     },
     {
       "id": "pilot_b2_meaning_recall_1",
@@ -1598,15 +1642,15 @@
         "C1"
       ],
       "prompt": "Recall the meaning of “atténuer” in this sentence:\nCes mesures devraient atténuer les effets de la hausse des prix.",
-      "answer": "to make something less strong or less intense",
+      "answer": "rendre quelque chose moins fort ou moins intense",
       "accepted": [
-        "to make something less strong or less intense"
+        "rendre quelque chose moins fort ou moins intense"
       ],
       "choices": [],
       "audio_text": "",
-      "explanation": "This card tests one sense only: to make something less strong or less intense. A correct paraphrase is enough; rate your own recall.",
+      "explanation": "Une reformulation correcte suffit. Comparez votre rappel à ce sens précis : rendre quelque chose moins fort ou moins intense.",
       "carrier_meaning": "These measures should lessen the effects of rising prices.",
-      "target_meaning": "to make something less strong or less intense",
+      "target_meaning": "rendre quelque chose moins fort ou moins intense",
       "prerequisites": [],
       "unit_id": "pilot_sense_b2_attenuer-reduce-intensity",
       "exposure_groups": [
@@ -1622,7 +1666,10 @@
         "level_basis": "provisional task estimate"
       },
       "origin_entry_level": "B2",
-      "estimated_seconds": 8
+      "estimated_seconds": 8,
+      "carrier_help_reveals_target": true,
+      "definition_language": "fr",
+      "english_support": "to make something less strong or less intense"
     },
     {
       "id": "pilot_b2_french_form_recall_1",
@@ -1632,16 +1679,16 @@
         "B2",
         "C1"
       ],
-      "prompt": "Recall the studied French verb meaning ‘to reduce the intensity of something’. Give the infinitive, beginning with att-.",
+      "prompt": "Retrouvez le verbe étudié : rendre quelque chose moins fort ou moins intense. Donnez l’infinitif commençant par att-.",
       "answer": "atténuer",
       "accepted": [
         "atténuer"
       ],
       "choices": [],
       "audio_text": "",
-      "explanation": "atténuer: to make something less strong or less intense.\nExample: Ces mesures devraient atténuer les effets de la hausse des prix.",
+      "explanation": "atténuer : rendre quelque chose moins fort ou moins intense.\\nThese measures should lessen the effects of rising prices.",
       "carrier_meaning": "These measures should lessen the effects of rising prices.",
-      "target_meaning": "to make something less strong or less intense",
+      "target_meaning": "rendre quelque chose moins fort ou moins intense",
       "prerequisites": [],
       "unit_id": "pilot_sense_b2_attenuer-reduce-intensity",
       "exposure_groups": [
@@ -1657,7 +1704,10 @@
         "level_basis": "provisional task estimate"
       },
       "origin_entry_level": "B2",
-      "estimated_seconds": 12
+      "estimated_seconds": 12,
+      "carrier_help_reveals_target": false,
+      "definition_language": "fr",
+      "english_support": "to make something less strong or less intense"
     },
     {
       "id": "pilot_b2_meaning_recall_2",
@@ -1692,7 +1742,9 @@
         "level_basis": "provisional task estimate"
       },
       "origin_entry_level": "B2",
-      "estimated_seconds": 8
+      "estimated_seconds": 8,
+      "carrier_help_reveals_target": true,
+      "definition_language": "en"
     },
     {
       "id": "pilot_b2_french_form_recall_2",
@@ -1727,7 +1779,9 @@
         "level_basis": "provisional task estimate"
       },
       "origin_entry_level": "B2",
-      "estimated_seconds": 12
+      "estimated_seconds": 12,
+      "carrier_help_reveals_target": false,
+      "definition_language": "en"
     },
     {
       "id": "pilot_c1_meaning_recall_1",
@@ -1737,15 +1791,15 @@
         "C1"
       ],
       "prompt": "Recall the meaning of “corroborer” in this sentence:\nLes résultats de l'enquête corroborent cette hypothèse.",
-      "answer": "to support a statement or conclusion with further evidence",
+      "answer": "confirmer une affirmation grâce à des preuves supplémentaires",
       "accepted": [
-        "to support a statement or conclusion with further evidence"
+        "confirmer une affirmation grâce à des preuves supplémentaires"
       ],
       "choices": [],
       "audio_text": "",
-      "explanation": "This card tests one sense only: to support a statement or conclusion with further evidence. A correct paraphrase is enough; rate your own recall.",
+      "explanation": "Une reformulation correcte suffit. Comparez votre rappel à ce sens précis : confirmer une affirmation grâce à des preuves supplémentaires.",
       "carrier_meaning": "The investigation's results support this hypothesis with further evidence.",
-      "target_meaning": "to support a statement or conclusion with further evidence",
+      "target_meaning": "confirmer une affirmation grâce à des preuves supplémentaires",
       "prerequisites": [],
       "unit_id": "pilot_sense_c1_corroborer-support-evidence",
       "exposure_groups": [
@@ -1761,7 +1815,10 @@
         "level_basis": "provisional task estimate"
       },
       "origin_entry_level": "C1",
-      "estimated_seconds": 8
+      "estimated_seconds": 8,
+      "carrier_help_reveals_target": true,
+      "definition_language": "fr",
+      "english_support": "to support a statement or conclusion with further evidence"
     },
     {
       "id": "pilot_c1_french_form_recall_1",
@@ -1770,16 +1827,16 @@
       "entry_levels": [
         "C1"
       ],
-      "prompt": "Recall the studied French verb meaning ‘to support a claim with further evidence’. Give the infinitive, beginning with cor-.",
+      "prompt": "Retrouvez le verbe étudié : confirmer une affirmation grâce à des preuves supplémentaires. Donnez l’infinitif commençant par cor-.",
       "answer": "corroborer",
       "accepted": [
         "corroborer"
       ],
       "choices": [],
       "audio_text": "",
-      "explanation": "corroborer: to support a statement or conclusion with further evidence.\nExample: Les résultats de l'enquête corroborent cette hypothèse.",
+      "explanation": "corroborer : confirmer une affirmation grâce à des preuves supplémentaires.\\nThe investigation's results support this hypothesis with further evidence.",
       "carrier_meaning": "The investigation's results support this hypothesis with further evidence.",
-      "target_meaning": "to support a statement or conclusion with further evidence",
+      "target_meaning": "confirmer une affirmation grâce à des preuves supplémentaires",
       "prerequisites": [],
       "unit_id": "pilot_sense_c1_corroborer-support-evidence",
       "exposure_groups": [
@@ -1795,7 +1852,10 @@
         "level_basis": "provisional task estimate"
       },
       "origin_entry_level": "C1",
-      "estimated_seconds": 12
+      "estimated_seconds": 12,
+      "carrier_help_reveals_target": false,
+      "definition_language": "fr",
+      "english_support": "to support a statement or conclusion with further evidence"
     },
     {
       "id": "pilot_c1_meaning_recall_2",
@@ -1805,15 +1865,15 @@
         "C1"
       ],
       "prompt": "Recall the meaning of “une réticence” in this sentence:\nElle a exprimé une réticence à participer au projet.",
-      "answer": "a reluctance or reservation that makes someone hesitate",
+      "answer": "une hésitation ou une réserve qui empêche d’accepter quelque chose facilement",
       "accepted": [
-        "a reluctance or reservation that makes someone hesitate"
+        "une hésitation ou une réserve qui empêche d’accepter quelque chose facilement"
       ],
       "choices": [],
       "audio_text": "",
-      "explanation": "This card tests one sense only: a reluctance or reservation that makes someone hesitate. A correct paraphrase is enough; rate your own recall.",
+      "explanation": "Une reformulation correcte suffit. Comparez votre rappel à ce sens précis : une hésitation ou une réserve qui empêche d’accepter quelque chose facilement.",
       "carrier_meaning": "She expressed reluctance to take part in the project.",
-      "target_meaning": "a reluctance or reservation that makes someone hesitate",
+      "target_meaning": "une hésitation ou une réserve qui empêche d’accepter quelque chose facilement",
       "prerequisites": [],
       "unit_id": "pilot_sense_c1_reticence-reluctance",
       "exposure_groups": [
@@ -1829,7 +1889,10 @@
         "level_basis": "provisional task estimate"
       },
       "origin_entry_level": "C1",
-      "estimated_seconds": 8
+      "estimated_seconds": 8,
+      "carrier_help_reveals_target": true,
+      "definition_language": "fr",
+      "english_support": "a reluctance or reservation that makes someone hesitate"
     },
     {
       "id": "pilot_c1_french_form_recall_2",
@@ -1838,16 +1901,16 @@
       "entry_levels": [
         "C1"
       ],
-      "prompt": "Recall the studied French noun meaning ‘a reluctance or reservation’. Include the indefinite article; the noun begins with rét-.",
+      "prompt": "Retrouvez le nom étudié : une hésitation ou une réserve qui empêche d’accepter quelque chose facilement. Incluez l’article indéfini ; le nom commence par rét-.",
       "answer": "une réticence",
       "accepted": [
         "une réticence"
       ],
       "choices": [],
       "audio_text": "",
-      "explanation": "une réticence: a reluctance or reservation that makes someone hesitate.\nExample: Elle a exprimé une réticence à participer au projet.",
+      "explanation": "une réticence : une hésitation ou une réserve qui empêche d’accepter quelque chose facilement.\\nShe expressed reluctance to take part in the project.",
       "carrier_meaning": "She expressed reluctance to take part in the project.",
-      "target_meaning": "a reluctance or reservation that makes someone hesitate",
+      "target_meaning": "une hésitation ou une réserve qui empêche d’accepter quelque chose facilement",
       "prerequisites": [],
       "unit_id": "pilot_sense_c1_reticence-reluctance",
       "exposure_groups": [
@@ -1863,7 +1926,10 @@
         "level_basis": "provisional task estimate"
       },
       "origin_entry_level": "C1",
-      "estimated_seconds": 12
+      "estimated_seconds": 12,
+      "carrier_help_reveals_target": false,
+      "definition_language": "fr",
+      "english_support": "a reluctance or reservation that makes someone hesitate"
     },
     {
       "id": "pilot_b1_sound_discrimination_1",
@@ -1910,7 +1976,8 @@
         "level_basis": "provisional task estimate"
       },
       "origin_entry_level": "B1",
-      "estimated_seconds": 10
+      "estimated_seconds": 10,
+      "carrier_help_reveals_target": false
     },
     {
       "id": "pilot_b1_sound_discrimination_2",
@@ -1957,7 +2024,8 @@
         "level_basis": "provisional task estimate"
       },
       "origin_entry_level": "B1",
-      "estimated_seconds": 10
+      "estimated_seconds": 10,
+      "carrier_help_reveals_target": false
     },
     {
       "id": "pilot_b2_sound_discrimination_1",
@@ -2003,7 +2071,8 @@
         "level_basis": "provisional task estimate"
       },
       "origin_entry_level": "B2",
-      "estimated_seconds": 10
+      "estimated_seconds": 10,
+      "carrier_help_reveals_target": false
     },
     {
       "id": "pilot_b2_sound_discrimination_2",
@@ -2049,7 +2118,8 @@
         "level_basis": "provisional task estimate"
       },
       "origin_entry_level": "B2",
-      "estimated_seconds": 10
+      "estimated_seconds": 10,
+      "carrier_help_reveals_target": false
     },
     {
       "id": "pilot_c1_sound_discrimination_1",
@@ -2094,7 +2164,8 @@
         "level_basis": "provisional task estimate"
       },
       "origin_entry_level": "C1",
-      "estimated_seconds": 10
+      "estimated_seconds": 10,
+      "carrier_help_reveals_target": false
     },
     {
       "id": "pilot_c1_sound_discrimination_2",
@@ -2139,7 +2210,8 @@
         "level_basis": "provisional task estimate"
       },
       "origin_entry_level": "C1",
-      "estimated_seconds": 10
+      "estimated_seconds": 10,
+      "carrier_help_reveals_target": false
     },
     {
       "id": "pilot_b1_connected_word_recognition_1",
@@ -2191,7 +2263,8 @@
         "level_basis": "provisional task estimate"
       },
       "origin_entry_level": "B1",
-      "estimated_seconds": 12
+      "estimated_seconds": 12,
+      "carrier_help_reveals_target": false
     },
     {
       "id": "pilot_b1_connected_word_recognition_2",
@@ -2243,7 +2316,8 @@
         "level_basis": "provisional task estimate"
       },
       "origin_entry_level": "B1",
-      "estimated_seconds": 12
+      "estimated_seconds": 12,
+      "carrier_help_reveals_target": false
     },
     {
       "id": "pilot_b2_connected_word_recognition_1",
@@ -2294,7 +2368,8 @@
         "level_basis": "provisional task estimate"
       },
       "origin_entry_level": "B2",
-      "estimated_seconds": 12
+      "estimated_seconds": 12,
+      "carrier_help_reveals_target": false
     },
     {
       "id": "pilot_b2_connected_word_recognition_2",
@@ -2345,7 +2420,8 @@
         "level_basis": "provisional task estimate"
       },
       "origin_entry_level": "B2",
-      "estimated_seconds": 12
+      "estimated_seconds": 12,
+      "carrier_help_reveals_target": false
     },
     {
       "id": "pilot_c1_connected_word_recognition_1",
@@ -2395,7 +2471,8 @@
         "level_basis": "provisional task estimate"
       },
       "origin_entry_level": "C1",
-      "estimated_seconds": 12
+      "estimated_seconds": 12,
+      "carrier_help_reveals_target": false
     },
     {
       "id": "pilot_c1_connected_word_recognition_2",
@@ -2445,7 +2522,8 @@
         "level_basis": "provisional task estimate"
       },
       "origin_entry_level": "C1",
-      "estimated_seconds": 12
+      "estimated_seconds": 12,
+      "carrier_help_reveals_target": false
     },
     {
       "id": "pilot_b1_sentence_reconstruction_1",
@@ -2513,7 +2591,8 @@
           "id": "token-6",
           "text": "matin"
         }
-      ]
+      ],
+      "carrier_help_reveals_target": false
     },
     {
       "id": "pilot_b1_sentence_reconstruction_2",
@@ -2585,7 +2664,8 @@
           "id": "token-7",
           "text": "travail"
         }
-      ]
+      ],
+      "carrier_help_reveals_target": false
     },
     {
       "id": "pilot_b2_sentence_reconstruction_1",
@@ -2660,7 +2740,8 @@
           "id": "token-8",
           "text": "partis"
         }
-      ]
+      ],
+      "carrier_help_reveals_target": false
     },
     {
       "id": "pilot_b2_sentence_reconstruction_2",
@@ -2735,7 +2816,8 @@
           "id": "token-8",
           "text": "demain"
         }
-      ]
+      ],
+      "carrier_help_reveals_target": false
     },
     {
       "id": "pilot_c1_sentence_reconstruction_1",
@@ -2813,7 +2895,8 @@
           "id": "token-9",
           "text": "décision"
         }
-      ]
+      ],
+      "carrier_help_reveals_target": false
     },
     {
       "id": "pilot_c1_sentence_reconstruction_2",
@@ -2887,7 +2970,8 @@
           "id": "token-8",
           "text": "progressivement"
         }
-      ]
+      ],
+      "carrier_help_reveals_target": false
     },
     {
       "id": "pilot_b1_partial_dictation_1",
@@ -2923,7 +3007,8 @@
         "level_basis": "provisional task estimate"
       },
       "origin_entry_level": "B1",
-      "estimated_seconds": 25
+      "estimated_seconds": 25,
+      "carrier_help_reveals_target": false
     },
     {
       "id": "pilot_b1_partial_dictation_2",
@@ -2959,7 +3044,8 @@
         "level_basis": "provisional task estimate"
       },
       "origin_entry_level": "B1",
-      "estimated_seconds": 25
+      "estimated_seconds": 25,
+      "carrier_help_reveals_target": false
     },
     {
       "id": "pilot_b2_partial_dictation_1",
@@ -2994,7 +3080,8 @@
         "level_basis": "provisional task estimate"
       },
       "origin_entry_level": "B2",
-      "estimated_seconds": 25
+      "estimated_seconds": 25,
+      "carrier_help_reveals_target": false
     },
     {
       "id": "pilot_b2_partial_dictation_2",
@@ -3029,7 +3116,8 @@
         "level_basis": "provisional task estimate"
       },
       "origin_entry_level": "B2",
-      "estimated_seconds": 25
+      "estimated_seconds": 25,
+      "carrier_help_reveals_target": false
     },
     {
       "id": "pilot_c1_partial_dictation_1",
@@ -3063,7 +3151,8 @@
         "level_basis": "provisional task estimate"
       },
       "origin_entry_level": "C1",
-      "estimated_seconds": 25
+      "estimated_seconds": 25,
+      "carrier_help_reveals_target": false
     },
     {
       "id": "pilot_c1_partial_dictation_2",
@@ -3097,7 +3186,8 @@
         "level_basis": "provisional task estimate"
       },
       "origin_entry_level": "C1",
-      "estimated_seconds": 25
+      "estimated_seconds": 25,
+      "carrier_help_reveals_target": false
     },
     {
       "id": "pilot_b1_sentence_transcription_1",
@@ -3133,7 +3223,8 @@
         "level_basis": "provisional task estimate"
       },
       "origin_entry_level": "B1",
-      "estimated_seconds": 40
+      "estimated_seconds": 40,
+      "carrier_help_reveals_target": false
     },
     {
       "id": "pilot_b1_sentence_transcription_2",
@@ -3169,7 +3260,8 @@
         "level_basis": "provisional task estimate"
       },
       "origin_entry_level": "B1",
-      "estimated_seconds": 40
+      "estimated_seconds": 40,
+      "carrier_help_reveals_target": false
     },
     {
       "id": "pilot_b2_sentence_transcription_1",
@@ -3204,7 +3296,8 @@
         "level_basis": "provisional task estimate"
       },
       "origin_entry_level": "B2",
-      "estimated_seconds": 40
+      "estimated_seconds": 40,
+      "carrier_help_reveals_target": false
     },
     {
       "id": "pilot_b2_sentence_transcription_2",
@@ -3239,7 +3332,8 @@
         "level_basis": "provisional task estimate"
       },
       "origin_entry_level": "B2",
-      "estimated_seconds": 40
+      "estimated_seconds": 40,
+      "carrier_help_reveals_target": false
     },
     {
       "id": "pilot_c1_sentence_transcription_1",
@@ -3273,7 +3367,8 @@
         "level_basis": "provisional task estimate"
       },
       "origin_entry_level": "C1",
-      "estimated_seconds": 40
+      "estimated_seconds": 40,
+      "carrier_help_reveals_target": false
     },
     {
       "id": "pilot_c1_sentence_transcription_2",
@@ -3307,7 +3402,8 @@
         "level_basis": "provisional task estimate"
       },
       "origin_entry_level": "C1",
-      "estimated_seconds": 40
+      "estimated_seconds": 40,
+      "carrier_help_reveals_target": false
     },
     {
       "id": "pilot_b1_audio_transcript_choice_1",
@@ -3359,7 +3455,8 @@
         "level_basis": "provisional task estimate"
       },
       "origin_entry_level": "B1",
-      "estimated_seconds": 16
+      "estimated_seconds": 16,
+      "carrier_help_reveals_target": false
     },
     {
       "id": "pilot_b1_audio_transcript_choice_2",
@@ -3411,7 +3508,8 @@
         "level_basis": "provisional task estimate"
       },
       "origin_entry_level": "B1",
-      "estimated_seconds": 16
+      "estimated_seconds": 16,
+      "carrier_help_reveals_target": false
     },
     {
       "id": "pilot_b2_audio_transcript_choice_1",
@@ -3462,7 +3560,8 @@
         "level_basis": "provisional task estimate"
       },
       "origin_entry_level": "B2",
-      "estimated_seconds": 16
+      "estimated_seconds": 16,
+      "carrier_help_reveals_target": false
     },
     {
       "id": "pilot_b2_audio_transcript_choice_2",
@@ -3513,7 +3612,8 @@
         "level_basis": "provisional task estimate"
       },
       "origin_entry_level": "B2",
-      "estimated_seconds": 16
+      "estimated_seconds": 16,
+      "carrier_help_reveals_target": false
     },
     {
       "id": "pilot_c1_audio_transcript_choice_1",
@@ -3563,7 +3663,8 @@
         "level_basis": "provisional task estimate"
       },
       "origin_entry_level": "C1",
-      "estimated_seconds": 16
+      "estimated_seconds": 16,
+      "carrier_help_reveals_target": false
     },
     {
       "id": "pilot_c1_audio_transcript_choice_2",
@@ -3613,7 +3714,8 @@
         "level_basis": "provisional task estimate"
       },
       "origin_entry_level": "C1",
-      "estimated_seconds": 16
+      "estimated_seconds": 16,
+      "carrier_help_reveals_target": false
     },
     {
       "id": "pilot_b1_audio_meaning_choice_1",
@@ -3665,7 +3767,8 @@
         "level_basis": "provisional task estimate"
       },
       "origin_entry_level": "B1",
-      "estimated_seconds": 16
+      "estimated_seconds": 16,
+      "carrier_help_reveals_target": true
     },
     {
       "id": "pilot_b1_audio_meaning_choice_2",
@@ -3717,7 +3820,8 @@
         "level_basis": "provisional task estimate"
       },
       "origin_entry_level": "B1",
-      "estimated_seconds": 16
+      "estimated_seconds": 16,
+      "carrier_help_reveals_target": true
     },
     {
       "id": "pilot_b2_audio_meaning_choice_1",
@@ -3768,7 +3872,8 @@
         "level_basis": "provisional task estimate"
       },
       "origin_entry_level": "B2",
-      "estimated_seconds": 16
+      "estimated_seconds": 16,
+      "carrier_help_reveals_target": true
     },
     {
       "id": "pilot_b2_audio_meaning_choice_2",
@@ -3819,7 +3924,8 @@
         "level_basis": "provisional task estimate"
       },
       "origin_entry_level": "B2",
-      "estimated_seconds": 16
+      "estimated_seconds": 16,
+      "carrier_help_reveals_target": true
     },
     {
       "id": "pilot_c1_audio_meaning_choice_1",
@@ -3869,7 +3975,8 @@
         "level_basis": "provisional task estimate"
       },
       "origin_entry_level": "C1",
-      "estimated_seconds": 16
+      "estimated_seconds": 16,
+      "carrier_help_reveals_target": true
     },
     {
       "id": "pilot_c1_audio_meaning_choice_2",
@@ -3919,7 +4026,8 @@
         "level_basis": "provisional task estimate"
       },
       "origin_entry_level": "C1",
-      "estimated_seconds": 16
+      "estimated_seconds": 16,
+      "carrier_help_reveals_target": true
     }
   ]
 }
