@@ -289,6 +289,29 @@ const typedExercise = pack.exercises.find(exercise => exercise.type === "french_
   front.close(); back.close();
 }
 
+// A translation can reveal the assessed meaning even when it is labelled carrier help.
+{
+  const exercise = {
+    ...pack.exercises.find(item => item.type === "audio_meaning_choice"),
+    id: "carrier-help-exposes-meaning", carrier_meaning: "The meaning being assessed.",
+    carrier_help_reveals_target: true
+  };
+  const front = openCard(exercise);
+  getButton(front, "Meaning support").click();
+  const exposure = events(front, "hint")[0];
+  same(exposure.kind, "target", "Meaning-revealing carrier support uses the target-exposure bridge path");
+  same(exposure.reveals_target, true, "Meaning-revealing carrier support records target exposure");
+  same(exposure.carrier_help, true, "Exposure still records that carrier support was used");
+  const record = JSON.parse(stored(front));
+  same(record.target_hint, true, "Meaning-revealing translation excludes independent retrieval evidence");
+  same(record.carrier_help, true, "Meaning-revealing translation remains classified as support usage");
+  const back = openCard(exercise, "back", {stored: stored(front)});
+  check(back.document.querySelector(".comuls-feedback").textContent.includes("Again is recommended"),
+    "Meaning-revealing translation recommends independent retrieval next time");
+  assertNoGrade(back, "Meaning-revealing support");
+  front.close(); back.close();
+}
+
 // Persist the core helper checks so CI protects normalization and stable IDs.
 {
   const view = openCard(typedExercise), api = view.window.COMULSCard;

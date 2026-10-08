@@ -301,8 +301,11 @@
       control.setAttribute("aria-expanded", opening ? "true" : "false");
       if (opening && !activated) {
         activated = true;
-        if (kind === "target") state.target_hint = true; else state.carrier_help = true;
-        persist(state); emit("hint", {kind: kind, reveals_target: kind === "target"});
+        var revealsTarget = kind === "target" || (kind === "carrier" && payload.carrier_help_reveals_target === true);
+        if (kind === "carrier") state.carrier_help = true;
+        if (revealsTarget) state.target_hint = true;
+        persist(state);
+        emit("hint", {kind: revealsTarget ? "target" : "carrier", reveals_target: revealsTarget, carrier_help: kind === "carrier"});
       }
     });
     control.setAttribute("aria-expanded", "false");
