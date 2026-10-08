@@ -22,6 +22,8 @@ jobs:
         run: python -m compileall -q addon tools tests
       - name: Run policy and real Anki collection tests
         run: python -m unittest discover -s tests -v
+      - name: Audit unchanged source vocabulary
+        run: python tools/audit_sources.py --out dist/source_audit.json
       - name: Build installable add-on
         run: python tools/build_addon.py
       - uses: actions/upload-artifact@v4

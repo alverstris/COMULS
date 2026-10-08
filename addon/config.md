@@ -1,0 +1,1 @@
+COMULS settings live in Tools → COMULS → Settings and sync with your collection. This add-on config only controls whether its home window opens after profile startup. Anki itself remains the scheduler.
