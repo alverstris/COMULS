@@ -100,9 +100,10 @@ class ReviewerHookTests(unittest.TestCase):
         from types import ModuleType
 
         cls.saved_modules = {}
-        for name in ("aqt", "aqt.operations", "aqt.reviewer", "aqt.sound",
+        for name in ("aqt", "aqt.operations", "aqt.reviewer", "aqt.sound", "aqt.qt",
                      "comuls_review_tests", "comuls_review_tests.bridge",
-                     "comuls_review_tests.core", "comuls_review_tests.reviewer"):
+                     "comuls_review_tests.core", "comuls_review_tests.reviewer",
+                     "comuls_review_tests.collection"):
             cls.saved_modules[name] = sys.modules.get(name)
         package = ModuleType("comuls_review_tests")
         package.__path__ = [str(PATH.parent)]
@@ -121,6 +122,7 @@ class ReviewerHookTests(unittest.TestCase):
                 self.auto_advance_enabled = False
                 self.auto_calls = 0
                 self.next_calls = 0
+                self.web = object()
 
             def auto_advance_if_enabled(self):
                 self.auto_calls += 1
@@ -156,7 +158,8 @@ class ReviewerHookTests(unittest.TestCase):
         names = ("card_will_show", "webview_did_receive_js_message",
                  "reviewer_did_show_question", "reviewer_did_show_answer",
                  "reviewer_will_answer_card", "reviewer_did_answer_card",
-                 "reviewer_will_end", "state_shortcuts_will_change")
+                 "reviewer_will_end", "state_shortcuts_will_change",
+                 "reviewer_will_show_context_menu", "audio_will_replay")
         aqt_module.gui_hooks = SimpleNamespace(**{name: [] for name in names})
         aqt_module.mw = None
         operations = ModuleType("aqt.operations")
@@ -165,7 +168,9 @@ class ReviewerHookTests(unittest.TestCase):
         reviewer_module.Reviewer = NativeReviewer
         sound = ModuleType("aqt.sound")
         sound.av_player = SimpleNamespace(stop_and_clear_queue=lambda: None)
-        for module in (aqt_module, operations, reviewer_module, sound):
+        qt = ModuleType("aqt.qt")
+        qt.QKeySequence = lambda value: value
+        for module in (aqt_module, operations, reviewer_module, sound, qt):
             sys.modules[module.__name__] = module
         spec = importlib.util.spec_from_file_location(
             "comuls_review_tests.reviewer", PATH.parent / "reviewer.py")
@@ -314,6 +319,153 @@ class ReviewerHookTests(unittest.TestCase):
         self.integration._restore_auto()
         shortcuts[0][1]()
         self.assertTrue(self.reviewer.auto_advance_enabled)
+
+    def test_more_menu_blocks_auto_reveal_and_auto_bury_entry(self):
+        self.begin()
+
+        class Action:
+            def __init__(self):
+                self.enabled = True
+                self.checked = True
+
+            def shortcut(self):
+                return "Shift+A"
+
+            def setEnabled(self, enabled):
+                self.enabled = enabled
+
+            def isCheckable(self):
+                return True
+
+            def setChecked(self, checked):
+                self.checked = checked
+
+            def menu(self):
+                return None
+
+        action = Action()
+        menu = SimpleNamespace(actions=lambda: [action])
+        self.reviewer.auto_advance_enabled = True
+        self.integration._context_menu(self.reviewer, menu)
+        self.assertFalse(action.enabled)
+        self.assertFalse(action.checked)
+        self.assertFalse(self.reviewer.auto_advance_enabled)
+
+    def test_response_first_captured_after_reveal_is_identified(self):
+        self.begin()
+        self.integration.exposed = True
+        self.integration._web_message((False, None), self.current_message(), self.reviewer)
+        attempt = self.events[-1]
+        self.assertEqual(attempt["capture_phase"], "after_exposure")
+        self.assertEqual(attempt["outcome"], "correct")
+
+    def test_priming_is_snapshotted_before_current_answer(self):
+        self.note["State"] = json.dumps({"last_exposed_day": "41",
+                                         "familiarised_day": "40"})
+        self.aqt.mw.col = SimpleNamespace(sched=SimpleNamespace(today=42))
+        self.begin()
+        self.assertFalse(self.integration.prior_exposure_today)
+        self.note["State"] = json.dumps({"last_exposed_day": "42"})
+        self.integration._web_message((False, None), self.current_message(), self.reviewer)
+        self.assertFalse(self.events[-1]["prior_exposure_today"])
+        self.begin()
+        self.assertTrue(self.integration.prior_exposure_today)
+
+    def test_native_keyboard_audio_replay_is_observed(self):
+        self.begin()
+        self.integration._audio_will_replay(self.reviewer.web, self.card, True)
+        self.assertEqual(self.integration.replays, 1)
+        self.assertEqual(self.events[-1]["source"], "native_shortcut")
+
+    def prepare_exposure_collection(self):
+        import html
+        import sys
+        from types import ModuleType
+
+        class Note(dict):
+            def __init__(self, identity, payload, card_id, queue=0):
+                super().__init__(COMULS_ID=payload["id"],
+                                 Payload=html.escape(json.dumps(payload)),
+                                 State=html.escape(json.dumps({"sentinel": "preserve"})))
+                self.id = identity
+                self._cards = [SimpleNamespace(id=card_id, queue=queue)]
+
+            def cards(self):
+                return self._cards
+
+        self.exercise["exposure_groups"] = ["exact-target"]
+        source = Note(321, self.exercise, 123)
+        sibling_payload = dict(self.exercise, id="linked")
+        sibling = Note(322, sibling_payload, 124)
+        sibling._cards.append(SimpleNamespace(id=125, queue=-1))
+        unrelated = Note(323, dict(self.exercise, id="unrelated",
+                                   exposure_groups=["other-target"]), 126)
+        notes = {item["COMULS_ID"]: item for item in (source, sibling, unrelated)}
+        helpers = ModuleType("comuls_review_tests.collection")
+        helpers.exercise_notes = lambda col: notes
+        helpers.note_payload = lambda note: json.loads(html.unescape(note["Payload"]))
+        helpers.note_state = lambda note: json.loads(html.unescape(note["State"]))
+        helpers._write_json = lambda note, field, value: note.__setitem__(
+            field, html.escape(json.dumps(value)))
+        sys.modules[helpers.__name__] = helpers
+        self.note = source
+        self.card.note = lambda: source
+        self.bury_calls = []
+        self.updated_notes = []
+        collection = SimpleNamespace(
+            get_note=lambda identity: source,
+            sched=SimpleNamespace(
+                today=42, bury_cards=lambda ids, manual: self.bury_calls.append((ids, manual))),
+            add_custom_undo_entry=lambda label: 999,
+            update_notes=lambda items: self.updated_notes.extend(items),
+            merge_undo_entries=lambda identity: SimpleNamespace(undo=identity),
+        )
+        self.aqt.mw.col = collection
+        return source, sibling, unrelated, collection, helpers
+
+    def test_exposure_updates_sync_state_and_buries_only_declared_active_links(self):
+        source, sibling, unrelated, collection, helpers = self.prepare_exposure_collection()
+        self.begin()
+        self.integration._did_show_answer(self.card)
+        operation = self.FakeCollectionOp.latest
+        self.assertTrue(self.integration.busy)
+        result = operation.op(collection)
+        self.assertEqual(result.undo, 999)
+        self.assertEqual(self.bury_calls, [([124], True)])
+        self.assertEqual([note.id for note in self.updated_notes], [321, 322])
+        for note in (source, sibling):
+            state = helpers.note_state(note)
+            self.assertEqual(state["sentinel"], "preserve")
+            self.assertEqual(state["last_exposed_day"], "42")
+            self.assertEqual(state["last_exposed_by"], "exercise-1")
+            self.assertIn("last_exposed_at", state)
+        self.assertNotIn("last_exposed_at", helpers.note_state(unrelated))
+        operation.success_callback(result)
+        self.assertFalse(self.integration.busy)
+        self.assertEqual(self.reviewer.next_calls, 0)
+
+    def test_failed_exposure_save_keeps_grades_blocked_and_allows_safe_exit(self):
+        self.prepare_exposure_collection()
+        self.begin()
+        self.integration._did_show_answer(self.card)
+        self.FakeCollectionOp.latest.failure_callback(ValueError("save failed"))
+        self.assertTrue(self.integration.busy)
+        self.assertEqual(self.integration._will_answer_card((True, 3),
+                                                           self.reviewer, self.card), (False, 3))
+        self.assertEqual(self.events[-1]["event"], "exposure_save_failed")
+        self.assertTrue(self.errors)
+        self.integration._will_end()
+        self.assertFalse(self.integration.busy)
+
+    def test_capture_metadata_does_not_leak_into_next_manual_review(self):
+        self.begin()
+        self.integration.exposed = True
+        self.integration._web_message((False, None), self.current_message(), self.reviewer)
+        self.assertEqual(self.integration._attempt_metadata()["capture_phase"], "after_exposure")
+        self.begin()
+        metadata = self.integration._attempt_metadata()
+        self.assertFalse(metadata["submitted"])
+        self.assertEqual(metadata["capture_phase"], "no_submission")
 
 
 if __name__ == "__main__":

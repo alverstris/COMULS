@@ -18,10 +18,17 @@ jobs:
           python-version: '3.13'
       - name: Install Anki test dependencies
         run: python -m pip install anki==26.9.3 aqt==26.9.3 pytest==8.3.5
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install card DOM test dependency
+        run: npm install --no-save jsdom@22.1.0
       - name: Compile all Python files
         run: python -m compileall -q addon tools tests
       - name: Run policy and real Anki collection tests
         run: python -m pytest tests -q
+      - name: Exercise all card interfaces
+        run: node tests/test_frontend.cjs
       - name: Audit unchanged source vocabulary
         run: python tools/audit_sources.py --out dist/source_audit.json
       - name: Build installable add-on

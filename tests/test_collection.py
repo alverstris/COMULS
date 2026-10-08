@@ -60,12 +60,15 @@ def test_small_synced_controls_preserve_undo_and_cap_day_records(col):
     assert state["enabled"] == list(core.EXERCISE_TYPES)
     assert state["audio_confirmed"] is False
     model = adapter.ensure_model(col)
-    previous = col.undo_status().last_step
+    previous = col.undo_status().undo
     state["days"] = {str(index): {"active_seconds": 5} for index in range(30)}
     adapter.save_state(col, state)
-    assert col.undo_status().last_step == previous
+    assert col.undo_status().undo == previous
     assert list(adapter.get_state(col)["days"]) == [str(x) for x in range(16, 30)]
     assert model["name"] == adapter.MODEL_NAME
+    col.undo()
+    assert col.models.by_name(adapter.MODEL_NAME) is None
+    assert list(adapter.get_state(col)["days"]) == [str(x) for x in range(16, 30)]
 
 
 def test_prepare_is_idempotent_and_requires_completed_familiarisation(col, exercise):
@@ -248,9 +251,41 @@ def test_raw_backlog_is_not_hidden_by_daily_review_limit(col, exercise):
     # Configure a legitimate small native daily limit and make these reviews due.
     did = adapter.get_state(col)["deck_id"]
     config = col.decks.config_dict_for_deck_id(did)
-    config["rev"]["perDay"] = 1
+    # Three grades have already consumed today's review counters; a limit of
+    # four leaves capacity for one of these three due cards.
+    config["rev"]["perDay"] = 4
     col.decks.update_config(config)
     col.sched.set_due_date(cards, "0")
     result = adapter.stats(col)
     assert result["due"] == 3
     assert result["available_due"] == 1
+
+
+def test_stage_undo_is_atomic_without_resetting_later_active_time(col, exercise):
+    controls = adapter.get_state(col)
+    controls["stage"] = "B2"
+    adapter.save_state(col, controls)
+    advanced = copy.deepcopy(exercise)
+    advanced.update(id="stage-undo-pending", level="B2", entry_levels=["B2", "C1"])
+    note = introduce(col, advanced, col.sched.today)
+    cid = note.cards()[0].id
+    marker = col.add_custom_undo_entry("Change COMULS entry level")
+    adapter.stage_change(col, "B1", [advanced])
+    col.merge_undo_entries(marker)
+    assert adapter.get_state(col)["stage"] == "B1"
+    assert col.get_card(cid).queue == -1
+
+    # A later non-undoable clock flush must survive undo of the stage change.
+    current = adapter.get_state(col)
+    day = str(col.sched.today)
+    current["days"][day] = {"active_seconds": 123.0}
+    adapter.save_state(col, current)
+    col.undo()
+    assert adapter.get_state(col)["stage"] == "B2"
+    assert adapter.get_state(col)["days"][day]["active_seconds"] == 123.0
+    assert col.get_card(cid).queue == 0
+    assert adapter.note_state(col.get_note(note.id))["lifecycle"] == "admitted"
+    col.redo()
+    assert adapter.get_state(col)["stage"] == "B1"
+    assert adapter.get_state(col)["days"][day]["active_seconds"] == 123.0
+    assert col.get_card(cid).queue == -1

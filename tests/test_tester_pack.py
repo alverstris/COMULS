@@ -33,3 +33,14 @@ class TesterPackTests(unittest.TestCase):
             self.assertTrue(e["provenance"])
             if e["type"] in core.AUDIO_TYPES:
                 self.assertTrue(e["audio_text"])
+
+    def test_reconstruction_tiles_have_explicit_identity_and_no_boundary_cues(self):
+        pack = core.load_pack(ROOT / "addon/data/tester.json")
+        for e in pack["exercises"]:
+            if e["type"] != "sentence_reconstruction":
+                continue
+            tokens = e["tokens"]
+            self.assertTrue(all(t["text"] == t["text"].lower() for t in tokens))
+            self.assertTrue(all(not any(p in t["text"] for p in ".,;:!?") for t in tokens))
+            result = core.evaluate_answer(e, [t["id"] for t in tokens])
+            self.assertEqual(result["status"], "correct")

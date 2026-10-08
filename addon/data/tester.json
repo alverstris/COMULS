@@ -38,7 +38,8 @@
         "source_text": "Original sentences and explanations; no dictionary wording copied.",
         "expression_ratings": "Existing source expression ratings unchanged."
       },
-      "origin_entry_level": "B1"
+      "origin_entry_level": "B1",
+      "estimated_seconds": 15
     },
     {
       "id": "ctx_b1_vocabulary_cloze_02",
@@ -74,7 +75,8 @@
         "source_text": "Original sentences and explanations; no dictionary wording copied.",
         "expression_ratings": "Existing source expression ratings unchanged."
       },
-      "origin_entry_level": "B1"
+      "origin_entry_level": "B1",
+      "estimated_seconds": 15
     },
     {
       "id": "ctx_b1_vocabulary_cloze_03",
@@ -110,7 +112,8 @@
         "source_text": "Original sentences and explanations; no dictionary wording copied.",
         "expression_ratings": "Existing source expression ratings unchanged."
       },
-      "origin_entry_level": "B1"
+      "origin_entry_level": "B1",
+      "estimated_seconds": 15
     },
     {
       "id": "ctx_b1_grammar_cloze_01",
@@ -146,7 +149,8 @@
         "source_text": "Original sentences and explanations; no dictionary wording copied.",
         "expression_ratings": "Existing source expression ratings unchanged."
       },
-      "origin_entry_level": "B1"
+      "origin_entry_level": "B1",
+      "estimated_seconds": 18
     },
     {
       "id": "ctx_b1_grammar_cloze_02",
@@ -182,7 +186,8 @@
         "source_text": "Original sentences and explanations; no dictionary wording copied.",
         "expression_ratings": "Existing source expression ratings unchanged."
       },
-      "origin_entry_level": "B1"
+      "origin_entry_level": "B1",
+      "estimated_seconds": 18
     },
     {
       "id": "ctx_b1_grammar_cloze_03",
@@ -218,7 +223,8 @@
         "source_text": "Original sentences and explanations; no dictionary wording copied.",
         "expression_ratings": "Existing source expression ratings unchanged."
       },
-      "origin_entry_level": "B1"
+      "origin_entry_level": "B1",
+      "estimated_seconds": 18
     },
     {
       "id": "ctx_b1_grammar_meaning_choice_01",
@@ -270,7 +276,8 @@
         "source_text": "Original sentences and explanations; no dictionary wording copied.",
         "expression_ratings": "Existing source expression ratings unchanged."
       },
-      "origin_entry_level": "B1"
+      "origin_entry_level": "B1",
+      "estimated_seconds": 12
     },
     {
       "id": "ctx_b1_grammar_meaning_choice_02",
@@ -322,7 +329,8 @@
         "source_text": "Original sentences and explanations; no dictionary wording copied.",
         "expression_ratings": "Existing source expression ratings unchanged."
       },
-      "origin_entry_level": "B1"
+      "origin_entry_level": "B1",
+      "estimated_seconds": 12
     },
     {
       "id": "ctx_b1_grammar_meaning_choice_03",
@@ -374,7 +382,8 @@
         "source_text": "Original sentences and explanations; no dictionary wording copied.",
         "expression_ratings": "Existing source expression ratings unchanged."
       },
-      "origin_entry_level": "B1"
+      "origin_entry_level": "B1",
+      "estimated_seconds": 12
     },
     {
       "id": "ctx_b1_sentence_transformation_01",
@@ -410,7 +419,8 @@
         "source_text": "Original sentences and explanations; no dictionary wording copied.",
         "expression_ratings": "Existing source expression ratings unchanged."
       },
-      "origin_entry_level": "B1"
+      "origin_entry_level": "B1",
+      "estimated_seconds": 40
     },
     {
       "id": "ctx_b1_sentence_transformation_02",
@@ -446,7 +456,8 @@
         "source_text": "Original sentences and explanations; no dictionary wording copied.",
         "expression_ratings": "Existing source expression ratings unchanged."
       },
-      "origin_entry_level": "B1"
+      "origin_entry_level": "B1",
+      "estimated_seconds": 40
     },
     {
       "id": "ctx_b1_sentence_transformation_03",
@@ -482,7 +493,8 @@
         "source_text": "Original sentences and explanations; no dictionary wording copied.",
         "expression_ratings": "Existing source expression ratings unchanged."
       },
-      "origin_entry_level": "B1"
+      "origin_entry_level": "B1",
+      "estimated_seconds": 40
     },
     {
       "id": "ctx_b2_vocabulary_cloze_01",
@@ -517,7 +529,8 @@
         "source_text": "Original sentences and explanations; no dictionary wording copied.",
         "expression_ratings": "Existing source expression ratings unchanged."
       },
-      "origin_entry_level": "B2"
+      "origin_entry_level": "B2",
+      "estimated_seconds": 15
     },
     {
       "id": "ctx_b2_vocabulary_cloze_02",
@@ -552,7 +565,8 @@
         "source_text": "Original sentences and explanations; no dictionary wording copied.",
         "expression_ratings": "Existing source expression ratings unchanged."
       },
-      "origin_entry_level": "B2"
+      "origin_entry_level": "B2",
+      "estimated_seconds": 15
     },
     {
       "id": "ctx_b2_vocabulary_cloze_03",
@@ -587,7 +601,8 @@
         "source_text": "Original sentences and explanations; no dictionary wording copied.",
         "expression_ratings": "Existing source expression ratings unchanged."
       },
-      "origin_entry_level": "B2"
+      "origin_entry_level": "B2",
+      "estimated_seconds": 15
     },
     {
       "id": "ctx_b2_grammar_cloze_01",
@@ -622,7 +637,8 @@
         "source_text": "Original sentences and explanations; no dictionary wording copied.",
         "expression_ratings": "Existing source expression ratings unchanged."
       },
-      "origin_entry_level": "B2"
+      "origin_entry_level": "B2",
+      "estimated_seconds": 18
     },
     {
       "id": "ctx_b2_grammar_cloze_02",
@@ -657,7 +673,8 @@
         "source_text": "Original sentences and explanations; no dictionary wording copied.",
         "expression_ratings": "Existing source expression ratings unchanged."
       },
-      "origin_entry_level": "B2"
+      "origin_entry_level": "B2",
+      "estimated_seconds": 18
     },
     {
       "id": "ctx_b2_grammar_cloze_03",
@@ -692,7 +709,8 @@
         "source_text": "Original sentences and explanations; no dictionary wording copied.",
         "expression_ratings": "Existing source expression ratings unchanged."
       },
-      "origin_entry_level": "B2"
+      "origin_entry_level": "B2",
+      "estimated_seconds": 18
     },
     {
       "id": "ctx_b2_grammar_meaning_choice_01",
@@ -743,7 +761,8 @@
         "source_text": "Original sentences and explanations; no dictionary wording copied.",
         "expression_ratings": "Existing source expression ratings unchanged."
       },
-      "origin_entry_level": "B2"
+      "origin_entry_level": "B2",
+      "estimated_seconds": 12
     },
     {
       "id": "ctx_b2_grammar_meaning_choice_02",
@@ -794,7 +813,8 @@
         "source_text": "Original sentences and explanations; no dictionary wording copied.",
         "expression_ratings": "Existing source expression ratings unchanged."
       },
-      "origin_entry_level": "B2"
+      "origin_entry_level": "B2",
+      "estimated_seconds": 12
     },
     {
       "id": "ctx_b2_grammar_meaning_choice_03",
@@ -845,7 +865,8 @@
         "source_text": "Original sentences and explanations; no dictionary wording copied.",
         "expression_ratings": "Existing source expression ratings unchanged."
       },
-      "origin_entry_level": "B2"
+      "origin_entry_level": "B2",
+      "estimated_seconds": 12
     },
     {
       "id": "ctx_b2_sentence_transformation_01",
@@ -880,7 +901,8 @@
         "source_text": "Original sentences and explanations; no dictionary wording copied.",
         "expression_ratings": "Existing source expression ratings unchanged."
       },
-      "origin_entry_level": "B2"
+      "origin_entry_level": "B2",
+      "estimated_seconds": 40
     },
     {
       "id": "ctx_b2_sentence_transformation_02",
@@ -915,7 +937,8 @@
         "source_text": "Original sentences and explanations; no dictionary wording copied.",
         "expression_ratings": "Existing source expression ratings unchanged."
       },
-      "origin_entry_level": "B2"
+      "origin_entry_level": "B2",
+      "estimated_seconds": 40
     },
     {
       "id": "ctx_b2_sentence_transformation_03",
@@ -950,7 +973,8 @@
         "source_text": "Original sentences and explanations; no dictionary wording copied.",
         "expression_ratings": "Existing source expression ratings unchanged."
       },
-      "origin_entry_level": "B2"
+      "origin_entry_level": "B2",
+      "estimated_seconds": 40
     },
     {
       "id": "ctx_c1_vocabulary_cloze_01",
@@ -984,7 +1008,8 @@
         "source_text": "Original sentences and explanations; no dictionary wording copied.",
         "expression_ratings": "Existing source expression ratings unchanged."
       },
-      "origin_entry_level": "C1"
+      "origin_entry_level": "C1",
+      "estimated_seconds": 15
     },
     {
       "id": "ctx_c1_vocabulary_cloze_02",
@@ -1018,7 +1043,8 @@
         "source_text": "Original sentences and explanations; no dictionary wording copied.",
         "expression_ratings": "Existing source expression ratings unchanged."
       },
-      "origin_entry_level": "C1"
+      "origin_entry_level": "C1",
+      "estimated_seconds": 15
     },
     {
       "id": "ctx_c1_vocabulary_cloze_03",
@@ -1052,7 +1078,8 @@
         "source_text": "Original sentences and explanations; no dictionary wording copied.",
         "expression_ratings": "Existing source expression ratings unchanged."
       },
-      "origin_entry_level": "C1"
+      "origin_entry_level": "C1",
+      "estimated_seconds": 15
     },
     {
       "id": "ctx_c1_grammar_cloze_01",
@@ -1086,7 +1113,8 @@
         "source_text": "Original sentences and explanations; no dictionary wording copied.",
         "expression_ratings": "Existing source expression ratings unchanged."
       },
-      "origin_entry_level": "C1"
+      "origin_entry_level": "C1",
+      "estimated_seconds": 18
     },
     {
       "id": "ctx_c1_grammar_cloze_02",
@@ -1120,7 +1148,8 @@
         "source_text": "Original sentences and explanations; no dictionary wording copied.",
         "expression_ratings": "Existing source expression ratings unchanged."
       },
-      "origin_entry_level": "C1"
+      "origin_entry_level": "C1",
+      "estimated_seconds": 18
     },
     {
       "id": "ctx_c1_grammar_cloze_03",
@@ -1154,7 +1183,8 @@
         "source_text": "Original sentences and explanations; no dictionary wording copied.",
         "expression_ratings": "Existing source expression ratings unchanged."
       },
-      "origin_entry_level": "C1"
+      "origin_entry_level": "C1",
+      "estimated_seconds": 18
     },
     {
       "id": "ctx_c1_grammar_meaning_choice_01",
@@ -1204,7 +1234,8 @@
         "source_text": "Original sentences and explanations; no dictionary wording copied.",
         "expression_ratings": "Existing source expression ratings unchanged."
       },
-      "origin_entry_level": "C1"
+      "origin_entry_level": "C1",
+      "estimated_seconds": 12
     },
     {
       "id": "ctx_c1_grammar_meaning_choice_02",
@@ -1254,7 +1285,8 @@
         "source_text": "Original sentences and explanations; no dictionary wording copied.",
         "expression_ratings": "Existing source expression ratings unchanged."
       },
-      "origin_entry_level": "C1"
+      "origin_entry_level": "C1",
+      "estimated_seconds": 12
     },
     {
       "id": "ctx_c1_grammar_meaning_choice_03",
@@ -1304,7 +1336,8 @@
         "source_text": "Original sentences and explanations; no dictionary wording copied.",
         "expression_ratings": "Existing source expression ratings unchanged."
       },
-      "origin_entry_level": "C1"
+      "origin_entry_level": "C1",
+      "estimated_seconds": 12
     },
     {
       "id": "ctx_c1_sentence_transformation_01",
@@ -1339,7 +1372,8 @@
         "source_text": "Original sentences and explanations; no dictionary wording copied.",
         "expression_ratings": "Existing source expression ratings unchanged."
       },
-      "origin_entry_level": "C1"
+      "origin_entry_level": "C1",
+      "estimated_seconds": 40
     },
     {
       "id": "ctx_c1_sentence_transformation_02",
@@ -1373,7 +1407,8 @@
         "source_text": "Original sentences and explanations; no dictionary wording copied.",
         "expression_ratings": "Existing source expression ratings unchanged."
       },
-      "origin_entry_level": "C1"
+      "origin_entry_level": "C1",
+      "estimated_seconds": 40
     },
     {
       "id": "ctx_c1_sentence_transformation_03",
@@ -1407,7 +1442,8 @@
         "source_text": "Original sentences and explanations; no dictionary wording copied.",
         "expression_ratings": "Existing source expression ratings unchanged."
       },
-      "origin_entry_level": "C1"
+      "origin_entry_level": "C1",
+      "estimated_seconds": 40
     },
     {
       "id": "pilot_b1_meaning_recall_1",
@@ -1442,7 +1478,8 @@
         "kind": "original_tester_content",
         "level_basis": "provisional task estimate"
       },
-      "origin_entry_level": "B1"
+      "origin_entry_level": "B1",
+      "estimated_seconds": 8
     },
     {
       "id": "pilot_b1_french_form_recall_1",
@@ -1477,7 +1514,8 @@
         "kind": "original_tester_content",
         "level_basis": "provisional task estimate"
       },
-      "origin_entry_level": "B1"
+      "origin_entry_level": "B1",
+      "estimated_seconds": 12
     },
     {
       "id": "pilot_b1_meaning_recall_2",
@@ -1512,7 +1550,8 @@
         "kind": "original_tester_content",
         "level_basis": "provisional task estimate"
       },
-      "origin_entry_level": "B1"
+      "origin_entry_level": "B1",
+      "estimated_seconds": 8
     },
     {
       "id": "pilot_b1_french_form_recall_2",
@@ -1547,7 +1586,8 @@
         "kind": "original_tester_content",
         "level_basis": "provisional task estimate"
       },
-      "origin_entry_level": "B1"
+      "origin_entry_level": "B1",
+      "estimated_seconds": 12
     },
     {
       "id": "pilot_b2_meaning_recall_1",
@@ -1581,7 +1621,8 @@
         "kind": "original_tester_content",
         "level_basis": "provisional task estimate"
       },
-      "origin_entry_level": "B2"
+      "origin_entry_level": "B2",
+      "estimated_seconds": 8
     },
     {
       "id": "pilot_b2_french_form_recall_1",
@@ -1615,7 +1656,8 @@
         "kind": "original_tester_content",
         "level_basis": "provisional task estimate"
       },
-      "origin_entry_level": "B2"
+      "origin_entry_level": "B2",
+      "estimated_seconds": 12
     },
     {
       "id": "pilot_b2_meaning_recall_2",
@@ -1649,7 +1691,8 @@
         "kind": "original_tester_content",
         "level_basis": "provisional task estimate"
       },
-      "origin_entry_level": "B2"
+      "origin_entry_level": "B2",
+      "estimated_seconds": 8
     },
     {
       "id": "pilot_b2_french_form_recall_2",
@@ -1683,7 +1726,8 @@
         "kind": "original_tester_content",
         "level_basis": "provisional task estimate"
       },
-      "origin_entry_level": "B2"
+      "origin_entry_level": "B2",
+      "estimated_seconds": 12
     },
     {
       "id": "pilot_c1_meaning_recall_1",
@@ -1716,7 +1760,8 @@
         "kind": "original_tester_content",
         "level_basis": "provisional task estimate"
       },
-      "origin_entry_level": "C1"
+      "origin_entry_level": "C1",
+      "estimated_seconds": 8
     },
     {
       "id": "pilot_c1_french_form_recall_1",
@@ -1749,7 +1794,8 @@
         "kind": "original_tester_content",
         "level_basis": "provisional task estimate"
       },
-      "origin_entry_level": "C1"
+      "origin_entry_level": "C1",
+      "estimated_seconds": 12
     },
     {
       "id": "pilot_c1_meaning_recall_2",
@@ -1782,7 +1828,8 @@
         "kind": "original_tester_content",
         "level_basis": "provisional task estimate"
       },
-      "origin_entry_level": "C1"
+      "origin_entry_level": "C1",
+      "estimated_seconds": 8
     },
     {
       "id": "pilot_c1_french_form_recall_2",
@@ -1815,7 +1862,8 @@
         "kind": "original_tester_content",
         "level_basis": "provisional task estimate"
       },
-      "origin_entry_level": "C1"
+      "origin_entry_level": "C1",
+      "estimated_seconds": 12
     },
     {
       "id": "pilot_b1_sound_discrimination_1",
@@ -1861,7 +1909,8 @@
         "kind": "original_tester_content",
         "level_basis": "provisional task estimate"
       },
-      "origin_entry_level": "B1"
+      "origin_entry_level": "B1",
+      "estimated_seconds": 10
     },
     {
       "id": "pilot_b1_sound_discrimination_2",
@@ -1907,7 +1956,8 @@
         "kind": "original_tester_content",
         "level_basis": "provisional task estimate"
       },
-      "origin_entry_level": "B1"
+      "origin_entry_level": "B1",
+      "estimated_seconds": 10
     },
     {
       "id": "pilot_b2_sound_discrimination_1",
@@ -1952,7 +2002,8 @@
         "kind": "original_tester_content",
         "level_basis": "provisional task estimate"
       },
-      "origin_entry_level": "B2"
+      "origin_entry_level": "B2",
+      "estimated_seconds": 10
     },
     {
       "id": "pilot_b2_sound_discrimination_2",
@@ -1997,7 +2048,8 @@
         "kind": "original_tester_content",
         "level_basis": "provisional task estimate"
       },
-      "origin_entry_level": "B2"
+      "origin_entry_level": "B2",
+      "estimated_seconds": 10
     },
     {
       "id": "pilot_c1_sound_discrimination_1",
@@ -2041,7 +2093,8 @@
         "kind": "original_tester_content",
         "level_basis": "provisional task estimate"
       },
-      "origin_entry_level": "C1"
+      "origin_entry_level": "C1",
+      "estimated_seconds": 10
     },
     {
       "id": "pilot_c1_sound_discrimination_2",
@@ -2085,7 +2138,8 @@
         "kind": "original_tester_content",
         "level_basis": "provisional task estimate"
       },
-      "origin_entry_level": "C1"
+      "origin_entry_level": "C1",
+      "estimated_seconds": 10
     },
     {
       "id": "pilot_b1_connected_word_recognition_1",
@@ -2136,7 +2190,8 @@
         "kind": "original_tester_content",
         "level_basis": "provisional task estimate"
       },
-      "origin_entry_level": "B1"
+      "origin_entry_level": "B1",
+      "estimated_seconds": 12
     },
     {
       "id": "pilot_b1_connected_word_recognition_2",
@@ -2187,7 +2242,8 @@
         "kind": "original_tester_content",
         "level_basis": "provisional task estimate"
       },
-      "origin_entry_level": "B1"
+      "origin_entry_level": "B1",
+      "estimated_seconds": 12
     },
     {
       "id": "pilot_b2_connected_word_recognition_1",
@@ -2237,7 +2293,8 @@
         "kind": "original_tester_content",
         "level_basis": "provisional task estimate"
       },
-      "origin_entry_level": "B2"
+      "origin_entry_level": "B2",
+      "estimated_seconds": 12
     },
     {
       "id": "pilot_b2_connected_word_recognition_2",
@@ -2287,7 +2344,8 @@
         "kind": "original_tester_content",
         "level_basis": "provisional task estimate"
       },
-      "origin_entry_level": "B2"
+      "origin_entry_level": "B2",
+      "estimated_seconds": 12
     },
     {
       "id": "pilot_c1_connected_word_recognition_1",
@@ -2336,7 +2394,8 @@
         "kind": "original_tester_content",
         "level_basis": "provisional task estimate"
       },
-      "origin_entry_level": "C1"
+      "origin_entry_level": "C1",
+      "estimated_seconds": 12
     },
     {
       "id": "pilot_c1_connected_word_recognition_2",
@@ -2385,7 +2444,8 @@
         "kind": "original_tester_content",
         "level_basis": "provisional task estimate"
       },
-      "origin_entry_level": "C1"
+      "origin_entry_level": "C1",
+      "estimated_seconds": 12
     },
     {
       "id": "pilot_b1_sentence_reconstruction_1",
@@ -2399,7 +2459,8 @@
       "prompt": "Listen, then put the tiles in the exact order heard.",
       "answer": "Nous avons acheté du pain ce matin.",
       "accepted": [
-        "Nous avons acheté du pain ce matin."
+        "Nous avons acheté du pain ce matin.",
+        "nous avons acheté du pain ce matin"
       ],
       "choices": [],
       "audio_text": "Nous avons acheté du pain ce matin.",
@@ -2421,7 +2482,38 @@
         "kind": "original_tester_content",
         "level_basis": "provisional task estimate"
       },
-      "origin_entry_level": "B1"
+      "origin_entry_level": "B1",
+      "estimated_seconds": 25,
+      "tokens": [
+        {
+          "id": "token-0",
+          "text": "nous"
+        },
+        {
+          "id": "token-1",
+          "text": "avons"
+        },
+        {
+          "id": "token-2",
+          "text": "acheté"
+        },
+        {
+          "id": "token-3",
+          "text": "du"
+        },
+        {
+          "id": "token-4",
+          "text": "pain"
+        },
+        {
+          "id": "token-5",
+          "text": "ce"
+        },
+        {
+          "id": "token-6",
+          "text": "matin"
+        }
+      ]
     },
     {
       "id": "pilot_b1_sentence_reconstruction_2",
@@ -2435,7 +2527,8 @@
       "prompt": "Listen, then put the tiles in the exact order heard.",
       "answer": "Elle va prendre le bus après le travail.",
       "accepted": [
-        "Elle va prendre le bus après le travail."
+        "Elle va prendre le bus après le travail.",
+        "elle va prendre le bus après le travail"
       ],
       "choices": [],
       "audio_text": "Elle va prendre le bus après le travail.",
@@ -2457,7 +2550,42 @@
         "kind": "original_tester_content",
         "level_basis": "provisional task estimate"
       },
-      "origin_entry_level": "B1"
+      "origin_entry_level": "B1",
+      "estimated_seconds": 25,
+      "tokens": [
+        {
+          "id": "token-0",
+          "text": "elle"
+        },
+        {
+          "id": "token-1",
+          "text": "va"
+        },
+        {
+          "id": "token-2",
+          "text": "prendre"
+        },
+        {
+          "id": "token-3",
+          "text": "le"
+        },
+        {
+          "id": "token-4",
+          "text": "bus"
+        },
+        {
+          "id": "token-5",
+          "text": "après"
+        },
+        {
+          "id": "token-6",
+          "text": "le"
+        },
+        {
+          "id": "token-7",
+          "text": "travail"
+        }
+      ]
     },
     {
       "id": "pilot_b2_sentence_reconstruction_1",
@@ -2470,7 +2598,8 @@
       "prompt": "Listen, then put the tiles in the exact order heard.",
       "answer": "Hier, je lui ai expliqué pourquoi nous étions partis.",
       "accepted": [
-        "Hier, je lui ai expliqué pourquoi nous étions partis."
+        "Hier, je lui ai expliqué pourquoi nous étions partis.",
+        "hier je lui ai expliqué pourquoi nous étions partis"
       ],
       "choices": [],
       "audio_text": "Hier, je lui ai expliqué pourquoi nous étions partis.",
@@ -2492,7 +2621,46 @@
         "kind": "original_tester_content",
         "level_basis": "provisional task estimate"
       },
-      "origin_entry_level": "B2"
+      "origin_entry_level": "B2",
+      "estimated_seconds": 25,
+      "tokens": [
+        {
+          "id": "token-0",
+          "text": "hier"
+        },
+        {
+          "id": "token-1",
+          "text": "je"
+        },
+        {
+          "id": "token-2",
+          "text": "lui"
+        },
+        {
+          "id": "token-3",
+          "text": "ai"
+        },
+        {
+          "id": "token-4",
+          "text": "expliqué"
+        },
+        {
+          "id": "token-5",
+          "text": "pourquoi"
+        },
+        {
+          "id": "token-6",
+          "text": "nous"
+        },
+        {
+          "id": "token-7",
+          "text": "étions"
+        },
+        {
+          "id": "token-8",
+          "text": "partis"
+        }
+      ]
     },
     {
       "id": "pilot_b2_sentence_reconstruction_2",
@@ -2505,7 +2673,8 @@
       "prompt": "Listen, then put the tiles in the exact order heard.",
       "answer": "Si tu avais le temps, tu pourrais venir demain.",
       "accepted": [
-        "Si tu avais le temps, tu pourrais venir demain."
+        "Si tu avais le temps, tu pourrais venir demain.",
+        "si tu avais le temps tu pourrais venir demain"
       ],
       "choices": [],
       "audio_text": "Si tu avais le temps, tu pourrais venir demain.",
@@ -2527,7 +2696,46 @@
         "kind": "original_tester_content",
         "level_basis": "provisional task estimate"
       },
-      "origin_entry_level": "B2"
+      "origin_entry_level": "B2",
+      "estimated_seconds": 25,
+      "tokens": [
+        {
+          "id": "token-0",
+          "text": "si"
+        },
+        {
+          "id": "token-1",
+          "text": "tu"
+        },
+        {
+          "id": "token-2",
+          "text": "avais"
+        },
+        {
+          "id": "token-3",
+          "text": "le"
+        },
+        {
+          "id": "token-4",
+          "text": "temps"
+        },
+        {
+          "id": "token-5",
+          "text": "tu"
+        },
+        {
+          "id": "token-6",
+          "text": "pourrais"
+        },
+        {
+          "id": "token-7",
+          "text": "venir"
+        },
+        {
+          "id": "token-8",
+          "text": "demain"
+        }
+      ]
     },
     {
       "id": "pilot_c1_sentence_reconstruction_1",
@@ -2539,7 +2747,8 @@
       "prompt": "Listen, then put the tiles in the exact order heard.",
       "answer": "Bien qu'il ait été averti, il a maintenu sa décision.",
       "accepted": [
-        "Bien qu'il ait été averti, il a maintenu sa décision."
+        "Bien qu'il ait été averti, il a maintenu sa décision.",
+        "bien qu'il ait été averti il a maintenu sa décision"
       ],
       "choices": [],
       "audio_text": "Bien qu'il ait été averti, il a maintenu sa décision.",
@@ -2561,7 +2770,50 @@
         "kind": "original_tester_content",
         "level_basis": "provisional task estimate"
       },
-      "origin_entry_level": "C1"
+      "origin_entry_level": "C1",
+      "estimated_seconds": 25,
+      "tokens": [
+        {
+          "id": "token-0",
+          "text": "bien"
+        },
+        {
+          "id": "token-1",
+          "text": "qu'il"
+        },
+        {
+          "id": "token-2",
+          "text": "ait"
+        },
+        {
+          "id": "token-3",
+          "text": "été"
+        },
+        {
+          "id": "token-4",
+          "text": "averti"
+        },
+        {
+          "id": "token-5",
+          "text": "il"
+        },
+        {
+          "id": "token-6",
+          "text": "a"
+        },
+        {
+          "id": "token-7",
+          "text": "maintenu"
+        },
+        {
+          "id": "token-8",
+          "text": "sa"
+        },
+        {
+          "id": "token-9",
+          "text": "décision"
+        }
+      ]
     },
     {
       "id": "pilot_c1_sentence_reconstruction_2",
@@ -2573,7 +2825,8 @@
       "prompt": "Listen, then put the tiles in the exact order heard.",
       "answer": "Les mesures dont nous avions convenu seront appliquées progressivement.",
       "accepted": [
-        "Les mesures dont nous avions convenu seront appliquées progressivement."
+        "Les mesures dont nous avions convenu seront appliquées progressivement.",
+        "les mesures dont nous avions convenu seront appliquées progressivement"
       ],
       "choices": [],
       "audio_text": "Les mesures dont nous avions convenu seront appliquées progressivement.",
@@ -2595,7 +2848,46 @@
         "kind": "original_tester_content",
         "level_basis": "provisional task estimate"
       },
-      "origin_entry_level": "C1"
+      "origin_entry_level": "C1",
+      "estimated_seconds": 25,
+      "tokens": [
+        {
+          "id": "token-0",
+          "text": "les"
+        },
+        {
+          "id": "token-1",
+          "text": "mesures"
+        },
+        {
+          "id": "token-2",
+          "text": "dont"
+        },
+        {
+          "id": "token-3",
+          "text": "nous"
+        },
+        {
+          "id": "token-4",
+          "text": "avions"
+        },
+        {
+          "id": "token-5",
+          "text": "convenu"
+        },
+        {
+          "id": "token-6",
+          "text": "seront"
+        },
+        {
+          "id": "token-7",
+          "text": "appliquées"
+        },
+        {
+          "id": "token-8",
+          "text": "progressivement"
+        }
+      ]
     },
     {
       "id": "pilot_b1_partial_dictation_1",
@@ -2630,7 +2922,8 @@
         "kind": "original_tester_content",
         "level_basis": "provisional task estimate"
       },
-      "origin_entry_level": "B1"
+      "origin_entry_level": "B1",
+      "estimated_seconds": 25
     },
     {
       "id": "pilot_b1_partial_dictation_2",
@@ -2665,7 +2958,8 @@
         "kind": "original_tester_content",
         "level_basis": "provisional task estimate"
       },
-      "origin_entry_level": "B1"
+      "origin_entry_level": "B1",
+      "estimated_seconds": 25
     },
     {
       "id": "pilot_b2_partial_dictation_1",
@@ -2699,7 +2993,8 @@
         "kind": "original_tester_content",
         "level_basis": "provisional task estimate"
       },
-      "origin_entry_level": "B2"
+      "origin_entry_level": "B2",
+      "estimated_seconds": 25
     },
     {
       "id": "pilot_b2_partial_dictation_2",
@@ -2733,7 +3028,8 @@
         "kind": "original_tester_content",
         "level_basis": "provisional task estimate"
       },
-      "origin_entry_level": "B2"
+      "origin_entry_level": "B2",
+      "estimated_seconds": 25
     },
     {
       "id": "pilot_c1_partial_dictation_1",
@@ -2766,7 +3062,8 @@
         "kind": "original_tester_content",
         "level_basis": "provisional task estimate"
       },
-      "origin_entry_level": "C1"
+      "origin_entry_level": "C1",
+      "estimated_seconds": 25
     },
     {
       "id": "pilot_c1_partial_dictation_2",
@@ -2799,7 +3096,8 @@
         "kind": "original_tester_content",
         "level_basis": "provisional task estimate"
       },
-      "origin_entry_level": "C1"
+      "origin_entry_level": "C1",
+      "estimated_seconds": 25
     },
     {
       "id": "pilot_b1_sentence_transcription_1",
@@ -2834,7 +3132,8 @@
         "kind": "original_tester_content",
         "level_basis": "provisional task estimate"
       },
-      "origin_entry_level": "B1"
+      "origin_entry_level": "B1",
+      "estimated_seconds": 40
     },
     {
       "id": "pilot_b1_sentence_transcription_2",
@@ -2869,7 +3168,8 @@
         "kind": "original_tester_content",
         "level_basis": "provisional task estimate"
       },
-      "origin_entry_level": "B1"
+      "origin_entry_level": "B1",
+      "estimated_seconds": 40
     },
     {
       "id": "pilot_b2_sentence_transcription_1",
@@ -2903,7 +3203,8 @@
         "kind": "original_tester_content",
         "level_basis": "provisional task estimate"
       },
-      "origin_entry_level": "B2"
+      "origin_entry_level": "B2",
+      "estimated_seconds": 40
     },
     {
       "id": "pilot_b2_sentence_transcription_2",
@@ -2937,7 +3238,8 @@
         "kind": "original_tester_content",
         "level_basis": "provisional task estimate"
       },
-      "origin_entry_level": "B2"
+      "origin_entry_level": "B2",
+      "estimated_seconds": 40
     },
     {
       "id": "pilot_c1_sentence_transcription_1",
@@ -2970,7 +3272,8 @@
         "kind": "original_tester_content",
         "level_basis": "provisional task estimate"
       },
-      "origin_entry_level": "C1"
+      "origin_entry_level": "C1",
+      "estimated_seconds": 40
     },
     {
       "id": "pilot_c1_sentence_transcription_2",
@@ -3003,7 +3306,8 @@
         "kind": "original_tester_content",
         "level_basis": "provisional task estimate"
       },
-      "origin_entry_level": "C1"
+      "origin_entry_level": "C1",
+      "estimated_seconds": 40
     },
     {
       "id": "pilot_b1_audio_transcript_choice_1",
@@ -3054,7 +3358,8 @@
         "kind": "original_tester_content",
         "level_basis": "provisional task estimate"
       },
-      "origin_entry_level": "B1"
+      "origin_entry_level": "B1",
+      "estimated_seconds": 16
     },
     {
       "id": "pilot_b1_audio_transcript_choice_2",
@@ -3105,7 +3410,8 @@
         "kind": "original_tester_content",
         "level_basis": "provisional task estimate"
       },
-      "origin_entry_level": "B1"
+      "origin_entry_level": "B1",
+      "estimated_seconds": 16
     },
     {
       "id": "pilot_b2_audio_transcript_choice_1",
@@ -3155,7 +3461,8 @@
         "kind": "original_tester_content",
         "level_basis": "provisional task estimate"
       },
-      "origin_entry_level": "B2"
+      "origin_entry_level": "B2",
+      "estimated_seconds": 16
     },
     {
       "id": "pilot_b2_audio_transcript_choice_2",
@@ -3205,7 +3512,8 @@
         "kind": "original_tester_content",
         "level_basis": "provisional task estimate"
       },
-      "origin_entry_level": "B2"
+      "origin_entry_level": "B2",
+      "estimated_seconds": 16
     },
     {
       "id": "pilot_c1_audio_transcript_choice_1",
@@ -3254,7 +3562,8 @@
         "kind": "original_tester_content",
         "level_basis": "provisional task estimate"
       },
-      "origin_entry_level": "C1"
+      "origin_entry_level": "C1",
+      "estimated_seconds": 16
     },
     {
       "id": "pilot_c1_audio_transcript_choice_2",
@@ -3303,7 +3612,8 @@
         "kind": "original_tester_content",
         "level_basis": "provisional task estimate"
       },
-      "origin_entry_level": "C1"
+      "origin_entry_level": "C1",
+      "estimated_seconds": 16
     },
     {
       "id": "pilot_b1_audio_meaning_choice_1",
@@ -3354,7 +3664,8 @@
         "kind": "original_tester_content",
         "level_basis": "provisional task estimate"
       },
-      "origin_entry_level": "B1"
+      "origin_entry_level": "B1",
+      "estimated_seconds": 16
     },
     {
       "id": "pilot_b1_audio_meaning_choice_2",
@@ -3405,7 +3716,8 @@
         "kind": "original_tester_content",
         "level_basis": "provisional task estimate"
       },
-      "origin_entry_level": "B1"
+      "origin_entry_level": "B1",
+      "estimated_seconds": 16
     },
     {
       "id": "pilot_b2_audio_meaning_choice_1",
@@ -3455,7 +3767,8 @@
         "kind": "original_tester_content",
         "level_basis": "provisional task estimate"
       },
-      "origin_entry_level": "B2"
+      "origin_entry_level": "B2",
+      "estimated_seconds": 16
     },
     {
       "id": "pilot_b2_audio_meaning_choice_2",
@@ -3505,7 +3818,8 @@
         "kind": "original_tester_content",
         "level_basis": "provisional task estimate"
       },
-      "origin_entry_level": "B2"
+      "origin_entry_level": "B2",
+      "estimated_seconds": 16
     },
     {
       "id": "pilot_c1_audio_meaning_choice_1",
@@ -3554,7 +3868,8 @@
         "kind": "original_tester_content",
         "level_basis": "provisional task estimate"
       },
-      "origin_entry_level": "C1"
+      "origin_entry_level": "C1",
+      "estimated_seconds": 16
     },
     {
       "id": "pilot_c1_audio_meaning_choice_2",
@@ -3603,7 +3918,8 @@
         "kind": "original_tester_content",
         "level_basis": "provisional task estimate"
       },
-      "origin_entry_level": "C1"
+      "origin_entry_level": "C1",
+      "estimated_seconds": 16
     }
   ]
 }

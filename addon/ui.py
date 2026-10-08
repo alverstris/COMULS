@@ -152,14 +152,18 @@ class CourseController:
         counts = stats(mw.col)
         day, record = self.today()
         units, admitted, seen_units = set(), 0, set()
+        first_days = {}
         for note in exercise_notes(mw.col).values():
             ns = note_state(note)
-            if ns.get("familiarised_day") == str(day):
-                units.add(ns.get("unit_id", note["COMULS_ID"]))
+            unit = ns.get("unit_id", note["COMULS_ID"])
+            first_day = ns.get("familiarised_day")
+            if first_day is not None:
+                first_days[unit] = min(int(first_day), first_days.get(unit, int(first_day)))
             if ns.get("admitted_day") == str(day):
                 admitted += 1
             if ns.get("familiarised_day") is not None:
                 seen_units.add(ns.get("unit_id", note["COMULS_ID"]))
+        units = {unit for unit, first_day in first_days.items() if first_day == day}
         seconds = record.get("active_seconds", 0) + self.active_buffer
         extra = record.get("extra_seconds", 0)
         return {"remaining_seconds": max(0, state.get("budget_minutes", 15) * 60 + extra - seconds),

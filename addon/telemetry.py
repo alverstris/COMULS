@@ -21,7 +21,7 @@ class LocalData:
         # Never retain typed answers, name, email, collection path or note prose.
         allowed = {"event", "exercise_id", "type", "ease", "outcome", "target_hint",
                    "carrier_help", "replays", "submitted", "reason", "rating",
-                   "seconds", "stage", "presentation_seed"}
+                   "seconds", "stage", "presentation_seed", "capture_phase", "prior_exposure_today"}
         safe = {k: v for k, v in event.items() if k in allowed and
                 (v is None or isinstance(v, (bool, int, float, str)))}
         safe["recorded_at"] = round(time.time(), 3)
