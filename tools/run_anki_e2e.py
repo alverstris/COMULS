@@ -48,7 +48,7 @@ def batches_for(stage, exercises):
             raise ValueError(f"No independently admissible {stage} {kind} in packaged content")
         item = candidates[0]
         unit, linked = item["unit_id"], set(item.get("exposure_groups", []))
-        preview = any(core.LEVELS.index(item.get(key, item["level"])) > core.LEVELS.index(stage)
+        preview = any(core.LEVELS.index(item.get(key) or item["level"]) > core.LEVELS.index(stage)
                       for key in ("level", "target_level", "carrier_level", "construction_level"))
         for group in groups:
             if (len(group["types"]) < 6 and unit not in group["units"]

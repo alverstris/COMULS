@@ -162,7 +162,7 @@ class Driver:
             result[identity] = {"note_id": int(note.id), "card_id": int(card.id),
                                 "reps": card.reps, "queue": card.queue, "type": card.type,
                                 "due": card.due, "interval": card.ivl,
-                                "revlog": aqt.mw.col.db.all("select id,ease,ivl,lastIvl,type from revlog where cid=? order by id", card.id)}
+                                "revlog": [list(row) for row in aqt.mw.col.db.all("select id,ease,ivl,lastIvl,type from revlog where cid=? order by id", card.id)]}
         return result
 
     def dismiss_info(self, substring):
