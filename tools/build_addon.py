@@ -26,7 +26,7 @@ def archive_entry(archive, name, content):
 def build():
     src = ROOT / "addon"
     required = ["__init__.py", "core.py", "templates.py", "collection.py", "ui.py", "reviewer.py",
-                "bridge.py", "media.py", "course.py", "evidence.py", "placement.py", "data/media_manifest.json", "data/imperial_b1.json", "data/imperial_b2.json"]
+                "bridge.py", "media.py", "course.py", "evidence.py", "placement.py", "pack_install.py", "data/media_manifest.json", "data/imperial_b1.json", "data/imperial_b2.json"]
     missing = [name for name in required if not (src / name).is_file()]
     if missing:
         raise SystemExit("Missing package files: " + ", ".join(missing))

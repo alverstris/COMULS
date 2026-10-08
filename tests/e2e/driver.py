@@ -477,6 +477,13 @@ class Driver:
             self.report["checks"].append("Content-manager pause/restore changes only the owned pause, preserving native history")
             self.schedule(buttons[0].click)
         yield from self.file_dialog(path)
+        yield Wait(lambda: self.modal("Review course update") is not None, "Concrete declarative course update preflight")
+        preflight = self.modal("Review course update")
+        assert preflight.button(QMessageBox.StandardButton.No).isDefault(), "Course import must default to keeping current content"
+        assert self.snapshot() == before, "Preflight must not change native collection data"
+        self.screenshot("course-update-preflight", preflight)
+        self.schedule(lambda: QTest.mouseClick(preflight.button(QMessageBox.StandardButton.Yes), Qt.MouseButton.LeftButton))
+        yield Wait(lambda: not preflight.isVisible(), "Approve concrete editorial import in real dialog")
         yield Wait(lambda: not self.c.busy and self.c.by_id[identity]["explanation"] == exercise["explanation"],
                    "Declarative content update completes through real native CollectionOp")
         if self.modal(text="Pack installed"):
