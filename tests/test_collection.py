@@ -233,3 +233,24 @@ def test_stats_read_native_collection_without_rescheduling(col, exercise):
     assert values["native_day"] == col.sched.today
     assert values["deck_id"] == card.did
     assert snapshot(col.get_card(card.id)) == before
+
+
+def test_raw_backlog_is_not_hidden_by_daily_review_limit(col, exercise):
+    cards = []
+    for index in range(3):
+        value = copy.deepcopy(exercise)
+        value["id"] = f"backlog-{index}"
+        note = introduce(col, value)
+        card = note.cards()[0]
+        card.start_timer()
+        col.sched.answerCard(card, 3)
+        cards.append(card.id)
+    # Configure a legitimate small native daily limit and make these reviews due.
+    did = adapter.get_state(col)["deck_id"]
+    config = col.decks.config_dict_for_deck_id(did)
+    config["rev"]["perDay"] = 1
+    col.decks.update_config(config)
+    col.sched.set_due_date(cards, "0")
+    result = adapter.stats(col)
+    assert result["due"] == 3
+    assert result["available_due"] == 1
