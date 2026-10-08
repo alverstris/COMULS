@@ -30,7 +30,7 @@ SYNTHESIS_TYPES = frozenset((
 ))
 CHOICE_TYPES = frozenset((
     "grammar_meaning_choice", "sound_discrimination",
-    "audio_transcript_choice", "audio_meaning_choice",
+    "connected_word_recognition", "audio_transcript_choice", "audio_meaning_choice",
 ))
 AUDIO_TYPES = frozenset((
     "sound_discrimination", "connected_word_recognition",

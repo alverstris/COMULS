@@ -15,7 +15,7 @@ from aqt.qt import (QAction, QApplication, QCheckBox, QComboBox, QDialog,
 from aqt.operations import CollectionOp
 from aqt.utils import showInfo, showWarning, tooltip
 from aqt.sound import av_player
-from anki.sound import TTSTag
+from anki.sound import TTSTag, SoundOrVideoTag
 
 from .core import (AUDIO_TYPES, ENTRY_LEVELS, EXERCISE_TYPES, LEVELS,
     admission_decision, level_eligible, load_pack, validate_pack)
@@ -245,6 +245,12 @@ class CourseController:
         except Exception as error:
             showWarning("French audio is unavailable: " + str(error), parent=self.window or mw)
 
+    def play_exercise(self, exercise):
+        if exercise.get("audio_file"):
+            av_player.play_tags([SoundOrVideoTag(filename=exercise["audio_file"])])
+        else:
+            self.play(exercise.get("audio_text", ""))
+
     def audio_check(self):
         self.play("Vous avez entendu une phrase entière. Écoutez comment les mots s'enchaînent.")
         dialog = QMessageBox(self.window or mw)
@@ -266,6 +272,11 @@ class CourseController:
         notes = exercise_notes(mw.col)
         day = mw.col.sched.today
         candidates, blocked = [], {}
+        type_counts = {kind: 0 for kind in EXERCISE_TYPES}
+        for note in notes.values():
+            kind = payload(note).get("type")
+            if note_state(note).get("admitted_day") is not None and kind in type_counts:
+                type_counts[kind] += 1
         for original in self.catalog:
             exercise = dict(original)
             if activity and exercise["type"] != activity:
@@ -293,7 +304,7 @@ class CourseController:
                     blocked[reason] = blocked.get(reason, 0) + 1
             else:
                 preferred = exercise.get("origin_entry_level") == state["stage"]
-                candidates.append((0 if preferred else 1, len(exercise["prompt"]), exercise["id"], exercise))
+                candidates.append((0 if preferred else 1, type_counts[exercise["type"]], exercise["id"], exercise))
         if not candidates:
             details = "\n".join(k.replace("_", " ") + ": " + str(v) for k, v in sorted(blocked.items()))
             showInfo("No new card is available for this selection. Existing reviews remain available.\n\n" + details,
@@ -317,9 +328,9 @@ class CourseController:
             ("prompt", "audio_text", "answer", "target_meaning", "carrier_meaning", "explanation") if exercise.get(k)))
         layout.addWidget(text)
         heard = {"value": exercise["type"] not in AUDIO_TYPES}
-        if exercise.get("audio_text"):
+        if exercise.get("audio_text") or exercise.get("audio_file"):
             def play():
-                self.play(exercise["audio_text"])
+                self.play_exercise(exercise)
                 heard["value"] = True
             button("Hear the whole sentence", play, layout)
         understood = QCheckBox("I understand this target and the words/construction used in this example.")
@@ -376,8 +387,8 @@ class CourseController:
             exercise.get("explanation", ""), exercise.get("carrier_meaning", ""),
             "Level assignment: provisional task estimate."]))
         layout.addWidget(text)
-        if exercise.get("audio_text"):
-            button("Play whole sentence", lambda: self.play(exercise["audio_text"]), layout)
+        if exercise.get("audio_text") or exercise.get("audio_file"):
+            button("Play whole sentence", lambda: self.play_exercise(exercise), layout)
         button("Close", dialog.accept, layout)
         self.on_event({"event": "reference_preview", "exercise_id": exercise["id"]})
         dialog.exec()
@@ -645,6 +656,8 @@ def open_comuls():
 
 def on_profile_open():
     global _controller
+    if _controller is not None:
+        _controller.close()
     try:
         _controller = CourseController()
         config = mw.addonManager.getConfig(__name__) or {}
@@ -662,6 +675,9 @@ def on_profile_close():
 
 
 def setup():
+    if getattr(mw, "_comuls_menu_installed", False):
+        return
+    mw._comuls_menu_installed = True
     action = QAction("COMULS", mw)
     action.triggered.connect(open_comuls)
     mw.form.menuTools.addAction(action)

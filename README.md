@@ -2,7 +2,7 @@
 
 COMULS is a proposed curriculum and progression system for Anki. It combines retention of earlier language, mastery of the current level, and controlled preparation for upcoming material. The aim is smoother language learning with fewer abrupt jumps between CEFR levels.
 
-**Current stage:** curriculum design and a verified French vocabulary dataset. There is no implemented curriculum engine, generated Anki deck, or released set of cards yet. This README describes the intended system and the vocabulary foundation currently published here. Improved learning speed is a design goal, not an established result.
+Current stage: a desktop Anki tester is implemented on this branch, with B1/B2/C1 entry levels, all thirteen exercise formats and a bounded 90-exercise pack. See [student installation instructions](docs/STUDENT_GUIDE.md) and [verification checklist](docs/TESTER_CHECKLIST.md). Download the installable package from a passing tester release. Improved learning speed remains a design goal, not an established result. The full vocabulary inventory is not yet a ready-made course.
 
 ## How the system is meant to work
 

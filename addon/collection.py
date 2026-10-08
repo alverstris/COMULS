@@ -57,7 +57,7 @@ def get_state(col: Any) -> dict[str, Any]:
     result = {
         "schema_version": 1, "stage": "B1", "budget_minutes": 15,
         "enabled": list(core.EXERCISE_TYPES), "audio_confirmed": False,
-        "days": {}, "manager_id": None,
+        "days": {}, "manager_id": None, "deck_id": None,
     }
     saved = col.get_config(CONFIG_KEY, default=None)
     if saved is not None:
@@ -114,7 +114,7 @@ def ensure_model(col: Any) -> dict[str, Any]:
 
 def ensure_deck(col: Any, state: dict[str, Any]) -> int:
     """Reuse a stored ID, including renamed decks; never relocate existing notes."""
-    existing = state.get("manager_id")
+    existing = state.get("deck_id")
     if existing is not None:
         if type(existing) is not int or col.decks.get_legacy(existing) is None:
             raise ValueError("The COMULS practice deck was deleted. Restore it or migrate explicitly.")
@@ -132,7 +132,7 @@ def ensure_deck(col: Any, state: dict[str, Any]) -> int:
             raise ValueError("The existing COMULS deck is missing.")
     else:
         deck_id = int(col.decks.add_normal_deck_with_name(DEFAULT_DECK_NAME).id)
-    state["manager_id"] = deck_id
+    state["deck_id"] = deck_id
     save_state(col, state)
     return deck_id
 
@@ -313,7 +313,7 @@ def stage_change(col: Any, newstage: str, catalog: Any = None) -> dict[str, int]
 
 def stats(col: Any) -> dict[str, Any]:
     controls = get_state(col)
-    deck_id = controls.get("manager_id")
+    deck_id = controls.get("deck_id")
     model = col.models.by_name(MODEL_NAME)
     rows = []
     if model is not None:
@@ -328,13 +328,15 @@ def stats(col: Any) -> dict[str, Any]:
               if (queue == 2 and value <= today)
               or (queue == 1 and value <= now)
               or (queue == 3 and value <= today))
-    # Native scheduler counts also honour review limits and learning look-ahead.
+    # Report the raw backlog separately from the scheduler-limited session.
+    available_due = due
     if deck_id is not None and col.decks.get_legacy(deck_id) is not None:
         tree = col.sched.deck_due_tree(deck_id)
         if tree is not None:
-            due = int(tree.review_count + tree.learn_count)
+            available_due = int(tree.review_count + tree.learn_count)
     return {
         "total": len(rows), "reviewed": sum(1 for _, reps, _, _, _ in rows if reps > 0),
         "new": sum(1 for _, _, queue, _, _ in rows if queue == 0),
-        "due": due, "learning": learning, "native_day": today, "deck_id": deck_id,
+        "due": due, "available_due": available_due,
+        "learning": learning, "native_day": today, "deck_id": deck_id,
     }
