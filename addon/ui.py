@@ -4,6 +4,8 @@ import hashlib
 import html
 import json
 import time
+import statistics
+import re
 from pathlib import Path
 from typing import Callable
 
@@ -11,7 +13,7 @@ from aqt import mw, gui_hooks
 from aqt.qt import (QAction, QApplication, QCheckBox, QComboBox, QDialog,
     QDialogButtonBox, QFileDialog, QFormLayout, QHBoxLayout, QLabel, QLineEdit,
     QListWidget, QMessageBox, QPushButton, QSpinBox, QTabWidget, QTextBrowser,
-    QTimer, QVBoxLayout, QWidget, Qt)
+    QTimer, QVBoxLayout, QWidget, Qt, QScrollArea, QGroupBox, QEvent, QObject)
 from aqt.operations import CollectionOp
 from aqt.utils import showInfo, showWarning, tooltip
 from aqt.sound import av_player
@@ -22,6 +24,8 @@ from .core import (AUDIO_TYPES, ENTRY_LEVELS, EXERCISE_TYPES, LEVELS,
 from .collection import (get_state, save_state, exercise_notes, prepare_exercise,
     mark_familiarised, activate_exercise, ensure_deck, stage_change, stats)
 from .telemetry import LocalData
+from .course import COHORTS, load_course, route_candidates, suggested_cohort
+from .version import VERSION
 from .workload import update_backlog
 
 ROOT = Path(__file__).resolve().parent
@@ -59,11 +63,19 @@ class CourseController:
         profile_hash = hashlib.sha256(mw.pm.profileFolder().encode()).hexdigest()[:20]
         self.local = LocalData(ROOT / "user_files" / profile_hash)
         self.catalog_path = self.local.root / "course-pack.json"
-        self.pack = load_pack(self.catalog_path if self.catalog_path.exists() else ROOT / "data" / "tester.json")
+        self.pack = load_course(ROOT, self.catalog_path)
         self.catalog = self.pack["exercises"]
         self.by_id = {e["id"]: e for e in self.catalog}
         self.window = None
         self.prepare_dialog = None
+        self.media_ready = False
+        self.media_error = ""
+        self.paused = False
+        self.temporarily_closed = False
+        self.last_interaction = time.monotonic()
+        self.last_sample = time.monotonic()
+        self.attempt_started = None
+        self.session_active = 0.0
         self.active_buffer = 0.0
         self.last_tick = time.monotonic()
         self.last_flush = self.last_tick
@@ -76,6 +88,164 @@ class CourseController:
         self.clock.start()
         from .reviewer import register
         self.reviewer = register(self)
+        self.install_bundled_audio()
+
+
+    def install_bundled_audio(self):
+        """Install only the package's verified, content-addressed recordings."""
+        manifest = ROOT / "data" / "media_manifest.json"
+        if not manifest.exists():
+            # Compatibility for old developer packs; public Imperial builds require it.
+            self.media_ready = not any(e.get("audio_file") for e in self.catalog)
+            return
+        try:
+            from .media import ensure_pack_media
+            result = {}
+            def install(col):
+                result["report"] = ensure_pack_media(col, self.pack, ROOT)
+                return col.set_config("comuls_media_version", self.pack["version"], undoable=False)
+            def success(_changes):
+                self.media_ready = True
+                self.media_error = ""
+                if self.window:
+                    self.window.refresh()
+            def failure(error):
+                self.media_ready = False
+                self.media_error = str(error)
+                if self.window:
+                    self.window.refresh()
+            CollectionOp(parent=mw, op=install).success(success).failure(failure).run_in_background()
+        except Exception as error:
+            self.media_ready = False
+            self.media_error = str(error)
+
+    def pause(self, reason="manual"):
+        if self.paused or self.closed:
+            return
+        self.paused = True
+        av_player.stop_and_clear_queue()
+        self.flush_time()
+        self.on_event({"event": "pause", "reason": reason})
+        if QApplication.applicationState() == Qt.ApplicationState.ApplicationActive:
+            QTimer.singleShot(0, self.resume_prompt)
+
+    def resume_prompt(self):
+        if not self.paused or self.closed or getattr(self, "_resume_dialog_open", False):
+            return
+        if QApplication.applicationState() != Qt.ApplicationState.ApplicationActive:
+            return
+        self._resume_dialog_open = True
+        dialog = QDialog(self.prepare_dialog or mw)
+        dialog.setWindowTitle("COMULS paused")
+        box = QVBoxLayout(dialog)
+        box.addWidget(label("Your place is saved. Audio is stopped and this pause does not use your daily study time."))
+        button("Resume", dialog.accept, box)
+        result = dialog.exec()
+        self._resume_dialog_open = False
+        if result == QDialog.DialogCode.Accepted:
+            self.paused = False
+            self.last_tick = time.monotonic()
+            self.last_interaction = self.last_tick
+            self.on_event({"event": "resume"})
+
+    def timings(self):
+        default = {"meaning_recall": 8, "french_form_recall": 18, "vocabulary_cloze": 18,
+            "grammar_cloze": 18, "grammar_meaning_choice": 12, "sentence_transformation": 40,
+            "sound_discrimination": 12, "connected_word_recognition": 12,
+            "sentence_reconstruction": 25, "partial_dictation": 25, "sentence_transcription": 40,
+            "audio_transcript_choice": 12, "audio_meaning_choice": 12}
+        for kind, values in self.state().get("type_timings", {}).items():
+            good = [v for v in values if isinstance(v, (int, float)) and 1 <= v <= 300]
+            if len(good) >= 20 and kind in default:
+                default[kind] = round(statistics.median(good))
+        return default
+
+    def evidence(self):
+        from .evidence import summarize_exercise
+        summaries = {}
+        for note in exercise_notes(mw.col).values():
+            exercise = payload(note)
+            logs = [entry for card in note.cards() for entry in mw.col.get_review_logs(card.id)]
+            summaries[exercise["id"]] = summarize_exercise(exercise, note_state(note), logs, time.time())
+        return summaries
+
+    def progress_text(self):
+        summaries = self.evidence()
+        state = self.state()
+        rows = []
+        for kind in EXERCISE_TYPES:
+            ids = [e["id"] for e in self.catalog if e["type"] == kind and e.get("origin_entry_level", state["stage"]) == state["stage"]]
+            sampled = [summaries[i] for i in ids if i in summaries]
+            stable = sum(bool(item.get("stable")) for item in sampled)
+            weak = sum(bool(item.get("repair_needed")) for item in sampled)
+            rows.append(display_type(kind) + f": {stable}/{len(sampled)} sampled targets stable; {len(ids)} available; {weak} need repair")
+        counts = stats(mw.col)
+        return ("Course: Imperial French " + state["stage"] + "\n"
+            + f"Introduced cards: {counts['reviewed']} · due: {counts['due']}\n\n"
+            + "\n".join(rows) + "\n\n"
+            "Stable means two recorded unaided successful reviews on different dates, at least 24 hours after known answer exposure. "
+            "Missing assistance coverage is reported conservatively. Native undo removes the undone review's evidence. "
+            "These samples do not certify a CEFR level. Timing covers this desktop; synced mobile reviews may have incomplete assistance/time evidence.")
+
+    def try_controls(self):
+        dialog = QDialog(self.window or mw)
+        dialog.setWindowTitle("Try the four card controls")
+        dialog.resize(600, 520)
+        layout = QVBoxLayout(dialog)
+        layout.addWidget(label("These are ungraded examples. Your Anki schedule is not changed."))
+        tabs = QTabWidget(); layout.addWidget(tabs)
+        reveal = QWidget(); rl = QVBoxLayout(reveal)
+        rl.addWidget(label("Meaning recall: Bonjour. Think of the meaning, then reveal."))
+        answer = label(""); rl.addWidget(answer)
+        button("Show answer", lambda: answer.setText("Hello / good morning. In ordinary study, compare and select your own Anki rating."), rl)
+        tabs.addTab(reveal, "Recall")
+        typed = QWidget(); tl = QVBoxLayout(typed)
+        tl.addWidget(label("Type the French word for hello:"))
+        field = QLineEdit(); field.setPlaceholderText("bonjour"); tl.addWidget(field)
+        result = label(""); tl.addWidget(result)
+        def compare():
+            from .core import normalize_answer
+            result.setText("Correct. Now you would choose a native Anki rating." if normalize_answer(field.text()) == "bonjour" else "Reference: bonjour. Anki's Again rating means the answer was not retrieved.")
+        button("Check", compare, tl); field.returnPressed.connect(compare)
+        tabs.addTab(typed, "Type")
+        choice = QWidget(); cl = QVBoxLayout(choice)
+        cl.addWidget(label("Choose the meaning of merci."))
+        feedback = label(""); cl.addWidget(feedback)
+        for text, correct in (("Thank you", True), ("Goodbye", False), ("Please", False)):
+            button(text, lambda c=correct: feedback.setText("Correct: thank you." if c else "Reference: thank you."), cl)
+        tabs.addTab(choice, "Choose")
+        tiles = QWidget(); il = QVBoxLayout(tiles)
+        il.addWidget(label("Click the tiles to build: Je suis étudiant."))
+        row = QHBoxLayout(); il.addLayout(row)
+        sequence = []; output = label(""); il.addWidget(output)
+        def add(word):
+            sequence.append(word); output.setText(" ".join(sequence))
+        for word in ("étudiant", "Je", "suis"):
+            button(word, lambda word=word: add(word), row)
+        button("Reset", lambda: (sequence.clear(), output.setText("")), il)
+        tabs.addTab(tiles, "Arrange")
+        button("Done", dialog.accept, layout)
+        dialog.exec()
+
+    def open_deck_options(self):
+        state = self.state()
+        deck_id = ensure_deck(mw.col, state)
+        from aqt.deckoptions import display_options_for_deck_id
+        display_options_for_deck_id(deck_id)
+
+    def on_collection_closing(self, _col=None):
+        self.flush_time()
+        self.temporarily_closed = True
+        self.paused = True
+        av_player.stop_and_clear_queue()
+
+    def on_collection_reopened(self, _col=None):
+        self.temporarily_closed = False
+        self.paused = False
+        self.last_tick = time.monotonic()
+        self.last_interaction = self.last_tick
+        if self.window:
+            self.window.refresh()
 
     def state(self):
         return get_state(mw.col)
@@ -99,8 +269,9 @@ class CourseController:
         if not self.window:
             self.window = CourseWindow(self)
         self.window.refresh()
-        if not self.state().get("stage_confirmed", False):
+        if not self.state().get("stage_confirmed", False) or self.state()["stage"] not in COHORTS:
             self.window.tabs.setCurrentIndex(1)
+            self.window.stage_box.setCurrentText(suggested_cohort(ROOT))
         self.window.show()
         self.window.raise_()
         self.window.activateWindow()
@@ -109,15 +280,20 @@ class CourseController:
         now = time.monotonic()
         elapsed = min(2.0, max(0.0, now - self.last_tick))
         self.last_tick = now
-        if self.closed or not mw.col:
+        if self.closed or self.temporarily_closed or not mw.col:
             return
         active = QApplication.applicationState() == Qt.ApplicationState.ApplicationActive
+        if active and self.paused and not getattr(self, "_resume_dialog_open", False):
+            QTimer.singleShot(0, self.resume_prompt)
         preparing = self.prepare_dialog is not None and self.prepare_dialog.isActiveWindow()
         reviewing = mw.state == "review" and mw.isActiveWindow() and self.current_is_comuls()
-        if active and (preparing or reviewing):
+        if active and not self.paused and (preparing or reviewing):
             self.active_buffer += elapsed
-        elif not active:
-            av_player.stop_and_clear_queue()
+            self.session_active += elapsed
+            if now - self.last_interaction > 180:
+                self.pause("idle")
+        elif not active and (self.prepare_dialog is not None or (mw.state == "review" and self.current_is_comuls())) and not self.paused:
+            self.pause("focus")
         if now - self.last_flush >= 15 and not self.busy:
             self.flush_time()
 
@@ -153,37 +329,65 @@ class CourseController:
 
     def budget(self):
         state = self.state()
-        counts = stats(mw.col)
         day, record = self.today()
-        updated = update_backlog(state, day, counts.get("due", 0) * 25, state.get("budget_minutes", 15) * 60)
-        if updated != state and not self.busy:
-            save_state(mw.col, updated)
-            state = updated
-        units, admitted, seen_units = set(), 0, set()
-        first_days = {}
-        for note in exercise_notes(mw.col).values():
-            ns = note_state(note)
+        timings = self.timings()
+        notes = exercise_notes(mw.col)
+        units, preview_units, seen_units = set(), set(), set()
+        first_days, admitted, due_seconds = {}, 0, 0
+        understood = set()
+        now = int(time.time())
+        for note in notes.values():
+            ns, exercise = note_state(note), payload(note)
             unit = ns.get("unit_id", note["COMULS_ID"])
             first_day = ns.get("familiarised_day")
             if first_day is not None:
                 first_days[unit] = min(int(first_day), first_days.get(unit, int(first_day)))
+                seen_units.add(unit)
+            # Understanding declared during preparation is a prerequisite
+            # declaration, never a claim of independent retrieval.
+            if ns.get("familiarised"):
+                understood.add(unit)
+            understood.update(ns.get("understood_support", []))
             if ns.get("admitted_day") == str(day):
                 admitted += 1
-            if ns.get("familiarised_day") is not None:
-                seen_units.add(ns.get("unit_id", note["COMULS_ID"]))
+            admission_stage = ns.get("admission_stage", state["stage"])
+            if (first_day == str(day) and exercise.get("level") in LEVELS
+                    and LEVELS.index(exercise["level"]) > LEVELS.index(admission_stage)):
+                preview_units.add(unit)
+            for card in note.cards():
+                due = ((card.queue == 2 and card.due <= day)
+                    or (card.queue == 1 and card.due <= now)
+                    or (card.queue == 3 and card.due <= day))
+                if due:
+                    due_seconds += timings.get(exercise["type"], 25)
         units = {unit for unit, first_day in first_days.items() if first_day == day}
+        updated = update_backlog(state, day, due_seconds, state.get("budget_minutes", 15) * 60)
+        if updated != state and not self.busy:
+            save_state(mw.col, updated)
+            state = updated
         seconds = record.get("active_seconds", 0) + self.active_buffer
         extra = record.get("extra_seconds", 0)
         return {"remaining_seconds": max(0, state.get("budget_minutes", 15) * 60 + extra - seconds),
                 "new_units": len(units), "admitted_cards": admitted,
-                "due_seconds": counts.get("due", 0) * 25,
+                "preview_units": len(preview_units),
+                "max_new_units": state.get("max_new_units", 6),
+                "max_new_cards": state.get("max_new_cards", 8),
+                "max_preview_units": state.get("max_preview_units", 1),
+                "due_seconds": due_seconds, "timings": timings,
                 "pause_new": bool(state.get("pause_new", False)),
                 "override": state.get("backlog_override_day") == day,
-                "seen_units": seen_units, "active_seconds": seconds}
+                "seen_units": seen_units, "understood": understood, "active_seconds": seconds}
 
     def on_event(self, event):
-        if self.closed or not mw.col:
+        if self.closed or self.temporarily_closed or not mw.col:
             return
+        if event.get("event") in ("activity", "question", "attempt", "hint", "replay", "native_grade"):
+            self.last_interaction = time.monotonic()
+        if event.get("event") == "question":
+            self.attempt_started = self.session_active
+        if event.get("event") == "native_grade" and self.attempt_started is not None:
+            event["active_seconds"] = round(max(0, self.session_active - self.attempt_started), 2)
+            self.attempt_started = None
         try:
             self.local.record(event, self.state().get("diagnostics", False) or event.get("event") == "report")
         except OSError:
@@ -200,8 +404,12 @@ class CourseController:
             self.hard_streak = self.hard_streak + 1 if kind in ("sentence_transcription", "sentence_transformation") else 0
             self.flush_time()
             state = self.state()
+            if kind and event.get("active_seconds", 0) >= 1:
+                samples = state.setdefault("type_timings", {}).setdefault(kind, [])
+                samples.append(min(300, event["active_seconds"]))
+                state["type_timings"][kind] = samples[-20:]
             counts = stats(mw.col)
-            state = update_backlog(state, mw.col.sched.today, counts.get("due", 0) * 25,
+            state = update_backlog(state, mw.col.sched.today, self.budget()["due_seconds"],
                 state.get("budget_minutes", 15) * 60, completed=True)
             save_state(mw.col, state)
 
@@ -278,6 +486,8 @@ class CourseController:
         except Exception as error:
             self.content_error(error)
             return
+        self.paused = False
+        self.last_interaction = time.monotonic()
         if self.window:
             self.window.hide()
         av_player.stop_and_clear_queue()
@@ -297,11 +507,22 @@ class CourseController:
             self.play(exercise.get("audio_text", ""))
 
     def audio_check(self):
-        self.play("Vous avez entendu une phrase entière. Écoutez comment les mots s'enchaînent.")
+        if not self.media_ready:
+            showInfo("The bundled audio is still being installed. " + self.media_error, parent=self.window or mw)
+            return
+        try:
+            from .media import audio_check_filename
+            filename = audio_check_filename(ROOT)
+        except (ImportError, FileNotFoundError, ValueError):
+            filename = None
+        if filename:
+            av_player.play_tags([SoundOrVideoTag(filename=filename)])
+        else:
+            self.play("Vous avez entendu une phrase entière. Écoutez comment les mots s'enchaînent.")
         dialog = QMessageBox(self.window or mw)
         dialog.setWindowTitle("French audio check")
-        dialog.setText("Did you hear clear French audio?\n\nIf not, install a French system voice and restart Anki. "
-                       "Linux requires an Anki TTS add-on. Listening stays unavailable until you confirm it works.")
+        dialog.setText("Did you hear clear French audio?\n\nCheck your output device and volume if you did not. "
+                       "The demo includes its French recordings. Listening stays unavailable until you confirm playback works.")
         dialog.setStandardButtons(QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No)
         dialog.setDefaultButton(QMessageBox.StandardButton.No)
         state = self.state()
@@ -316,7 +537,7 @@ class CourseController:
         state, budget = self.state(), self.budget()
         if not state.get("stage_confirmed", False):
             self.window.tabs.setCurrentIndex(1)
-            showInfo("Choose B1, B2 or C1 and click Use this level first.", parent=self.window)
+            showInfo("Choose your Imperial B1 or B2 course and click Use this level first.", parent=self.window)
             return
         notes = exercise_notes(mw.col)
         day = mw.col.sched.today
@@ -326,7 +547,7 @@ class CourseController:
             kind = payload(note).get("type")
             if note_state(note).get("admitted_day") is not None and kind in type_counts:
                 type_counts[kind] += 1
-        for original in self.catalog:
+        for original in route_candidates(self.catalog, state["stage"], repair):
             exercise = dict(original)
             if activity and exercise["type"] != activity:
                 continue
@@ -338,10 +559,12 @@ class CourseController:
                 continue
             exercise["unit_already_introduced"] = exercise["unit_id"] in budget["seen_units"]
             decision = admission_decision(exercise, state["stage"], True,
-                budget["seen_units"], set(state.get("enabled", EXERCISE_TYPES)), budget)
+                budget["understood"], set(state.get("enabled", EXERCISE_TYPES)), budget)
             reasons = list(decision["reasons"])
             if exercise["type"] in AUDIO_TYPES and not state.get("audio_confirmed"):
                 reasons.append("French audio check required")
+            if exercise["type"] in AUDIO_TYPES and exercise.get("audio_file") and not self.media_ready:
+                reasons.append("bundled media unavailable")
             # A reverse/companion card is not an independent retrieval on the same day.
             for other in notes.values():
                 os = note_state(other)
@@ -407,7 +630,7 @@ class CourseController:
         exercise_for_gate = dict(exercise)
         exercise_for_gate["unit_already_introduced"] = exercise["unit_id"] in budget["seen_units"]
         decision = admission_decision(exercise_for_gate, state["stage"], True,
-            budget["seen_units"], set(state.get("enabled", EXERCISE_TYPES)), budget)
+            budget["understood"], set(state.get("enabled", EXERCISE_TYPES)), budget)
         if not decision["allowed"]:
             showInfo("Your preparation is complete, but admission is paused: " + ", ".join(decision["reasons"]), parent=self.window)
             # Preserve actual familiarisation even when the remaining time is exhausted.
@@ -426,6 +649,7 @@ class CourseController:
             result = stage_change(col, stage, self.catalog)
             state = get_state(col)
             state["stage_confirmed"] = True
+            state["cohort"] = stage
             save_state(col, state)
             return result
         self.mutate("Change COMULS entry level", apply,
@@ -446,6 +670,8 @@ class CourseController:
         if exercise.get("audio_text") or exercise.get("audio_file"):
             button("Play whole sentence", lambda: self.play_exercise(exercise), layout)
         button("Close", dialog.accept, layout)
+        from .collection import record_reference_exposure
+        record_reference_exposure(mw.col, exercise["id"], time.time())
         self.on_event({"event": "reference_preview", "exercise_id": exercise["id"]})
         dialog.exec()
         av_player.stop_and_clear_queue()
@@ -465,7 +691,8 @@ class CourseController:
                 records.append({"exercise_id": note["COMULS_ID"], "reviews": logs, "state": note_state(note)})
         state = self.state()
         export = {"schema_version": 1, "pack_id": self.pack["pack_id"], "pack_version": self.pack["version"],
-            "stage": state["stage"], "days": state.get("days", {}), "cards": records,
+            "stage": state["stage"], "cohort": state.get("cohort", state["stage"]),
+            "addon_version": VERSION, "evidence": self.evidence(), "days": state.get("days", {}), "cards": records,
             "events": self.local.events(), "measurement_notes":
             ["Native review history is authoritative and reflects undo.",
              "Optional detailed events and active time cover this desktop only.",
@@ -473,6 +700,49 @@ class CourseController:
              "No name, email, profile path, raw typed answer or device ID is included."]}
         Path(path).write_text(json.dumps(export, ensure_ascii=False, indent=2), encoding="utf-8")
         showInfo("Study data exported. Nothing was uploaded.", parent=self.window)
+
+    def content_manager(self):
+        dialog = QDialog(self.window or mw)
+        dialog.setWindowTitle("COMULS content manager")
+        dialog.resize(780, 610)
+        layout = QVBoxLayout(dialog)
+        layout.addWidget(label("Installed course: " + self.pack["pack_id"] + " · " + self.pack["version"]
+            + "\nMedia: " + ("verified and available" if self.media_ready else "unavailable — " + self.media_error)))
+        listing = QListWidget(); layout.addWidget(listing)
+        from aqt.qt import QListWidgetItem
+        def refresh():
+            listing.clear()
+            for note in exercise_notes(mw.col).values():
+                exercise, state = payload(note), note_state(note)
+                status = state.get("lifecycle", "prepared")
+                if state.get("managed_pause"):
+                    status += " · paused"
+                item = QListWidgetItem(exercise["level"] + " · " + display_type(exercise["type"])
+                    + " · " + exercise["answer"] + " · " + status)
+                item.setData(Qt.ItemDataRole.UserRole, exercise["id"])
+                listing.addItem(item)
+        def selected():
+            item = listing.currentItem()
+            return item.data(Qt.ItemDataRole.UserRole) if item else None
+        def change(action):
+            identity = selected()
+            if not identity:
+                return
+            from .collection import set_managed_pause
+            self.mutate("Change COMULS managed pause",
+                lambda col: set_managed_pause(col, [identity], action == "pause", "user"),
+                lambda _result: refresh())
+        row = QHBoxLayout(); layout.addLayout(row)
+        button("Pause selected", lambda: change("pause"), row)
+        button("Restore selected", lambda: change("restore"), row)
+        button("Open reference", lambda: self.preview(self.by_id[selected()]) if selected() in self.by_id else None, row)
+        layout.addWidget(label("Restore affects only COMULS-owned pauses. Personal Anki suspensions, review history and due dates are preserved."))
+        row = QHBoxLayout(); layout.addLayout(row)
+        button("Install course pack…", self.install_pack, row)
+        button("Verify / restore bundled audio", self.install_bundled_audio, row)
+        button("Close", dialog.accept, row)
+        refresh()
+        dialog.exec()
 
     def install_pack(self):
         if not self.require_manager():
@@ -530,11 +800,11 @@ class CourseWindow(QDialog):
     def __init__(self, controller):
         super().__init__(mw)
         self.c = controller
-        self.setWindowTitle("COMULS — French practice")
+        self.setWindowTitle("COMULS — Imperial French demo")
         self.resize(830, 670)
         self.setMinimumSize(610, 470)
         layout = QVBoxLayout(self)
-        title = label("COMULS · concurrent French practice")
+        title = label("COMULS · Imperial French")
         title.setStyleSheet("font-size: 23px; padding: 8px 0;")
         layout.addWidget(title)
         self.tabs = QTabWidget()
@@ -549,6 +819,7 @@ class CourseWindow(QDialog):
         button("Prepare one new exercise", lambda: self.c.prepare_next(self.activity.currentData()), self.home_layout)
         button("Prepare lower-level repair", lambda: self.c.prepare_next(self.activity.currentData(), True), self.home_layout)
         button("Check French audio", self.c.audio_check, self.home_layout)
+        button("Try the card controls", self.c.try_controls, self.home_layout)
         button("Resume new learning today despite backlog", self.c.resume_new_today, self.home_layout)
         self.home_layout.addWidget(label("Prepare only what fits today. Anki schedules the cards you have introduced. "
             "Show the answer and choose Again / Hard / Good / Easy yourself; COMULS never rates for you."))
@@ -558,7 +829,7 @@ class CourseWindow(QDialog):
         levels_layout.addWidget(label("Choose your current entry level. Existing reviews remain available. "
             "Cloze and synthesis tasks stay below it; supported listening can use higher bands. "
             "These labels guide this tester and do not certify CEFR proficiency."))
-        self.stage_box = QComboBox(); self.stage_box.addItems(list(ENTRY_LEVELS)); levels_layout.addWidget(self.stage_box)
+        self.stage_box = QComboBox(); self.stage_box.addItems(list(COHORTS)); levels_layout.addWidget(self.stage_box)
         button("Use this level", lambda: self.c.change_stage(self.stage_box.currentText()), levels_layout)
         self.coverage = QTextBrowser(); levels_layout.addWidget(self.coverage)
         self.tabs.addTab(self.levels, "Levels")
@@ -574,32 +845,43 @@ class CourseWindow(QDialog):
         button("Export study data…", self.c.export, pl)
         button("Record today's effort / fatigue", self.fatigue, pl)
         self.tabs.addTab(progress, "Progress")
-        settings = QWidget(); sl = QVBoxLayout(settings)
+        settings = QScrollArea(); settings.setWidgetResizable(True)
+        settings_body = QWidget(); sl = QVBoxLayout(settings_body); settings.setWidget(settings_body)
         form = QFormLayout(); sl.addLayout(form)
         self.minutes = QSpinBox(); self.minutes.setRange(5, 90); form.addRow("Daily active minutes", self.minutes)
+        self.units = QSpinBox(); self.units.setRange(0, 20); form.addRow("New targets per day", self.units)
+        self.cards = QSpinBox(); self.cards.setRange(0, 30); form.addRow("New cards per day", self.cards)
+        self.previews = QSpinBox(); self.previews.setRange(0, 1); form.addRow("Above-stage new targets per day", self.previews)
+        self.font_size = QSpinBox(); self.font_size.setRange(85, 160); self.font_size.setSuffix("%"); form.addRow("Card text size", self.font_size)
+        self.accent_row = QCheckBox("Show French accent keys"); sl.addWidget(self.accent_row)
+        self.autoplay = QCheckBox("Play the primary recording automatically on listening questions"); sl.addWidget(self.autoplay)
+        self.startup = QCheckBox("Open COMULS when this profile opens"); sl.addWidget(self.startup)
         self.diagnostics = QCheckBox("Keep optional local study diagnostics (no automatic upload)"); sl.addWidget(self.diagnostics)
         self.checks = {}
         for kind in EXERCISE_TYPES:
             check = QCheckBox(display_type(kind)); self.checks[kind] = check; sl.addWidget(check)
         sl.addWidget(label("These switches control new admission. Existing cards keep their Anki schedule. "
-                           "Use Anki's Browse → Suspend for a deliberate pause of existing cards."))
+                           "Use Content manager to pause and restore existing exercises."))
         button("Save settings", self.save_settings, sl)
         row = QHBoxLayout(); sl.addLayout(row)
-        button("Install course pack…", self.c.install_pack, row)
+        button("Content manager…", self.c.content_manager, row)
         button("Transfer course management here", self.transfer, row)
         button("Delete local diagnostics", self.delete_logs, row)
+        button("Native Anki deck options", self.c.open_deck_options, sl)
         self.tabs.addTab(settings, "Settings")
         about = QTextBrowser(); about.setPlainText(
-            "COMULS tester\n\nInstall target: Anki Desktop 26.09.3 or later.\n\n"
-            "This is a small original content pack covering all thirteen formats. It is not the full vocabulary course. "
-            "Task-level estimates are provisional and existing vocabulary expression ratings remain unchanged.\n\n"
-            "French audio uses Anki's native text-to-speech. Check the installed voice before listening practice. "
-            "The tester does not include a human-reviewed recording pack or validated word-boundary timestamps.\n\n"
-            "Cards and scheduling sync through normal Anki sync. Manage new admissions from one designated desktop. "
-            "Mobile review is a compatibility candidate; mobile admission, detailed timing and add-on controls are not available.\n\n"
-            "This tester can support usability feedback. It is not evidence that COMULS improves fluency or learning speed. "
-            "Use independent delayed assessments for an effectiveness study.\n\n"
-            "Report a problematic card through its Report control; reports remain local. Export study data if you choose to share it.")
+            "COMULS Imperial French demo · " + VERSION + "\n\n"
+            "Desktop compatibility target: Anki 26.09.3. Install the B1 or B2 package for your course. "
+            "Both routes use thirteen short flashcard formats and native Anki scheduling.\n\n"
+            "The included course is an original pilot pack. Vocabulary source levels are unchanged; exercise-level "
+            "estimates are provisional. Lower-level synthesis and supported higher-level listening are intentional.\n\n"
+            "French recordings are bundled for offline playback. The audio manifest records the voice, licence and "
+            "exact file hashes. Answer-side listening uses recorded whole utterances and available aligned chunks.\n\n"
+            "Anki sync carries cards, media and native review history. Manage admissions from one desktop. "
+            "Mobile review has reduced management, assistance and timing coverage.\n\n"
+            "No study data is uploaded automatically. Reports stay on this computer until you export them. "
+            "Course activity and stable sampled targets do not certify a CEFR level or establish improved fluency. "
+            "An effectiveness study needs independent delayed assessments.")
         self.tabs.addTab(about, "About")
         button("Refresh", self.refresh, layout)
 
@@ -613,32 +895,33 @@ class CourseWindow(QDialog):
             return
         self.stage_box.setCurrentText(state["stage"])
         self.minutes.setValue(state.get("budget_minutes", 15))
+        self.units.setValue(state.get("max_new_units", 6))
+        self.cards.setValue(state.get("max_new_cards", 8))
+        self.previews.setValue(state.get("max_preview_units", 1))
+        self.font_size.setValue(state.get("font_percent", 100))
+        self.accent_row.setChecked(state.get("accent_row", True))
+        self.autoplay.setChecked(state.get("audio_autoplay", False))
+        self.startup.setChecked(state.get("open_on_startup", False))
         self.diagnostics.setChecked(state.get("diagnostics", False))
         for kind, check in self.checks.items():
             check.setChecked(kind in state.get("enabled", EXERCISE_TYPES))
         self.summary.setText(f"Entry level {state['stage']} · {counts.get('due', 0)} due · "
             f"{counts.get('new', 0)} admitted new cards\n"
             f"{round(budget['remaining_seconds'] / 60, 1)} active minutes left today · "
-            f"{budget['new_units']}/6 new units · {budget['admitted_cards']}/8 new cards\n"
+            f"{budget['new_units']}/{budget['max_new_units']} new targets · {budget['admitted_cards']}/{budget['max_new_cards']} new cards\n"
+            f"{budget['preview_units']}/{budget['max_preview_units']} above-stage new targets today\n"
             + ("French audio confirmed." if state.get("audio_confirmed") else "Run the French audio check before listening.")
             + ("" if self.c.is_manager() else "\nCourse management belongs to another desktop; native review is available."))
         lines = []
-        for stage in ENTRY_LEVELS:
-            available = [e for e in self.c.catalog if level_eligible(e, stage)]
+        for stage in COHORTS:
+            available = [e for e in route_candidates(self.c.catalog, stage) if level_eligible(e, stage)]
             bands = sorted({e["level"] for e in available}, key=LEVELS.index)
             lines.append(stage + ": " + str(len(available)) + " catalog exercises; task bands " + ", ".join(bands))
         lines.append("\nHalf-level labels are COMULS subdivisions. Library previews are ungraded; admission requires "
                      "per-exercise familiarisation, available audio, enabled formats and remaining budget.")
         self.coverage.setPlainText("\n\n".join(lines))
         self.filter_library()
-        self.progress.setPlainText(
-            f"Introduced native cards: {counts.get('reviewed', 0)}\n"
-            f"Managed cards: {counts.get('total', 0)}\n"
-            f"Active study on this desktop today: {round(budget['active_seconds']/60, 1)} minutes\n\n"
-            "These are activity measures, not a CEFR score. Anki's review history is authoritative and respects native undo. "
-            "Assisted answers and immediate preparation do not demonstrate independent mastery.\n\n"
-            "Timing excludes unfocused windows. Reviews on other devices and periods with the add-on unavailable "
-            "make time coverage incomplete. Optional diagnostics are stored locally and exported only on request.")
+        self.progress.setPlainText(self.c.progress_text())
 
     def filter_library(self, _text=None):
         self.library.clear()
@@ -662,6 +945,13 @@ class CourseWindow(QDialog):
             return
         state = self.c.state()
         state["budget_minutes"] = self.minutes.value()
+        state["max_new_units"] = self.units.value()
+        state["max_new_cards"] = self.cards.value()
+        state["max_preview_units"] = self.previews.value()
+        state["font_percent"] = self.font_size.value()
+        state["accent_row"] = self.accent_row.isChecked()
+        state["audio_autoplay"] = self.autoplay.isChecked()
+        state["open_on_startup"] = self.startup.isChecked()
         state["diagnostics"] = self.diagnostics.isChecked()
         state["enabled"] = [kind for kind, check in self.checks.items() if check.isChecked()]
         save_state(mw.col, state)
@@ -718,7 +1008,7 @@ def on_profile_open():
     try:
         _controller = CourseController()
         config = mw.addonManager.getConfig(__name__) or {}
-        if config.get("open_on_startup", False):
+        if _controller.state().get("open_on_startup", config.get("open_on_startup", False)):
             _controller.show()
     except Exception as error:
         showWarning("COMULS could not start: " + str(error))
@@ -740,3 +1030,29 @@ def setup():
     mw.form.menuTools.addAction(action)
     gui_hooks.profile_did_open.append(on_profile_open)
     gui_hooks.profile_will_close.append(on_profile_close)
+    gui_hooks.deck_browser_will_render_content.append(deck_browser_content)
+    gui_hooks.webview_did_receive_js_message.append(navigation_message)
+    gui_hooks.collection_will_temporarily_close.append(collection_closing)
+    gui_hooks.collection_did_temporarily_close.append(collection_reopened)
+
+
+def deck_browser_content(_browser, content):
+    content.stats += '<div style="margin:18px"><button onclick="pycmd(\'comuls:open\')">COMULS · French course</button></div>'
+
+
+def navigation_message(handled, message, context):
+    from aqt.deckbrowser import DeckBrowser
+    if not handled[0] and isinstance(context, DeckBrowser) and message == "comuls:open":
+        open_comuls()
+        return (True, None)
+    return handled
+
+
+def collection_closing(col):
+    if _controller is not None:
+        _controller.on_collection_closing(col)
+
+
+def collection_reopened(col):
+    if _controller is not None and not _controller.closed:
+        _controller.on_collection_reopened(col)
