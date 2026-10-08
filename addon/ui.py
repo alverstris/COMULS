@@ -175,7 +175,7 @@ class CourseController:
         rows = []
         for kind in EXERCISE_TYPES:
             ids = [e["id"] for e in self.catalog if e["type"] == kind and e.get("origin_entry_level", state["stage"]) == state["stage"]]
-            sampled = [summaries[i] for i in ids if i in summaries]
+            sampled = [summaries[i] for i in ids if i in summaries and summaries[i].get("total_reviews", 0) > 0]
             stable = sum(bool(item.get("stable")) for item in sampled)
             weak = sum(bool(item.get("repair_needed")) for item in sampled)
             rows.append(display_type(kind) + f": {stable}/{len(sampled)} sampled targets stable; {len(ids)} available; {weak} need repair")
@@ -186,6 +186,10 @@ class CourseController:
             "Stable means two recorded unaided successful reviews on different dates, at least 24 hours after known answer exposure. "
             "Missing assistance coverage is reported conservatively. Native undo removes the undone review's evidence. "
             "These samples do not certify a CEFR level. Timing covers this desktop; synced mobile reviews may have incomplete assistance/time evidence.")
+
+    def placement_check(self):
+        from .placement import open_diagnostic
+        open_diagnostic(self)
 
     def try_controls(self):
         dialog = QDialog(self.window or mw)
@@ -246,6 +250,7 @@ class CourseController:
         self.last_interaction = self.last_tick
         if self.window:
             self.window.refresh()
+        self.install_bundled_audio()
 
     def state(self):
         return get_state(mw.col)
@@ -345,13 +350,13 @@ class CourseController:
                 seen_units.add(unit)
             # Understanding declared during preparation is a prerequisite
             # declaration, never a claim of independent retrieval.
-            if ns.get("familiarised"):
+            if ns.get("declared_understood") or ns.get("understood"):
                 understood.add(unit)
             understood.update(ns.get("understood_support", []))
             if ns.get("admitted_day") == str(day):
                 admitted += 1
             admission_stage = ns.get("admission_stage", state["stage"])
-            if (first_day == str(day) and exercise.get("level") in LEVELS
+            if (first_day is not None and int(first_day) == day and exercise.get("level") in LEVELS
                     and LEVELS.index(exercise["level"]) > LEVELS.index(admission_stage)):
                 preview_units.add(unit)
             for card in note.cards():
@@ -360,6 +365,12 @@ class CourseController:
                     or (card.queue == 3 and card.due <= day))
                 if due:
                     due_seconds += timings.get(exercise["type"], 25)
+        from .evidence import summarize_exercise
+        for note in notes.values():
+            logs = [entry for card in note.cards() for entry in mw.col.get_review_logs(card.id)]
+            summary = summarize_exercise(payload(note), note_state(note), logs, time.time())
+            if summary.get("understood"):
+                understood.add(payload(note)["unit_id"])
         units = {unit for unit, first_day in first_days.items() if first_day == day}
         updated = update_backlog(state, day, due_seconds, state.get("budget_minutes", 15) * 60)
         if updated != state and not self.busy:
@@ -649,7 +660,6 @@ class CourseController:
             result = stage_change(col, stage, self.catalog)
             state = get_state(col)
             state["stage_confirmed"] = True
-            state["cohort"] = stage
             save_state(col, state)
             return result
         self.mutate("Change COMULS entry level", apply,
@@ -665,7 +675,10 @@ class CourseController:
         text.setPlainText("\n\n".join([display_type(exercise["type"]) + " · " + exercise["level"],
             exercise["prompt"], exercise.get("audio_text", ""), exercise["answer"],
             exercise.get("explanation", ""), exercise.get("carrier_meaning", ""),
-            "Level assignment: provisional task estimate."]))
+            "Level assignment: provisional task estimate.",
+            "Target: " + str(exercise.get("display_form", exercise.get("headword", exercise.get("unit_id", "")))),
+            "Sense: " + str(exercise.get("sense_id", "")),
+            "Source: " + json.dumps(exercise.get("provenance", {}), ensure_ascii=False)]))
         layout.addWidget(text)
         if exercise.get("audio_text") or exercise.get("audio_file"):
             button("Play whole sentence", lambda: self.play_exercise(exercise), layout)
@@ -691,8 +704,10 @@ class CourseController:
                 records.append({"exercise_id": note["COMULS_ID"], "reviews": logs, "state": note_state(note)})
         state = self.state()
         export = {"schema_version": 1, "pack_id": self.pack["pack_id"], "pack_version": self.pack["version"],
-            "stage": state["stage"], "cohort": state.get("cohort", state["stage"]),
-            "addon_version": VERSION, "evidence": self.evidence(), "days": state.get("days", {}), "cards": records,
+            "stage": state["stage"], "cohort": state["stage"],
+            "addon_version": VERSION, "evidence": self.evidence(),
+            "domain_check": json.loads((self.local.root / "domain-check.json").read_text(encoding="utf-8")) if (self.local.root / "domain-check.json").is_file() else None,
+            "days": state.get("days", {}), "cards": records,
             "events": self.local.events(), "measurement_notes":
             ["Native review history is authoritative and reflects undo.",
              "Optional detailed events and active time cover this desktop only.",
@@ -831,10 +846,19 @@ class CourseWindow(QDialog):
             "These labels guide this tester and do not certify CEFR proficiency."))
         self.stage_box = QComboBox(); self.stage_box.addItems(list(COHORTS)); levels_layout.addWidget(self.stage_box)
         button("Use this level", lambda: self.c.change_stage(self.stage_box.currentText()), levels_layout)
+        button("Optional domain check", self.c.placement_check, levels_layout)
         self.coverage = QTextBrowser(); levels_layout.addWidget(self.coverage)
         self.tabs.addTab(self.levels, "Levels")
         library = QWidget(); ll = QVBoxLayout(library)
         self.search = QLineEdit(); self.search.setPlaceholderText("Find an exercise, word or type"); ll.addWidget(self.search)
+        filters = QHBoxLayout(); ll.addLayout(filters)
+        self.library_cohort = QComboBox(); self.library_cohort.addItems(["All courses", "B1", "B2"]); filters.addWidget(self.library_cohort)
+        self.library_type = QComboBox(); self.library_type.addItem("All exercise types", None)
+        for kind in EXERCISE_TYPES:
+            self.library_type.addItem(display_type(kind), kind)
+        filters.addWidget(self.library_type)
+        self.library_cohort.currentTextChanged.connect(self.filter_library)
+        self.library_type.currentIndexChanged.connect(self.filter_library)
         self.library = QListWidget(); ll.addWidget(self.library)
         self.search.textChanged.connect(self.filter_library)
         self.library.itemDoubleClicked.connect(lambda item: self.c.preview(item.data(Qt.ItemDataRole.UserRole)))
@@ -927,6 +951,11 @@ class CourseWindow(QDialog):
         self.library.clear()
         query = self.search.text().casefold().strip()
         for exercise in self.c.catalog:
+            cohort = self.library_cohort.currentText()
+            if cohort in COHORTS and exercise.get("cohort", exercise.get("origin_entry_level")) != cohort:
+                continue
+            if self.library_type.currentData() and exercise["type"] != self.library_type.currentData():
+                continue
             text = exercise["level"] + " · " + display_type(exercise["type"]) + " · " + exercise["prompt"].split("\n")[0]
             if query and query not in (text + " " + exercise["answer"]).casefold():
                 continue
