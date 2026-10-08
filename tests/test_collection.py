@@ -95,6 +95,7 @@ def test_reimport_preserves_native_history_personal_notes_and_tags(col, exercise
     note.add_tag("my::tag")
     col.update_note(note)
     card = note.cards()[0]
+    card.start_timer()
     col.sched.answerCard(card, 3)
     card = col.get_card(card.id)
     before = snapshot(card)
@@ -154,6 +155,7 @@ def test_stage_change_keeps_review_history_and_withdraws_only_unreviewed(col, ex
     advanced.update(id="advanced-reviewed", level="B2", entry_levels=["B2", "C1"])
     reviewed_note = introduce(col, advanced, col.sched.today)
     card = reviewed_note.cards()[0]
+    card.start_timer()
     col.sched.answerCard(card, 3)
     before = snapshot(col.get_card(card.id))
     revlog = [row.SerializeToString() for row in col.get_review_logs(card.id)]
@@ -170,9 +172,14 @@ def test_stage_change_keeps_review_history_and_withdraws_only_unreviewed(col, ex
 
 
 def test_stored_deck_id_survives_rename_and_deleted_deck_is_reported(col, exercise):
+    controls = adapter.get_state(col)
+    controls["manager_id"] = "desktop-uuid"
+    adapter.save_state(col, controls)
     adapter.prepare_exercise(col, exercise, 0)
     controls = adapter.get_state(col)
-    did = controls["manager_id"]
+    assert controls["manager_id"] == "desktop-uuid"
+    did = controls["deck_id"]
+    assert isinstance(did, int)
     deck = col.decks.get_legacy(did)
     deck["name"] = "My renamed French practice"
     col.decks.save(deck)
@@ -189,7 +196,7 @@ def test_duplicate_identity_blocks_import_before_mutation(col, exercise):
     duplicate = col.new_note(adapter.ensure_model(col))
     for name in adapter.FIELDS:
         duplicate[name] = existing[name]
-    col.add_note(duplicate, adapter.get_state(col)["manager_id"])
+    col.add_note(duplicate, adapter.get_state(col)["deck_id"])
     with pytest.raises(ValueError, match="Duplicate"):
         adapter.prepare_exercise(col, exercise, 0)
     assert len(col.models.nids(existing.mid)) == 2
