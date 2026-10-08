@@ -91,7 +91,7 @@
   if (typeBadge) typeBadge.textContent = TYPE_NAMES[payload.type] || "Practice";
   var levelBadge = card.querySelector("[data-comuls-level]");
   if (levelBadge && payload.level) { levelBadge.textContent = String(payload.level); levelBadge.classList.remove("comuls-hidden"); }
-  var KEY = "comuls-attempt-v1:" + payload.id;
+  var KEY = "comuls-current-attempt-v1";
   var AGE = 2 * 60 * 60 * 1000;
   root.__COMULS_ATTEMPTS = root.__COMULS_ATTEMPTS || {};
   function context() { return root.comulsContext || {}; }
@@ -99,7 +99,7 @@
     var value;
     try { value = JSON.parse(root.sessionStorage.getItem(KEY) || "null"); } catch (_) { /* restricted webview */ }
     value = value || root.__COMULS_ATTEMPTS[KEY];
-    if (!value || Date.now() - value.created_at > AGE || value.consumed) return null;
+    if (!value || value.exercise_id !== payload.id || Date.now() - value.created_at > AGE || value.consumed) return null;
     if (context().nonce && value.context_nonce !== context().nonce) return null;
     return value;
   }
@@ -136,7 +136,7 @@
       replays: state.replays || 0, presentation_seed: state.seed};
   }
   var state = side === "front" ? {
-    created_at: Date.now(), context_nonce: context().nonce || null,
+    created_at: Date.now(), exercise_id: payload.id, context_nonce: context().nonce || null,
     response: "", selected_ids: [], target_hint: false, carrier_help: false,
     replays: 0, submitted: false, seed: payload.id + ":" + Date.now() + ":" + Math.random()
   } : readAttempt();
@@ -184,16 +184,30 @@
       explanationMount.appendChild(el("div", "comuls-reference-label", "What you heard"));
       var transcript = el("div", "comuls-explanation", payload.audio_text); transcript.lang = "fr";
       explanationMount.appendChild(transcript);
-      explanationMount.appendChild(el("div", "comuls-muted", "Repair: replay the complete phrase, then hide the answer and listen again on a later review. Keep the rhythm between words."));
+      explanationMount.appendChild(el("div", "comuls-muted", "Repair: read the transcript, hide the text, then replay the complete phrase. Notice where the words join without adding pauses."));
     }
     var backActions = el("div", "comuls-actions");
-    backActions.appendChild(button("Report this card", "comuls-quiet", function () {
+    if (payload.audio_text) {
+      var repairHidden = false;
+      var repairButton = button("Hide text and listen again", "comuls-quiet", function () {
+        repairHidden = !repairHidden;
+        var repairNodes = card.querySelectorAll(".comuls-prompt, .comuls-reference-label, .comuls-reference, [data-comuls-explanation], .comuls-feedback, .comuls-response, .comuls-rating-guide");
+        Array.prototype.forEach.call(repairNodes, function (node) { node.classList.toggle("comuls-hidden", repairHidden); });
+        repairButton.textContent = repairHidden ? "Show text again" : "Hide text and listen again";
+        repairButton.setAttribute("aria-pressed", repairHidden ? "true" : "false");
+      });
+      repairButton.setAttribute("aria-pressed", "false");
+      backActions.appendChild(repairButton);
+    }
+    var reportButton = button("Report this card", "comuls-quiet", function () {
+      reportButton.disabled = true;
       if (emit("report", {reason: "card_quality", side: "back"})) {
-        backActions.replaceChildren(el("div", "comuls-muted", "Flagged for review. You can also add details in COMULS → Feedback."));
+        mount.appendChild(el("div", "comuls-muted", "Flagged for review. You can also add details in COMULS → Feedback."));
       } else {
-        backActions.replaceChildren(el("div", "comuls-muted", "Use COMULS → Feedback on Anki Desktop and include this card ID: " + payload.id));
+        mount.appendChild(el("div", "comuls-muted", "Use COMULS → Feedback on Anki Desktop and include this card ID: " + payload.id));
       }
-    }));
+    });
+    backActions.appendChild(reportButton);
     mount.appendChild(backActions);
     return;
   }
@@ -230,7 +244,7 @@
     label.htmlFor = "comuls-response";
     var input = el("textarea", "comuls-answer-input");
     input.id = "comuls-response"; input.rows = payload.type === "sentence_transcription" || payload.type === "sentence_transformation" ? 3 : 1;
-    input.lang = "fr"; input.autocomplete = "off"; input.spellcheck = false;
+    input.lang = "fr"; input.autocomplete = "off"; input.spellcheck = false; input.maxLength = 2000;
     input.setAttribute("autocapitalize", "none");
     input.setAttribute("autocorrect", "off");
     input.addEventListener("input", function () { saveResponse(input.value); });
