@@ -2,7 +2,7 @@ name: Anki tester
 on:
   push:
     branches: [codex/anki-tester, main]
-    paths: ['addon/**', 'tests/**', 'tools/**', '.github/workflows/anki-tester.yml']
+    paths: ['addon/**', 'tests/**', 'tools/**', 'outputs/french_vocabulary_b1_c1.csv', 'docs/VERIFICATION.md', '.github/workflows/anki-tester.yml']
   workflow_dispatch:
 permissions:
   contents: read
