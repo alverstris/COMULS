@@ -8,6 +8,7 @@ from __future__ import annotations
 import html
 import json
 import secrets
+from datetime import datetime, timezone
 from typing import Any, Callable
 
 import aqt
@@ -187,6 +188,68 @@ class ReviewerIntegration:
         if not self.exposed:
             self.exposed = True
             self._event("answer_exposure", type=self.exercise["type"])
+            self._record_exposure(card)
+
+    def _record_exposure(self, card: Any) -> None:
+        """Sync factual answer exposure and bury explicitly linked siblings.
+
+        This is a single native undoable operation. The current answer stays
+        visible; no grade is possible until it finishes. Only declared exposure
+        groups cause cross-note burial. A shared word alone creates no link.
+        """
+        from .collection import _write_json, exercise_notes, note_payload, note_state
+
+        mw = aqt.mw
+        reviewer = mw.reviewer
+        expected = dict(self.expected)
+        note_id = int(card.nid)
+        groups = frozenset(self.exercise.get("exposure_groups", []))
+        now = datetime.now(timezone.utc).isoformat(timespec="seconds")
+        self.busy = True
+
+        def operation(col: Any) -> Any:
+            source_note = col.get_note(note_id)
+            if source_note["COMULS_ID"] != expected["exercise_id"]:
+                raise ValueError("COMULS exposure identity changed")
+            notes = [source_note]
+            if groups:
+                for candidate in exercise_notes(col).values():
+                    if int(candidate.id) == note_id:
+                        continue
+                    linked = set(note_payload(candidate).get("exposure_groups", []))
+                    if groups.intersection(linked):
+                        notes.append(candidate)
+            day = str(col.sched.today)
+            bury_ids: list[int] = []
+            for note in notes:
+                state = note_state(note)
+                state["last_exposed_at"] = now
+                state["last_exposed_day"] = day
+                state["last_exposed_by"] = expected["exercise_id"]
+                _write_json(note, "State", state)
+                if int(note.id) != note_id:
+                    bury_ids.extend(
+                        int(sibling.id) for sibling in note.cards()
+                        if sibling.id != expected["card_id"] and sibling.queue >= 0
+                    )
+            undo_entry = col.add_custom_undo_entry("COMULS answer exposure")
+            col.update_notes(notes)
+            if bury_ids:
+                col.sched.bury_cards(sorted(set(bury_ids)), manual=True)
+            return col.merge_undo_entries(undo_entry)
+
+        def success(result: Any) -> None:
+            if self.expected == expected:
+                self.busy = False
+
+        def failure(exception: Exception) -> None:
+            if self.expected == expected:
+                self.busy = False
+            self._error("COMULS could not save answer exposure. Check the card data before continuing.")
+
+        CollectionOp(parent=mw, op=operation).success(success).failure(failure).run_in_background(
+            initiator=reviewer,
+        )
 
     def _web_message(
         self, handled: tuple[bool, Any], message: str, context: Any,
@@ -195,7 +258,7 @@ class ReviewerIntegration:
             return handled
         # Own malformed/stale messages are consumed; they never fall through to
         # Anki's bridge. Verify Reviewer class, object and card before JSON parsing.
-        if not self._live(context) or self.busy:
+        if not self._live(context):
             return (True, None)
         event = validate_message(message, self.expected)
         if event is None:
@@ -271,16 +334,17 @@ class ReviewerIntegration:
         av_player.stop_and_clear_queue()
 
         def success(result: Any) -> None:
-            self.busy = False
             if self.expected != expected or not self._live(reviewer):
                 return
+            self.busy = False
             self._event("skip", reason="manual_bury")
             self._clear()
             # Advance only AFTER supported scheduler burial completed.
             reviewer.nextCard()
 
         def failure(exception: Exception) -> None:
-            self.busy = False
+            if self.expected == expected:
+                self.busy = False
             self._error("The card could not be skipped. It is still available for review.")
 
         CollectionOp(
