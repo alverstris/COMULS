@@ -319,3 +319,31 @@ def test_first_open_requests_an_explicit_entry_route(course):
     course.window.stage_box.setCurrentText("B1")
     find_button(course.window, "Use this level").click()
     assert course.state()["stage_confirmed"] is True
+
+
+def test_profile_lifecycle_and_repeated_menu_open_keep_one_active_reviewer(course):
+    ui._controller = course
+    ui.open_comuls()
+    first_window = course.window
+    ui.open_comuls()
+    assert ui._controller is course
+    assert course.window is first_window
+    assert len(course._test_registrations) == 1
+    ui.on_profile_close()
+    assert ui._controller is None
+    assert course.closed
+    assert not course.clock.isActive()
+    assert course._test_registrations[0].closed
+
+    ui.on_profile_open()
+    current = ui._controller
+    assert current is not None and current is not course
+    assert current.clock.isActive()
+    assert sum(not handle.closed for handle in course._test_registrations) == 1
+    ui.open_comuls()
+    ui.open_comuls()
+    assert ui._controller is current
+    assert sum(not handle.closed for handle in course._test_registrations) == 1
+    ui.on_profile_close()
+    assert not current.clock.isActive()
+    assert sum(not handle.closed for handle in course._test_registrations) == 0
