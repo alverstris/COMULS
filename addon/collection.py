@@ -328,13 +328,15 @@ def stats(col: Any) -> dict[str, Any]:
               if (queue == 2 and value <= today)
               or (queue == 1 and value <= now)
               or (queue == 3 and value <= today))
-    # Native scheduler counts also honour review limits and learning look-ahead.
+    # Report the raw backlog separately from the scheduler-limited session.
+    available_due = due
     if deck_id is not None and col.decks.get_legacy(deck_id) is not None:
         tree = col.sched.deck_due_tree(deck_id)
         if tree is not None:
-            due = int(tree.review_count + tree.learn_count)
+            available_due = int(tree.review_count + tree.learn_count)
     return {
         "total": len(rows), "reviewed": sum(1 for _, reps, _, _, _ in rows if reps > 0),
         "new": sum(1 for _, _, queue, _, _ in rows if queue == 0),
-        "due": due, "learning": learning, "native_day": today, "deck_id": deck_id,
+        "due": due, "available_due": available_due,
+        "learning": learning, "native_day": today, "deck_id": deck_id,
     }
