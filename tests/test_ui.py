@@ -188,6 +188,10 @@ def test_prepare_button_creates_paused_card_without_fabricating_familiarity(cour
     window = show_window(course)
     exposed = []
     monkeypatch.setattr(course, "familiarise", lambda exercise: exposed.append(exercise))
+    # Explicit onboarding choice, including confirming the initial B1 route.
+    window.stage_box.setCurrentText("B1")
+    find_button(window, "Use this level").click()
+    assert course.state().get("stage_confirmed") is True
     window.activity.setCurrentIndex(window.activity.findData("meaning_recall"))
     find_button(window, "Prepare one new exercise").click()
     assert len(exposed) == 1
@@ -305,3 +309,13 @@ def test_controller_close_stops_owned_clock_audio_and_reviewer_once(course):
     assert course.active_buffer == 0
     course.close()
     assert course._test_audio["stops"] == first_stops
+
+
+def test_first_open_requests_an_explicit_entry_route(course):
+    assert not course.state().get("stage_confirmed", False)
+    course.show()
+    assert course.window.tabs.tabText(course.window.tabs.currentIndex()) == "Levels"
+    assert adapter.exercise_notes(course._test_mw.col) == {}
+    course.window.stage_box.setCurrentText("B1")
+    find_button(course.window, "Use this level").click()
+    assert course.state()["stage_confirmed"] is True
