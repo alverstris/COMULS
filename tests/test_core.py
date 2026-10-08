@@ -94,6 +94,16 @@ class AdmissionTests(unittest.TestCase):
         for reason in ("entry_level_unavailable", "content_not_ready", "exercise_disabled"):
             self.assertIn(reason, result["reasons"])
 
+    def test_pure_level_gate_ignores_budget_and_familiarity(self):
+        item = exercise("sentence_transcription", "B1+")
+        item["qa"]["ready"] = False
+        item["prerequisites"] = ["unknown-carrier"]
+        self.assertTrue(core.level_eligible(item, "B1"))
+        self.assertFalse(admission(item, familiarised=False)["allowed"])
+        item["carrier_level"] = "B2"
+        self.assertFalse(core.level_eligible(item, "B1"))
+        self.assertTrue(core.level_eligible(item, "B2"))
+
     def test_caps_count_units_separately_from_cards(self):
         item = exercise()
         self.assertIn("daily_unit_limit", admission(item, budget={"new_units": 6})["reasons"])

@@ -15,6 +15,7 @@ from pathlib import Path
 from typing import Any
 
 LEVELS = ("A2", "A2+", "B1", "B1+", "B2", "B2+", "C1", "C1+", "C2")
+STAGES = LEVELS  # Compatibility alias for curriculum integration.
 ENTRY_LEVELS = ("B1", "B2", "C1")
 EXERCISE_TYPES = (
     "meaning_recall", "french_form_recall", "vocabulary_cloze",
@@ -207,6 +208,23 @@ def load_pack(path: str | Path) -> dict[str, Any]:
     if errors:
         raise ValueError("Invalid COMULS pack:\n" + "\n".join(errors))
     return pack
+
+
+def level_eligible(exercise: dict[str, Any], stage: str) -> bool:
+    """Pure admission-level gate; no budgets, familiarity, QA or scheduling.
+
+    This can withdraw an admitted but never-reviewed card on a stage change.
+    It must never be used to hide already reviewed cards from Anki's due queue.
+    """
+    kind = exercise.get("type")
+    if stage not in ENTRY_LEVELS or kind not in EXERCISE_TYPES:
+        return False
+    if stage not in exercise.get("entry_levels", []):
+        return False
+    ceiling = LEVELS.index(stage) + CEILING_OFFSETS[kind]
+    levels = [exercise.get(field, exercise.get("level"))
+              for field in ("level", "target_level", "carrier_level", "construction_level")]
+    return all(level in LEVELS and LEVELS.index(level) <= ceiling for level in levels)
 
 
 def admission_decision(
