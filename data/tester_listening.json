@@ -957,7 +957,8 @@
       ],
       "qa": {
         "ready": true,
-        "level_status": "provisional"
+        "level_status": "provisional",
+        "no_audio_check": "This tile set allows a moved adverbial or clause while remaining grammatical. Only the recorded order earns an exact match; identical written tiles are interchangeable."
       },
       "provenance": {
         "author": "COMULS",
@@ -989,7 +990,8 @@
       ],
       "qa": {
         "ready": true,
-        "level_status": "provisional"
+        "level_status": "provisional",
+        "no_audio_check": "This tile set allows a moved adverbial or clause while remaining grammatical. Only the recorded order earns an exact match; identical written tiles are interchangeable."
       },
       "provenance": {
         "author": "COMULS",
@@ -1005,14 +1007,14 @@
         "B2"
       ],
       "prompt": "Listen, then put the tiles in the exact order heard.",
-      "answer": "Je lui ai expliqué pourquoi nous étions partis.",
+      "answer": "Hier, je lui ai expliqué pourquoi nous étions partis.",
       "accepted": [
-        "Je lui ai expliqué pourquoi nous étions partis."
+        "Hier, je lui ai expliqué pourquoi nous étions partis."
       ],
       "choices": [],
-      "audio_text": "Je lui ai expliqué pourquoi nous étions partis.",
-      "explanation": "The pronoun lui precedes ai expliqué. The sequence after pourquoi is nous étions partis.",
-      "carrier_meaning": "I explained to him or her why we had left.",
+      "audio_text": "Hier, je lui ai expliqué pourquoi nous étions partis.",
+      "explanation": "Hier comes first in the recording. The pronoun lui precedes ai expliqué; the sequence after pourquoi is nous étions partis.",
+      "carrier_meaning": "Yesterday, I explained to him or her why we had left.",
       "target_meaning": "Recognise the order and boundaries of the words in continuous speech.",
       "prerequisites": [],
       "unit_id": "pilot_b2_sentence_reconstruction_1",
@@ -1021,7 +1023,8 @@
       ],
       "qa": {
         "ready": true,
-        "level_status": "provisional"
+        "level_status": "provisional",
+        "no_audio_check": "This tile set allows a moved adverbial or clause while remaining grammatical. Only the recorded order earns an exact match; identical written tiles are interchangeable."
       },
       "provenance": {
         "author": "COMULS",
@@ -1053,7 +1056,8 @@
       ],
       "qa": {
         "ready": true,
-        "level_status": "provisional"
+        "level_status": "provisional",
+        "no_audio_check": "This tile set allows a moved adverbial or clause while remaining grammatical. Only the recorded order earns an exact match; identical written tiles are interchangeable."
       },
       "provenance": {
         "author": "COMULS",
@@ -1085,7 +1089,8 @@
       ],
       "qa": {
         "ready": true,
-        "level_status": "provisional"
+        "level_status": "provisional",
+        "no_audio_check": "This tile set allows a moved adverbial or clause while remaining grammatical. Only the recorded order earns an exact match; identical written tiles are interchangeable."
       },
       "provenance": {
         "author": "COMULS",
@@ -1117,7 +1122,8 @@
       ],
       "qa": {
         "ready": true,
-        "level_status": "provisional"
+        "level_status": "provisional",
+        "no_audio_check": "This tile set allows a moved adverbial or clause while remaining grammatical. Only the recorded order earns an exact match; identical written tiles are interchangeable."
       },
       "provenance": {
         "author": "COMULS",
