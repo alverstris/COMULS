@@ -282,7 +282,7 @@ class ReviewerIntegration:
             return handled
         # Own malformed/stale messages are consumed; they never fall through to
         # Anki's bridge. Verify Reviewer class, object and card before JSON parsing.
-        if not self._live(context):
+        if not isinstance(context, Reviewer) or not self._live(context):
             return (True, None)
         event = validate_message(message, self.expected)
         if event is None:
