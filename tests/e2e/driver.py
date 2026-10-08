@@ -16,7 +16,8 @@ import traceback
 
 import aqt
 from aqt import gui_hooks
-from aqt.qt import QApplication, QCheckBox, QDialog, QFileDialog, QLineEdit, QMessageBox, QPushButton, QTimer
+from aqt.qt import QApplication, QCheckBox, QDialog, QFileDialog, QLineEdit, QMessageBox, QPushButton, QScrollArea, QTabWidget, QTimer, Qt
+from PyQt6.QtTest import QTest
 from aqt.sound import av_player
 
 
@@ -125,10 +126,13 @@ class Driver:
 
     def click(self, parent, text, contains=False):
         buttons = [b for b in parent.findChildren(QPushButton)
-                   if (text in b.text() if contains else b.text() == text) and b.isVisible()]
+                   if (text.casefold() in b.text().casefold() if contains else b.text() == text) and b.isVisible()]
         if len(buttons) != 1 or not buttons[0].isEnabled():
             raise AssertionError(f"Expected one enabled visible button {text!r}; found {[b.text() for b in buttons]}")
-        self.schedule(buttons[0].click)
+        for area in parent.findChildren(QScrollArea):
+            if area.isAncestorOf(buttons[0]):
+                area.ensureWidgetVisible(buttons[0])
+        self.schedule(lambda: QTest.mouseClick(buttons[0], Qt.MouseButton.LeftButton))
 
     def pause(self, seconds=.15):
         until = time.monotonic()+seconds
@@ -228,6 +232,9 @@ class Driver:
         assert not state["stage_confirmed"], "A fresh profile must require explicit entry level"
         assert state["budget_minutes"] == 15
         assert window.tabs.currentIndex() == 1
+        if self.config.get("suggested_cohort"):
+            assert window.stage_box.currentText() == self.config["suggested_cohort"], "Cohort package must suggest its entry level on a fresh profile"
+        self.report["fsrs_initial"] = mw.col.get_config("fsrs", False)
         window.stage_box.setCurrentText(self.config["stage"])
         self.click(window, "Use this level")
         yield Wait(lambda: not self.c.busy and self.c.state().get("stage_confirmed")
@@ -255,6 +262,35 @@ class Driver:
 
         if self.config.get("extra_controls"):
             before = self.snapshot()
+            self.click(window, "Try the card controls")
+            yield Wait(lambda: self.modal("Try the four card controls") is not None, "Optional four-shell onboarding")
+            tutorial = self.modal("Try the four card controls")
+            tabs = tutorial.findChildren(QTabWidget)
+            assert len(tabs) == 1 and tabs[0].count() == 4
+            for index in range(4):
+                tabs[0].setCurrentIndex(index)
+                panel = tabs[0].currentWidget()
+                if index == 0:
+                    self.click(panel, "Show answer")
+                elif index == 1:
+                    panel.findChildren(QLineEdit)[0].setText("bonjour")
+                    self.click(panel, "Check")
+                elif index == 2:
+                    self.click(panel, "Thank you")
+                else:
+                    for word in ("Je", "suis", "étudiant"):
+                        self.click(panel, word)
+                        yield self.pause(.1)
+                yield self.pause(.4)
+                from aqt.qt import QLabel
+                labels = [w.text() for w in panel.findChildren(QLabel)]
+                assert any(("Hello" in value if index == 0 else "Correct" in value if index in (1,2)
+                            else value == "Je suis étudiant") for value in labels), labels
+                self.screenshot("onboarding-"+str(index), tutorial)
+            self.click(tutorial, "Done")
+            yield Wait(lambda: not tutorial.isVisible(), "Close four-shell onboarding")
+            assert self.snapshot() == before, "Ungraded control tutorial must not create or grade cards"
+            self.report["checks"].append("All four optional onboarding shells remain ungraded")
             window.tabs.setCurrentIndex(2)
             window.search.setText("meaning")
             if window.library.count() == 0:
@@ -360,12 +396,14 @@ class Driver:
             if self.config.get("extra_controls") and not self.report["reviews"]:
                 yield from self.js(mw.web, "Array.from(document.querySelectorAll('button')).find(b=>b.textContent==='Report this card').click(); true")
                 yield Wait(lambda: any(e.get("event") == "report" for e in self.c.local.events()), "Real card report reaches local telemetry")
-            yield from self.wait_js(mw.bottomWeb, "!!document.querySelector('[data-ease=\"3\"]')", "Native Good rating button")
-            yield from self.js(mw.bottomWeb, "document.querySelector('[data-ease=\"3\"]').click(); true")
+            ease = len(self.report["reviews"]) % 4 + 1
+            selector = "[data-ease='"+str(ease)+"']"
+            yield from self.wait_js(mw.bottomWeb, "!!document.querySelector("+json.dumps(selector)+")", "Native learner rating button")
+            yield from self.js(mw.bottomWeb, "document.querySelector("+json.dumps(selector)+").click(); true")
             yield Wait(lambda: mw.col.get_card(card_id).reps == 1 and mw.col.db.scalar("select count(*) from revlog where cid=?", card_id) == 1,
                        "Native learner-selected grade and authoritative revlog")
             self.report["reviews"].append({"exercise_id": identity, "type": exercise["type"], "level": exercise["level"],
-                                           "shell": shell, "card_id": card_id, "ease": 3, "feedback": feedback})
+                                           "shell": shell, "card_id": card_id, "ease": ease, "feedback": feedback})
             pending.remove(identity)
 
         self.schedule(lambda: mw.moveToState("deckBrowser"))
@@ -395,6 +433,7 @@ class Driver:
                                       "new_units": self.c.budget()["new_units"],
                                       "native_due": self.adapter.stats(mw.col)["due"]})
         assert self.c.budget()["active_seconds"] > 0, "Real foreground review/preparation must register study time"
+        assert mw.col.get_config("fsrs", False) == self.report["fsrs_initial"], "COMULS must leave the native FSRS setting untouched"
         assert len(self.report["reviews"]) == len(self.config["types"])
         assert all(mw.col.get_card(r["card_id"]).reps == 1 for r in self.report["reviews"])
 
@@ -420,6 +459,22 @@ class Driver:
                            and w is not window and any("Install" in b.text() for b in w.findChildren(QPushButton)))
             buttons = [b for b in manager.findChildren(QPushButton) if "Install" in b.text() and b.isVisible()]
             assert len(buttons) == 1
+            listing = manager.findChildren(importlib.import_module("aqt.qt").QListWidget)[0]
+            from aqt.qt import Qt
+            for row in range(listing.count()):
+                if listing.item(row).data(Qt.ItemDataRole.UserRole) == identity:
+                    listing.setCurrentRow(row)
+                    break
+            else:
+                raise AssertionError("Managed native card missing from content manager")
+            self.click(manager, "Pause selected")
+            yield Wait(lambda: not self.c.busy and aqt.mw.col.get_card(before[identity]["card_id"]).queue == -1,
+                       "Actual managed pause suspends native card")
+            paused = self.snapshot()[identity]
+            assert all(paused[key] == before[identity][key] for key in before[identity] if key != "queue")
+            self.click(manager, "Restore selected")
+            yield Wait(lambda: not self.c.busy and self.snapshot() == before, "Managed restore preserves native schedule and history")
+            self.report["checks"].append("Content-manager pause/restore changes only the owned pause, preserving native history")
             self.schedule(buttons[0].click)
         yield from self.file_dialog(path)
         yield Wait(lambda: not self.c.busy and self.c.by_id[identity]["explanation"] == exercise["explanation"],
@@ -437,6 +492,18 @@ class Driver:
         self.report["updated_explanations"] = {identity: exercise["explanation"]}
         self.report["checks"].append("Editorial course-pack import preserved exact native note/card identity, schedule and revlog")
         window.tabs.setCurrentIndex(3)
+        self.click(window, "Record today's effort / fatigue")
+        yield Wait(lambda: self.modal("Today's effort") is not None, "Actual daily effort dialog")
+        effort = self.modal("Today's effort")
+        from aqt.qt import QComboBox
+        boxes = effort.findChildren(QComboBox)
+        assert len(boxes) == 1
+        boxes[0].setCurrentIndex(3)
+        self.click(effort, "Save")
+        yield Wait(lambda: not effort.isVisible() and self.c.state()["days"][str(aqt.mw.col.sched.today)]["fatigue"] == 4,
+                   "Daily fatigue persists through actual controls")
+        assert self.snapshot() == before
+        self.report["checks"].append("Effort/fatigue control saves activity without grading")
         path = self.output / (self.config["run_id"]+"-study-export.json")
         self.click(window, "Export study data…")
         yield from self.file_dialog(path, save=True)

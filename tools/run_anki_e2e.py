@@ -31,7 +31,8 @@ def read_package(path):
         exercises = []
         for name in names:
             exercises.extend(json.loads(archive.read(name))["exercises"])
-        return manifest, exercises
+        profile = json.loads(archive.read("course_profile.json")) if "course_profile.json" in archive.namelist() else {}
+        return manifest, exercises, profile
 
 
 def batches_for(stage, exercises):
@@ -112,6 +113,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--addon", type=Path)
     parser.add_argument("--output", type=Path, default=ROOT / "artifacts" / "anki-e2e")
+    parser.add_argument("--smoke", action="store_true", help="Verify cohort-package selection and two formats, without repeating the full format sweep")
     parser.add_argument("--timeout", type=int, default=420)
     parser.add_argument("--stages", nargs="+", choices=["B1", "B2"], default=["B1", "B2"])
     parser.add_argument("--child", nargs=3, metavar=("BASE", "PROFILE", "CONFIG"))
@@ -124,8 +126,9 @@ def main():
     output = args.output.resolve()
     output.mkdir(parents=True, exist_ok=True)
     addon = args.addon.resolve()
-    manifest, exercises = read_package(addon)
-    plans = [(stage, kinds) for stage in args.stages for kinds in batches_for(stage, exercises)]
+    manifest, exercises, profile = read_package(addon)
+    plans = ([(stage, ["meaning_recall", "sound_discrimination"]) for stage in args.stages] if args.smoke
+             else [(stage, kinds) for stage in args.stages for kinds in batches_for(stage, exercises)])
     profiles = ["E2E install"] + [f"E2E {stage} {i+1}" for i, (stage, _) in enumerate(plans)]
     summary = {"package": addon.name, "package_sha256": hashlib.sha256(addon.read_bytes()).hexdigest(),
                "anki": "26.09.3", "display": os.environ.get("DISPLAY"), "runs": [], "passed": False,
@@ -144,7 +147,7 @@ def main():
             driver.mkdir(parents=True)
             shutil.copyfile(ROOT / "tests" / "e2e" / "driver.py", driver / "driver.py")
             (driver / "__init__.py").write_text("from .driver import install\ninstall()\n", encoding="utf-8")
-            common = {"package": manifest["package"], "addon_path": str(addon)}
+            common = {"package": manifest["package"], "addon_path": str(addon), "suggested_cohort": profile.get("cohort")}
             summary["runs"].append(invoke(base, profiles[0], dict(common, run_id="install", phase="install"), output, args.timeout))
             for i, (stage, kinds) in enumerate(plans):
                 profile = profiles[i+1]
@@ -154,13 +157,16 @@ def main():
                 summary["runs"].append(run)
                 summary["runs"].append(invoke(base, profile, dict(common, run_id=run_id+"-reopen", phase="reopen",
                                             previous_report=str(output / (run_id+".json"))), output, args.timeout))
-            for stage in args.stages:
+            for stage in ([] if args.smoke else args.stages):
                 observed = {r["type"] for run in summary["runs"] if run.get("stage") == stage for r in run.get("reviews", [])}
                 expected = {e["type"] for e in exercises}
                 if observed != expected:
                     raise AssertionError(f"{stage} missing review formats: {sorted(expected-observed)}")
-            if not any(r.get("six_unit_cap_verified") for r in summary["runs"]):
+            if not args.smoke and not any(r.get("six_unit_cap_verified") for r in summary["runs"]):
                 raise AssertionError("No actual six-unit admission cap was exercised")
+            if not args.smoke:
+                ratings = {r["ease"] for run in summary["runs"] for r in run.get("reviews", [])}
+                assert ratings == {1, 2, 3, 4}, "All four native rating buttons must be exercised"
             summary["passed"] = True
     except Exception as error:
         summary["error"] = str(error)

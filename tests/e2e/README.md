@@ -26,11 +26,13 @@ is also exercised explicitly by attempting another admission.
 Each student scenario verifies explicit level selection, settings, actual
 bundled audio playback begin/end hooks, supported familiarisation, native
 admission, actual rendered front controls, answer submission through the
-nonce bridge, answer exposure, native learner-selected Good grading, native
+nonce bridge, answer exposure, native learner-selected Again/Hard/Good/Easy grading, native
 revlog, Undo/Redo through Anki's menu actions, and a full shutdown/reopen.
-An editorial JSON import and study-data export are driven through real file
+The four-shell onboarding, content-manager pause/restore, an editorial JSON import and study-data export are driven through real file
 choosers in the first profile. Native IDs, scheduler state and review history
-are compared before/after import and application restart.
+are compared before/after import and application restart. Settings, fatigue and the unchanged native FSRS setting are also verified.
+
+Use --smoke --stages B1 (or B2) to verify a cohort installer's initial course suggestion and two native formats without repeating the entire sweep.
 
 Artifacts under artifacts/anki-e2e contain JSON reports, subprocess logs,
 and actual course/preparation/reviewer/file-chooser screenshots. Every
