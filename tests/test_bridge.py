@@ -457,6 +457,16 @@ class ReviewerHookTests(unittest.TestCase):
         self.integration._will_end()
         self.assertFalse(self.integration.busy)
 
+    def test_capture_metadata_does_not_leak_into_next_manual_review(self):
+        self.begin()
+        self.integration.exposed = True
+        self.integration._web_message((False, None), self.current_message(), self.reviewer)
+        self.assertEqual(self.integration._attempt_metadata()["capture_phase"], "after_exposure")
+        self.begin()
+        metadata = self.integration._attempt_metadata()
+        self.assertFalse(metadata["submitted"])
+        self.assertEqual(metadata["capture_phase"], "no_submission")
+
 
 if __name__ == "__main__":
     unittest.main()
