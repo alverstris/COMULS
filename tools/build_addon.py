@@ -26,7 +26,7 @@ def archive_entry(archive, name, content):
 def build():
     src = ROOT / "addon"
     required = ["__init__.py", "core.py", "templates.py", "collection.py", "ui.py", "reviewer.py",
-                "bridge.py", "media.py", "course.py", "data/media_manifest.json", "data/imperial_b1.json", "data/imperial_b2.json"]
+                "bridge.py", "media.py", "course.py", "evidence.py", "placement.py", "data/media_manifest.json", "data/imperial_b1.json", "data/imperial_b2.json"]
     missing = [name for name in required if not (src / name).is_file()]
     if missing:
         raise SystemExit("Missing package files: " + ", ".join(missing))
@@ -35,7 +35,7 @@ def build():
     audio_files = {e["audio_file"] for pack in packs for e in pack["exercises"] if e.get("audio_file")}
     if not audio_files:
         raise SystemExit("Imperial listening content must include bundled recording filenames")
-    media_paths = {p.name: p for p in (src/"media").rglob("*") if p.is_file()}
+    media_paths = {p.name: p for p in (src/"data"/"media").rglob("*") if p.is_file()}
     missing = sorted(audio_files-media_paths.keys())
     if missing:
         raise SystemExit("Run the verified audio build before packaging; missing recordings: "+", ".join(missing[:8]))
