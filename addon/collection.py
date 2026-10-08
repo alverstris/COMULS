@@ -56,7 +56,7 @@ def note_state(note: Any) -> dict[str, Any]:
 
 def get_state(col: Any) -> dict[str, Any]:
     result = {
-        "schema_version": 1, "stage": "B1", "budget_minutes": 15,
+        "schema_version": 1, "stage": "B1", "stage_confirmed": False, "budget_minutes": 15,
         "enabled": list(core.EXERCISE_TYPES), "audio_confirmed": False,
         "days": {}, "manager_id": None, "deck_id": None,
     }
