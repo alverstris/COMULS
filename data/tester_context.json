@@ -1,0 +1,1340 @@
+{
+  "schema_version": 1,
+  "pack_id": "comuls-tester-context",
+  "version": "0.1.0",
+  "exercises": [
+    {
+      "id": "ctx_b1_vocabulary_cloze_01",
+      "type": "vocabulary_cloze",
+      "unit_id": "ctx_b1_vocabulary_cloze_01",
+      "entry_levels": [
+        "B1"
+      ],
+      "level": "A2+",
+      "prompt": "Je garde le lait dans le ___.\nMeaning cue: the standard formal French noun for an electric refrigerator; avoid informal or brand-name alternatives.",
+      "answer": "réfrigérateur",
+      "accepted": [
+        "réfrigérateur"
+      ],
+      "choices": [],
+      "explanation": "Réfrigérateur is the standard noun here; it is masculine, so the sentence uses le.",
+      "carrier_meaning": "I keep the milk in the [appliance].",
+      "target_meaning": "an electric refrigerator",
+      "construction": "garder + objet + dans le + nom",
+      "exposure_groups": [],
+      "prerequisites": [],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "kind": "original_authoring",
+        "author": "COMULS prototype drafting",
+        "created_on": "2026-10-08",
+        "level_basis": "Provisional authoring heuristic; not a validated CEFR rating.",
+        "source_text": "Original sentences and explanations; no dictionary wording copied.",
+        "expression_ratings": "Existing source expression ratings unchanged."
+      }
+    },
+    {
+      "id": "ctx_b1_vocabulary_cloze_02",
+      "type": "vocabulary_cloze",
+      "unit_id": "ctx_b1_vocabulary_cloze_02",
+      "entry_levels": [
+        "B1"
+      ],
+      "level": "A2+",
+      "prompt": "Je coupe le pain avec un ___.\nMeaning cue: a knife; give one noun.",
+      "answer": "couteau",
+      "accepted": [
+        "couteau"
+      ],
+      "choices": [],
+      "explanation": "A knife is un couteau. The noun fits after the masculine singular article un.",
+      "carrier_meaning": "I cut the bread with a [tool].",
+      "target_meaning": "a knife",
+      "construction": "couper + objet + avec un + nom",
+      "exposure_groups": [],
+      "prerequisites": [],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "kind": "original_authoring",
+        "author": "COMULS prototype drafting",
+        "created_on": "2026-10-08",
+        "level_basis": "Provisional authoring heuristic; not a validated CEFR rating.",
+        "source_text": "Original sentences and explanations; no dictionary wording copied.",
+        "expression_ratings": "Existing source expression ratings unchanged."
+      }
+    },
+    {
+      "id": "ctx_b1_vocabulary_cloze_03",
+      "type": "vocabulary_cloze",
+      "unit_id": "ctx_b1_vocabulary_cloze_03",
+      "entry_levels": [
+        "B1"
+      ],
+      "level": "A2+",
+      "prompt": "L'___ est en panne ; nous prenons l'escalier.\nMeaning cue: a building's lift or elevator; give one noun.",
+      "answer": "ascenseur",
+      "accepted": [
+        "ascenseur"
+      ],
+      "choices": [],
+      "explanation": "Ascenseur begins with a vowel, so the preceding article is written l'.",
+      "carrier_meaning": "The [building device] is broken; we take the stairs.",
+      "target_meaning": "a building's lift or elevator",
+      "construction": "être en panne ; prendre l'escalier",
+      "exposure_groups": [],
+      "prerequisites": [],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "kind": "original_authoring",
+        "author": "COMULS prototype drafting",
+        "created_on": "2026-10-08",
+        "level_basis": "Provisional authoring heuristic; not a validated CEFR rating.",
+        "source_text": "Original sentences and explanations; no dictionary wording copied.",
+        "expression_ratings": "Existing source expression ratings unchanged."
+      }
+    },
+    {
+      "id": "ctx_b1_grammar_cloze_01",
+      "type": "grammar_cloze",
+      "unit_id": "ctx_b1_grammar_cloze_01",
+      "entry_levels": [
+        "B1"
+      ],
+      "level": "A2+",
+      "prompt": "Nous ___ au cinéma ce soir.\nUse aller in the present tense.",
+      "answer": "allons",
+      "accepted": [
+        "allons"
+      ],
+      "choices": [],
+      "explanation": "The present-tense form of aller with nous is allons.",
+      "carrier_meaning": "We are going to the cinema this evening.",
+      "target_meaning": "first-person plural present of aller",
+      "construction": "aller au présent : nous allons",
+      "exposure_groups": [],
+      "prerequisites": [],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "kind": "original_authoring",
+        "author": "COMULS prototype drafting",
+        "created_on": "2026-10-08",
+        "level_basis": "Provisional authoring heuristic; not a validated CEFR rating.",
+        "source_text": "Original sentences and explanations; no dictionary wording copied.",
+        "expression_ratings": "Existing source expression ratings unchanged."
+      }
+    },
+    {
+      "id": "ctx_b1_grammar_cloze_02",
+      "type": "grammar_cloze",
+      "unit_id": "ctx_b1_grammar_cloze_02",
+      "entry_levels": [
+        "B1"
+      ],
+      "level": "A2+",
+      "prompt": "Les chaussures sont ___.\nUse neuf and make the adjective agree.",
+      "answer": "neuves",
+      "accepted": [
+        "neuves"
+      ],
+      "choices": [],
+      "explanation": "Chaussures is feminine plural: neuf becomes neuve, then neuves.",
+      "carrier_meaning": "The shoes are new.",
+      "target_meaning": "feminine plural agreement of neuf",
+      "construction": "adjectif attribut : neuf → neuves",
+      "exposure_groups": [],
+      "prerequisites": [],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "kind": "original_authoring",
+        "author": "COMULS prototype drafting",
+        "created_on": "2026-10-08",
+        "level_basis": "Provisional authoring heuristic; not a validated CEFR rating.",
+        "source_text": "Original sentences and explanations; no dictionary wording copied.",
+        "expression_ratings": "Existing source expression ratings unchanged."
+      }
+    },
+    {
+      "id": "ctx_b1_grammar_cloze_03",
+      "type": "grammar_cloze",
+      "unit_id": "ctx_b1_grammar_cloze_03",
+      "entry_levels": [
+        "B1"
+      ],
+      "level": "A2+",
+      "prompt": "Hier, Léa ___ son train.\nUse prendre in the passé composé; include the auxiliary.",
+      "answer": "a pris",
+      "accepted": [
+        "a pris"
+      ],
+      "choices": [],
+      "explanation": "Prendre uses avoir in the passé composé. With Léa, use a; its past participle is pris.",
+      "carrier_meaning": "Yesterday, Léa took her train.",
+      "target_meaning": "third-person singular passé composé of prendre",
+      "construction": "avoir au présent + participe passé pris",
+      "exposure_groups": [],
+      "prerequisites": [],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "kind": "original_authoring",
+        "author": "COMULS prototype drafting",
+        "created_on": "2026-10-08",
+        "level_basis": "Provisional authoring heuristic; not a validated CEFR rating.",
+        "source_text": "Original sentences and explanations; no dictionary wording copied.",
+        "expression_ratings": "Existing source expression ratings unchanged."
+      }
+    },
+    {
+      "id": "ctx_b1_grammar_meaning_choice_01",
+      "type": "grammar_meaning_choice",
+      "unit_id": "ctx_b1_grammar_meaning_choice_01",
+      "entry_levels": [
+        "B1"
+      ],
+      "level": "B1",
+      "prompt": "Je ne bois plus de café.\nChoose the meaning.",
+      "answer": "I no longer drink coffee.",
+      "accepted": [
+        "I no longer drink coffee."
+      ],
+      "choices": [
+        {
+          "id": "no_longer",
+          "text": "I no longer drink coffee.",
+          "correct": true
+        },
+        {
+          "id": "never",
+          "text": "I never drink coffee.",
+          "correct": false
+        },
+        {
+          "id": "not_much",
+          "text": "I do not drink much coffee.",
+          "correct": false
+        }
+      ],
+      "explanation": "Ne ... plus means that the action has stopped; it is different from never or not much.",
+      "carrier_meaning": "The speaker describes their coffee-drinking habit.",
+      "target_meaning": "cessation expressed by ne ... plus",
+      "construction": "négation : ne ... plus",
+      "exposure_groups": [],
+      "prerequisites": [],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "kind": "original_authoring",
+        "author": "COMULS prototype drafting",
+        "created_on": "2026-10-08",
+        "level_basis": "Provisional authoring heuristic; not a validated CEFR rating.",
+        "source_text": "Original sentences and explanations; no dictionary wording copied.",
+        "expression_ratings": "Existing source expression ratings unchanged."
+      }
+    },
+    {
+      "id": "ctx_b1_grammar_meaning_choice_02",
+      "type": "grammar_meaning_choice",
+      "unit_id": "ctx_b1_grammar_meaning_choice_02",
+      "entry_levels": [
+        "B1"
+      ],
+      "level": "B1",
+      "prompt": "Il vient de fermer la porte.\nChoose the meaning.",
+      "answer": "He has just closed the door.",
+      "accepted": [
+        "He has just closed the door."
+      ],
+      "choices": [
+        {
+          "id": "just_closed",
+          "text": "He has just closed the door.",
+          "correct": true
+        },
+        {
+          "id": "about_to",
+          "text": "He is about to close the door.",
+          "correct": false
+        },
+        {
+          "id": "habit",
+          "text": "He usually closes the door.",
+          "correct": false
+        }
+      ],
+      "explanation": "Venir de + infinitive describes a recently completed action.",
+      "carrier_meaning": "The sentence concerns closing a door.",
+      "target_meaning": "recent completion",
+      "construction": "venir de + infinitif",
+      "exposure_groups": [],
+      "prerequisites": [],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "kind": "original_authoring",
+        "author": "COMULS prototype drafting",
+        "created_on": "2026-10-08",
+        "level_basis": "Provisional authoring heuristic; not a validated CEFR rating.",
+        "source_text": "Original sentences and explanations; no dictionary wording copied.",
+        "expression_ratings": "Existing source expression ratings unchanged."
+      }
+    },
+    {
+      "id": "ctx_b1_grammar_meaning_choice_03",
+      "type": "grammar_meaning_choice",
+      "unit_id": "ctx_b1_grammar_meaning_choice_03",
+      "entry_levels": [
+        "B1"
+      ],
+      "level": "B1",
+      "prompt": "Si j'ai le temps, je viendrai.\nChoose the meaning.",
+      "answer": "I will come if I have time.",
+      "accepted": [
+        "I will come if I have time."
+      ],
+      "choices": [
+        {
+          "id": "condition",
+          "text": "I will come if I have time.",
+          "correct": true
+        },
+        {
+          "id": "past",
+          "text": "I came because I had time.",
+          "correct": false
+        },
+        {
+          "id": "unless",
+          "text": "I will come unless I have time.",
+          "correct": false
+        }
+      ],
+      "explanation": "A present-tense si clause can give the condition for an action expressed in the future.",
+      "carrier_meaning": "The speaker discusses whether they will come.",
+      "target_meaning": "a future action conditional on having time",
+      "construction": "si + présent ; futur simple",
+      "exposure_groups": [],
+      "prerequisites": [],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "kind": "original_authoring",
+        "author": "COMULS prototype drafting",
+        "created_on": "2026-10-08",
+        "level_basis": "Provisional authoring heuristic; not a validated CEFR rating.",
+        "source_text": "Original sentences and explanations; no dictionary wording copied.",
+        "expression_ratings": "Existing source expression ratings unchanged."
+      }
+    },
+    {
+      "id": "ctx_b1_sentence_transformation_01",
+      "type": "sentence_transformation",
+      "unit_id": "ctx_b1_sentence_transformation_01",
+      "entry_levels": [
+        "B1"
+      ],
+      "level": "A2+",
+      "prompt": "Replace je with nous; keep the present tense and the rest of the sentence.\nJe vais à la bibliothèque.",
+      "answer": "Nous allons à la bibliothèque.",
+      "accepted": [
+        "Nous allons à la bibliothèque."
+      ],
+      "choices": [],
+      "explanation": "Changing je to nous requires vais to become allons.",
+      "carrier_meaning": "I am going to the library.",
+      "target_meaning": "first-person plural subject and verb agreement",
+      "construction": "je vais → nous allons",
+      "exposure_groups": [],
+      "prerequisites": [],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "kind": "original_authoring",
+        "author": "COMULS prototype drafting",
+        "created_on": "2026-10-08",
+        "level_basis": "Provisional authoring heuristic; not a validated CEFR rating.",
+        "source_text": "Original sentences and explanations; no dictionary wording copied.",
+        "expression_ratings": "Existing source expression ratings unchanged."
+      }
+    },
+    {
+      "id": "ctx_b1_sentence_transformation_02",
+      "type": "sentence_transformation",
+      "unit_id": "ctx_b1_sentence_transformation_02",
+      "entry_levels": [
+        "B1"
+      ],
+      "level": "A2+",
+      "prompt": "Turn this statement into a question using est-ce que; keep the remaining words.\nTu travailles demain.",
+      "answer": "Est-ce que tu travailles demain ?",
+      "accepted": [
+        "Est-ce que tu travailles demain ?"
+      ],
+      "choices": [],
+      "explanation": "Est-ce que introduces a question without reversing the subject and verb.",
+      "carrier_meaning": "You are working tomorrow.",
+      "target_meaning": "a yes/no question",
+      "construction": "est-ce que + sujet + verbe",
+      "exposure_groups": [],
+      "prerequisites": [],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "kind": "original_authoring",
+        "author": "COMULS prototype drafting",
+        "created_on": "2026-10-08",
+        "level_basis": "Provisional authoring heuristic; not a validated CEFR rating.",
+        "source_text": "Original sentences and explanations; no dictionary wording copied.",
+        "expression_ratings": "Existing source expression ratings unchanged."
+      }
+    },
+    {
+      "id": "ctx_b1_sentence_transformation_03",
+      "type": "sentence_transformation",
+      "unit_id": "ctx_b1_sentence_transformation_03",
+      "entry_levels": [
+        "B1"
+      ],
+      "level": "A2+",
+      "prompt": "Make the sentence negative with ne ... pas; keep the remaining words.\nPaul aime le café.",
+      "answer": "Paul n'aime pas le café.",
+      "accepted": [
+        "Paul n'aime pas le café."
+      ],
+      "choices": [],
+      "explanation": "Before aime, ne becomes n'. Place pas after the verb.",
+      "carrier_meaning": "Paul likes coffee.",
+      "target_meaning": "negation of aimer",
+      "construction": "ne ... pas avec élision devant une voyelle",
+      "exposure_groups": [],
+      "prerequisites": [],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "kind": "original_authoring",
+        "author": "COMULS prototype drafting",
+        "created_on": "2026-10-08",
+        "level_basis": "Provisional authoring heuristic; not a validated CEFR rating.",
+        "source_text": "Original sentences and explanations; no dictionary wording copied.",
+        "expression_ratings": "Existing source expression ratings unchanged."
+      }
+    },
+    {
+      "id": "ctx_b2_vocabulary_cloze_01",
+      "type": "vocabulary_cloze",
+      "unit_id": "ctx_b2_vocabulary_cloze_01",
+      "entry_levels": [
+        "B2"
+      ],
+      "level": "B1+",
+      "prompt": "Je règle mon ___ sur cinq heures pour ne pas manquer le train.\nMeaning cue: an alarm clock; give one masculine noun.",
+      "answer": "réveil",
+      "accepted": [
+        "réveil"
+      ],
+      "choices": [],
+      "explanation": "An alarm clock is un réveil. Régler son réveil sur une heure means setting its time.",
+      "carrier_meaning": "I set my [device] for five o'clock so I do not miss the train.",
+      "target_meaning": "an alarm clock",
+      "construction": "régler son réveil sur + heure",
+      "exposure_groups": [],
+      "prerequisites": [],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "kind": "original_authoring",
+        "author": "COMULS prototype drafting",
+        "created_on": "2026-10-08",
+        "level_basis": "Provisional authoring heuristic; not a validated CEFR rating.",
+        "source_text": "Original sentences and explanations; no dictionary wording copied.",
+        "expression_ratings": "Existing source expression ratings unchanged."
+      }
+    },
+    {
+      "id": "ctx_b2_vocabulary_cloze_02",
+      "type": "vocabulary_cloze",
+      "unit_id": "ctx_b2_vocabulary_cloze_02",
+      "entry_levels": [
+        "B2"
+      ],
+      "level": "B1+",
+      "prompt": "La route est fermée ; nous devons faire un ___.\nMeaning cue: a detour; give one masculine noun.",
+      "answer": "détour",
+      "accepted": [
+        "détour"
+      ],
+      "choices": [],
+      "explanation": "Faire un détour means taking an indirect route.",
+      "carrier_meaning": "The road is closed; we must take an [alternative route].",
+      "target_meaning": "a detour",
+      "construction": "faire un détour",
+      "exposure_groups": [],
+      "prerequisites": [],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "kind": "original_authoring",
+        "author": "COMULS prototype drafting",
+        "created_on": "2026-10-08",
+        "level_basis": "Provisional authoring heuristic; not a validated CEFR rating.",
+        "source_text": "Original sentences and explanations; no dictionary wording copied.",
+        "expression_ratings": "Existing source expression ratings unchanged."
+      }
+    },
+    {
+      "id": "ctx_b2_vocabulary_cloze_03",
+      "type": "vocabulary_cloze",
+      "unit_id": "ctx_b2_vocabulary_cloze_03",
+      "entry_levels": [
+        "B2"
+      ],
+      "level": "B1+",
+      "prompt": "Je retire de l'argent à un ___ de billets.\nMeaning cue: complete the usual French name of an ATM, using one noun.",
+      "answer": "distributeur",
+      "accepted": [
+        "distributeur"
+      ],
+      "choices": [],
+      "explanation": "Un distributeur de billets is a cash machine. The gap requires only distributeur.",
+      "carrier_meaning": "I withdraw money at a [machine] for banknotes.",
+      "target_meaning": "the noun in distributeur de billets",
+      "construction": "retirer de l'argent à un distributeur de billets",
+      "exposure_groups": [],
+      "prerequisites": [],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "kind": "original_authoring",
+        "author": "COMULS prototype drafting",
+        "created_on": "2026-10-08",
+        "level_basis": "Provisional authoring heuristic; not a validated CEFR rating.",
+        "source_text": "Original sentences and explanations; no dictionary wording copied.",
+        "expression_ratings": "Existing source expression ratings unchanged."
+      }
+    },
+    {
+      "id": "ctx_b2_grammar_cloze_01",
+      "type": "grammar_cloze",
+      "unit_id": "ctx_b2_grammar_cloze_01",
+      "entry_levels": [
+        "B2"
+      ],
+      "level": "B1+",
+      "prompt": "Si j'avais une voiture, je ___ plus souvent.\nUse voyager in the conditionnel présent.",
+      "answer": "voyagerais",
+      "accepted": [
+        "voyagerais"
+      ],
+      "choices": [],
+      "explanation": "The conditionnel présent with je ends in -ais: voyagerais.",
+      "carrier_meaning": "If I had a car, I would travel more often.",
+      "target_meaning": "first-person singular conditionnel présent",
+      "construction": "si + imparfait ; conditionnel présent",
+      "exposure_groups": [],
+      "prerequisites": [],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "kind": "original_authoring",
+        "author": "COMULS prototype drafting",
+        "created_on": "2026-10-08",
+        "level_basis": "Provisional authoring heuristic; not a validated CEFR rating.",
+        "source_text": "Original sentences and explanations; no dictionary wording copied.",
+        "expression_ratings": "Existing source expression ratings unchanged."
+      }
+    },
+    {
+      "id": "ctx_b2_grammar_cloze_02",
+      "type": "grammar_cloze",
+      "unit_id": "ctx_b2_grammar_cloze_02",
+      "entry_levels": [
+        "B2"
+      ],
+      "level": "B1+",
+      "prompt": "Voici le livre ___ j'ai acheté hier.\nSupply the relative pronoun.",
+      "answer": "que",
+      "accepted": [
+        "que"
+      ],
+      "choices": [],
+      "explanation": "Le livre is the direct object of ai acheté. Que introduces this relative clause.",
+      "carrier_meaning": "Here is the book that I bought yesterday.",
+      "target_meaning": "relative pronoun for a direct object",
+      "construction": "antécédent + que + sujet + verbe",
+      "exposure_groups": [],
+      "prerequisites": [],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "kind": "original_authoring",
+        "author": "COMULS prototype drafting",
+        "created_on": "2026-10-08",
+        "level_basis": "Provisional authoring heuristic; not a validated CEFR rating.",
+        "source_text": "Original sentences and explanations; no dictionary wording copied.",
+        "expression_ratings": "Existing source expression ratings unchanged."
+      }
+    },
+    {
+      "id": "ctx_b2_grammar_cloze_03",
+      "type": "grammar_cloze",
+      "unit_id": "ctx_b2_grammar_cloze_03",
+      "entry_levels": [
+        "B2"
+      ],
+      "level": "B1+",
+      "prompt": "Les fenêtres que Marie a ___ sont grandes.\nUse ouvrir; write only its past participle.",
+      "answer": "ouvertes",
+      "accepted": [
+        "ouvertes"
+      ],
+      "choices": [],
+      "explanation": "With avoir, the past participle agrees with the direct object when it comes before the verb. Les fenêtres is feminine plural.",
+      "carrier_meaning": "The windows that Marie opened are large.",
+      "target_meaning": "past-participle agreement with a preceding direct object",
+      "construction": "avoir + participe passé ; accord avec le COD antéposé",
+      "exposure_groups": [],
+      "prerequisites": [],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "kind": "original_authoring",
+        "author": "COMULS prototype drafting",
+        "created_on": "2026-10-08",
+        "level_basis": "Provisional authoring heuristic; not a validated CEFR rating.",
+        "source_text": "Original sentences and explanations; no dictionary wording copied.",
+        "expression_ratings": "Existing source expression ratings unchanged."
+      }
+    },
+    {
+      "id": "ctx_b2_grammar_meaning_choice_01",
+      "type": "grammar_meaning_choice",
+      "unit_id": "ctx_b2_grammar_meaning_choice_01",
+      "entry_levels": [
+        "B2"
+      ],
+      "level": "B2",
+      "prompt": "Bien qu'il pleuve, nous sortirons.\nChoose the meaning.",
+      "answer": "We will go out despite the rain.",
+      "accepted": [
+        "We will go out despite the rain."
+      ],
+      "choices": [
+        {
+          "id": "despite",
+          "text": "We will go out despite the rain.",
+          "correct": true
+        },
+        {
+          "id": "only_if",
+          "text": "We will go out only if it rains.",
+          "correct": false
+        },
+        {
+          "id": "because",
+          "text": "We will stay in because it rains.",
+          "correct": false
+        }
+      ],
+      "explanation": "Bien que introduces a concession: the rain does not prevent the planned outing.",
+      "carrier_meaning": "The sentence discusses rain and a planned outing.",
+      "target_meaning": "concession expressed by bien que",
+      "construction": "bien que + subjonctif",
+      "exposure_groups": [],
+      "prerequisites": [],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "kind": "original_authoring",
+        "author": "COMULS prototype drafting",
+        "created_on": "2026-10-08",
+        "level_basis": "Provisional authoring heuristic; not a validated CEFR rating.",
+        "source_text": "Original sentences and explanations; no dictionary wording copied.",
+        "expression_ratings": "Existing source expression ratings unchanged."
+      }
+    },
+    {
+      "id": "ctx_b2_grammar_meaning_choice_02",
+      "type": "grammar_meaning_choice",
+      "unit_id": "ctx_b2_grammar_meaning_choice_02",
+      "entry_levels": [
+        "B2"
+      ],
+      "level": "B2",
+      "prompt": "Selon le journal, le ministre aurait démissionné.\nWhat does the conditional convey here?",
+      "answer": "The resignation is reported without being presented as established fact.",
+      "accepted": [
+        "The resignation is reported without being presented as established fact."
+      ],
+      "choices": [
+        {
+          "id": "reported",
+          "text": "The resignation is reported without being presented as established fact.",
+          "correct": true
+        },
+        {
+          "id": "future",
+          "text": "The resignation will definitely happen tomorrow.",
+          "correct": false
+        },
+        {
+          "id": "denied",
+          "text": "The newspaper states that the minister did not resign.",
+          "correct": false
+        }
+      ],
+      "explanation": "In journalistic reporting, the conditional can distance the writer from an unconfirmed report.",
+      "carrier_meaning": "The newspaper reports a possible ministerial resignation.",
+      "target_meaning": "reported information whose certainty is not asserted",
+      "construction": "conditionnel passé de l'information rapportée",
+      "exposure_groups": [],
+      "prerequisites": [],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "kind": "original_authoring",
+        "author": "COMULS prototype drafting",
+        "created_on": "2026-10-08",
+        "level_basis": "Provisional authoring heuristic; not a validated CEFR rating.",
+        "source_text": "Original sentences and explanations; no dictionary wording copied.",
+        "expression_ratings": "Existing source expression ratings unchanged."
+      }
+    },
+    {
+      "id": "ctx_b2_grammar_meaning_choice_03",
+      "type": "grammar_meaning_choice",
+      "unit_id": "ctx_b2_grammar_meaning_choice_03",
+      "entry_levels": [
+        "B2"
+      ],
+      "level": "B2",
+      "prompt": "Plus tu t'entraînes, plus tu progresses.\nChoose the meaning.",
+      "answer": "The more you practise, the more you improve.",
+      "accepted": [
+        "The more you practise, the more you improve."
+      ],
+      "choices": [
+        {
+          "id": "increase",
+          "text": "The more you practise, the more you improve.",
+          "correct": true
+        },
+        {
+          "id": "decrease",
+          "text": "The more you practise, the less you improve.",
+          "correct": false
+        },
+        {
+          "id": "stop",
+          "text": "You improve only after you stop practising.",
+          "correct": false
+        }
+      ],
+      "explanation": "Plus ... plus links two increases.",
+      "carrier_meaning": "The sentence links practice with improvement.",
+      "target_meaning": "correlated increases",
+      "construction": "plus + proposition ; plus + proposition",
+      "exposure_groups": [],
+      "prerequisites": [],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "kind": "original_authoring",
+        "author": "COMULS prototype drafting",
+        "created_on": "2026-10-08",
+        "level_basis": "Provisional authoring heuristic; not a validated CEFR rating.",
+        "source_text": "Original sentences and explanations; no dictionary wording copied.",
+        "expression_ratings": "Existing source expression ratings unchanged."
+      }
+    },
+    {
+      "id": "ctx_b2_sentence_transformation_01",
+      "type": "sentence_transformation",
+      "unit_id": "ctx_b2_sentence_transformation_01",
+      "entry_levels": [
+        "B2"
+      ],
+      "level": "B1+",
+      "prompt": "Join the two sentences using qui; do not add information.\nJ'ai un voisin. Ce voisin joue du piano.",
+      "answer": "J'ai un voisin qui joue du piano.",
+      "accepted": [
+        "J'ai un voisin qui joue du piano."
+      ],
+      "choices": [],
+      "explanation": "Qui replaces the subject ce voisin in the second clause.",
+      "carrier_meaning": "I have a neighbour. That neighbour plays the piano.",
+      "target_meaning": "subject relative clause",
+      "construction": "antécédent + qui + verbe",
+      "exposure_groups": [],
+      "prerequisites": [],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "kind": "original_authoring",
+        "author": "COMULS prototype drafting",
+        "created_on": "2026-10-08",
+        "level_basis": "Provisional authoring heuristic; not a validated CEFR rating.",
+        "source_text": "Original sentences and explanations; no dictionary wording copied.",
+        "expression_ratings": "Existing source expression ratings unchanged."
+      }
+    },
+    {
+      "id": "ctx_b2_sentence_transformation_02",
+      "type": "sentence_transformation",
+      "unit_id": "ctx_b2_sentence_transformation_02",
+      "entry_levels": [
+        "B2"
+      ],
+      "level": "B1+",
+      "prompt": "Replace le livre with the appropriate object pronoun; keep the present tense.\nJe lis le livre.",
+      "answer": "Je le lis.",
+      "accepted": [
+        "Je le lis."
+      ],
+      "choices": [],
+      "explanation": "Le livre is a masculine singular direct object. Its pronoun le goes before lis.",
+      "carrier_meaning": "I am reading the book.",
+      "target_meaning": "masculine singular direct-object pronoun",
+      "construction": "pronom COD le avant le verbe",
+      "exposure_groups": [],
+      "prerequisites": [],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "kind": "original_authoring",
+        "author": "COMULS prototype drafting",
+        "created_on": "2026-10-08",
+        "level_basis": "Provisional authoring heuristic; not a validated CEFR rating.",
+        "source_text": "Original sentences and explanations; no dictionary wording copied.",
+        "expression_ratings": "Existing source expression ratings unchanged."
+      }
+    },
+    {
+      "id": "ctx_b2_sentence_transformation_03",
+      "type": "sentence_transformation",
+      "unit_id": "ctx_b2_sentence_transformation_03",
+      "entry_levels": [
+        "B2"
+      ],
+      "level": "B1+",
+      "prompt": "Put the verb in the futur simple; keep the remaining words.\nNous prenons le train demain.",
+      "answer": "Nous prendrons le train demain.",
+      "accepted": [
+        "Nous prendrons le train demain."
+      ],
+      "choices": [],
+      "explanation": "Prendre has the future stem prendr-. With nous, add -ons.",
+      "carrier_meaning": "We are taking the train tomorrow.",
+      "target_meaning": "first-person plural futur simple of prendre",
+      "construction": "futur simple : nous prendrons",
+      "exposure_groups": [],
+      "prerequisites": [],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "kind": "original_authoring",
+        "author": "COMULS prototype drafting",
+        "created_on": "2026-10-08",
+        "level_basis": "Provisional authoring heuristic; not a validated CEFR rating.",
+        "source_text": "Original sentences and explanations; no dictionary wording copied.",
+        "expression_ratings": "Existing source expression ratings unchanged."
+      }
+    },
+    {
+      "id": "ctx_c1_vocabulary_cloze_01",
+      "type": "vocabulary_cloze",
+      "unit_id": "ctx_c1_vocabulary_cloze_01",
+      "entry_levels": [
+        "C1"
+      ],
+      "level": "B2+",
+      "prompt": "Après la pluie, une ___ laisse enfin apparaître le soleil.\nMeaning cue: a spell of clearer weather between cloudy periods; give one feminine noun.",
+      "answer": "éclaircie",
+      "accepted": [
+        "éclaircie"
+      ],
+      "choices": [],
+      "explanation": "Une éclaircie is an interval when the sky becomes clearer.",
+      "carrier_meaning": "After the rain, an [interval of clearer weather] finally lets the sun appear.",
+      "target_meaning": "an interval of clearer weather",
+      "construction": "une éclaircie laisse apparaître le soleil",
+      "exposure_groups": [],
+      "prerequisites": [],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "kind": "original_authoring",
+        "author": "COMULS prototype drafting",
+        "created_on": "2026-10-08",
+        "level_basis": "Provisional authoring heuristic; not a validated CEFR rating.",
+        "source_text": "Original sentences and explanations; no dictionary wording copied.",
+        "expression_ratings": "Existing source expression ratings unchanged."
+      }
+    },
+    {
+      "id": "ctx_c1_vocabulary_cloze_02",
+      "type": "vocabulary_cloze",
+      "unit_id": "ctx_c1_vocabulary_cloze_02",
+      "entry_levels": [
+        "C1"
+      ],
+      "level": "B2+",
+      "prompt": "Cette décision crée un ___ juridique auquel les juges pourront se référer.\nMeaning cue: a precedent; give one masculine noun.",
+      "answer": "précédent",
+      "accepted": [
+        "précédent"
+      ],
+      "choices": [],
+      "explanation": "Un précédent juridique is an earlier decision that can serve as a reference.",
+      "carrier_meaning": "This decision creates a legal [reference] that judges can refer to.",
+      "target_meaning": "a legal precedent",
+      "construction": "créer un précédent juridique",
+      "exposure_groups": [],
+      "prerequisites": [],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "kind": "original_authoring",
+        "author": "COMULS prototype drafting",
+        "created_on": "2026-10-08",
+        "level_basis": "Provisional authoring heuristic; not a validated CEFR rating.",
+        "source_text": "Original sentences and explanations; no dictionary wording copied.",
+        "expression_ratings": "Existing source expression ratings unchanged."
+      }
+    },
+    {
+      "id": "ctx_c1_vocabulary_cloze_03",
+      "type": "vocabulary_cloze",
+      "unit_id": "ctx_c1_vocabulary_cloze_03",
+      "entry_levels": [
+        "C1"
+      ],
+      "level": "B2+",
+      "prompt": "Les deux camps trouvent un ___ en faisant chacun des concessions.\nMeaning cue: a compromise; give one masculine noun.",
+      "answer": "compromis",
+      "accepted": [
+        "compromis"
+      ],
+      "choices": [],
+      "explanation": "Trouver un compromis means reaching a solution through concessions.",
+      "carrier_meaning": "Both sides find a [solution] by making concessions.",
+      "target_meaning": "a compromise",
+      "construction": "trouver un compromis ; faire des concessions",
+      "exposure_groups": [],
+      "prerequisites": [],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "kind": "original_authoring",
+        "author": "COMULS prototype drafting",
+        "created_on": "2026-10-08",
+        "level_basis": "Provisional authoring heuristic; not a validated CEFR rating.",
+        "source_text": "Original sentences and explanations; no dictionary wording copied.",
+        "expression_ratings": "Existing source expression ratings unchanged."
+      }
+    },
+    {
+      "id": "ctx_c1_grammar_cloze_01",
+      "type": "grammar_cloze",
+      "unit_id": "ctx_c1_grammar_cloze_01",
+      "entry_levels": [
+        "C1"
+      ],
+      "level": "B2+",
+      "prompt": "Il faut que vous ___ cette décision.\nUse comprendre in the subjonctif présent.",
+      "answer": "compreniez",
+      "accepted": [
+        "compreniez"
+      ],
+      "choices": [],
+      "explanation": "Il faut que requires the subjunctive. With vous, comprendre becomes compreniez.",
+      "carrier_meaning": "You need to understand this decision.",
+      "target_meaning": "second-person plural subjonctif présent",
+      "construction": "il faut que + subjonctif présent",
+      "exposure_groups": [],
+      "prerequisites": [],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "kind": "original_authoring",
+        "author": "COMULS prototype drafting",
+        "created_on": "2026-10-08",
+        "level_basis": "Provisional authoring heuristic; not a validated CEFR rating.",
+        "source_text": "Original sentences and explanations; no dictionary wording copied.",
+        "expression_ratings": "Existing source expression ratings unchanged."
+      }
+    },
+    {
+      "id": "ctx_c1_grammar_cloze_02",
+      "type": "grammar_cloze",
+      "unit_id": "ctx_c1_grammar_cloze_02",
+      "entry_levels": [
+        "C1"
+      ],
+      "level": "B2+",
+      "prompt": "Sans ton aide, nous ___ échoué.\nSupply the auxiliary in the conditionnel passé.",
+      "answer": "aurions",
+      "accepted": [
+        "aurions"
+      ],
+      "choices": [],
+      "explanation": "The conditionnel passé of échouer uses avoir in the conditional: nous aurions échoué.",
+      "carrier_meaning": "Without your help, we would have failed.",
+      "target_meaning": "conditional-perfect auxiliary with nous",
+      "construction": "conditionnel passé : aurions + participe passé",
+      "exposure_groups": [],
+      "prerequisites": [],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "kind": "original_authoring",
+        "author": "COMULS prototype drafting",
+        "created_on": "2026-10-08",
+        "level_basis": "Provisional authoring heuristic; not a validated CEFR rating.",
+        "source_text": "Original sentences and explanations; no dictionary wording copied.",
+        "expression_ratings": "Existing source expression ratings unchanged."
+      }
+    },
+    {
+      "id": "ctx_c1_grammar_cloze_03",
+      "type": "grammar_cloze",
+      "unit_id": "ctx_c1_grammar_cloze_03",
+      "entry_levels": [
+        "C1"
+      ],
+      "level": "B2+",
+      "prompt": "Je cherche un collègue qui ___ parler japonais.\nUse pouvoir in the subjonctif présent.",
+      "answer": "puisse",
+      "accepted": [
+        "puisse"
+      ],
+      "choices": [],
+      "explanation": "The requested subjunctive form is puisse. The clause describes a colleague being sought rather than identifying a known colleague.",
+      "carrier_meaning": "I am looking for a colleague who can speak Japanese.",
+      "target_meaning": "subjunctive in a relative clause with a sought referent",
+      "construction": "chercher un antécédent non identifié + qui + subjonctif",
+      "exposure_groups": [],
+      "prerequisites": [],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "kind": "original_authoring",
+        "author": "COMULS prototype drafting",
+        "created_on": "2026-10-08",
+        "level_basis": "Provisional authoring heuristic; not a validated CEFR rating.",
+        "source_text": "Original sentences and explanations; no dictionary wording copied.",
+        "expression_ratings": "Existing source expression ratings unchanged."
+      }
+    },
+    {
+      "id": "ctx_c1_grammar_meaning_choice_01",
+      "type": "grammar_meaning_choice",
+      "unit_id": "ctx_c1_grammar_meaning_choice_01",
+      "entry_levels": [
+        "C1"
+      ],
+      "level": "C1",
+      "prompt": "À supposer qu'il accepte, nous pourrions commencer lundi.\nChoose the meaning.",
+      "answer": "If we assume he agrees, we could start on Monday.",
+      "accepted": [
+        "If we assume he agrees, we could start on Monday."
+      ],
+      "choices": [
+        {
+          "id": "hypothesis",
+          "text": "If we assume he agrees, we could start on Monday.",
+          "correct": true
+        },
+        {
+          "id": "confirmed",
+          "text": "He has agreed, so we will definitely start on Monday.",
+          "correct": false
+        },
+        {
+          "id": "refusal",
+          "text": "If he refuses, we could start on Monday.",
+          "correct": false
+        }
+      ],
+      "explanation": "À supposer que introduces a hypothesis, not confirmation that it is true.",
+      "carrier_meaning": "The sentence considers a possible agreement and a Monday start.",
+      "target_meaning": "hypothesis rather than established agreement",
+      "construction": "à supposer que + subjonctif ; conditionnel",
+      "exposure_groups": [],
+      "prerequisites": [],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "kind": "original_authoring",
+        "author": "COMULS prototype drafting",
+        "created_on": "2026-10-08",
+        "level_basis": "Provisional authoring heuristic; not a validated CEFR rating.",
+        "source_text": "Original sentences and explanations; no dictionary wording copied.",
+        "expression_ratings": "Existing source expression ratings unchanged."
+      }
+    },
+    {
+      "id": "ctx_c1_grammar_meaning_choice_02",
+      "type": "grammar_meaning_choice",
+      "unit_id": "ctx_c1_grammar_meaning_choice_02",
+      "entry_levels": [
+        "C1"
+      ],
+      "level": "C1",
+      "prompt": "Il n'a pas tant refusé le projet qu'il en a contesté le calendrier.\nChoose the interpretation.",
+      "answer": "His objection mainly concerned the timetable rather than the project itself.",
+      "accepted": [
+        "His objection mainly concerned the timetable rather than the project itself."
+      ],
+      "choices": [
+        {
+          "id": "timetable",
+          "text": "His objection mainly concerned the timetable rather than the project itself.",
+          "correct": true
+        },
+        {
+          "id": "rejection",
+          "text": "He rejected both the project and its timetable equally.",
+          "correct": false
+        },
+        {
+          "id": "approval",
+          "text": "He approved the project because of its timetable.",
+          "correct": false
+        }
+      ],
+      "explanation": "Pas tant ... que corrects how an action should be characterised: contesting the timetable is the better description.",
+      "carrier_meaning": "The sentence distinguishes rejecting a project from challenging its timetable.",
+      "target_meaning": "corrective comparison expressed by pas tant ... que",
+      "construction": "ne pas tant + verbe + que + proposition",
+      "exposure_groups": [],
+      "prerequisites": [],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "kind": "original_authoring",
+        "author": "COMULS prototype drafting",
+        "created_on": "2026-10-08",
+        "level_basis": "Provisional authoring heuristic; not a validated CEFR rating.",
+        "source_text": "Original sentences and explanations; no dictionary wording copied.",
+        "expression_ratings": "Existing source expression ratings unchanged."
+      }
+    },
+    {
+      "id": "ctx_c1_grammar_meaning_choice_03",
+      "type": "grammar_meaning_choice",
+      "unit_id": "ctx_c1_grammar_meaning_choice_03",
+      "entry_levels": [
+        "C1"
+      ],
+      "level": "C1",
+      "prompt": "Il a beau être expérimenté, il hésite encore.\nChoose the meaning.",
+      "answer": "Although he is experienced, he still hesitates.",
+      "accepted": [
+        "Although he is experienced, he still hesitates."
+      ],
+      "choices": [
+        {
+          "id": "concession",
+          "text": "Although he is experienced, he still hesitates.",
+          "correct": true
+        },
+        {
+          "id": "cause",
+          "text": "He hesitates because he has no experience.",
+          "correct": false
+        },
+        {
+          "id": "end",
+          "text": "His experience has completely ended his hesitation.",
+          "correct": false
+        }
+      ],
+      "explanation": "Avoir beau + infinitive expresses concession: the experience does not eliminate his hesitation.",
+      "carrier_meaning": "The sentence contrasts experience with continuing hesitation.",
+      "target_meaning": "concession expressed by avoir beau",
+      "construction": "avoir beau + infinitif ; proposition contrastée",
+      "exposure_groups": [],
+      "prerequisites": [],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "kind": "original_authoring",
+        "author": "COMULS prototype drafting",
+        "created_on": "2026-10-08",
+        "level_basis": "Provisional authoring heuristic; not a validated CEFR rating.",
+        "source_text": "Original sentences and explanations; no dictionary wording copied.",
+        "expression_ratings": "Existing source expression ratings unchanged."
+      }
+    },
+    {
+      "id": "ctx_c1_sentence_transformation_01",
+      "type": "sentence_transformation",
+      "unit_id": "ctx_c1_sentence_transformation_01",
+      "entry_levels": [
+        "C1"
+      ],
+      "level": "B2+",
+      "prompt": "Replace bien que with malgré, using the noun fatigue; keep the main clause.\nBien qu'il soit fatigué, il continue à travailler.",
+      "answer": "Malgré sa fatigue, il continue à travailler.",
+      "accepted": [
+        "Malgré sa fatigue, il continue à travailler.",
+        "Malgré la fatigue, il continue à travailler."
+      ],
+      "choices": [],
+      "explanation": "Malgré takes a noun phrase. Sa fatigue makes the link with his tiredness explicit; la fatigue is also acceptable in this context.",
+      "carrier_meaning": "Although he is tired, he keeps working.",
+      "target_meaning": "nominal concession with malgré",
+      "construction": "malgré + groupe nominal ; proposition principale",
+      "exposure_groups": [],
+      "prerequisites": [],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "kind": "original_authoring",
+        "author": "COMULS prototype drafting",
+        "created_on": "2026-10-08",
+        "level_basis": "Provisional authoring heuristic; not a validated CEFR rating.",
+        "source_text": "Original sentences and explanations; no dictionary wording copied.",
+        "expression_ratings": "Existing source expression ratings unchanged."
+      }
+    },
+    {
+      "id": "ctx_c1_sentence_transformation_02",
+      "type": "sentence_transformation",
+      "unit_id": "ctx_c1_sentence_transformation_02",
+      "entry_levels": [
+        "C1"
+      ],
+      "level": "B2+",
+      "prompt": "Report her words after Elle a expliqué que, applying the usual past-tense sequence; keep the person reference.\n« Je suis malade. »",
+      "answer": "Elle a expliqué qu'elle était malade.",
+      "accepted": [
+        "Elle a expliqué qu'elle était malade."
+      ],
+      "choices": [],
+      "explanation": "With the requested past-tense sequence, suis becomes était. Je refers to the same woman as elle, and que elides before elle.",
+      "carrier_meaning": "She said: I am ill.",
+      "target_meaning": "indirect speech with past-tense sequence",
+      "construction": "discours indirect : présent → imparfait après un verbe introducteur au passé",
+      "exposure_groups": [],
+      "prerequisites": [],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "kind": "original_authoring",
+        "author": "COMULS prototype drafting",
+        "created_on": "2026-10-08",
+        "level_basis": "Provisional authoring heuristic; not a validated CEFR rating.",
+        "source_text": "Original sentences and explanations; no dictionary wording copied.",
+        "expression_ratings": "Existing source expression ratings unchanged."
+      }
+    },
+    {
+      "id": "ctx_c1_sentence_transformation_03",
+      "type": "sentence_transformation",
+      "unit_id": "ctx_c1_sentence_transformation_03",
+      "entry_levels": [
+        "C1"
+      ],
+      "level": "B2+",
+      "prompt": "Replace si with à condition que; keep the main clause and the intended condition.\nNous partirons si tu es prêt.",
+      "answer": "Nous partirons à condition que tu sois prêt.",
+      "accepted": [
+        "Nous partirons à condition que tu sois prêt."
+      ],
+      "choices": [],
+      "explanation": "À condition que requires the subjunctive: tu es becomes tu sois.",
+      "carrier_meaning": "We will leave if you are ready.",
+      "target_meaning": "a condition expressed with à condition que",
+      "construction": "à condition que + subjonctif présent",
+      "exposure_groups": [],
+      "prerequisites": [],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "kind": "original_authoring",
+        "author": "COMULS prototype drafting",
+        "created_on": "2026-10-08",
+        "level_basis": "Provisional authoring heuristic; not a validated CEFR rating.",
+        "source_text": "Original sentences and explanations; no dictionary wording copied.",
+        "expression_ratings": "Existing source expression ratings unchanged."
+      }
+    }
+  ]
+}
