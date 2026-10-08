@@ -57,7 +57,7 @@ def get_state(col: Any) -> dict[str, Any]:
     result = {
         "schema_version": 1, "stage": "B1", "budget_minutes": 15,
         "enabled": list(core.EXERCISE_TYPES), "audio_confirmed": False,
-        "days": {}, "manager_id": None,
+        "days": {}, "manager_id": None, "deck_id": None,
     }
     saved = col.get_config(CONFIG_KEY, default=None)
     if saved is not None:
@@ -114,7 +114,7 @@ def ensure_model(col: Any) -> dict[str, Any]:
 
 def ensure_deck(col: Any, state: dict[str, Any]) -> int:
     """Reuse a stored ID, including renamed decks; never relocate existing notes."""
-    existing = state.get("manager_id")
+    existing = state.get("deck_id")
     if existing is not None:
         if type(existing) is not int or col.decks.get_legacy(existing) is None:
             raise ValueError("The COMULS practice deck was deleted. Restore it or migrate explicitly.")
@@ -132,7 +132,7 @@ def ensure_deck(col: Any, state: dict[str, Any]) -> int:
             raise ValueError("The existing COMULS deck is missing.")
     else:
         deck_id = int(col.decks.add_normal_deck_with_name(DEFAULT_DECK_NAME).id)
-    state["manager_id"] = deck_id
+    state["deck_id"] = deck_id
     save_state(col, state)
     return deck_id
 
@@ -313,7 +313,7 @@ def stage_change(col: Any, newstage: str, catalog: Any = None) -> dict[str, int]
 
 def stats(col: Any) -> dict[str, Any]:
     controls = get_state(col)
-    deck_id = controls.get("manager_id")
+    deck_id = controls.get("deck_id")
     model = col.models.by_name(MODEL_NAME)
     rows = []
     if model is not None:
