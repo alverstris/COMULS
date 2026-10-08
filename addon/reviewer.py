@@ -33,6 +33,8 @@ class ReviewerIntegration:
         self.carrier_help = False
         self.replays = 0
         self.exposed = False
+        self.capture_after_exposure = False
+        self.prior_exposure_today: bool | None = None
         self.busy = False
         self._saved_auto_advance: bool | None = None
         self._auto_reviewer: Reviewer | None = None
@@ -48,6 +50,8 @@ class ReviewerIntegration:
             ("reviewer_did_answer_card", self._did_answer_card),
             ("reviewer_will_end", self._will_end),
             ("state_shortcuts_will_change", self._shortcuts_will_change),
+            ("reviewer_will_show_context_menu", self._context_menu),
+            ("audio_will_replay", self._audio_will_replay),
         )
         for name, callback in bindings:
             hook = getattr(gui_hooks, name)
@@ -115,6 +119,20 @@ class ReviewerIntegration:
             self._error("This COMULS card has invalid exercise data. Check or re-import " + identity + ".")
             return None
 
+    def _snapshot_prior_exposure(self, card: Any) -> None:
+        """Read exposure before this question's own answer updates synced State."""
+        try:
+            state = json.loads(html.unescape(card.note()["State"]))
+            day = str(aqt.mw.col.sched.today)
+            if isinstance(state, dict):
+                self.prior_exposure_today = (
+                    str(state.get("last_exposed_day")) == day
+                    or str(state.get("familiarised_day")) == day
+                )
+        except (KeyError, IndexError, ValueError, TypeError, AttributeError):
+            # Unknown is different from proof that the target was unprimed.
+            self.prior_exposure_today = None
+
     def _disable_auto(self, reviewer: Reviewer) -> None:
         if self._auto_reviewer is not reviewer:
             self._restore_auto()
@@ -163,6 +181,7 @@ class ReviewerIntegration:
                 return "<script>window.comulsContext=null;</script>" + text
             self._clear()
             self.exercise = exercise
+            self._snapshot_prior_exposure(card)
             self.expected = {
                 "nonce": secrets.token_urlsafe(18), "card_id": int(card.id),
                 "exercise_id": exercise["id"],
@@ -179,7 +198,8 @@ class ReviewerIntegration:
     def _did_show_question(self, card: Any) -> None:
         if self._live() and card.id == self.expected["card_id"]:
             self._disable_auto(aqt.mw.reviewer)
-            self._event("question", type=self.exercise["type"])
+            self._event("question", type=self.exercise["type"],
+                        prior_exposure_today=self.prior_exposure_today)
 
     def _did_show_answer(self, card: Any) -> None:
         if not self._live() or card.id != self.expected["card_id"]:
@@ -244,8 +264,11 @@ class ReviewerIntegration:
 
         def failure(exception: Exception) -> None:
             if self.expected == expected:
-                self.busy = False
-            self._error("COMULS could not save answer exposure. Check the card data before continuing.")
+                # Preserve the grading block: otherwise a failed save would let
+                # linked retrievals appear unprimed. Leaving review is safe.
+                self.busy = True
+                self._event("exposure_save_failed")
+            self._error("COMULS could not save answer exposure. Return to the deck and repair the card data before continuing.")
 
         CollectionOp(parent=mw, op=operation).success(success).failure(failure).run_in_background(
             initiator=reviewer,
@@ -266,6 +289,7 @@ class ReviewerIntegration:
         kind = event["event"]
         if kind == "attempt":
             if self.latch.accept(event):
+                self.capture_after_exposure = self.exposed
                 self.target_hint = self.target_hint or event["target_hint"]
                 self.carrier_help = self.carrier_help or event["carrier_help"]
                 self.replays = max(self.replays, event["replays"])
@@ -299,6 +323,9 @@ class ReviewerIntegration:
             "submitted": self.latch.submitted, "outcome": self.outcome,
             "target_hint": self.target_hint, "carrier_help": self.carrier_help,
             "replays": self.replays,
+            "capture_phase": ("after_exposure" if self.capture_after_exposure
+                              else "question" if self.latch.submitted else "no_submission"),
+            "prior_exposure_today": self.prior_exposure_today,
         }
 
     def _will_answer_card(
@@ -367,6 +394,33 @@ class ReviewerIntegration:
                 return _original(*args, **kwargs)
 
             shortcuts[index] = (item[0], guarded_toggle, *item[2:])
+
+    def _context_menu(self, reviewer: Reviewer, menu: Any) -> None:
+        if not self._live(reviewer):
+            return
+        from aqt.qt import QKeySequence
+        self._disable_auto(reviewer)
+
+        def disable_auto_action(current: Any) -> None:
+            for action in current.actions():
+                if action.shortcut() == QKeySequence("Shift+A"):
+                    action.setEnabled(False)
+                    if action.isCheckable():
+                        action.setChecked(False)
+                submenu = action.menu()
+                if submenu is not None:
+                    disable_auto_action(submenu)
+
+        disable_auto_action(menu)
+
+    def _audio_will_replay(self, webview: Any, card: Any, question_side: bool) -> None:
+        if (not self._live() or card.id != self.expected["card_id"]
+                or webview is not aqt.mw.reviewer.web):
+            return
+        if question_side:
+            self.replays += 1
+        self._event("replay", side="front" if question_side else "back",
+                    source="native_shortcut")
 
     def _will_end(self) -> None:
         if self.expected is not None:
