@@ -15,6 +15,7 @@ from typing import Any
 from . import core, templates
 
 CONFIG_KEY = "comuls_v1"
+STAGE_KEY = "comuls_stage_v1"
 MODEL_NAME = "COMULS v1"
 DEFAULT_DECK_NAME = "COMULS::Practice"
 FIELDS = ("COMULS_ID", "Payload", "Prompt", "Answer", "AudioText",
@@ -64,6 +65,9 @@ def get_state(col: Any) -> dict[str, Any]:
         if not isinstance(saved, dict):
             raise ValueError("COMULS control state is invalid; restore a backup.")
         result.update(copy.deepcopy(saved))
+    separate_stage = col.get_config(STAGE_KEY, default=None)
+    if separate_stage is not None:
+        result["stage"] = separate_stage
     if result["stage"] not in core.ENTRY_LEVELS:
         raise ValueError("COMULS entry stage must be B1, B2 or C1.")
     return result
@@ -89,6 +93,11 @@ def save_state(col: Any, state: dict[str, Any]) -> Any:
     }
     if len(_json(saved).encode("utf-8")) > 8192:
         raise ValueError("COMULS control state exceeds its 8 KiB limit; keep telemetry local.")
+    # Seed a separate stage key once; settings/time writes never replace it.
+    # This lets native undo restore a stage action without rolling back clocks.
+    if col.get_config(STAGE_KEY, default=None) is None:
+        col.set_config(STAGE_KEY, saved["stage"], undoable=False)
+    saved.pop("stage", None)
     return col.set_config(CONFIG_KEY, saved, undoable=False)
 
 
@@ -305,6 +314,7 @@ def stage_change(col: Any, newstage: str, catalog: Any = None) -> dict[str, int]
         _write_json(note, "State", state)
         col.update_note(note)
     controls = get_state(col)
+    col.set_config(STAGE_KEY, newstage, undoable=True)
     controls["stage"] = newstage
     save_state(col, controls)
     return {"withdrawn": sum(len(ids) for _, _, ids in planned),
