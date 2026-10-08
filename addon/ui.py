@@ -546,7 +546,7 @@ class CourseController:
         if not self.require_manager() or self.busy:
             return
         state, budget = self.state(), self.budget()
-        if not state.get("stage_confirmed", False):
+        if not state.get("stage_confirmed", False) or state["stage"] not in COHORTS:
             self.window.tabs.setCurrentIndex(1)
             showInfo("Choose your Imperial B1 or B2 course and click Use this level first.", parent=self.window)
             return
@@ -726,6 +726,7 @@ class CourseController:
         listing = QListWidget(); layout.addWidget(listing)
         from aqt.qt import QListWidgetItem
         def refresh():
+            selected_id = listing.currentItem().data(Qt.ItemDataRole.UserRole) if listing.currentItem() else None
             listing.clear()
             for note in exercise_notes(mw.col).values():
                 exercise, state = payload(note), note_state(note)
@@ -736,6 +737,8 @@ class CourseController:
                     + " · " + exercise["answer"] + " · " + status)
                 item.setData(Qt.ItemDataRole.UserRole, exercise["id"])
                 listing.addItem(item)
+                if exercise["id"] == selected_id:
+                    listing.setCurrentItem(item)
         def selected():
             item = listing.currentItem()
             return item.data(Qt.ItemDataRole.UserRole) if item else None
@@ -755,46 +758,86 @@ class CourseController:
         row = QHBoxLayout(); layout.addLayout(row)
         button("Install course pack…", self.install_pack, row)
         button("Verify / restore bundled audio", self.install_bundled_audio, row)
+        if (self.local.root / "pending-pack.json").is_file():
+            button("Recover pending update", self.recover_pending_pack, layout)
         button("Close", dialog.accept, row)
         refresh()
         dialog.exec()
 
-    def install_pack(self):
+    def install_pack(self, selected_path=None):
         if not self.require_manager():
             return
-        path, _ = QFileDialog.getOpenFileName(self.window, "Install declarative course pack", "", "JSON (*.json)")
+        path = selected_path
+        if path is None:
+            path, _ = QFileDialog.getOpenFileName(self.window, "Install declarative course pack", "", "JSON (*.json)")
         if not path:
             return
         try:
+            from .collection import preflight_update
+            from .pack_install import stage_install, activate_install
             file = Path(path)
             if file.stat().st_size > 8_000_000:
-                raise ValueError("Course packs are limited to 8 MB in this tester.")
+                raise ValueError("Course packs are limited to 8 MB in this demo.")
             pack = load_pack(file)
             merged = {e["id"]: e for e in self.catalog}
             for exercise in pack["exercises"]:
-                audio = exercise.get("audio_file", "")
-                if audio and (Path(audio).name != audio or ":" in audio or "[" in audio):
-                    raise ValueError("Audio must name a collection media file, not a path or URL.")
-                if audio and not (Path(mw.col.media.dir()) / audio).is_file():
-                    raise ValueError("Missing collection audio: " + audio)
+                filenames = [exercise.get("audio_file", "")]
+                filenames.extend(choice.get("audio_file", "") for choice in exercise.get("choices", []))
+                for audio in filenames:
+                    if audio and (Path(audio).name != audio or ":" in audio or "[" in audio):
+                        raise ValueError("Audio must name a collection media file, not a path or URL.")
+                    if audio and not (Path(mw.col.media.dir()) / audio).is_file():
+                        raise ValueError("Missing collection audio: " + audio)
                 merged[exercise["id"]] = exercise
-            combined = dict(pack, exercises=list(merged.values()))
+            combined = dict(self.pack, version=pack["version"], exercises=list(merged.values()))
+            combined["last_update"] = {"pack_id": pack["pack_id"], "version": pack["version"]}
             errors = validate_pack(combined)
             if errors:
                 raise ValueError("\n".join(errors))
-            notes = exercise_notes(mw.col)
+            report = preflight_update(mw.col, pack["exercises"])
+            if report.get("conflicts") or report.get("material_changes"):
+                raise ValueError("The update requires conflict resolution before installation. "
+                    "Your existing content is retained.\n\n" + json.dumps(report, ensure_ascii=False, indent=2))
+            preview = json.dumps(report, ensure_ascii=False, indent=2)
+            answer = QMessageBox.question(self.window or mw, "Review course update",
+                "Local declarative course pack: " + pack["pack_id"] + " · " + pack["version"]
+                + "\nThis file does not authenticate its publisher. Obtain updates from the COMULS GitHub release.\n\n"
+                + preview + "\n\nApply these compatible changes?",
+                QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No, QMessageBox.StandardButton.No)
+            if answer != QMessageBox.StandardButton.Yes:
+                return
+            stage_install(self.local.root, combined, report)
             def install(col):
+                current = preflight_update(col, pack["exercises"])
+                if current.get("conflicts") or current.get("material_changes"):
+                    raise ValueError("The collection changed after preflight. Reopen the update preview.")
+                notes = exercise_notes(col)
                 for exercise in pack["exercises"]:
                     if exercise["id"] in notes:
                         prepare_exercise(col, exercise, col.sched.today)
                 return True
             def save(_result):
-                self.catalog_path.write_text(json.dumps(combined, ensure_ascii=False, indent=2), encoding="utf-8")
-                self.pack, self.catalog = combined, combined["exercises"]
-                self.by_id = {e["id"]: e for e in self.catalog}
-                self.window.refresh()
-                showInfo("Pack installed. Existing identities and review history were preserved.", parent=self.window)
+                try:
+                    active = activate_install(self.local.root)
+                    self.pack, self.catalog = active, active["exercises"]
+                    self.by_id = {e["id"]: e for e in self.catalog}
+                    if self.window:
+                        self.window.refresh()
+                    showInfo("Pack installed. Existing identities and review history were preserved.", parent=self.window)
+                except Exception as error:
+                    self.content_error("Native updates completed, but the catalog could not be activated. "
+                        "Use Recover pending update in Content manager. " + str(error))
             self.mutate("Update COMULS content", install, save)
+        except Exception as error:
+            self.content_error(error)
+
+    def recover_pending_pack(self):
+        from .pack_install import pending_pack, PENDING
+        try:
+            if pending_pack(self.local.root) is None:
+                showInfo("There is no pending course update.", parent=self.window)
+                return
+            self.install_pack(self.local.root / PENDING)
         except Exception as error:
             self.content_error(error)
 

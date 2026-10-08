@@ -10,7 +10,10 @@ def load_course(root: Path, override: Path | None = None):
     if override is not None and override.is_file():
         return load_pack(override)
     paths = [root / "data" / ("imperial_" + stage.lower() + ".json") for stage in COHORTS]
-    if not all(path.is_file() for path in paths):
+    present = [path.is_file() for path in paths]
+    if any(present) and not all(present):
+        raise ValueError("The Imperial course installation is incomplete. Reinstall the current GitHub add-on package.")
+    if not any(present):
         return load_pack(root / "data" / "tester.json")
     packs = [load_pack(path) for path in paths]
     exercises = [exercise for pack in packs for exercise in pack["exercises"]]

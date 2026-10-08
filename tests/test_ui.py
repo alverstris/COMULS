@@ -246,6 +246,7 @@ def test_pack_install_controls_update_catalog_without_auto_admission(course, tmp
     path.write_text(json.dumps(pack, ensure_ascii=False), encoding="utf-8")
     monkeypatch.setattr(ui, "QFileDialog", types.SimpleNamespace(
         getOpenFileName=lambda *_args: (str(path), "JSON (*.json)")))
+    monkeypatch.setattr(ui.QMessageBox, "question", lambda *_args, **_kwargs: QMessageBox.StandardButton.Yes)
     original_count = len(course.catalog)
     course.install_pack()
     assert len(course.catalog) == original_count + 1
