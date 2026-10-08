@@ -1,0 +1,2089 @@
+{
+  "schema_version": 1,
+  "pack_id": "comuls-tester-listening",
+  "version": "0.1.0",
+  "exercises": [
+    {
+      "id": "pilot_b1_meaning_recall_1",
+      "type": "meaning_recall",
+      "level": "B1",
+      "entry_levels": [
+        "B1"
+      ],
+      "prompt": "Recall the meaning of “emprunter” in this sentence:\nTu peux emprunter mon vélo pour la journée.",
+      "answer": "to borrow something that you intend to return",
+      "accepted": [
+        "to borrow something that you intend to return"
+      ],
+      "choices": [],
+      "audio_text": "",
+      "explanation": "This card tests one sense only: to borrow something that you intend to return. A correct paraphrase is enough; rate your own recall.",
+      "carrier_meaning": "You can borrow my bicycle for the day.",
+      "target_meaning": "to borrow something that you intend to return",
+      "prerequisites": [],
+      "unit_id": "pilot_sense_b1_emprunter-borrow",
+      "exposure_groups": [
+        "pilot_sense_b1_emprunter-borrow"
+      ],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "author": "COMULS",
+        "kind": "original_tester_content",
+        "level_basis": "provisional task estimate"
+      }
+    },
+    {
+      "id": "pilot_b1_french_form_recall_1",
+      "type": "french_form_recall",
+      "level": "B1",
+      "entry_levels": [
+        "B1"
+      ],
+      "prompt": "Recall the studied French verb meaning ‘to borrow’. Give the infinitive, beginning with em-.",
+      "answer": "emprunter",
+      "accepted": [
+        "emprunter"
+      ],
+      "choices": [],
+      "audio_text": "",
+      "explanation": "emprunter: to borrow something that you intend to return.\nExample: Tu peux emprunter mon vélo pour la journée.",
+      "carrier_meaning": "You can borrow my bicycle for the day.",
+      "target_meaning": "to borrow something that you intend to return",
+      "prerequisites": [],
+      "unit_id": "pilot_sense_b1_emprunter-borrow",
+      "exposure_groups": [
+        "pilot_sense_b1_emprunter-borrow"
+      ],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "author": "COMULS",
+        "kind": "original_tester_content",
+        "level_basis": "provisional task estimate"
+      }
+    },
+    {
+      "id": "pilot_b1_meaning_recall_2",
+      "type": "meaning_recall",
+      "level": "B1",
+      "entry_levels": [
+        "B1"
+      ],
+      "prompt": "Recall the meaning of “prévenir” in this sentence:\nIl faut prévenir les voisins du danger.",
+      "answer": "to warn someone about a possible problem",
+      "accepted": [
+        "to warn someone about a possible problem"
+      ],
+      "choices": [],
+      "audio_text": "",
+      "explanation": "This card tests one sense only: to warn someone about a possible problem. A correct paraphrase is enough; rate your own recall.",
+      "carrier_meaning": "We must warn the neighbours about the danger.",
+      "target_meaning": "to warn someone about a possible problem",
+      "prerequisites": [],
+      "unit_id": "pilot_sense_b1_prevenir-warn",
+      "exposure_groups": [
+        "pilot_sense_b1_prevenir-warn"
+      ],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "author": "COMULS",
+        "kind": "original_tester_content",
+        "level_basis": "provisional task estimate"
+      }
+    },
+    {
+      "id": "pilot_b1_french_form_recall_2",
+      "type": "french_form_recall",
+      "level": "B1",
+      "entry_levels": [
+        "B1"
+      ],
+      "prompt": "Recall the studied French verb meaning ‘to warn someone about a possible problem’. Give the infinitive, beginning with pré-.",
+      "answer": "prévenir",
+      "accepted": [
+        "prévenir"
+      ],
+      "choices": [],
+      "audio_text": "",
+      "explanation": "prévenir: to warn someone about a possible problem.\nExample: Il faut prévenir les voisins du danger.",
+      "carrier_meaning": "We must warn the neighbours about the danger.",
+      "target_meaning": "to warn someone about a possible problem",
+      "prerequisites": [],
+      "unit_id": "pilot_sense_b1_prevenir-warn",
+      "exposure_groups": [
+        "pilot_sense_b1_prevenir-warn"
+      ],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "author": "COMULS",
+        "kind": "original_tester_content",
+        "level_basis": "provisional task estimate"
+      }
+    },
+    {
+      "id": "pilot_b2_meaning_recall_1",
+      "type": "meaning_recall",
+      "level": "B2",
+      "entry_levels": [
+        "B2"
+      ],
+      "prompt": "Recall the meaning of “atténuer” in this sentence:\nCes mesures devraient atténuer les effets de la hausse des prix.",
+      "answer": "to make something less strong or less intense",
+      "accepted": [
+        "to make something less strong or less intense"
+      ],
+      "choices": [],
+      "audio_text": "",
+      "explanation": "This card tests one sense only: to make something less strong or less intense. A correct paraphrase is enough; rate your own recall.",
+      "carrier_meaning": "These measures should lessen the effects of rising prices.",
+      "target_meaning": "to make something less strong or less intense",
+      "prerequisites": [],
+      "unit_id": "pilot_sense_b2_attenuer-reduce-intensity",
+      "exposure_groups": [
+        "pilot_sense_b2_attenuer-reduce-intensity"
+      ],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "author": "COMULS",
+        "kind": "original_tester_content",
+        "level_basis": "provisional task estimate"
+      }
+    },
+    {
+      "id": "pilot_b2_french_form_recall_1",
+      "type": "french_form_recall",
+      "level": "B2",
+      "entry_levels": [
+        "B2"
+      ],
+      "prompt": "Recall the studied French verb meaning ‘to reduce the intensity of something’. Give the infinitive, beginning with att-.",
+      "answer": "atténuer",
+      "accepted": [
+        "atténuer"
+      ],
+      "choices": [],
+      "audio_text": "",
+      "explanation": "atténuer: to make something less strong or less intense.\nExample: Ces mesures devraient atténuer les effets de la hausse des prix.",
+      "carrier_meaning": "These measures should lessen the effects of rising prices.",
+      "target_meaning": "to make something less strong or less intense",
+      "prerequisites": [],
+      "unit_id": "pilot_sense_b2_attenuer-reduce-intensity",
+      "exposure_groups": [
+        "pilot_sense_b2_attenuer-reduce-intensity"
+      ],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "author": "COMULS",
+        "kind": "original_tester_content",
+        "level_basis": "provisional task estimate"
+      }
+    },
+    {
+      "id": "pilot_b2_meaning_recall_2",
+      "type": "meaning_recall",
+      "level": "B2",
+      "entry_levels": [
+        "B2"
+      ],
+      "prompt": "Recall the meaning of “un enjeu” in this sentence:\nLa protection des données est un enjeu majeur de cette réforme.",
+      "answer": "something important that may be gained or lost in a situation",
+      "accepted": [
+        "something important that may be gained or lost in a situation"
+      ],
+      "choices": [],
+      "audio_text": "",
+      "explanation": "This card tests one sense only: something important that may be gained or lost in a situation. A correct paraphrase is enough; rate your own recall.",
+      "carrier_meaning": "Data protection is a major issue at stake in this reform.",
+      "target_meaning": "something important that may be gained or lost in a situation",
+      "prerequisites": [],
+      "unit_id": "pilot_sense_b2_enjeu-stake",
+      "exposure_groups": [
+        "pilot_sense_b2_enjeu-stake"
+      ],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "author": "COMULS",
+        "kind": "original_tester_content",
+        "level_basis": "provisional task estimate"
+      }
+    },
+    {
+      "id": "pilot_b2_french_form_recall_2",
+      "type": "french_form_recall",
+      "level": "B2",
+      "entry_levels": [
+        "B2"
+      ],
+      "prompt": "Recall the studied French noun for ‘something important at stake in a situation’. Include the indefinite article; the noun begins with en-.",
+      "answer": "un enjeu",
+      "accepted": [
+        "un enjeu"
+      ],
+      "choices": [],
+      "audio_text": "",
+      "explanation": "un enjeu: something important that may be gained or lost in a situation.\nExample: La protection des données est un enjeu majeur de cette réforme.",
+      "carrier_meaning": "Data protection is a major issue at stake in this reform.",
+      "target_meaning": "something important that may be gained or lost in a situation",
+      "prerequisites": [],
+      "unit_id": "pilot_sense_b2_enjeu-stake",
+      "exposure_groups": [
+        "pilot_sense_b2_enjeu-stake"
+      ],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "author": "COMULS",
+        "kind": "original_tester_content",
+        "level_basis": "provisional task estimate"
+      }
+    },
+    {
+      "id": "pilot_c1_meaning_recall_1",
+      "type": "meaning_recall",
+      "level": "C1",
+      "entry_levels": [
+        "C1"
+      ],
+      "prompt": "Recall the meaning of “corroborer” in this sentence:\nLes résultats de l'enquête corroborent cette hypothèse.",
+      "answer": "to support a statement or conclusion with further evidence",
+      "accepted": [
+        "to support a statement or conclusion with further evidence"
+      ],
+      "choices": [],
+      "audio_text": "",
+      "explanation": "This card tests one sense only: to support a statement or conclusion with further evidence. A correct paraphrase is enough; rate your own recall.",
+      "carrier_meaning": "The investigation's results support this hypothesis with further evidence.",
+      "target_meaning": "to support a statement or conclusion with further evidence",
+      "prerequisites": [],
+      "unit_id": "pilot_sense_c1_corroborer-support-evidence",
+      "exposure_groups": [
+        "pilot_sense_c1_corroborer-support-evidence"
+      ],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "author": "COMULS",
+        "kind": "original_tester_content",
+        "level_basis": "provisional task estimate"
+      }
+    },
+    {
+      "id": "pilot_c1_french_form_recall_1",
+      "type": "french_form_recall",
+      "level": "C1",
+      "entry_levels": [
+        "C1"
+      ],
+      "prompt": "Recall the studied French verb meaning ‘to support a claim with further evidence’. Give the infinitive, beginning with cor-.",
+      "answer": "corroborer",
+      "accepted": [
+        "corroborer"
+      ],
+      "choices": [],
+      "audio_text": "",
+      "explanation": "corroborer: to support a statement or conclusion with further evidence.\nExample: Les résultats de l'enquête corroborent cette hypothèse.",
+      "carrier_meaning": "The investigation's results support this hypothesis with further evidence.",
+      "target_meaning": "to support a statement or conclusion with further evidence",
+      "prerequisites": [],
+      "unit_id": "pilot_sense_c1_corroborer-support-evidence",
+      "exposure_groups": [
+        "pilot_sense_c1_corroborer-support-evidence"
+      ],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "author": "COMULS",
+        "kind": "original_tester_content",
+        "level_basis": "provisional task estimate"
+      }
+    },
+    {
+      "id": "pilot_c1_meaning_recall_2",
+      "type": "meaning_recall",
+      "level": "C1",
+      "entry_levels": [
+        "C1"
+      ],
+      "prompt": "Recall the meaning of “une réticence” in this sentence:\nElle a exprimé une réticence à participer au projet.",
+      "answer": "a reluctance or reservation that makes someone hesitate",
+      "accepted": [
+        "a reluctance or reservation that makes someone hesitate"
+      ],
+      "choices": [],
+      "audio_text": "",
+      "explanation": "This card tests one sense only: a reluctance or reservation that makes someone hesitate. A correct paraphrase is enough; rate your own recall.",
+      "carrier_meaning": "She expressed reluctance to take part in the project.",
+      "target_meaning": "a reluctance or reservation that makes someone hesitate",
+      "prerequisites": [],
+      "unit_id": "pilot_sense_c1_reticence-reluctance",
+      "exposure_groups": [
+        "pilot_sense_c1_reticence-reluctance"
+      ],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "author": "COMULS",
+        "kind": "original_tester_content",
+        "level_basis": "provisional task estimate"
+      }
+    },
+    {
+      "id": "pilot_c1_french_form_recall_2",
+      "type": "french_form_recall",
+      "level": "C1",
+      "entry_levels": [
+        "C1"
+      ],
+      "prompt": "Recall the studied French noun meaning ‘a reluctance or reservation’. Include the indefinite article; the noun begins with rét-.",
+      "answer": "une réticence",
+      "accepted": [
+        "une réticence"
+      ],
+      "choices": [],
+      "audio_text": "",
+      "explanation": "une réticence: a reluctance or reservation that makes someone hesitate.\nExample: Elle a exprimé une réticence à participer au projet.",
+      "carrier_meaning": "She expressed reluctance to take part in the project.",
+      "target_meaning": "a reluctance or reservation that makes someone hesitate",
+      "prerequisites": [],
+      "unit_id": "pilot_sense_c1_reticence-reluctance",
+      "exposure_groups": [
+        "pilot_sense_c1_reticence-reluctance"
+      ],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "author": "COMULS",
+        "kind": "original_tester_content",
+        "level_basis": "provisional task estimate"
+      }
+    },
+    {
+      "id": "pilot_b1_sound_discrimination_1",
+      "type": "sound_discrimination",
+      "level": "B1+",
+      "entry_levels": [
+        "B1"
+      ],
+      "prompt": "Listen once, then choose the word you heard. Replay if needed.",
+      "answer": "roue",
+      "accepted": [
+        "roue"
+      ],
+      "choices": [
+        {
+          "id": "o1",
+          "text": "roue",
+          "correct": true
+        },
+        {
+          "id": "o2",
+          "text": "rue",
+          "correct": false
+        }
+      ],
+      "audio_text": "Je regarde la roue.",
+      "explanation": "roue has /u/; rue has /y/. The two words have one syllable. Listen to the vowel.",
+      "carrier_meaning": "I am looking at the wheel.",
+      "target_meaning": "roue",
+      "prerequisites": [],
+      "unit_id": "pilot_b1_sound_discrimination_1",
+      "exposure_groups": [
+        "pilot_b1_sound_discrimination_1"
+      ],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "author": "COMULS",
+        "kind": "original_tester_content",
+        "level_basis": "provisional task estimate"
+      }
+    },
+    {
+      "id": "pilot_b1_sound_discrimination_2",
+      "type": "sound_discrimination",
+      "level": "B1+",
+      "entry_levels": [
+        "B1"
+      ],
+      "prompt": "Listen once, then choose the word you heard. Replay if needed.",
+      "answer": "dessus",
+      "accepted": [
+        "dessus"
+      ],
+      "choices": [
+        {
+          "id": "o1",
+          "text": "dessus",
+          "correct": true
+        },
+        {
+          "id": "o2",
+          "text": "dessous",
+          "correct": false
+        }
+      ],
+      "audio_text": "Je l'ai posé dessus.",
+      "explanation": "dessus ends in /y/; dessous ends in /u/. The last vowel changes the meaning.",
+      "carrier_meaning": "I put it on top.",
+      "target_meaning": "dessus",
+      "prerequisites": [],
+      "unit_id": "pilot_b1_sound_discrimination_2",
+      "exposure_groups": [
+        "pilot_b1_sound_discrimination_2"
+      ],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "author": "COMULS",
+        "kind": "original_tester_content",
+        "level_basis": "provisional task estimate"
+      }
+    },
+    {
+      "id": "pilot_b2_sound_discrimination_1",
+      "type": "sound_discrimination",
+      "level": "B2+",
+      "entry_levels": [
+        "B2"
+      ],
+      "prompt": "Listen once, then choose the word you heard. Replay if needed.",
+      "answer": "poison",
+      "accepted": [
+        "poison"
+      ],
+      "choices": [
+        {
+          "id": "o1",
+          "text": "poison",
+          "correct": true
+        },
+        {
+          "id": "o2",
+          "text": "poisson",
+          "correct": false
+        }
+      ],
+      "audio_text": "Il est question d'un poison susceptible de provoquer des troubles.",
+      "explanation": "poison contains /z/; poisson contains /s/. Both options have two syllables.",
+      "carrier_meaning": "It concerns a poison that may cause disorders.",
+      "target_meaning": "poison",
+      "prerequisites": [],
+      "unit_id": "pilot_b2_sound_discrimination_1",
+      "exposure_groups": [
+        "pilot_b2_sound_discrimination_1"
+      ],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "author": "COMULS",
+        "kind": "original_tester_content",
+        "level_basis": "provisional task estimate"
+      }
+    },
+    {
+      "id": "pilot_b2_sound_discrimination_2",
+      "type": "sound_discrimination",
+      "level": "B2+",
+      "entry_levels": [
+        "B2"
+      ],
+      "prompt": "Listen once, then choose the word you heard. Replay if needed.",
+      "answer": "cousin",
+      "accepted": [
+        "cousin"
+      ],
+      "choices": [
+        {
+          "id": "o1",
+          "text": "cousin",
+          "correct": true
+        },
+        {
+          "id": "o2",
+          "text": "coussin",
+          "correct": false
+        }
+      ],
+      "audio_text": "Elle évoque son cousin, dont l'absence demeure inexpliquée.",
+      "explanation": "cousin contains /z/; coussin contains /s/. Listen inside the target word, rather than deciding from its meaning.",
+      "carrier_meaning": "She mentions her cousin, whose absence remains unexplained.",
+      "target_meaning": "cousin",
+      "prerequisites": [],
+      "unit_id": "pilot_b2_sound_discrimination_2",
+      "exposure_groups": [
+        "pilot_b2_sound_discrimination_2"
+      ],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "author": "COMULS",
+        "kind": "original_tester_content",
+        "level_basis": "provisional task estimate"
+      }
+    },
+    {
+      "id": "pilot_c1_sound_discrimination_1",
+      "type": "sound_discrimination",
+      "level": "C1+",
+      "entry_levels": [
+        "C1"
+      ],
+      "prompt": "Listen once, then choose the word you heard. Replay if needed.",
+      "answer": "égards",
+      "accepted": [
+        "égards"
+      ],
+      "choices": [
+        {
+          "id": "o1",
+          "text": "égards",
+          "correct": true
+        },
+        {
+          "id": "o2",
+          "text": "écarts",
+          "correct": false
+        }
+      ],
+      "audio_text": "Cette analyse demeure, à maints égards, difficile à concilier avec les données disponibles.",
+      "explanation": "égards contains /g/; écarts contains /k/. The final written d or t is silent in these words. The surrounding sentence is familiarised before this card.",
+      "carrier_meaning": "In many respects, this analysis remains difficult to reconcile with the available data.",
+      "target_meaning": "égards",
+      "prerequisites": [],
+      "unit_id": "pilot_c1_sound_discrimination_1",
+      "exposure_groups": [
+        "pilot_c1_sound_discrimination_1"
+      ],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "author": "COMULS",
+        "kind": "original_tester_content",
+        "level_basis": "provisional task estimate"
+      }
+    },
+    {
+      "id": "pilot_c1_sound_discrimination_2",
+      "type": "sound_discrimination",
+      "level": "C1+",
+      "entry_levels": [
+        "C1"
+      ],
+      "prompt": "Listen once, then choose the word you heard. Replay if needed.",
+      "answer": "inclus",
+      "accepted": [
+        "inclus"
+      ],
+      "choices": [
+        {
+          "id": "o1",
+          "text": "inclus",
+          "correct": true
+        },
+        {
+          "id": "o2",
+          "text": "exclu",
+          "correct": false
+        }
+      ],
+      "audio_text": "Il reste à établir si ce mécanisme est inclus dans le périmètre de l'évaluation.",
+      "explanation": "inclus begins /ɛ̃kly/; exclu begins /ɛkskly/. Attend to the onset and consonant sequence. Both options end in the vowel /y/.",
+      "carrier_meaning": "It remains to establish whether this mechanism is included in the scope of the evaluation.",
+      "target_meaning": "inclus",
+      "prerequisites": [],
+      "unit_id": "pilot_c1_sound_discrimination_2",
+      "exposure_groups": [
+        "pilot_c1_sound_discrimination_2"
+      ],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "author": "COMULS",
+        "kind": "original_tester_content",
+        "level_basis": "provisional task estimate"
+      }
+    },
+    {
+      "id": "pilot_b1_connected_word_recognition_1",
+      "type": "connected_word_recognition",
+      "level": "B1",
+      "entry_levels": [
+        "B1"
+      ],
+      "prompt": "Which exact word sequence did you hear in the sentence?",
+      "answer": "à onze heures",
+      "accepted": [
+        "à onze heures"
+      ],
+      "choices": [
+        {
+          "id": "o1",
+          "text": "à onze heures",
+          "correct": true
+        },
+        {
+          "id": "o2",
+          "text": "à douze heures",
+          "correct": false
+        },
+        {
+          "id": "o3",
+          "text": "à deux heures",
+          "correct": false
+        }
+      ],
+      "audio_text": "On a rendez-vous à onze heures.",
+      "explanation": "Hear the phrase as à | onze | heures. There is no pronounced n inserted between à and onze. The /z/ in onze is already part of the word.",
+      "carrier_meaning": "We have an appointment at eleven o'clock.",
+      "target_meaning": "à onze heures",
+      "prerequisites": [],
+      "unit_id": "pilot_b1_connected_word_recognition_1",
+      "exposure_groups": [
+        "pilot_b1_connected_word_recognition_1"
+      ],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "author": "COMULS",
+        "kind": "original_tester_content",
+        "level_basis": "provisional task estimate"
+      }
+    },
+    {
+      "id": "pilot_b1_connected_word_recognition_2",
+      "type": "connected_word_recognition",
+      "level": "B1",
+      "entry_levels": [
+        "B1"
+      ],
+      "prompt": "Which exact word sequence did you hear in the sentence?",
+      "answer": "ils ont encore",
+      "accepted": [
+        "ils ont encore"
+      ],
+      "choices": [
+        {
+          "id": "o1",
+          "text": "ils ont encore",
+          "correct": true
+        },
+        {
+          "id": "o2",
+          "text": "ils sont encore",
+          "correct": false
+        },
+        {
+          "id": "o3",
+          "text": "ils vont encore",
+          "correct": false
+        }
+      ],
+      "audio_text": "Ils ont encore oublié leurs clés.",
+      "explanation": "Ils ont begins /ilzɔ̃/: the final s of ils links to the following vowel as /z/. Compare ils sont, /ilsɔ̃/, which contains /s/.",
+      "carrier_meaning": "They have forgotten their keys again.",
+      "target_meaning": "ils ont encore",
+      "prerequisites": [],
+      "unit_id": "pilot_b1_connected_word_recognition_2",
+      "exposure_groups": [
+        "pilot_b1_connected_word_recognition_2"
+      ],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "author": "COMULS",
+        "kind": "original_tester_content",
+        "level_basis": "provisional task estimate"
+      }
+    },
+    {
+      "id": "pilot_b2_connected_word_recognition_1",
+      "type": "connected_word_recognition",
+      "level": "B2",
+      "entry_levels": [
+        "B2"
+      ],
+      "prompt": "Which exact word sequence did you hear in the sentence?",
+      "answer": "il en a parlé",
+      "accepted": [
+        "il en a parlé"
+      ],
+      "choices": [
+        {
+          "id": "o1",
+          "text": "il en a parlé",
+          "correct": true
+        },
+        {
+          "id": "o2",
+          "text": "il leur a parlé",
+          "correct": false
+        },
+        {
+          "id": "o3",
+          "text": "il n'a pas parlé",
+          "correct": false
+        }
+      ],
+      "audio_text": "Il en a parlé au responsable hier.",
+      "explanation": "Group the opening as il | en | a | parlé. The pronoun en belongs before a; its final n links to the following vowel.",
+      "carrier_meaning": "He spoke about it to the person in charge yesterday.",
+      "target_meaning": "il en a parlé",
+      "prerequisites": [],
+      "unit_id": "pilot_b2_connected_word_recognition_1",
+      "exposure_groups": [
+        "pilot_b2_connected_word_recognition_1"
+      ],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "author": "COMULS",
+        "kind": "original_tester_content",
+        "level_basis": "provisional task estimate"
+      }
+    },
+    {
+      "id": "pilot_b2_connected_word_recognition_2",
+      "type": "connected_word_recognition",
+      "level": "B2",
+      "entry_levels": [
+        "B2"
+      ],
+      "prompt": "Which exact word sequence did you hear in the sentence?",
+      "answer": "on y aurait renoncé",
+      "accepted": [
+        "on y aurait renoncé"
+      ],
+      "choices": [
+        {
+          "id": "o1",
+          "text": "on y aurait renoncé",
+          "correct": true
+        },
+        {
+          "id": "o2",
+          "text": "on aurait dû renoncer",
+          "correct": false
+        },
+        {
+          "id": "o3",
+          "text": "on n'y a pas renoncé",
+          "correct": false
+        }
+      ],
+      "audio_text": "On y aurait renoncé sans votre aide.",
+      "explanation": "Group the sequence as on | y | aurait | renoncé. The short pronoun y is a separate word even though there is no pause around it.",
+      "carrier_meaning": "We would have given it up without your help.",
+      "target_meaning": "on y aurait renoncé",
+      "prerequisites": [],
+      "unit_id": "pilot_b2_connected_word_recognition_2",
+      "exposure_groups": [
+        "pilot_b2_connected_word_recognition_2"
+      ],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "author": "COMULS",
+        "kind": "original_tester_content",
+        "level_basis": "provisional task estimate"
+      }
+    },
+    {
+      "id": "pilot_c1_connected_word_recognition_1",
+      "type": "connected_word_recognition",
+      "level": "C1",
+      "entry_levels": [
+        "C1"
+      ],
+      "prompt": "Which exact word sequence did you hear in the sentence?",
+      "answer": "il n'en demeure pas moins",
+      "accepted": [
+        "il n'en demeure pas moins"
+      ],
+      "choices": [
+        {
+          "id": "o1",
+          "text": "il n'en demeure pas moins",
+          "correct": true
+        },
+        {
+          "id": "o2",
+          "text": "il ne demeure pas loin",
+          "correct": false
+        },
+        {
+          "id": "o3",
+          "text": "il n'en demandait pas moins",
+          "correct": false
+        }
+      ],
+      "audio_text": "Il n'en demeure pas moins que les délais seront difficiles à tenir.",
+      "explanation": "Group the opening as il | n'en | demeure | pas | moins. Il n'en demeure pas moins que means ‘the fact remains that’ or ‘nevertheless’; these negatives do not reject the following statement.",
+      "carrier_meaning": "Nevertheless, meeting the deadlines will be difficult.",
+      "target_meaning": "il n'en demeure pas moins",
+      "prerequisites": [],
+      "unit_id": "pilot_c1_connected_word_recognition_1",
+      "exposure_groups": [
+        "pilot_c1_connected_word_recognition_1"
+      ],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "author": "COMULS",
+        "kind": "original_tester_content",
+        "level_basis": "provisional task estimate"
+      }
+    },
+    {
+      "id": "pilot_c1_connected_word_recognition_2",
+      "type": "connected_word_recognition",
+      "level": "C1",
+      "entry_levels": [
+        "C1"
+      ],
+      "prompt": "Which exact word sequence did you hear in the sentence?",
+      "answer": "d'aucuns y voient",
+      "accepted": [
+        "d'aucuns y voient"
+      ],
+      "choices": [
+        {
+          "id": "o1",
+          "text": "d'aucuns y voient",
+          "correct": true
+        },
+        {
+          "id": "o2",
+          "text": "aucun n'y voit",
+          "correct": false
+        },
+        {
+          "id": "o3",
+          "text": "d'aucuns y croient",
+          "correct": false
+        }
+      ],
+      "audio_text": "D'aucuns y voient une remise en cause du principe lui-même.",
+      "explanation": "Group the opening as d'aucuns | y | voient. D'aucuns means ‘some people’; y is the short pronoun immediately before voient.",
+      "carrier_meaning": "Some people see it as calling the very principle into question.",
+      "target_meaning": "d'aucuns y voient",
+      "prerequisites": [],
+      "unit_id": "pilot_c1_connected_word_recognition_2",
+      "exposure_groups": [
+        "pilot_c1_connected_word_recognition_2"
+      ],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "author": "COMULS",
+        "kind": "original_tester_content",
+        "level_basis": "provisional task estimate"
+      }
+    },
+    {
+      "id": "pilot_b1_sentence_reconstruction_1",
+      "type": "sentence_reconstruction",
+      "level": "A2+",
+      "entry_levels": [
+        "B1"
+      ],
+      "prompt": "Listen, then put the tiles in the exact order heard.",
+      "answer": "Nous avons acheté du pain ce matin.",
+      "accepted": [
+        "Nous avons acheté du pain ce matin."
+      ],
+      "choices": [],
+      "audio_text": "Nous avons acheté du pain ce matin.",
+      "explanation": "Rebuild the exact sentence heard: Nous | avons | acheté | du | pain | ce | matin. Du belongs with pain; ce belongs with matin.",
+      "carrier_meaning": "We bought some bread this morning.",
+      "target_meaning": "Recognise the order and boundaries of the words in continuous speech.",
+      "prerequisites": [],
+      "unit_id": "pilot_b1_sentence_reconstruction_1",
+      "exposure_groups": [
+        "pilot_b1_sentence_reconstruction_1"
+      ],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "author": "COMULS",
+        "kind": "original_tester_content",
+        "level_basis": "provisional task estimate"
+      }
+    },
+    {
+      "id": "pilot_b1_sentence_reconstruction_2",
+      "type": "sentence_reconstruction",
+      "level": "A2+",
+      "entry_levels": [
+        "B1"
+      ],
+      "prompt": "Listen, then put the tiles in the exact order heard.",
+      "answer": "Elle va prendre le bus après le travail.",
+      "accepted": [
+        "Elle va prendre le bus après le travail."
+      ],
+      "choices": [],
+      "audio_text": "Elle va prendre le bus après le travail.",
+      "explanation": "The two copies of le have the same written form and are interchangeable as tiles. Listen for après le travail at the end.",
+      "carrier_meaning": "She is going to take the bus after work.",
+      "target_meaning": "Recognise the order and boundaries of the words in continuous speech.",
+      "prerequisites": [],
+      "unit_id": "pilot_b1_sentence_reconstruction_2",
+      "exposure_groups": [
+        "pilot_b1_sentence_reconstruction_2"
+      ],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "author": "COMULS",
+        "kind": "original_tester_content",
+        "level_basis": "provisional task estimate"
+      }
+    },
+    {
+      "id": "pilot_b2_sentence_reconstruction_1",
+      "type": "sentence_reconstruction",
+      "level": "B1+",
+      "entry_levels": [
+        "B2"
+      ],
+      "prompt": "Listen, then put the tiles in the exact order heard.",
+      "answer": "Je lui ai expliqué pourquoi nous étions partis.",
+      "accepted": [
+        "Je lui ai expliqué pourquoi nous étions partis."
+      ],
+      "choices": [],
+      "audio_text": "Je lui ai expliqué pourquoi nous étions partis.",
+      "explanation": "The pronoun lui precedes ai expliqué. The sequence after pourquoi is nous étions partis.",
+      "carrier_meaning": "I explained to him or her why we had left.",
+      "target_meaning": "Recognise the order and boundaries of the words in continuous speech.",
+      "prerequisites": [],
+      "unit_id": "pilot_b2_sentence_reconstruction_1",
+      "exposure_groups": [
+        "pilot_b2_sentence_reconstruction_1"
+      ],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "author": "COMULS",
+        "kind": "original_tester_content",
+        "level_basis": "provisional task estimate"
+      }
+    },
+    {
+      "id": "pilot_b2_sentence_reconstruction_2",
+      "type": "sentence_reconstruction",
+      "level": "B1+",
+      "entry_levels": [
+        "B2"
+      ],
+      "prompt": "Listen, then put the tiles in the exact order heard.",
+      "answer": "Si tu avais le temps, tu pourrais venir demain.",
+      "accepted": [
+        "Si tu avais le temps, tu pourrais venir demain."
+      ],
+      "choices": [],
+      "audio_text": "Si tu avais le temps, tu pourrais venir demain.",
+      "explanation": "Reconstruct what was heard. The first tu belongs to avais; the second belongs to pourrais. Identical tu tiles are interchangeable.",
+      "carrier_meaning": "If you had time, you could come tomorrow.",
+      "target_meaning": "Recognise the order and boundaries of the words in continuous speech.",
+      "prerequisites": [],
+      "unit_id": "pilot_b2_sentence_reconstruction_2",
+      "exposure_groups": [
+        "pilot_b2_sentence_reconstruction_2"
+      ],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "author": "COMULS",
+        "kind": "original_tester_content",
+        "level_basis": "provisional task estimate"
+      }
+    },
+    {
+      "id": "pilot_c1_sentence_reconstruction_1",
+      "type": "sentence_reconstruction",
+      "level": "B2+",
+      "entry_levels": [
+        "C1"
+      ],
+      "prompt": "Listen, then put the tiles in the exact order heard.",
+      "answer": "Bien qu'il ait été averti, il a maintenu sa décision.",
+      "accepted": [
+        "Bien qu'il ait été averti, il a maintenu sa décision."
+      ],
+      "choices": [],
+      "audio_text": "Bien qu'il ait été averti, il a maintenu sa décision.",
+      "explanation": "The opening group is Bien qu'il ait été averti. The main clause is il a maintenu sa décision.",
+      "carrier_meaning": "Although he had been warned, he maintained his decision.",
+      "target_meaning": "Recognise the order and boundaries of the words in continuous speech.",
+      "prerequisites": [],
+      "unit_id": "pilot_c1_sentence_reconstruction_1",
+      "exposure_groups": [
+        "pilot_c1_sentence_reconstruction_1"
+      ],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "author": "COMULS",
+        "kind": "original_tester_content",
+        "level_basis": "provisional task estimate"
+      }
+    },
+    {
+      "id": "pilot_c1_sentence_reconstruction_2",
+      "type": "sentence_reconstruction",
+      "level": "B2+",
+      "entry_levels": [
+        "C1"
+      ],
+      "prompt": "Listen, then put the tiles in the exact order heard.",
+      "answer": "Les mesures dont nous avions convenu seront appliquées progressivement.",
+      "accepted": [
+        "Les mesures dont nous avions convenu seront appliquées progressivement."
+      ],
+      "choices": [],
+      "audio_text": "Les mesures dont nous avions convenu seront appliquées progressivement.",
+      "explanation": "The relative clause is dont nous avions convenu. Progressivement describes how the measures will be implemented.",
+      "carrier_meaning": "The measures we had agreed on will be implemented gradually.",
+      "target_meaning": "Recognise the order and boundaries of the words in continuous speech.",
+      "prerequisites": [],
+      "unit_id": "pilot_c1_sentence_reconstruction_2",
+      "exposure_groups": [
+        "pilot_c1_sentence_reconstruction_2"
+      ],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "author": "COMULS",
+        "kind": "original_tester_content",
+        "level_basis": "provisional task estimate"
+      }
+    },
+    {
+      "id": "pilot_b1_partial_dictation_1",
+      "type": "partial_dictation",
+      "level": "B1+",
+      "entry_levels": [
+        "B1"
+      ],
+      "prompt": "Type only the missing words you hear:\nSi tu veux, je peux ___ demain.",
+      "answer": "t'accompagner",
+      "accepted": [
+        "t'accompagner"
+      ],
+      "choices": [],
+      "audio_text": "Si tu veux, je peux t'accompagner demain.",
+      "explanation": "The missing form is t'accompagner: te becomes t' before the vowel. Hear t' as the attached pronoun, not part of the verb's dictionary form.",
+      "carrier_meaning": "If you like, I can go with you tomorrow.",
+      "target_meaning": "t'accompagner",
+      "prerequisites": [],
+      "unit_id": "pilot_b1_partial_dictation_1",
+      "exposure_groups": [
+        "pilot_b1_partial_dictation_1"
+      ],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "author": "COMULS",
+        "kind": "original_tester_content",
+        "level_basis": "provisional task estimate"
+      }
+    },
+    {
+      "id": "pilot_b1_partial_dictation_2",
+      "type": "partial_dictation",
+      "level": "B1+",
+      "entry_levels": [
+        "B1"
+      ],
+      "prompt": "Type only the missing words you hear:\nNous n'avons ___ reçu votre réponse.",
+      "answer": "pas encore",
+      "accepted": [
+        "pas encore"
+      ],
+      "choices": [],
+      "audio_text": "Nous n'avons pas encore reçu votre réponse.",
+      "explanation": "Pas encore means ‘not yet’. The two words are spoken continuously, but remain separate in writing.",
+      "carrier_meaning": "We have not received your reply yet.",
+      "target_meaning": "pas encore",
+      "prerequisites": [],
+      "unit_id": "pilot_b1_partial_dictation_2",
+      "exposure_groups": [
+        "pilot_b1_partial_dictation_2"
+      ],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "author": "COMULS",
+        "kind": "original_tester_content",
+        "level_basis": "provisional task estimate"
+      }
+    },
+    {
+      "id": "pilot_b2_partial_dictation_1",
+      "type": "partial_dictation",
+      "level": "B2+",
+      "entry_levels": [
+        "B2"
+      ],
+      "prompt": "Type only the missing words you hear:\nCette décision risque de ___ l'accord.",
+      "answer": "remettre en cause",
+      "accepted": [
+        "remettre en cause"
+      ],
+      "choices": [],
+      "audio_text": "Cette décision risque de remettre en cause l'accord.",
+      "explanation": "The fixed expression is remettre en cause. Hear the chain remettre | en | cause; the final consonant of remettre is followed directly by en.",
+      "carrier_meaning": "This decision risks calling the agreement into question.",
+      "target_meaning": "remettre en cause",
+      "prerequisites": [],
+      "unit_id": "pilot_b2_partial_dictation_1",
+      "exposure_groups": [
+        "pilot_b2_partial_dictation_1"
+      ],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "author": "COMULS",
+        "kind": "original_tester_content",
+        "level_basis": "provisional task estimate"
+      }
+    },
+    {
+      "id": "pilot_b2_partial_dictation_2",
+      "type": "partial_dictation",
+      "level": "B2+",
+      "entry_levels": [
+        "B2"
+      ],
+      "prompt": "Type only the missing words you hear:\nIl aurait fallu ___ plus tôt.",
+      "answer": "nous en informer",
+      "accepted": [
+        "nous en informer"
+      ],
+      "choices": [],
+      "audio_text": "Il aurait fallu nous en informer plus tôt.",
+      "explanation": "The missing sequence contains two pronouns: nous | en | informer. En represents the matter people should have informed us about.",
+      "carrier_meaning": "We should have been informed about it earlier.",
+      "target_meaning": "nous en informer",
+      "prerequisites": [],
+      "unit_id": "pilot_b2_partial_dictation_2",
+      "exposure_groups": [
+        "pilot_b2_partial_dictation_2"
+      ],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "author": "COMULS",
+        "kind": "original_tester_content",
+        "level_basis": "provisional task estimate"
+      }
+    },
+    {
+      "id": "pilot_c1_partial_dictation_1",
+      "type": "partial_dictation",
+      "level": "C1+",
+      "entry_levels": [
+        "C1"
+      ],
+      "prompt": "Type only the missing words you hear:\nIl convient de ne pas ___ du débat.",
+      "answer": "préjuger de l'issue",
+      "accepted": [
+        "préjuger de l'issue"
+      ],
+      "choices": [],
+      "audio_text": "Il convient de ne pas préjuger de l'issue du débat.",
+      "explanation": "The sequence is préjuger | de | l'issue. The construction is préjuger de quelque chose; l'issue means the outcome.",
+      "carrier_meaning": "We should not prejudge the outcome of the debate.",
+      "target_meaning": "préjuger de l'issue",
+      "prerequisites": [],
+      "unit_id": "pilot_c1_partial_dictation_1",
+      "exposure_groups": [
+        "pilot_c1_partial_dictation_1"
+      ],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "author": "COMULS",
+        "kind": "original_tester_content",
+        "level_basis": "provisional task estimate"
+      }
+    },
+    {
+      "id": "pilot_c1_partial_dictation_2",
+      "type": "partial_dictation",
+      "level": "C1+",
+      "entry_levels": [
+        "C1"
+      ],
+      "prompt": "Type only the missing words you hear:\nLa commission a émis un avis ___.",
+      "answer": "assorti de plusieurs réserves",
+      "accepted": [
+        "assorti de plusieurs réserves"
+      ],
+      "choices": [],
+      "audio_text": "La commission a émis un avis assorti de plusieurs réserves.",
+      "explanation": "Group the sequence as assorti | de | plusieurs | réserves. Assorti de means accompanied by or subject to the stated qualifications.",
+      "carrier_meaning": "The committee issued an opinion accompanied by several reservations.",
+      "target_meaning": "assorti de plusieurs réserves",
+      "prerequisites": [],
+      "unit_id": "pilot_c1_partial_dictation_2",
+      "exposure_groups": [
+        "pilot_c1_partial_dictation_2"
+      ],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "author": "COMULS",
+        "kind": "original_tester_content",
+        "level_basis": "provisional task estimate"
+      }
+    },
+    {
+      "id": "pilot_b1_sentence_transcription_1",
+      "type": "sentence_transcription",
+      "level": "B1+",
+      "entry_levels": [
+        "B1"
+      ],
+      "prompt": "Listen, then type the complete sentence. Replay if needed.",
+      "answer": "Je ne savais pas que tu travaillais encore ici.",
+      "accepted": [
+        "Je ne savais pas que tu travaillais encore ici."
+      ],
+      "choices": [],
+      "audio_text": "Je ne savais pas que tu travaillais encore ici.",
+      "explanation": "Listen for Je ne savais pas | que tu travaillais | encore ici. The two verb endings are written -ais even though the final s is silent.",
+      "carrier_meaning": "I did not know you still worked here.",
+      "target_meaning": "Recover the complete spoken sentence and its written word boundaries.",
+      "prerequisites": [],
+      "unit_id": "pilot_b1_sentence_transcription_1",
+      "exposure_groups": [
+        "pilot_b1_sentence_transcription_1"
+      ],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "author": "COMULS",
+        "kind": "original_tester_content",
+        "level_basis": "provisional task estimate"
+      }
+    },
+    {
+      "id": "pilot_b1_sentence_transcription_2",
+      "type": "sentence_transcription",
+      "level": "B1+",
+      "entry_levels": [
+        "B1"
+      ],
+      "prompt": "Listen, then type the complete sentence. Replay if needed.",
+      "answer": "Est-ce que vous pourriez me rappeler dans une heure ?",
+      "accepted": [
+        "Est-ce que vous pourriez me rappeler dans une heure ?"
+      ],
+      "choices": [],
+      "audio_text": "Est-ce que vous pourriez me rappeler dans une heure ?",
+      "explanation": "The sequence is Est-ce que | vous pourriez | me rappeler | dans une heure. Dans une links /z/ to the following vowel; heure begins with a silent h.",
+      "carrier_meaning": "Could you call me back in an hour?",
+      "target_meaning": "Recover the complete spoken sentence and its written word boundaries.",
+      "prerequisites": [],
+      "unit_id": "pilot_b1_sentence_transcription_2",
+      "exposure_groups": [
+        "pilot_b1_sentence_transcription_2"
+      ],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "author": "COMULS",
+        "kind": "original_tester_content",
+        "level_basis": "provisional task estimate"
+      }
+    },
+    {
+      "id": "pilot_b2_sentence_transcription_1",
+      "type": "sentence_transcription",
+      "level": "B2+",
+      "entry_levels": [
+        "B2"
+      ],
+      "prompt": "Listen, then type the complete sentence. Replay if needed.",
+      "answer": "Faute d'informations suffisantes, nous avons préféré reporter la réunion.",
+      "accepted": [
+        "Faute d'informations suffisantes, nous avons préféré reporter la réunion."
+      ],
+      "choices": [],
+      "audio_text": "Faute d'informations suffisantes, nous avons préféré reporter la réunion.",
+      "explanation": "Faute de expresses a lack: faute d'informations suffisantes. Informations and suffisantes are plural in the written sentence.",
+      "carrier_meaning": "Because there was not enough information, we preferred to postpone the meeting.",
+      "target_meaning": "Recover the complete spoken sentence and its written word boundaries.",
+      "prerequisites": [],
+      "unit_id": "pilot_b2_sentence_transcription_1",
+      "exposure_groups": [
+        "pilot_b2_sentence_transcription_1"
+      ],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "author": "COMULS",
+        "kind": "original_tester_content",
+        "level_basis": "provisional task estimate"
+      }
+    },
+    {
+      "id": "pilot_b2_sentence_transcription_2",
+      "type": "sentence_transcription",
+      "level": "B2+",
+      "entry_levels": [
+        "B2"
+      ],
+      "prompt": "Listen, then type the complete sentence. Replay if needed.",
+      "answer": "Je lui en aurais parlé si j'avais su qu'il était disponible.",
+      "accepted": [
+        "Je lui en aurais parlé si j'avais su qu'il était disponible."
+      ],
+      "choices": [],
+      "audio_text": "Je lui en aurais parlé si j'avais su qu'il était disponible.",
+      "explanation": "The opening pronouns are lui | en. The sentence links je lui en aurais parlé to si j'avais su; do not merge the short pronouns into the following verb.",
+      "carrier_meaning": "I would have spoken to him about it if I had known he was available.",
+      "target_meaning": "Recover the complete spoken sentence and its written word boundaries.",
+      "prerequisites": [],
+      "unit_id": "pilot_b2_sentence_transcription_2",
+      "exposure_groups": [
+        "pilot_b2_sentence_transcription_2"
+      ],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "author": "COMULS",
+        "kind": "original_tester_content",
+        "level_basis": "provisional task estimate"
+      }
+    },
+    {
+      "id": "pilot_c1_sentence_transcription_1",
+      "type": "sentence_transcription",
+      "level": "C1+",
+      "entry_levels": [
+        "C1"
+      ],
+      "prompt": "Listen, then type the complete sentence. Replay if needed.",
+      "answer": "Si fondée qu'elle puisse paraître, cette objection n'épuise pas la question.",
+      "accepted": [
+        "Si fondée qu'elle puisse paraître, cette objection n'épuise pas la question."
+      ],
+      "choices": [],
+      "audio_text": "Si fondée qu'elle puisse paraître, cette objection n'épuise pas la question.",
+      "explanation": "Si fondée qu'elle puisse paraître is a concessive opening. The main clause is cette objection n'épuise pas la question.",
+      "carrier_meaning": "However well founded this objection may seem, it does not settle the whole question.",
+      "target_meaning": "Recover the complete spoken sentence and its written word boundaries.",
+      "prerequisites": [],
+      "unit_id": "pilot_c1_sentence_transcription_1",
+      "exposure_groups": [
+        "pilot_c1_sentence_transcription_1"
+      ],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "author": "COMULS",
+        "kind": "original_tester_content",
+        "level_basis": "provisional task estimate"
+      }
+    },
+    {
+      "id": "pilot_c1_sentence_transcription_2",
+      "type": "sentence_transcription",
+      "level": "C1+",
+      "entry_levels": [
+        "C1"
+      ],
+      "prompt": "Listen, then type the complete sentence. Replay if needed.",
+      "answer": "Encore faut-il que les garanties annoncées se traduisent par des mesures effectives.",
+      "accepted": [
+        "Encore faut-il que les garanties annoncées se traduisent par des mesures effectives."
+      ],
+      "choices": [],
+      "audio_text": "Encore faut-il que les garanties annoncées se traduisent par des mesures effectives.",
+      "explanation": "The opening is Encore faut-il que. The subject of se traduisent is les garanties annoncées; effectives agrees with mesures.",
+      "carrier_meaning": "The announced guarantees must still result in effective measures.",
+      "target_meaning": "Recover the complete spoken sentence and its written word boundaries.",
+      "prerequisites": [],
+      "unit_id": "pilot_c1_sentence_transcription_2",
+      "exposure_groups": [
+        "pilot_c1_sentence_transcription_2"
+      ],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "author": "COMULS",
+        "kind": "original_tester_content",
+        "level_basis": "provisional task estimate"
+      }
+    },
+    {
+      "id": "pilot_b1_audio_transcript_choice_1",
+      "type": "audio_transcript_choice",
+      "level": "B2",
+      "entry_levels": [
+        "B1"
+      ],
+      "prompt": "Which transcript matches the sentence you heard exactly?",
+      "answer": "Bien qu'il soit fatigué, il tient à terminer ce travail.",
+      "accepted": [
+        "Bien qu'il soit fatigué, il tient à terminer ce travail."
+      ],
+      "choices": [
+        {
+          "id": "o1",
+          "text": "Bien qu'il soit fatigué, il tient à terminer ce travail.",
+          "correct": true
+        },
+        {
+          "id": "o2",
+          "text": "Puisqu'il est fatigué, il tient à terminer ce travail.",
+          "correct": false
+        },
+        {
+          "id": "o3",
+          "text": "Bien qu'il soit fatigué, il vient de terminer ce travail.",
+          "correct": false
+        }
+      ],
+      "audio_text": "Bien qu'il soit fatigué, il tient à terminer ce travail.",
+      "explanation": "The opening heard is bien qu'il soit, not puisqu'il est. Later, il tient à expresses determination; it is not il vient de.",
+      "carrier_meaning": "Although he is tired, he is determined to finish this work.",
+      "target_meaning": "Distinguish the exact spoken sentence from plausible alternatives.",
+      "prerequisites": [],
+      "unit_id": "pilot_b1_audio_transcript_choice_1",
+      "exposure_groups": [
+        "pilot_b1_audio_transcript_choice_1"
+      ],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "author": "COMULS",
+        "kind": "original_tester_content",
+        "level_basis": "provisional task estimate"
+      }
+    },
+    {
+      "id": "pilot_b1_audio_transcript_choice_2",
+      "type": "audio_transcript_choice",
+      "level": "B2",
+      "entry_levels": [
+        "B1"
+      ],
+      "prompt": "Which transcript matches the sentence you heard exactly?",
+      "answer": "Nous aurions accepté cette offre si les délais avaient été plus courts.",
+      "accepted": [
+        "Nous aurions accepté cette offre si les délais avaient été plus courts."
+      ],
+      "choices": [
+        {
+          "id": "o1",
+          "text": "Nous aurions accepté cette offre si les délais avaient été plus courts.",
+          "correct": true
+        },
+        {
+          "id": "o2",
+          "text": "Nous aurions refusé cette offre si les délais avaient été plus courts.",
+          "correct": false
+        },
+        {
+          "id": "o3",
+          "text": "Nous aurions accepté cette offre si les délais avaient été plus longs.",
+          "correct": false
+        }
+      ],
+      "audio_text": "Nous aurions accepté cette offre si les délais avaient été plus courts.",
+      "explanation": "Listen for accepté and plus courts. The conditional sentence describes an acceptance that did not happen under the actual conditions.",
+      "carrier_meaning": "We would have accepted this offer if the time frames had been shorter.",
+      "target_meaning": "Distinguish the exact spoken sentence from plausible alternatives.",
+      "prerequisites": [],
+      "unit_id": "pilot_b1_audio_transcript_choice_2",
+      "exposure_groups": [
+        "pilot_b1_audio_transcript_choice_2"
+      ],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "author": "COMULS",
+        "kind": "original_tester_content",
+        "level_basis": "provisional task estimate"
+      }
+    },
+    {
+      "id": "pilot_b2_audio_transcript_choice_1",
+      "type": "audio_transcript_choice",
+      "level": "C1",
+      "entry_levels": [
+        "B2"
+      ],
+      "prompt": "Which transcript matches the sentence you heard exactly?",
+      "answer": "À supposer que cette estimation soit juste, il resterait à en vérifier les conséquences.",
+      "accepted": [
+        "À supposer que cette estimation soit juste, il resterait à en vérifier les conséquences."
+      ],
+      "choices": [
+        {
+          "id": "o1",
+          "text": "À supposer que cette estimation soit juste, il resterait à en vérifier les conséquences.",
+          "correct": true
+        },
+        {
+          "id": "o2",
+          "text": "À supposer que cette estimation soit fausse, il resterait à en vérifier les conséquences.",
+          "correct": false
+        },
+        {
+          "id": "o3",
+          "text": "À supposer que cette estimation soit juste, il resterait à en modifier les conséquences.",
+          "correct": false
+        }
+      ],
+      "audio_text": "À supposer que cette estimation soit juste, il resterait à en vérifier les conséquences.",
+      "explanation": "The sentence says soit juste and vérifier. À supposer que presents an assumption, not a confirmed result.",
+      "carrier_meaning": "Assuming this estimate is correct, its consequences would still need to be checked.",
+      "target_meaning": "Distinguish the exact spoken sentence from plausible alternatives.",
+      "prerequisites": [],
+      "unit_id": "pilot_b2_audio_transcript_choice_1",
+      "exposure_groups": [
+        "pilot_b2_audio_transcript_choice_1"
+      ],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "author": "COMULS",
+        "kind": "original_tester_content",
+        "level_basis": "provisional task estimate"
+      }
+    },
+    {
+      "id": "pilot_b2_audio_transcript_choice_2",
+      "type": "audio_transcript_choice",
+      "level": "C1",
+      "entry_levels": [
+        "B2"
+      ],
+      "prompt": "Which transcript matches the sentence you heard exactly?",
+      "answer": "Ce n'est qu'après avoir consulté les archives qu'elle a remis cette interprétation en cause.",
+      "accepted": [
+        "Ce n'est qu'après avoir consulté les archives qu'elle a remis cette interprétation en cause."
+      ],
+      "choices": [
+        {
+          "id": "o1",
+          "text": "Ce n'est qu'après avoir consulté les archives qu'elle a remis cette interprétation en cause.",
+          "correct": true
+        },
+        {
+          "id": "o2",
+          "text": "C'est avant d'avoir consulté les archives qu'elle a remis cette interprétation en cause.",
+          "correct": false
+        },
+        {
+          "id": "o3",
+          "text": "Ce n'est qu'après avoir consulté les archives qu'elle a confirmé cette interprétation.",
+          "correct": false
+        }
+      ],
+      "audio_text": "Ce n'est qu'après avoir consulté les archives qu'elle a remis cette interprétation en cause.",
+      "explanation": "The opening restriction is ce n'est qu'après. The final expression is remis cette interprétation en cause, not confirmé cette interprétation.",
+      "carrier_meaning": "It was only after consulting the archives that she questioned this interpretation.",
+      "target_meaning": "Distinguish the exact spoken sentence from plausible alternatives.",
+      "prerequisites": [],
+      "unit_id": "pilot_b2_audio_transcript_choice_2",
+      "exposure_groups": [
+        "pilot_b2_audio_transcript_choice_2"
+      ],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "author": "COMULS",
+        "kind": "original_tester_content",
+        "level_basis": "provisional task estimate"
+      }
+    },
+    {
+      "id": "pilot_c1_audio_transcript_choice_1",
+      "type": "audio_transcript_choice",
+      "level": "C2",
+      "entry_levels": [
+        "C1"
+      ],
+      "prompt": "Which transcript matches the sentence you heard exactly?",
+      "answer": "Ce n'est pas tant le principe qui prête à discussion que les modalités de sa mise en œuvre.",
+      "accepted": [
+        "Ce n'est pas tant le principe qui prête à discussion que les modalités de sa mise en œuvre."
+      ],
+      "choices": [
+        {
+          "id": "o1",
+          "text": "Ce n'est pas tant le principe qui prête à discussion que les modalités de sa mise en œuvre.",
+          "correct": true
+        },
+        {
+          "id": "o2",
+          "text": "Ce n'est pas tant le principe qui prête à confusion que les modalités de sa mise en œuvre.",
+          "correct": false
+        },
+        {
+          "id": "o3",
+          "text": "Ce n'est pas tant le principe qui prête à discussion que les finalités de sa mise en œuvre.",
+          "correct": false
+        }
+      ],
+      "audio_text": "Ce n'est pas tant le principe qui prête à discussion que les modalités de sa mise en œuvre.",
+      "explanation": "Hear prête à discussion and les modalités. The structure pas tant X que Y shifts emphasis from X to Y.",
+      "carrier_meaning": "The implementation arrangements are more open to debate than the principle itself.",
+      "target_meaning": "Distinguish the exact spoken sentence from plausible alternatives.",
+      "prerequisites": [],
+      "unit_id": "pilot_c1_audio_transcript_choice_1",
+      "exposure_groups": [
+        "pilot_c1_audio_transcript_choice_1"
+      ],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "author": "COMULS",
+        "kind": "original_tester_content",
+        "level_basis": "provisional task estimate"
+      }
+    },
+    {
+      "id": "pilot_c1_audio_transcript_choice_2",
+      "type": "audio_transcript_choice",
+      "level": "C2",
+      "entry_levels": [
+        "C1"
+      ],
+      "prompt": "Which transcript matches the sentence you heard exactly?",
+      "answer": "Pour contestable qu'en soit le fondement, cette décision n'en demeure pas moins juridiquement applicable.",
+      "accepted": [
+        "Pour contestable qu'en soit le fondement, cette décision n'en demeure pas moins juridiquement applicable."
+      ],
+      "choices": [
+        {
+          "id": "o1",
+          "text": "Pour contestable qu'en soit le fondement, cette décision n'en demeure pas moins juridiquement applicable.",
+          "correct": true
+        },
+        {
+          "id": "o2",
+          "text": "Pour contestable qu'en soit le fondement, cette décision n'en demeure pas moins politiquement applicable.",
+          "correct": false
+        },
+        {
+          "id": "o3",
+          "text": "Pour contestable qu'en soit le fondement, cette décision n'en demeure pas moins juridiquement inapplicable.",
+          "correct": false
+        }
+      ],
+      "audio_text": "Pour contestable qu'en soit le fondement, cette décision n'en demeure pas moins juridiquement applicable.",
+      "explanation": "The end heard is juridiquement applicable. N'en demeure pas moins expresses ‘nevertheless remains’; it does not negate applicability.",
+      "carrier_meaning": "However questionable its basis may be, this decision nevertheless remains legally applicable.",
+      "target_meaning": "Distinguish the exact spoken sentence from plausible alternatives.",
+      "prerequisites": [],
+      "unit_id": "pilot_c1_audio_transcript_choice_2",
+      "exposure_groups": [
+        "pilot_c1_audio_transcript_choice_2"
+      ],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "author": "COMULS",
+        "kind": "original_tester_content",
+        "level_basis": "provisional task estimate"
+      }
+    },
+    {
+      "id": "pilot_b1_audio_meaning_choice_1",
+      "type": "audio_meaning_choice",
+      "level": "B2",
+      "entry_levels": [
+        "B1"
+      ],
+      "prompt": "Which meaning matches the sentence you heard?",
+      "answer": "You may keep the book if you return it before Friday.",
+      "accepted": [
+        "You may keep the book if you return it before Friday."
+      ],
+      "choices": [
+        {
+          "id": "o1",
+          "text": "You may keep the book if you return it before Friday.",
+          "correct": true
+        },
+        {
+          "id": "o2",
+          "text": "You may keep the book only after returning it on Friday.",
+          "correct": false
+        },
+        {
+          "id": "o3",
+          "text": "You must return the book now and borrow it again on Friday.",
+          "correct": false
+        }
+      ],
+      "audio_text": "Tu peux garder le livre à condition de me le rendre avant vendredi.",
+      "explanation": "À condition de introduces a condition. Avant vendredi means before Friday, not on Friday.",
+      "carrier_meaning": "You may keep the book if you return it before Friday.",
+      "target_meaning": "You may keep the book if you return it before Friday.",
+      "prerequisites": [],
+      "unit_id": "pilot_b1_audio_meaning_choice_1",
+      "exposure_groups": [
+        "pilot_b1_audio_meaning_choice_1"
+      ],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "author": "COMULS",
+        "kind": "original_tester_content",
+        "level_basis": "provisional task estimate"
+      }
+    },
+    {
+      "id": "pilot_b1_audio_meaning_choice_2",
+      "type": "audio_meaning_choice",
+      "level": "B2",
+      "entry_levels": [
+        "B1"
+      ],
+      "prompt": "Which meaning matches the sentence you heard?",
+      "answer": "The explanation did not make him change his mind.",
+      "accepted": [
+        "The explanation did not make him change his mind."
+      ],
+      "choices": [
+        {
+          "id": "o1",
+          "text": "The explanation did not make him change his mind.",
+          "correct": true
+        },
+        {
+          "id": "o2",
+          "text": "He changed his mind as soon as the situation was explained.",
+          "correct": false
+        },
+        {
+          "id": "o3",
+          "text": "He agreed to change his mind before hearing the explanation.",
+          "correct": false
+        }
+      ],
+      "audio_text": "J'ai eu beau lui expliquer la situation, il n'a pas changé d'avis.",
+      "explanation": "Avoir beau faire quelque chose means doing it without achieving the hoped-for result. The explanation was unsuccessful.",
+      "carrier_meaning": "The explanation did not make him change his mind.",
+      "target_meaning": "The explanation did not make him change his mind.",
+      "prerequisites": [],
+      "unit_id": "pilot_b1_audio_meaning_choice_2",
+      "exposure_groups": [
+        "pilot_b1_audio_meaning_choice_2"
+      ],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "author": "COMULS",
+        "kind": "original_tester_content",
+        "level_basis": "provisional task estimate"
+      }
+    },
+    {
+      "id": "pilot_b2_audio_meaning_choice_1",
+      "type": "audio_meaning_choice",
+      "level": "C1",
+      "entry_levels": [
+        "B2"
+      ],
+      "prompt": "Which meaning matches the sentence you heard?",
+      "answer": "She would have accepted only with a guarantee of genuine independence.",
+      "accepted": [
+        "She would have accepted only with a guarantee of genuine independence."
+      ],
+      "choices": [
+        {
+          "id": "o1",
+          "text": "She would have accepted only with a guarantee of genuine independence.",
+          "correct": true
+        },
+        {
+          "id": "o2",
+          "text": "She accepted despite being denied genuine independence.",
+          "correct": false
+        },
+        {
+          "id": "o3",
+          "text": "She would have refused even with a guarantee of genuine independence.",
+          "correct": false
+        }
+      ],
+      "audio_text": "Elle n'aurait accepté le poste que si on lui avait garanti une réelle autonomie.",
+      "explanation": "Ne… que means ‘only’. The guarantee is a necessary condition for the hypothetical acceptance; the sentence does not say she accepted.",
+      "carrier_meaning": "She would have accepted only with a guarantee of genuine independence.",
+      "target_meaning": "She would have accepted only with a guarantee of genuine independence.",
+      "prerequisites": [],
+      "unit_id": "pilot_b2_audio_meaning_choice_1",
+      "exposure_groups": [
+        "pilot_b2_audio_meaning_choice_1"
+      ],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "author": "COMULS",
+        "kind": "original_tester_content",
+        "level_basis": "provisional task estimate"
+      }
+    },
+    {
+      "id": "pilot_b2_audio_meaning_choice_2",
+      "type": "audio_meaning_choice",
+      "level": "C1",
+      "entry_levels": [
+        "B2"
+      ],
+      "prompt": "Which meaning matches the sentence you heard?",
+      "answer": "The reservations clarify the project's limits rather than challenging the project.",
+      "accepted": [
+        "The reservations clarify the project's limits rather than challenging the project."
+      ],
+      "choices": [
+        {
+          "id": "o1",
+          "text": "The reservations clarify the project's limits rather than challenging the project.",
+          "correct": true
+        },
+        {
+          "id": "o2",
+          "text": "The reservations reject the project because its limits are already clear.",
+          "correct": false
+        },
+        {
+          "id": "o3",
+          "text": "The reservations remove the project's limits without giving any explanation.",
+          "correct": false
+        }
+      ],
+      "audio_text": "Loin de remettre en cause le projet, ces réserves visent à en préciser les limites.",
+      "explanation": "Loin de rejects the first interpretation. The reservations aim to clarify the limits; they do not question the project itself.",
+      "carrier_meaning": "The reservations clarify the project's limits rather than challenging the project.",
+      "target_meaning": "The reservations clarify the project's limits rather than challenging the project.",
+      "prerequisites": [],
+      "unit_id": "pilot_b2_audio_meaning_choice_2",
+      "exposure_groups": [
+        "pilot_b2_audio_meaning_choice_2"
+      ],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "author": "COMULS",
+        "kind": "original_tester_content",
+        "level_basis": "provisional task estimate"
+      }
+    },
+    {
+      "id": "pilot_c1_audio_meaning_choice_1",
+      "type": "audio_meaning_choice",
+      "level": "C2",
+      "entry_levels": [
+        "C1"
+      ],
+      "prompt": "Which meaning matches the sentence you heard?",
+      "answer": "Considering the delayed effects makes the immediate advantage much less appealing.",
+      "accepted": [
+        "Considering the delayed effects makes the immediate advantage much less appealing."
+      ],
+      "choices": [
+        {
+          "id": "o1",
+          "text": "Considering the delayed effects makes the immediate advantage much less appealing.",
+          "correct": true
+        },
+        {
+          "id": "o2",
+          "text": "Ignoring the delayed effects makes the immediate advantage much less appealing.",
+          "correct": false
+        },
+        {
+          "id": "o3",
+          "text": "Considering the delayed effects shows that the immediate advantage will last longer.",
+          "correct": false
+        }
+      ],
+      "audio_text": "Pour peu qu'on en mesure les effets différés, l'avantage immédiat perd singulièrement de son attrait.",
+      "explanation": "Pour peu que introduces a sufficient condition. Once delayed effects are considered, the immediate advantage loses much of its appeal.",
+      "carrier_meaning": "Considering the delayed effects makes the immediate advantage much less appealing.",
+      "target_meaning": "Considering the delayed effects makes the immediate advantage much less appealing.",
+      "prerequisites": [],
+      "unit_id": "pilot_c1_audio_meaning_choice_1",
+      "exposure_groups": [
+        "pilot_c1_audio_meaning_choice_1"
+      ],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "author": "COMULS",
+        "kind": "original_tester_content",
+        "level_basis": "provisional task estimate"
+      }
+    },
+    {
+      "id": "pilot_c1_audio_meaning_choice_2",
+      "type": "audio_meaning_choice",
+      "level": "C2",
+      "entry_levels": [
+        "C1"
+      ],
+      "prompt": "Which meaning matches the sentence you heard?",
+      "answer": "Even supporters of the reform now acknowledge its harmful unintended effects.",
+      "accepted": [
+        "Even supporters of the reform now acknowledge its harmful unintended effects."
+      ],
+      "choices": [
+        {
+          "id": "o1",
+          "text": "Even supporters of the reform now acknowledge its harmful unintended effects.",
+          "correct": true
+        },
+        {
+          "id": "o2",
+          "text": "Only opponents of the reform acknowledge its harmful unintended effects.",
+          "correct": false
+        },
+        {
+          "id": "o3",
+          "text": "Supporters of the reform no longer acknowledge any harmful unintended effects.",
+          "correct": false
+        }
+      ],
+      "audio_text": "Il n'est pas jusqu'aux partisans de la réforme qui n'en reconnaissent désormais les effets pervers.",
+      "explanation": "Il n'est pas jusqu'à… qui ne… is an emphatic construction meaning ‘even…’. The multiple negative forms do not mean that supporters deny the effects.",
+      "carrier_meaning": "Even supporters of the reform now acknowledge its harmful unintended effects.",
+      "target_meaning": "Even supporters of the reform now acknowledge its harmful unintended effects.",
+      "prerequisites": [],
+      "unit_id": "pilot_c1_audio_meaning_choice_2",
+      "exposure_groups": [
+        "pilot_c1_audio_meaning_choice_2"
+      ],
+      "qa": {
+        "ready": true,
+        "level_status": "provisional"
+      },
+      "provenance": {
+        "author": "COMULS",
+        "kind": "original_tester_content",
+        "level_basis": "provisional task estimate"
+      }
+    }
+  ]
+}
