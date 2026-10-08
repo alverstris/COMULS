@@ -60,12 +60,15 @@ def test_small_synced_controls_preserve_undo_and_cap_day_records(col):
     assert state["enabled"] == list(core.EXERCISE_TYPES)
     assert state["audio_confirmed"] is False
     model = adapter.ensure_model(col)
-    previous = col.undo_status().last_step
+    previous = col.undo_status().undo
     state["days"] = {str(index): {"active_seconds": 5} for index in range(30)}
     adapter.save_state(col, state)
-    assert col.undo_status().last_step == previous
+    assert col.undo_status().undo == previous
     assert list(adapter.get_state(col)["days"]) == [str(x) for x in range(16, 30)]
     assert model["name"] == adapter.MODEL_NAME
+    col.undo()
+    assert col.models.by_name(adapter.MODEL_NAME) is None
+    assert list(adapter.get_state(col)["days"]) == [str(x) for x in range(16, 30)]
 
 
 def test_prepare_is_idempotent_and_requires_completed_familiarisation(col, exercise):
@@ -248,7 +251,9 @@ def test_raw_backlog_is_not_hidden_by_daily_review_limit(col, exercise):
     # Configure a legitimate small native daily limit and make these reviews due.
     did = adapter.get_state(col)["deck_id"]
     config = col.decks.config_dict_for_deck_id(did)
-    config["rev"]["perDay"] = 1
+    # Three grades have already consumed today's review counters; a limit of
+    # four leaves capacity for one of these three due cards.
+    config["rev"]["perDay"] = 4
     col.decks.update_config(config)
     col.sched.set_due_date(cards, "0")
     result = adapter.stats(col)
