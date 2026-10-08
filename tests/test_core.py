@@ -173,6 +173,14 @@ class EvaluationTests(unittest.TestCase):
         self.assertEqual(core.evaluate_answer(item, {"choice_id": "write"})["status"], "incorrect")
         self.assertEqual(core.evaluate_answer(item, "Listen")["status"], "incorrect")
 
+    def test_connected_word_recognition_uses_stable_choice_ids(self):
+        item = exercise("connected_word_recognition")
+        item["choices"].reverse()
+        self.assertEqual(core.validate_pack(pack(item)), [])
+        self.assertEqual(core.evaluate_answer(item, "listen")["status"], "correct")
+        self.assertEqual(core.evaluate_answer(item, "write")["status"], "incorrect")
+        self.assertEqual(core.evaluate_answer(item, "Listen")["status"], "incorrect")
+
     def test_repeated_equivalent_tiles_can_exchange_positions(self):
         item = exercise("sentence_reconstruction", "A2+")
         item["answer"] = "Il dit il"
