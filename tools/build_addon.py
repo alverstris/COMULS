@@ -22,7 +22,9 @@ def build():
             entry = zipfile.ZipInfo(path.relative_to(src).as_posix(), date_time=(2026, 10, 8, 0, 0, 0))
             entry.compress_type = zipfile.ZIP_DEFLATED
             archive.writestr(entry, path.read_bytes())
-        archive.writestr("manifest.json", json.dumps({"package": "comuls_tester", "name": "COMULS tester", "min_point_version": 260903}))
+        manifest_entry = zipfile.ZipInfo("manifest.json", date_time=(2026, 10, 8, 0, 0, 0))
+        manifest_entry.compress_type = zipfile.ZIP_DEFLATED
+        archive.writestr(manifest_entry, json.dumps({"package": "comuls_tester", "name": "COMULS tester", "min_point_version": 260903}))
     checksum = hashlib.sha256(target.read_bytes()).hexdigest()
     (out / "SHA256SUMS").write_text(checksum + "  " + target.name + "\n", encoding="utf-8")
     print(f"Built {target.name}: {target.stat().st_size} bytes; sha256 {checksum}")

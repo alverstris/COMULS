@@ -16,6 +16,10 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.13'
+      - name: Install Qt runtime libraries
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends libegl1 libopengl0 libxcb-cursor0 libxkbcommon-x11-0 libxcb-xinerama0 libnss3 libasound2t64
       - name: Install Anki test dependencies
         run: python -m pip install anki==26.9.3 aqt==26.9.3 pytest==8.3.5
       - uses: actions/setup-node@v4
@@ -38,3 +42,21 @@ jobs:
           name: comuls-anki-tester
           path: dist/*
           if-no-files-found: error
+
+  release:
+    needs: verify
+    if: github.ref == 'refs/heads/codex/anki-tester' && startsWith(github.event.head_commit.message, 'Release Anki tester')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          name: comuls-anki-tester
+          path: dist
+      - name: Publish downloadable tester
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create "tester-0.1.$GITHUB_RUN_NUMBER" dist/comuls-tester.ankiaddon dist/SHA256SUMS dist/source_audit.json --prerelease --target "$GITHUB_SHA" --title "COMULS Anki tester 0.1.$GITHUB_RUN_NUMBER" --notes-file docs/TESTER_RELEASE.md
