@@ -254,3 +254,33 @@ def test_raw_backlog_is_not_hidden_by_daily_review_limit(col, exercise):
     result = adapter.stats(col)
     assert result["due"] == 3
     assert result["available_due"] == 1
+
+
+def test_stage_undo_is_atomic_without_resetting_later_active_time(col, exercise):
+    controls = adapter.get_state(col)
+    controls["stage"] = "B2"
+    adapter.save_state(col, controls)
+    advanced = copy.deepcopy(exercise)
+    advanced.update(id="stage-undo-pending", level="B2", entry_levels=["B2", "C1"])
+    note = introduce(col, advanced, col.sched.today)
+    cid = note.cards()[0].id
+    marker = col.add_custom_undo_entry("Change COMULS entry level")
+    adapter.stage_change(col, "B1", [advanced])
+    col.merge_undo_entries(marker)
+    assert adapter.get_state(col)["stage"] == "B1"
+    assert col.get_card(cid).queue == -1
+
+    # A later non-undoable clock flush must survive undo of the stage change.
+    current = adapter.get_state(col)
+    day = str(col.sched.today)
+    current["days"][day] = {"active_seconds": 123.0}
+    adapter.save_state(col, current)
+    col.undo()
+    assert adapter.get_state(col)["stage"] == "B2"
+    assert adapter.get_state(col)["days"][day]["active_seconds"] == 123.0
+    assert col.get_card(cid).queue == 0
+    assert adapter.note_state(col.get_note(note.id))["lifecycle"] == "admitted"
+    col.redo()
+    assert adapter.get_state(col)["stage"] == "B1"
+    assert adapter.get_state(col)["days"][day]["active_seconds"] == 123.0
+    assert col.get_card(cid).queue == -1
