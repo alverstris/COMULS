@@ -159,6 +159,8 @@ class ReviewerIntegration:
         self.carrier_help = False
         self.replays = 0
         self.exposed = False
+        self.capture_after_exposure = False
+        self.prior_exposure_today = None
         self.busy = False
 
     def _card_will_show(self, text: str, card: Any, kind: str) -> str:
@@ -173,11 +175,10 @@ class ReviewerIntegration:
         if kind == "reviewQuestion":
             exercise = self._read_exercise(card)
             if exercise is None:
-                had_comuls = self.expected is not None
+                if self.expected is not None:
+                    self._event("foreign_card")
                 self._clear()
                 self._restore_auto()
-                if had_comuls:
-                    self._event("foreign_card")
                 return "<script>window.comulsContext=null;</script>" + text
             self._clear()
             self.exercise = exercise
