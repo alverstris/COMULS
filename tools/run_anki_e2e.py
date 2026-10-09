@@ -95,6 +95,15 @@ def child(base, profile, config):
     aqt.run()
 
 
+def print_log_tail(path, limit=16000):
+    """Keep fatal native startup diagnostics visible even without an artifact download."""
+    with path.open("rb") as log:
+        log.seek(0, 2)
+        log.seek(max(0, log.tell() - limit))
+        tail = log.read().decode("utf-8", errors="replace")
+    print(f"Native Anki log tail ({path.name}, at most {limit} bytes):\n{tail}", flush=True)
+
+
 def invoke(base, profile, config, output, timeout):
     config_path = output / f"{config['run_id']}.config.json"
     report_path = output / f"{config['run_id']}.json"
@@ -104,12 +113,19 @@ def invoke(base, profile, config, output, timeout):
     config_path.write_text(json.dumps(config, ensure_ascii=False), encoding="utf-8")
     command = [sys.executable, str(Path(__file__).resolve()), "--child", str(base), profile, str(config_path)]
     log_path = output / f"{config['run_id']}.log"
-    with log_path.open("w", encoding="utf-8") as log:
-        result = subprocess.run(command, stdout=log, stderr=subprocess.STDOUT, timeout=timeout)
+    try:
+        with log_path.open("w", encoding="utf-8") as log:
+            result = subprocess.run(command, stdout=log, stderr=subprocess.STDOUT, timeout=timeout,
+                                    env=dict(os.environ, PYTHONUNBUFFERED="1"))
+    except subprocess.TimeoutExpired as error:
+        print_log_tail(log_path)
+        raise RuntimeError(f"{config['run_id']}: Anki exceeded {timeout} seconds; see {log_path}") from error
     if not report_path.exists():
+        print_log_tail(log_path)
         raise RuntimeError(f"{config['run_id']}: Anki exited {result.returncode} without a driver report; see {log_path}")
     report = json.loads(report_path.read_text(encoding="utf-8"))
     if result.returncode or not report.get("passed"):
+        print_log_tail(log_path)
         raise RuntimeError(f"{config['run_id']}: {report.get('error', 'Anki process failed')}; see {log_path}")
     print(f"PASS {config['run_id']}: {len(report.get('reviews', []))} native reviews", flush=True)
     return report

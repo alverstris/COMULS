@@ -13,7 +13,7 @@ permissions:
   contents: read
 jobs:
   verify:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 60
     env:
       QT_QPA_PLATFORM: offscreen
@@ -25,9 +25,33 @@ jobs:
       - name: Install Qt, native desktop and audio runtime
         run: |
           sudo apt-get update -qq
-          sudo apt-get install -y --no-install-recommends libegl1 libgl1 libopengl0 libxcb-cursor0 libxkbcommon-x11-0 libxcb-xinerama0 libnss3 libasound2t64 libpulse0 xvfb xauth openbox mpv pulseaudio pulseaudio-utils ffmpeg
+          sudo apt-get install -y --no-install-recommends \
+            libegl1 libgl1 libopengl0 libgbm1 libdrm2 libfontconfig1 libfreetype6 \
+            libxcb-cursor0 libxcb-icccm4 libxcb-keysyms1 libxcb-image0 \
+            libxcb-render-util0 libxcb-randr0 libxcb-shape0 libxcb-shm0 \
+            libxcb-sync1 libxcb-xfixes0 libxcb-xinerama0 libxcb-xkb1 \
+            libxcb-dri3-0 libxcb-util1 libxkbcommon0 libxkbcommon-x11-0 \
+            libx11-xcb1 libxcomposite1 libxdamage1 libxrandr2 libxtst6 libxkbfile1 \
+            libnss3 libnspr4 libasound2t64 libpulse0 \
+            xvfb xauth openbox mpv pulseaudio pulseaudio-utils ffmpeg
       - name: Install pinned Anki dependencies
         run: python -m pip install anki==26.9.3 aqt==26.9.3 pytest==8.3.5
+      - name: Check native Qt XCB and WebEngine runtime linkage
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import subprocess
+          from PyQt6.QtCore import QLibraryInfo
+          targets = [
+              Path(QLibraryInfo.path(QLibraryInfo.LibraryPath.PluginsPath)) / "platforms/libqxcb.so",
+              Path(QLibraryInfo.path(QLibraryInfo.LibraryPath.LibraryExecutablesPath)) / "QtWebEngineProcess",
+          ]
+          for target in targets:
+              result = subprocess.run(["ldd", str(target)], capture_output=True, text=True)
+              print(str(target) + "\n" + result.stdout + result.stderr, flush=True)
+              if result.returncode or "not found" in result.stdout or "not found" in result.stderr:
+                  raise SystemExit("Native Qt runtime dependencies are incomplete")
+          PY
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: '22'
@@ -96,7 +120,7 @@ jobs:
       (github.ref == 'refs/heads/codex/anki-tester' || github.ref == 'refs/heads/main') &&
       (startsWith(github.event.head_commit.message, 'Release Imperial prototype') ||
        (github.event_name == 'workflow_dispatch' && inputs.publish))
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     permissions:
       contents: write
     steps:
