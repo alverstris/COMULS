@@ -3063,7 +3063,7 @@
         "human_reviewed": false,
         "answer_contract_reviewed": true,
         "support_scope": "exact fixed use, English bridge available",
-        "audio_review_status": "pending_media_pipeline",
+        "audio_review_status": "automated_audio_review_complete",
         "phonetic_contrast": {
           "correct_ipa": "/ʁy/",
           "distractor_ipa": "/ʁu/",
@@ -3082,7 +3082,20 @@
           "level_ceiling",
           "exposure_groups",
           "audio_text"
-        ]
+        ],
+        "audio_review": {
+          "report": "audio_qa_report.json",
+          "report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade",
+          "primary_sha256": "6749093a63d2b1170533e1674908bcdf213e495aa3a78d973267d50893943b6c",
+          "disposition": "independent_unconstrained_match",
+          "human_reviewed": false,
+          "alignment": "whole_utterance_only",
+          "contrast_audio_sha256": [
+            "6749093a63d2b1170533e1674908bcdf213e495aa3a78d973267d50893943b6c",
+            "16f1f903441f0a5777a1c343ac8424394642fbbde1f609a635fbfc82eda92630"
+          ],
+          "contrast_method": "Independent waveform recognition against both permitted labels; see report for the rue trailing-unknown caveat and selected independent spectral measurements."
+        }
       },
       "provenance": {
         "kind": "original_imperial_pilot_content",
@@ -3195,7 +3208,7 @@
         "human_reviewed": false,
         "answer_contract_reviewed": true,
         "support_scope": "exact fixed use, English bridge available",
-        "audio_review_status": "pending_media_pipeline",
+        "audio_review_status": "automated_audio_review_complete",
         "phonetic_contrast": {
           "correct_ipa": "/dəsy/",
           "distractor_ipa": "/dəsu/",
@@ -3214,7 +3227,20 @@
           "level_ceiling",
           "exposure_groups",
           "audio_text"
-        ]
+        ],
+        "audio_review": {
+          "report": "audio_qa_report.json",
+          "report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade",
+          "primary_sha256": "a7c4e98785bd64f7b5a1164a920b501d6e0b69e6225bf1515e6d5d48b6a52521",
+          "disposition": "independent_unconstrained_match",
+          "human_reviewed": false,
+          "alignment": "whole_utterance_only",
+          "contrast_audio_sha256": [
+            "a7c4e98785bd64f7b5a1164a920b501d6e0b69e6225bf1515e6d5d48b6a52521",
+            "02706e8822bcd22116a1f3a4870b1ae0910861cee63f6d908fc8a82a81be638b"
+          ],
+          "contrast_method": "Independent waveform recognition against both permitted labels; see report for the rue trailing-unknown caveat and selected independent spectral measurements."
+        }
       },
       "provenance": {
         "kind": "original_imperial_pilot_content",
@@ -3327,7 +3353,7 @@
         "human_reviewed": false,
         "answer_contract_reviewed": true,
         "support_scope": "exact fixed use, English bridge available",
-        "audio_review_status": "pending_media_pipeline",
+        "audio_review_status": "automated_audio_review_complete",
         "phonetic_contrast": {
           "correct_ipa": "/pwasɔ̃/",
           "distractor_ipa": "/pwazɔ̃/",
@@ -3346,7 +3372,20 @@
           "level_ceiling",
           "exposure_groups",
           "audio_text"
-        ]
+        ],
+        "audio_review": {
+          "report": "audio_qa_report.json",
+          "report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade",
+          "primary_sha256": "2b6900b1de26571fc4b4b2a2964e445c8ec062cab1ee97917644243cafe0b261",
+          "disposition": "independent_unconstrained_match",
+          "human_reviewed": false,
+          "alignment": "whole_utterance_only",
+          "contrast_audio_sha256": [
+            "2b6900b1de26571fc4b4b2a2964e445c8ec062cab1ee97917644243cafe0b261",
+            "93de9869229508b1e4ca6c937203ca0f1f0ae95ce96d72cc256107d1aa5b8473"
+          ],
+          "contrast_method": "Independent waveform recognition against both permitted labels; see report for the rue trailing-unknown caveat and selected independent spectral measurements."
+        }
       },
       "provenance": {
         "kind": "original_imperial_pilot_content",
@@ -3459,7 +3498,7 @@
         "human_reviewed": false,
         "answer_contract_reviewed": true,
         "support_scope": "exact fixed use, English bridge available",
-        "audio_review_status": "pending_media_pipeline",
+        "audio_review_status": "automated_audio_review_complete",
         "phonetic_contrast": {
           "correct_ipa": "/pɛ̃/",
           "distractor_ipa": "/bɛ̃/",
@@ -3478,7 +3517,20 @@
           "level_ceiling",
           "exposure_groups",
           "audio_text"
-        ]
+        ],
+        "audio_review": {
+          "report": "audio_qa_report.json",
+          "report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade",
+          "primary_sha256": "3fbfabd04865501416d470ae05feea6a27ca5add8806b3996cf4602c174e6210",
+          "disposition": "isolated_contrast_verified_with_candidates",
+          "human_reviewed": false,
+          "alignment": "whole_utterance_only",
+          "contrast_audio_sha256": [
+            "3fbfabd04865501416d470ae05feea6a27ca5add8806b3996cf4602c174e6210",
+            "726e5407bcf4bbe60911c4327c5e00fe4d215de78506bb1b63adc780b7d573e5"
+          ],
+          "contrast_method": "Independent waveform recognition against both permitted labels; see report for the rue trailing-unknown caveat and selected independent spectral measurements."
+        }
       },
       "provenance": {
         "kind": "original_imperial_pilot_content",
@@ -3591,7 +3643,7 @@
         "human_reviewed": false,
         "answer_contract_reviewed": true,
         "support_scope": "exact fixed use, English bridge available",
-        "audio_review_status": "pending_media_pipeline",
+        "audio_review_status": "automated_audio_review_complete",
         "phonetic_contrast": {
           "correct_ipa": "/fɛ̃/",
           "distractor_ipa": "/vɛ̃/",
@@ -3610,7 +3662,20 @@
           "level_ceiling",
           "exposure_groups",
           "audio_text"
-        ]
+        ],
+        "audio_review": {
+          "report": "audio_qa_report.json",
+          "report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade",
+          "primary_sha256": "0c7f774b185936bbd472ab2644ce864d43fd2db354f8f9218aa3f431c67f6867",
+          "disposition": "independent_unconstrained_match",
+          "human_reviewed": false,
+          "alignment": "whole_utterance_only",
+          "contrast_audio_sha256": [
+            "0c7f774b185936bbd472ab2644ce864d43fd2db354f8f9218aa3f431c67f6867",
+            "c5445d72ff8f44336a6ceb701a3b1655e145f66e7a860db05301b2ba2ebfda27"
+          ],
+          "contrast_method": "Independent waveform recognition against both permitted labels; see report for the rue trailing-unknown caveat and selected independent spectral measurements."
+        }
       },
       "provenance": {
         "kind": "original_imperial_pilot_content",
@@ -3722,7 +3787,7 @@
         "human_reviewed": false,
         "answer_contract_reviewed": true,
         "support_scope": "exact fixed use, English bridge available",
-        "audio_review_status": "pending_media_pipeline",
+        "audio_review_status": "automated_audio_review_complete",
         "reviewed_fields": [
           "prompt",
           "answer",
@@ -3735,7 +3800,15 @@
           "level_ceiling",
           "exposure_groups",
           "audio_text"
-        ]
+        ],
+        "audio_review": {
+          "report": "audio_qa_report.json",
+          "report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade",
+          "primary_sha256": "e4472847e67acb435ef63d613300afbb7014ebf528436c65d7ad968e327050d8",
+          "disposition": "independent_unconstrained_match",
+          "human_reviewed": false,
+          "alignment": "whole_utterance_only"
+        }
       },
       "provenance": {
         "kind": "original_imperial_pilot_content",
@@ -3852,7 +3925,7 @@
         "human_reviewed": false,
         "answer_contract_reviewed": true,
         "support_scope": "exact fixed use, English bridge available",
-        "audio_review_status": "pending_media_pipeline",
+        "audio_review_status": "automated_audio_review_complete",
         "reviewed_fields": [
           "prompt",
           "answer",
@@ -3865,7 +3938,15 @@
           "level_ceiling",
           "exposure_groups",
           "audio_text"
-        ]
+        ],
+        "audio_review": {
+          "report": "audio_qa_report.json",
+          "report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade",
+          "primary_sha256": "0828723f8f863f0e66f0348b572a8e8bab194990b08bd1f7ad1342b2ba3e8b9f",
+          "disposition": "independent_unconstrained_match",
+          "human_reviewed": false,
+          "alignment": "whole_utterance_only"
+        }
       },
       "provenance": {
         "kind": "original_imperial_pilot_content",
@@ -3983,7 +4064,7 @@
         "human_reviewed": false,
         "answer_contract_reviewed": true,
         "support_scope": "exact fixed use, English bridge available",
-        "audio_review_status": "pending_media_pipeline",
+        "audio_review_status": "automated_audio_review_complete",
         "reviewed_fields": [
           "prompt",
           "answer",
@@ -3996,7 +4077,15 @@
           "level_ceiling",
           "exposure_groups",
           "audio_text"
-        ]
+        ],
+        "audio_review": {
+          "report": "audio_qa_report.json",
+          "report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade",
+          "primary_sha256": "c49478c7f8fa53362abe8c5e47973a45638f3bdb0504d80f9521d09657686a0a",
+          "disposition": "independent_unconstrained_match",
+          "human_reviewed": false,
+          "alignment": "whole_utterance_only"
+        }
       },
       "provenance": {
         "kind": "original_imperial_pilot_content",
@@ -4113,7 +4202,7 @@
         "human_reviewed": false,
         "answer_contract_reviewed": true,
         "support_scope": "exact fixed use, English bridge available",
-        "audio_review_status": "pending_media_pipeline",
+        "audio_review_status": "automated_audio_review_complete",
         "reviewed_fields": [
           "prompt",
           "answer",
@@ -4126,7 +4215,15 @@
           "level_ceiling",
           "exposure_groups",
           "audio_text"
-        ]
+        ],
+        "audio_review": {
+          "report": "audio_qa_report.json",
+          "report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade",
+          "primary_sha256": "5af0901f585cbac814d0ad130b4731bb427428b02c881b0e42c3e223e1916ead",
+          "disposition": "independent_unconstrained_match",
+          "human_reviewed": false,
+          "alignment": "whole_utterance_only"
+        }
       },
       "provenance": {
         "kind": "original_imperial_pilot_content",
@@ -4243,7 +4340,7 @@
         "human_reviewed": false,
         "answer_contract_reviewed": true,
         "support_scope": "exact fixed use, English bridge available",
-        "audio_review_status": "pending_media_pipeline",
+        "audio_review_status": "automated_audio_review_complete",
         "reviewed_fields": [
           "prompt",
           "answer",
@@ -4256,7 +4353,15 @@
           "level_ceiling",
           "exposure_groups",
           "audio_text"
-        ]
+        ],
+        "audio_review": {
+          "report": "audio_qa_report.json",
+          "report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade",
+          "primary_sha256": "ad6f4c144d6705595e773c6ddd7d2fc9ec69f4ddf5f32144660d7d374e79c51b",
+          "disposition": "independent_unconstrained_match",
+          "human_reviewed": false,
+          "alignment": "whole_utterance_only"
+        }
       },
       "provenance": {
         "kind": "original_imperial_pilot_content",
@@ -4344,7 +4449,7 @@
         "human_reviewed": false,
         "answer_contract_reviewed": true,
         "support_scope": "The whole utterance is the primary target and is directly familiarised with its English bridge. No lower-stage knowledge of that same target is asserted.",
-        "audio_review_status": "pending_media_pipeline",
+        "audio_review_status": "automated_audio_review_complete",
         "no_audio_check": {
           "alternative_grammatical_order": "Demain nous prenons le bus.",
           "same_tile_multiset": true,
@@ -4362,7 +4467,15 @@
           "level_ceiling",
           "exposure_groups",
           "audio_text"
-        ]
+        ],
+        "audio_review": {
+          "report": "audio_qa_report.json",
+          "report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade",
+          "primary_sha256": "768e30d61da8ede97f9628d4e1ebda0e60be0d06ed3c42b87818b85d77783d2f",
+          "disposition": "independent_unconstrained_match",
+          "human_reviewed": false,
+          "alignment": "whole_utterance_only"
+        }
       },
       "provenance": {
         "kind": "original_imperial_pilot_content",
@@ -4428,16 +4541,16 @@
       "construction": "Recover the recorded clause and adverbial order.",
       "context_id": "imperial_b1_sentence_reconstruction_02_context_v1",
       "prompt": "Listen first. Then arrange every tile in the exact order heard. Each tile is used once.",
-      "answer": "Elle lit le livre dans le train.",
+      "answer": "Elle ouvre le livre dans le train.",
       "accepted": [
-        "elle lit le livre dans le train"
+        "elle ouvre le livre dans le train"
       ],
       "answer_policy": "strict",
       "choices": [],
       "target_meaning": "Recover the exact sequence in the recording, with word tiles supplied.",
-      "carrier_meaning": "She is reading the book on the train.",
+      "carrier_meaning": "She opens the book on the train.",
       "explanation": "The other placement is grammatical, but this card asks for the recorded order. Identical repeated tiles are interchangeable.",
-      "english_support": "She is reading the book on the train.",
+      "english_support": "She opens the book on the train.",
       "prerequisites": [],
       "support_units": [],
       "exposure_groups": [
@@ -4455,9 +4568,9 @@
         "human_reviewed": false,
         "answer_contract_reviewed": true,
         "support_scope": "The whole utterance is the primary target and is directly familiarised with its English bridge. No lower-stage knowledge of that same target is asserted.",
-        "audio_review_status": "pending_media_pipeline",
+        "audio_review_status": "automated_audio_review_complete",
         "no_audio_check": {
-          "alternative_grammatical_order": "Dans le train elle lit le livre.",
+          "alternative_grammatical_order": "Dans le train elle ouvre le livre.",
           "same_tile_multiset": true,
           "disposition": "recorded order needed to distinguish the two grammatical possibilities"
         },
@@ -4473,7 +4586,15 @@
           "level_ceiling",
           "exposure_groups",
           "audio_text"
-        ]
+        ],
+        "audio_review": {
+          "report": "audio_qa_report.json",
+          "report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade",
+          "primary_sha256": "2662db9a578268170acc521cbc2add945e50fdc7934ea15d4996497da93f99cf",
+          "disposition": "independent_unconstrained_match",
+          "human_reviewed": false,
+          "alignment": "whole_utterance_only"
+        }
       },
       "provenance": {
         "kind": "original_imperial_pilot_content",
@@ -4482,9 +4603,10 @@
         "level_basis": "Local conservative task-sequencing estimate; not a certified CEFR rating or validated lexical allocation.",
         "source_text": "Original sentences, definitions and explanations. No dictionary wording copied.",
         "expression_ratings": "Source CSV expression ratings untouched.",
-        "rights": "Original instructional text created for this project."
+        "rights": "Original instructional text created for this project.",
+        "audio_text_revision": "Replaced lit with ouvre before first Imperial release after two independent speech recognizers disagreed with the prior waveform; updated all tiles, target text and English support."
       },
-      "audio_text": "Elle lit le livre dans le train.",
+      "audio_text": "Elle ouvre le livre dans le train.",
       "tokens": [
         {
           "id": "tile-1",
@@ -4492,7 +4614,7 @@
         },
         {
           "id": "tile-2",
-          "text": "lit"
+          "text": "ouvre"
         },
         {
           "id": "tile-3",
@@ -4515,15 +4637,15 @@
           "text": "train"
         }
       ],
-      "target_form": "Elle lit le livre dans le train.",
+      "target_form": "Elle ouvre le livre dans le train.",
       "local_task_assignment": {
         "stage": "A2+",
         "basis": "Local conservative task-sequencing estimate; not a certified CEFR rating or validated lexical allocation.",
         "scope": "this exact exercise only",
         "source_lexical_cefr_claim": false
       },
-      "audio_file": "comuls_29e71388254eaa700f5f1eba810da292d1ccff9d0ba0b546fd634bd984d8d714.wav",
-      "audio_sha256": "29e71388254eaa700f5f1eba810da292d1ccff9d0ba0b546fd634bd984d8d714"
+      "audio_file": "comuls_2662db9a578268170acc521cbc2add945e50fdc7934ea15d4996497da93f99cf.wav",
+      "audio_sha256": "2662db9a578268170acc521cbc2add945e50fdc7934ea15d4996497da93f99cf"
     },
     {
       "id": "imperial_b1_sentence_reconstruction_03",
@@ -4574,7 +4696,7 @@
         "human_reviewed": false,
         "answer_contract_reviewed": true,
         "support_scope": "The whole utterance is the primary target and is directly familiarised with its English bridge. No lower-stage knowledge of that same target is asserted.",
-        "audio_review_status": "pending_media_pipeline",
+        "audio_review_status": "automated_audio_review_complete",
         "no_audio_check": {
           "alternative_grammatical_order": "Nous avons acheté du pain ce matin.",
           "same_tile_multiset": true,
@@ -4592,7 +4714,15 @@
           "level_ceiling",
           "exposure_groups",
           "audio_text"
-        ]
+        ],
+        "audio_review": {
+          "report": "audio_qa_report.json",
+          "report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade",
+          "primary_sha256": "7e4eaae36ebd9626b5ad3a26846bf9000848907858aa86c47fde1e5bfee691c1",
+          "disposition": "bounded_manual_adjudication_of_model_outputs",
+          "human_reviewed": false,
+          "alignment": "whole_utterance_only"
+        }
       },
       "provenance": {
         "kind": "original_imperial_pilot_content",
@@ -4693,7 +4823,7 @@
         "human_reviewed": false,
         "answer_contract_reviewed": true,
         "support_scope": "The whole utterance is the primary target and is directly familiarised with its English bridge. No lower-stage knowledge of that same target is asserted.",
-        "audio_review_status": "pending_media_pipeline",
+        "audio_review_status": "automated_audio_review_complete",
         "no_audio_check": {
           "alternative_grammatical_order": "Tu peux venir après le cours.",
           "same_tile_multiset": true,
@@ -4711,7 +4841,15 @@
           "level_ceiling",
           "exposure_groups",
           "audio_text"
-        ]
+        ],
+        "audio_review": {
+          "report": "audio_qa_report.json",
+          "report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade",
+          "primary_sha256": "90cd9af5928fcdd0944449dc2a67486ad2efd990f5ba665ceaf3f1d09c1d4ba8",
+          "disposition": "independent_unconstrained_match",
+          "human_reviewed": false,
+          "alignment": "whole_utterance_only"
+        }
       },
       "provenance": {
         "kind": "original_imperial_pilot_content",
@@ -4808,7 +4946,7 @@
         "human_reviewed": false,
         "answer_contract_reviewed": true,
         "support_scope": "The whole utterance is the primary target and is directly familiarised with its English bridge. No lower-stage knowledge of that same target is asserted.",
-        "audio_review_status": "pending_media_pipeline",
+        "audio_review_status": "automated_audio_review_complete",
         "no_audio_check": {
           "alternative_grammatical_order": "Avec Paul je prépare le repas.",
           "same_tile_multiset": true,
@@ -4826,7 +4964,15 @@
           "level_ceiling",
           "exposure_groups",
           "audio_text"
-        ]
+        ],
+        "audio_review": {
+          "report": "audio_qa_report.json",
+          "report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade",
+          "primary_sha256": "d69eac16ced2af9bebe3632bd60bbbeac5731feaaa674fc0d883741c91541630",
+          "disposition": "independent_unconstrained_match",
+          "human_reviewed": false,
+          "alignment": "whole_utterance_only"
+        }
       },
       "provenance": {
         "kind": "original_imperial_pilot_content",
@@ -4936,7 +5082,7 @@
         "human_reviewed": false,
         "answer_contract_reviewed": true,
         "support_scope": "exact fixed use, English bridge available",
-        "audio_review_status": "pending_media_pipeline",
+        "audio_review_status": "automated_audio_review_complete",
         "preview_rationale": "Current-stage listening example; no above-stage preview required.",
         "reviewed_fields": [
           "prompt",
@@ -4950,7 +5096,15 @@
           "level_ceiling",
           "exposure_groups",
           "audio_text"
-        ]
+        ],
+        "audio_review": {
+          "report": "audio_qa_report.json",
+          "report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade",
+          "primary_sha256": "27f589da830ebd86fcc704509071234c99da0540989b29f4faaef8ffdfc0c4f1",
+          "disposition": "independent_unconstrained_match",
+          "human_reviewed": false,
+          "alignment": "whole_utterance_only"
+        }
       },
       "provenance": {
         "kind": "original_imperial_pilot_content",
@@ -5034,7 +5188,7 @@
         "human_reviewed": false,
         "answer_contract_reviewed": true,
         "support_scope": "exact fixed use, English bridge available",
-        "audio_review_status": "pending_media_pipeline",
+        "audio_review_status": "automated_audio_review_complete",
         "preview_rationale": "A short exact utterance is taught with an English bridge before audio retrieval. The higher band denotes local lexical/phrase sequencing, not a CEFR certification.",
         "reviewed_fields": [
           "prompt",
@@ -5048,7 +5202,15 @@
           "level_ceiling",
           "exposure_groups",
           "audio_text"
-        ]
+        ],
+        "audio_review": {
+          "report": "audio_qa_report.json",
+          "report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade",
+          "primary_sha256": "ead5475a0032d33513d5c7a9826acb8c08de610fdf39b310964e2be98e81dd03",
+          "disposition": "independent_unconstrained_match",
+          "human_reviewed": false,
+          "alignment": "whole_utterance_only"
+        }
       },
       "provenance": {
         "kind": "original_imperial_pilot_content",
@@ -5132,7 +5294,7 @@
         "human_reviewed": false,
         "answer_contract_reviewed": true,
         "support_scope": "exact fixed use, English bridge available",
-        "audio_review_status": "pending_media_pipeline",
+        "audio_review_status": "automated_audio_review_complete",
         "preview_rationale": "A short exact utterance is taught with an English bridge before audio retrieval. The higher band denotes local lexical/phrase sequencing, not a CEFR certification.",
         "reviewed_fields": [
           "prompt",
@@ -5146,7 +5308,15 @@
           "level_ceiling",
           "exposure_groups",
           "audio_text"
-        ]
+        ],
+        "audio_review": {
+          "report": "audio_qa_report.json",
+          "report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade",
+          "primary_sha256": "403b8f20ac73714280aedba70e0b60531b49de763adeef7706e852ddf0dd5e21",
+          "disposition": "bounded_manual_adjudication_of_model_outputs",
+          "human_reviewed": false,
+          "alignment": "whole_utterance_only"
+        }
       },
       "provenance": {
         "kind": "original_imperial_pilot_content",
@@ -5230,7 +5400,7 @@
         "human_reviewed": false,
         "answer_contract_reviewed": true,
         "support_scope": "exact fixed use, English bridge available",
-        "audio_review_status": "pending_media_pipeline",
+        "audio_review_status": "automated_audio_review_complete",
         "preview_rationale": "A short exact utterance is taught with an English bridge before audio retrieval. The higher band denotes local lexical/phrase sequencing, not a CEFR certification.",
         "reviewed_fields": [
           "prompt",
@@ -5244,7 +5414,15 @@
           "level_ceiling",
           "exposure_groups",
           "audio_text"
-        ]
+        ],
+        "audio_review": {
+          "report": "audio_qa_report.json",
+          "report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade",
+          "primary_sha256": "accc678ac01336493a535ac6c50395b754bf10c13a9c0f1456b3b9f75e902394",
+          "disposition": "independent_unconstrained_match",
+          "human_reviewed": false,
+          "alignment": "whole_utterance_only"
+        }
       },
       "provenance": {
         "kind": "original_imperial_pilot_content",
@@ -5328,7 +5506,7 @@
         "human_reviewed": false,
         "answer_contract_reviewed": true,
         "support_scope": "exact fixed use, English bridge available",
-        "audio_review_status": "pending_media_pipeline",
+        "audio_review_status": "automated_audio_review_complete",
         "preview_rationale": "A short exact utterance is taught with an English bridge before audio retrieval. The higher band denotes local lexical/phrase sequencing, not a CEFR certification.",
         "reviewed_fields": [
           "prompt",
@@ -5342,7 +5520,15 @@
           "level_ceiling",
           "exposure_groups",
           "audio_text"
-        ]
+        ],
+        "audio_review": {
+          "report": "audio_qa_report.json",
+          "report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade",
+          "primary_sha256": "064330772f2436d90e58773a192614a8538d563ed782012ca4467c4ce460d43d",
+          "disposition": "independent_unconstrained_match",
+          "human_reviewed": false,
+          "alignment": "whole_utterance_only"
+        }
       },
       "provenance": {
         "kind": "original_imperial_pilot_content",
@@ -5411,7 +5597,7 @@
         "human_reviewed": false,
         "answer_contract_reviewed": true,
         "support_scope": "The whole utterance is the primary target and is directly familiarised with its English bridge. No lower-stage knowledge of that same target is asserted.",
-        "audio_review_status": "pending_media_pipeline",
+        "audio_review_status": "automated_audio_review_complete",
         "preview_rationale": "Current-stage listening example; no above-stage preview required.",
         "reviewed_fields": [
           "prompt",
@@ -5425,7 +5611,15 @@
           "level_ceiling",
           "exposure_groups",
           "audio_text"
-        ]
+        ],
+        "audio_review": {
+          "report": "audio_qa_report.json",
+          "report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade",
+          "primary_sha256": "8f2a7549bc2c97b28d9e44e58f1e83633e0363639fc5e7d4fcf7cc29af576f6a",
+          "disposition": "independent_unconstrained_match",
+          "human_reviewed": false,
+          "alignment": "whole_utterance_only"
+        }
       },
       "provenance": {
         "kind": "original_imperial_pilot_content",
@@ -5494,7 +5688,7 @@
         "human_reviewed": false,
         "answer_contract_reviewed": true,
         "support_scope": "The whole utterance is the primary target and is directly familiarised with its English bridge. No lower-stage knowledge of that same target is asserted.",
-        "audio_review_status": "pending_media_pipeline",
+        "audio_review_status": "automated_audio_review_complete",
         "preview_rationale": "A short exact utterance is taught with an English bridge before audio retrieval. The higher band denotes local lexical/phrase sequencing, not a CEFR certification.",
         "reviewed_fields": [
           "prompt",
@@ -5508,7 +5702,15 @@
           "level_ceiling",
           "exposure_groups",
           "audio_text"
-        ]
+        ],
+        "audio_review": {
+          "report": "audio_qa_report.json",
+          "report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade",
+          "primary_sha256": "7033ad059d0b1d60cc3f00cb2c36981e95c1921cf58aa3466da465071b5edab8",
+          "disposition": "independent_unconstrained_match",
+          "human_reviewed": false,
+          "alignment": "whole_utterance_only"
+        }
       },
       "provenance": {
         "kind": "original_imperial_pilot_content",
@@ -5577,7 +5779,7 @@
         "human_reviewed": false,
         "answer_contract_reviewed": true,
         "support_scope": "The whole utterance is the primary target and is directly familiarised with its English bridge. No lower-stage knowledge of that same target is asserted.",
-        "audio_review_status": "pending_media_pipeline",
+        "audio_review_status": "automated_audio_review_complete",
         "preview_rationale": "A short exact utterance is taught with an English bridge before audio retrieval. The higher band denotes local lexical/phrase sequencing, not a CEFR certification.",
         "reviewed_fields": [
           "prompt",
@@ -5591,7 +5793,15 @@
           "level_ceiling",
           "exposure_groups",
           "audio_text"
-        ]
+        ],
+        "audio_review": {
+          "report": "audio_qa_report.json",
+          "report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade",
+          "primary_sha256": "a5a592bae03778404fcd09f62301679febfa36d3ad0d301da2421ad910d1be77",
+          "disposition": "independent_unconstrained_match",
+          "human_reviewed": false,
+          "alignment": "whole_utterance_only"
+        }
       },
       "provenance": {
         "kind": "original_imperial_pilot_content",
@@ -5662,7 +5872,7 @@
         "human_reviewed": false,
         "answer_contract_reviewed": true,
         "support_scope": "The whole utterance is the primary target and is directly familiarised with its English bridge. No lower-stage knowledge of that same target is asserted.",
-        "audio_review_status": "pending_media_pipeline",
+        "audio_review_status": "automated_audio_review_complete",
         "preview_rationale": "A short exact utterance is taught with an English bridge before audio retrieval. The higher band denotes local lexical/phrase sequencing, not a CEFR certification.",
         "reviewed_fields": [
           "prompt",
@@ -5676,7 +5886,15 @@
           "level_ceiling",
           "exposure_groups",
           "audio_text"
-        ]
+        ],
+        "audio_review": {
+          "report": "audio_qa_report.json",
+          "report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade",
+          "primary_sha256": "16715179d40741d885a01dd1139dd127504072e6bafe00427276a60fbcfe8f33",
+          "disposition": "independent_unconstrained_match",
+          "human_reviewed": false,
+          "alignment": "whole_utterance_only"
+        }
       },
       "provenance": {
         "kind": "original_imperial_pilot_content",
@@ -5745,7 +5963,7 @@
         "human_reviewed": false,
         "answer_contract_reviewed": true,
         "support_scope": "The whole utterance is the primary target and is directly familiarised with its English bridge. No lower-stage knowledge of that same target is asserted.",
-        "audio_review_status": "pending_media_pipeline",
+        "audio_review_status": "automated_audio_review_complete",
         "preview_rationale": "A short exact utterance is taught with an English bridge before audio retrieval. The higher band denotes local lexical/phrase sequencing, not a CEFR certification.",
         "reviewed_fields": [
           "prompt",
@@ -5759,7 +5977,15 @@
           "level_ceiling",
           "exposure_groups",
           "audio_text"
-        ]
+        ],
+        "audio_review": {
+          "report": "audio_qa_report.json",
+          "report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade",
+          "primary_sha256": "2f6e0dbb8b9270a5806cf0532c70eee870e867862f2f3eeea3357658ee1e9197",
+          "disposition": "independent_unconstrained_match",
+          "human_reviewed": false,
+          "alignment": "whole_utterance_only"
+        }
       },
       "provenance": {
         "kind": "original_imperial_pilot_content",
@@ -5844,7 +6070,7 @@
         "human_reviewed": false,
         "answer_contract_reviewed": true,
         "support_scope": "The whole utterance is the primary target and is directly familiarised with its English bridge. No lower-stage knowledge of that same target is asserted.",
-        "audio_review_status": "pending_media_pipeline",
+        "audio_review_status": "automated_audio_review_complete",
         "preview_rationale": "Current-stage listening example; no above-stage preview required.",
         "reviewed_fields": [
           "prompt",
@@ -5858,7 +6084,15 @@
           "level_ceiling",
           "exposure_groups",
           "audio_text"
-        ]
+        ],
+        "audio_review": {
+          "report": "audio_qa_report.json",
+          "report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade",
+          "primary_sha256": "43493d28e2adb158d6bfe4bd75daf94b461b780ee7e2664704233ab4f02b1a9e",
+          "disposition": "independent_unconstrained_match",
+          "human_reviewed": false,
+          "alignment": "whole_utterance_only"
+        }
       },
       "provenance": {
         "kind": "original_imperial_pilot_content",
@@ -5960,7 +6194,7 @@
         "human_reviewed": false,
         "answer_contract_reviewed": true,
         "support_scope": "The whole utterance is the primary target and is directly familiarised with its English bridge. No lower-stage knowledge of that same target is asserted.",
-        "audio_review_status": "pending_media_pipeline",
+        "audio_review_status": "automated_audio_review_complete",
         "preview_rationale": "A short exact utterance is taught with an English bridge before audio retrieval. The higher band denotes local lexical/phrase sequencing, not a CEFR certification.",
         "reviewed_fields": [
           "prompt",
@@ -5974,7 +6208,15 @@
           "level_ceiling",
           "exposure_groups",
           "audio_text"
-        ]
+        ],
+        "audio_review": {
+          "report": "audio_qa_report.json",
+          "report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade",
+          "primary_sha256": "b7ffab856f3614a9fc583300c3669307a4eefe22dfe986d74db014e14c8c80f8",
+          "disposition": "bounded_manual_adjudication_of_model_outputs",
+          "human_reviewed": false,
+          "alignment": "whole_utterance_only"
+        }
       },
       "provenance": {
         "kind": "original_imperial_pilot_content",
@@ -6076,7 +6318,7 @@
         "human_reviewed": false,
         "answer_contract_reviewed": true,
         "support_scope": "The whole utterance is the primary target and is directly familiarised with its English bridge. No lower-stage knowledge of that same target is asserted.",
-        "audio_review_status": "pending_media_pipeline",
+        "audio_review_status": "automated_audio_review_complete",
         "preview_rationale": "A short exact utterance is taught with an English bridge before audio retrieval. The higher band denotes local lexical/phrase sequencing, not a CEFR certification.",
         "reviewed_fields": [
           "prompt",
@@ -6090,7 +6332,15 @@
           "level_ceiling",
           "exposure_groups",
           "audio_text"
-        ]
+        ],
+        "audio_review": {
+          "report": "audio_qa_report.json",
+          "report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade",
+          "primary_sha256": "437b96e085830ec1ad3b076a52802d74fe4898d36a90a935b4efa8ab2a5111fb",
+          "disposition": "independent_unconstrained_match",
+          "human_reviewed": false,
+          "alignment": "whole_utterance_only"
+        }
       },
       "provenance": {
         "kind": "original_imperial_pilot_content",
@@ -6192,7 +6442,7 @@
         "human_reviewed": false,
         "answer_contract_reviewed": true,
         "support_scope": "The whole utterance is the primary target and is directly familiarised with its English bridge. No lower-stage knowledge of that same target is asserted.",
-        "audio_review_status": "pending_media_pipeline",
+        "audio_review_status": "automated_audio_review_complete",
         "preview_rationale": "A short exact utterance is taught with an English bridge before audio retrieval. The higher band denotes local lexical/phrase sequencing, not a CEFR certification.",
         "reviewed_fields": [
           "prompt",
@@ -6206,7 +6456,15 @@
           "level_ceiling",
           "exposure_groups",
           "audio_text"
-        ]
+        ],
+        "audio_review": {
+          "report": "audio_qa_report.json",
+          "report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade",
+          "primary_sha256": "8c472b59e3184a86ea5cdf4c55bf4d6f6e631bb3384ed96ba27484225677c46b",
+          "disposition": "independent_unconstrained_match",
+          "human_reviewed": false,
+          "alignment": "whole_utterance_only"
+        }
       },
       "provenance": {
         "kind": "original_imperial_pilot_content",
@@ -6308,7 +6566,7 @@
         "human_reviewed": false,
         "answer_contract_reviewed": true,
         "support_scope": "The whole utterance is the primary target and is directly familiarised with its English bridge. No lower-stage knowledge of that same target is asserted.",
-        "audio_review_status": "pending_media_pipeline",
+        "audio_review_status": "automated_audio_review_complete",
         "preview_rationale": "A short exact utterance is taught with an English bridge before audio retrieval. The higher band denotes local lexical/phrase sequencing, not a CEFR certification.",
         "reviewed_fields": [
           "prompt",
@@ -6322,7 +6580,15 @@
           "level_ceiling",
           "exposure_groups",
           "audio_text"
-        ]
+        ],
+        "audio_review": {
+          "report": "audio_qa_report.json",
+          "report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade",
+          "primary_sha256": "5829b5692ca44c0320c8d92d318e24351dc18a356cc0895a051046d02156b106",
+          "disposition": "independent_unconstrained_match",
+          "human_reviewed": false,
+          "alignment": "whole_utterance_only"
+        }
       },
       "provenance": {
         "kind": "original_imperial_pilot_content",
@@ -6424,7 +6690,7 @@
         "human_reviewed": false,
         "answer_contract_reviewed": true,
         "support_scope": "The whole utterance is the primary target and is directly familiarised with its English bridge. No lower-stage knowledge of that same target is asserted.",
-        "audio_review_status": "pending_media_pipeline",
+        "audio_review_status": "automated_audio_review_complete",
         "preview_rationale": "Current-stage listening example; no above-stage preview required.",
         "reviewed_fields": [
           "prompt",
@@ -6438,7 +6704,15 @@
           "level_ceiling",
           "exposure_groups",
           "audio_text"
-        ]
+        ],
+        "audio_review": {
+          "report": "audio_qa_report.json",
+          "report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade",
+          "primary_sha256": "84fee78d424800e65c268da70267625e8215bb707c4f69c156e48726780fa3ef",
+          "disposition": "independent_unconstrained_match",
+          "human_reviewed": false,
+          "alignment": "whole_utterance_only"
+        }
       },
       "provenance": {
         "kind": "original_imperial_pilot_content",
@@ -6540,7 +6814,7 @@
         "human_reviewed": false,
         "answer_contract_reviewed": true,
         "support_scope": "The whole utterance is the primary target and is directly familiarised with its English bridge. No lower-stage knowledge of that same target is asserted.",
-        "audio_review_status": "pending_media_pipeline",
+        "audio_review_status": "automated_audio_review_complete",
         "preview_rationale": "A short exact utterance is taught with an English bridge before audio retrieval. The higher band denotes local lexical/phrase sequencing, not a CEFR certification.",
         "reviewed_fields": [
           "prompt",
@@ -6554,7 +6828,15 @@
           "level_ceiling",
           "exposure_groups",
           "audio_text"
-        ]
+        ],
+        "audio_review": {
+          "report": "audio_qa_report.json",
+          "report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade",
+          "primary_sha256": "8dfbe48a797fe0f9a37b7b0b797bb216f8700c54c91d1ac9dfe2036b1206b3ea",
+          "disposition": "independent_unconstrained_match",
+          "human_reviewed": false,
+          "alignment": "whole_utterance_only"
+        }
       },
       "provenance": {
         "kind": "original_imperial_pilot_content",
@@ -6656,7 +6938,7 @@
         "human_reviewed": false,
         "answer_contract_reviewed": true,
         "support_scope": "The whole utterance is the primary target and is directly familiarised with its English bridge. No lower-stage knowledge of that same target is asserted.",
-        "audio_review_status": "pending_media_pipeline",
+        "audio_review_status": "automated_audio_review_complete",
         "preview_rationale": "A short exact utterance is taught with an English bridge before audio retrieval. The higher band denotes local lexical/phrase sequencing, not a CEFR certification.",
         "reviewed_fields": [
           "prompt",
@@ -6670,7 +6952,15 @@
           "level_ceiling",
           "exposure_groups",
           "audio_text"
-        ]
+        ],
+        "audio_review": {
+          "report": "audio_qa_report.json",
+          "report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade",
+          "primary_sha256": "f585719b017a129de1a6cf4254ad6c34465984df9686d6ef42305ab4290cb743",
+          "disposition": "independent_unconstrained_match",
+          "human_reviewed": false,
+          "alignment": "whole_utterance_only"
+        }
       },
       "provenance": {
         "kind": "original_imperial_pilot_content",
@@ -6772,7 +7062,7 @@
         "human_reviewed": false,
         "answer_contract_reviewed": true,
         "support_scope": "The whole utterance is the primary target and is directly familiarised with its English bridge. No lower-stage knowledge of that same target is asserted.",
-        "audio_review_status": "pending_media_pipeline",
+        "audio_review_status": "automated_audio_review_complete",
         "preview_rationale": "A short exact utterance is taught with an English bridge before audio retrieval. The higher band denotes local lexical/phrase sequencing, not a CEFR certification.",
         "reviewed_fields": [
           "prompt",
@@ -6786,7 +7076,15 @@
           "level_ceiling",
           "exposure_groups",
           "audio_text"
-        ]
+        ],
+        "audio_review": {
+          "report": "audio_qa_report.json",
+          "report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade",
+          "primary_sha256": "1bfc3da2a348f14d715c3868666b6e0b427a788d180da59b0cd9d3aa6ac17af6",
+          "disposition": "independent_unconstrained_match",
+          "human_reviewed": false,
+          "alignment": "whole_utterance_only"
+        }
       },
       "provenance": {
         "kind": "original_imperial_pilot_content",
@@ -6888,7 +7186,7 @@
         "human_reviewed": false,
         "answer_contract_reviewed": true,
         "support_scope": "The whole utterance is the primary target and is directly familiarised with its English bridge. No lower-stage knowledge of that same target is asserted.",
-        "audio_review_status": "pending_media_pipeline",
+        "audio_review_status": "automated_audio_review_complete",
         "preview_rationale": "A short exact utterance is taught with an English bridge before audio retrieval. The higher band denotes local lexical/phrase sequencing, not a CEFR certification.",
         "reviewed_fields": [
           "prompt",
@@ -6902,7 +7200,15 @@
           "level_ceiling",
           "exposure_groups",
           "audio_text"
-        ]
+        ],
+        "audio_review": {
+          "report": "audio_qa_report.json",
+          "report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade",
+          "primary_sha256": "6208d988b5388dd68a2394ae0c3f016a1a1060302e2cc101441305fd49a338cc",
+          "disposition": "independent_unconstrained_match",
+          "human_reviewed": false,
+          "alignment": "whole_utterance_only"
+        }
       },
       "provenance": {
         "kind": "original_imperial_pilot_content",

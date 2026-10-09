@@ -152,11 +152,13 @@
       replays: state.replays || 0, presentation_seed: state.seed};
   }
   function sessionActions(container) {
-    container.appendChild(button("Skip without grading", "comuls-quiet", function () {
+    var skipButton = button("Skip without grading", "comuls-quiet", function () {
+      skipButton.disabled = true;
       if (!emit("skip", {reason: "student_skip", side: side})) {
         mount.appendChild(el("div", "comuls-muted", "Use Anki’s Bury Card command to skip without a rating."));
       }
-    }));
+    });
+    container.appendChild(skipButton);
     if (context().nonce) {
       container.appendChild(button("Pause", "comuls-quiet", function () { emit("pause", {}); }));
     }
@@ -396,7 +398,9 @@
     control.setAttribute("aria-expanded", "false");
     support.appendChild(control); mount.appendChild(supportText);
   }
-  addSupport("Meaning support", payload.carrier_meaning, "carrier");
+  var meaningHelp = payload.type === "french_form_recall" && payload.definition_language === "fr" && payload.english_support ?
+    payload.english_support : payload.carrier_meaning;
+  addSupport("Meaning support", meaningHelp, "carrier");
   addSupport("Answer hint", payload.target_hint || payload.target_meaning, "target");
   if (support.children.length) mount.appendChild(support);
   mount.appendChild(el("div", "comuls-muted", "No timer. Anki’s Show Answer and rating buttons always remain available."));

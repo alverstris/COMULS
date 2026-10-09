@@ -17,9 +17,15 @@ import wave
 
 import aqt
 from aqt import gui_hooks
-from aqt.qt import QApplication, QCheckBox, QComboBox, QDialog, QFileDialog, QLineEdit, QMessageBox, QPushButton, QScrollArea, QTabWidget, QTimer, Qt
+from aqt.qt import QApplication, QCheckBox, QComboBox, QDialog, QDialogButtonBox, QFileDialog, QLineEdit, QMessageBox, QPushButton, QScrollArea, QTabWidget, QTimer, Qt
 from PyQt6.QtTest import QTest
+from PyQt6 import sip
 from aqt.sound import av_player
+
+
+def visible(widget):
+    # Qt's static file/message helpers delete their C++ dialog after choice.
+    return not sip.isdeleted(widget) and widget.isVisible()
 
 
 class Wait:
@@ -197,7 +203,7 @@ class Driver:
         dialog = self.modal(text=substring)
         self.report["checks"].append({"dialog": dialog.text()})
         self.schedule(dialog.accept)
-        yield Wait(lambda: not dialog.isVisible(), "Close information dialog")
+        yield Wait(lambda: not visible(dialog), "Close information dialog")
 
     def file_dialog(self, filename, save=False):
         yield Wait(lambda: self.modal() is not None and any(isinstance(w, QFileDialog) and w.isVisible()
@@ -209,8 +215,13 @@ class Driver:
         if name:
             name.setText(str(filename))
         self.screenshot("file-chooser", dialog)
-        self.schedule(dialog.accept)
-        yield Wait(lambda: not dialog.isVisible(), "Accept native Qt file chooser")
+        standard = QDialogButtonBox.StandardButton.Save if save else QDialogButtonBox.StandardButton.Open
+        accept_button = next((box.button(standard) for box in dialog.findChildren(QDialogButtonBox)
+                              if box.button(standard) is not None), None)
+        assert accept_button is not None and accept_button.isEnabled(), "Native file chooser approval button"
+        self.schedule(lambda: QTest.mouseClick(accept_button, Qt.MouseButton.LeftButton))
+        yield Wait(lambda: not any(isinstance(w, QFileDialog) and w.isVisible()
+                                  for w in QApplication.topLevelWidgets()), "Accept native Qt file chooser")
 
     def steps(self):
         mw = aqt.mw
@@ -286,7 +297,7 @@ class Driver:
         yes = dialog.button(QMessageBox.StandardButton.Yes)
         yield Wait(lambda: yes.isEnabled(), "French audio confirmation available after real playback")
         self.schedule(yes.click)
-        yield Wait(lambda: self.c.state()["audio_confirmed"] and not dialog.isVisible(), "Saved French audio confirmation")
+        yield Wait(lambda: self.c.state()["audio_confirmed"] and not visible(dialog), "Saved French audio confirmation")
         self.report["checks"].append("French audio used a real native player to completion; no French system voice or fake player")
         assert all(a["tag"] == "SoundOrVideoTag" for a in self.report["audio"]), "Demo must use packaged recording audio"
 
@@ -318,7 +329,7 @@ class Driver:
                             else value == "Je suis étudiant") for value in labels), labels
                 self.screenshot("onboarding-"+str(index), tutorial)
             self.click(tutorial, "Done")
-            yield Wait(lambda: not tutorial.isVisible(), "Close four-shell onboarding")
+            yield Wait(lambda: not visible(tutorial), "Close four-shell onboarding")
             assert self.snapshot() == before, "Ungraded control tutorial must not create or grade cards"
             self.report["checks"].append("All four optional onboarding shells remain ungraded")
             window.tabs.setCurrentIndex(2)
@@ -331,7 +342,7 @@ class Driver:
             reference = self.modal("library")
             self.screenshot("reference", reference)
             self.click(reference, "Close")
-            yield Wait(lambda: not reference.isVisible(), "Close library reference")
+            yield Wait(lambda: not visible(reference), "Close library reference")
             assert self.snapshot() == before, "Library preview must not admit or grade"
             self.report["checks"].append("Library search/reference remains ungraded")
             window.tabs.setCurrentIndex(0)
@@ -342,7 +353,7 @@ class Driver:
             assert index >= 0
             window.activity.setCurrentIndex(index)
             self.click(window, "Prepare one new exercise")
-            yield Wait(lambda: self.c.prepare_dialog is not None and self.c.prepare_dialog.isVisible(),
+            yield Wait(lambda: self.c.prepare_dialog is not None and visible(self.c.prepare_dialog),
                        "Supported familiarisation dialog for "+kind)
             preparation = self.c.prepare_dialog
             checkboxes = preparation.findChildren(QCheckBox)
@@ -407,10 +418,18 @@ class Driver:
                                     "Actual rendered COMULS front")
             self.screenshot("front-"+exercise["type"], mw)
             if exercise.get("audio_file"):
+                if exercise["type"] == "sentence_reconstruction":
+                    hidden = yield from self.js(mw.web, "document.querySelector('.comuls-tile-stage').hidden && document.querySelector('.comuls-primary').disabled")
+                    assert hidden, "Reconstruction word tiles must stay hidden until listening finishes"
                 begins = len(self.report["audio"])
                 played = yield from self.js(mw.web, "(function(){var b=document.querySelector('.comuls-audio .replay-button,.comuls-audio a'); if(!b)return false; b.click();return true;})()")
                 assert played, "Native recording replay control is missing"
                 yield Wait(lambda: len(self.report["audio"]) > begins, "Native QWebEngine audio replay reaches real player")
+                if exercise["type"] == "sentence_reconstruction":
+                    yield Wait(lambda: self.recording_completed_since(begins), "Complete native listening unlocks reconstruction", 60)
+                    yield from self.wait_js(mw.web, "!document.querySelector('.comuls-tile-stage').hidden && !document.querySelector('.comuls-primary').disabled",
+                                            "Only completed native playback reveals reconstruction tiles")
+                    assert not self.c.reviewer.target_hint, "Completed listening is not an answer-revealing help action"
             if self.config.get("extra_controls") and not self.report["reviews"]:
                 supported = yield from self.js(mw.web, "(function(){var b=Array.from(document.querySelectorAll('button')).find(b=>b.textContent==='Meaning support');if(b){b.click();return true;}return false;})()")
                 if supported:
@@ -470,6 +489,7 @@ class Driver:
             original = self.snapshot()
             window.tabs.setCurrentIndex(1)
             for stage in (("B2" if stage_before == "B1" else "B1"), stage_before):
+                window.tabs.setCurrentIndex(1)
                 window.stage_box.setCurrentText(stage)
                 self.click(window, "Use this level")
                 yield Wait(lambda: not self.c.busy and self.c.state()["stage"] == stage, "Real cohort change preserves reviews")
@@ -536,7 +556,7 @@ class Driver:
         assert self.snapshot() == before, "Preflight must not change native collection data"
         self.screenshot("course-update-preflight", preflight)
         self.schedule(lambda: QTest.mouseClick(preflight.button(QMessageBox.StandardButton.Yes), Qt.MouseButton.LeftButton))
-        yield Wait(lambda: not preflight.isVisible(), "Approve concrete editorial import in real dialog")
+        yield Wait(lambda: not visible(preflight), "Approve concrete editorial import in real dialog")
         yield Wait(lambda: not self.c.busy and self.c.by_id[identity]["explanation"] == exercise["explanation"],
                    "Declarative content update completes through real native CollectionOp")
         if self.modal(text="Pack installed"):
@@ -560,7 +580,7 @@ class Driver:
         assert len(boxes) == 1
         boxes[0].setCurrentIndex(3)
         self.click(effort, "Save")
-        yield Wait(lambda: not effort.isVisible() and self.c.state()["days"][str(aqt.mw.col.sched.today)]["fatigue"] == 4,
+        yield Wait(lambda: not visible(effort) and self.c.state()["days"][str(aqt.mw.col.sched.today)]["fatigue"] == 4,
                    "Daily fatigue persists through actual controls")
         assert self.snapshot() == before
         self.report["checks"].append("Effort/fatigue control saves activity without grading")

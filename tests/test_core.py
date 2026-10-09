@@ -173,7 +173,7 @@ class AdmissionTests(unittest.TestCase):
 
     def test_override_does_not_bypass_learning_or_daily_caps(self):
         item = exercise()
-        budget = {"pause_new": True, "remaining_seconds": 40, "due_seconds": 80}
+        budget = {"pause_new": True, "remaining_seconds": 80, "due_seconds": 160}
         result = admission(item, budget=budget)
         self.assertIn("new_admission_paused", result["reasons"])
         self.assertIn("review_backlog", result["reasons"])
@@ -187,10 +187,33 @@ class AdmissionTests(unittest.TestCase):
     def test_time_budget_includes_estimated_next_exercise(self):
         item = exercise()
         item["estimated_seconds"] = 30
-        self.assertFalse(admission(item, budget={"remaining_seconds": 29})["allowed"])
-        self.assertTrue(admission(item, budget={"remaining_seconds": 30})["allowed"])
+        self.assertFalse(admission(item, budget={"remaining_seconds": 89})["allowed"])
+        self.assertTrue(admission(item, budget={"remaining_seconds": 90})["allowed"])
         self.assertFalse(admission(item, budget={"remaining_seconds": 0, "override": True})["allowed"])
         self.assertIn("invalid_budget", admission(item, budget={"new_units": float("nan")})["reasons"])
+
+    def test_forecast_reserves_preparation_retrieval_relearning_and_support(self):
+        item = dict(exercise(), estimated_seconds=20, new_unit_cost=3)
+        forecast = core.admission_forecast(item, {})
+        self.assertEqual(forecast, {"first_review_seconds": 20, "relearning_allowance_seconds": 20,
+            "preparation_seconds": 20, "support_seconds": 40, "required_seconds": 100})
+        self.assertFalse(admission(item, budget={"remaining_seconds": 99})["allowed"])
+        self.assertIn("review_backlog", admission(item, budget={"remaining_seconds": 110, "due_seconds": 20})["reasons"])
+
+    def test_completed_preparation_is_not_double_counted_in_remaining_work(self):
+        item = dict(exercise(), estimated_seconds=20, new_unit_cost=3, preparation_complete=True)
+        result = admission(item, budget={"remaining_seconds": 40})
+        self.assertTrue(result["allowed"])
+        self.assertEqual(result["forecast"]["required_seconds"], 40)
+        self.assertEqual(result["forecast"]["support_seconds"], 0)
+        self.assertIn("daily_unit_limit", admission(item, budget={"new_units": 4})["reasons"])
+
+    def test_observed_per_type_time_replaces_prior_only_for_forecasting(self):
+        item = dict(exercise(), estimated_seconds=20)
+        self.assertEqual(core.admission_forecast(item, {"timings": {item["type"]: 12}})["required_seconds"], 39)
+        self.assertEqual(item["estimated_seconds"], 20)
+        for value in (0, float("nan"), "20"):
+            self.assertIn("invalid_budget", admission(item, budget={"timings": {item["type"]: value}})["reasons"])
 
 
 class EvaluationTests(unittest.TestCase):

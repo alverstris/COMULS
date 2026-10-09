@@ -21,7 +21,7 @@
     },
     "locale": "fr-FR"
   },
-  "audio_check_file": "comuls_8c1ef1ac34946c454d163e1516ba488f9c7a44472b22fe95f3e4e73bb8cb77cb.wav",
+  "audio_check_file": "comuls_8684fc04cc1aab7a27a19e707a29a94610a4add9f1d72e18ab713e1f8b2303fa.wav",
   "assets": [
     {
       "audio_id": "sha256:02706e8822bcd22116a1f3a4870b1ae0910861cee63f6d908fc8a82a81be638b",
@@ -57,7 +57,9 @@
         "leading_quiet_seconds": 0.12,
         "trailing_quiet_seconds": 0.14,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "independent_unconstrained_match",
+        "independent_review_note": "Independent Vosk transcription matches after punctuation/case token normalization.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -150,7 +152,9 @@
         "leading_quiet_seconds": 0.08,
         "trailing_quiet_seconds": 0.16,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "independent_unconstrained_match",
+        "independent_review_note": "Independent Vosk transcription matches after punctuation/case token normalization.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -221,7 +225,9 @@
         "leading_quiet_seconds": 0.18,
         "trailing_quiet_seconds": 0.16,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "independent_unconstrained_match",
+        "independent_review_note": "Independent Vosk transcription matches after punctuation/case token normalization.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -324,7 +330,9 @@
         "leading_quiet_seconds": 0.18,
         "trailing_quiet_seconds": 0.14,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "independent_unconstrained_match",
+        "independent_review_note": "Independent Vosk transcription matches after punctuation/case token normalization.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -380,7 +388,9 @@
         "leading_quiet_seconds": 0.16,
         "trailing_quiet_seconds": 0.08,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "independent_unconstrained_match",
+        "independent_review_note": "Independent Vosk transcription matches after punctuation/case token normalization.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -480,7 +490,9 @@
         "leading_quiet_seconds": 0.18,
         "trailing_quiet_seconds": 0.12,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "bounded_manual_adjudication_of_model_outputs",
+        "independent_review_note": "Secondary unprompted Whisper correctly recovers mérite; its approfondit spelling is homophonic with approfondi.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -572,7 +584,9 @@
         "leading_quiet_seconds": 0.16,
         "trailing_quiet_seconds": 0.14,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "independent_unconstrained_match",
+        "independent_review_note": "Independent Vosk transcription matches after punctuation/case token normalization.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -627,7 +641,9 @@
         "leading_quiet_seconds": 0.06,
         "trailing_quiet_seconds": 0.08,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "isolated_contrast_verified_with_candidates",
+        "independent_review_note": "Open-vocabulary recognition differs, but the independent recognizer identifies the expected item when offered both actual contrast labels plus unknown. No claim of unrestricted-word recognition is made.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -718,7 +734,9 @@
         "leading_quiet_seconds": 0.18,
         "trailing_quiet_seconds": 0.18,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "independent_unconstrained_match",
+        "independent_review_note": "Independent Vosk transcription matches after punctuation/case token normalization.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -815,7 +833,95 @@
         "leading_quiet_seconds": 0.18,
         "trailing_quiet_seconds": 0.16,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "independent_unconstrained_match",
+        "independent_review_note": "Independent Vosk transcription matches after punctuation/case token normalization.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
+      },
+      "alignment": {
+        "status": "whole_utterance_only",
+        "word_timestamps": null,
+        "note": "Replay always uses the original complete utterance. No inferred word boundaries or isolated-word sentence reconstruction."
+      },
+      "rights": {
+        "source_dataset": "SIWIS French Speech Synthesis Database (2017)",
+        "authors": [
+          "Junichi Yamagishi",
+          "Pierre-Edouard Honnet",
+          "Philip Garner",
+          "Alexandros Lazaridis"
+        ],
+        "source_dataset_license": "CC-BY-4.0",
+        "source_dataset_url": "https://doi.org/10.7488/ds/1705",
+        "voice_model_card": "https://huggingface.co/rhasspy/piper-voices/blob/c10ece1aade47bb51c153c893d14e5bf8e5b7117/fr/fr_FR/siwis/medium/MODEL_CARD",
+        "voice_repository_license": "MIT; voice-specific dataset attribution retained",
+        "engine_license": "GPL-3.0-or-later (build tool only; not distributed)",
+        "recording_notice": "Synthetic speech generated for COMULS from original teaching text; attribution retained. No endorsement by the dataset contributors is implied."
+      }
+    },
+    {
+      "audio_id": "sha256:2662db9a578268170acc521cbc2add945e50fdc7934ea15d4996497da93f99cf",
+      "filename": "comuls_2662db9a578268170acc521cbc2add945e50fdc7934ea15d4996497da93f99cf.wav",
+      "sha256": "2662db9a578268170acc521cbc2add945e50fdc7934ea15d4996497da93f99cf",
+      "text": "Elle ouvre le livre dans le train.",
+      "text_sha256": "9cc028080962a59467a2afc24985b5a029a0b5c529e0b99c9b12d1dd6adaeb40",
+      "source_utterance_id": "text-sha256:9cc028080962a59467a2afc24985b5a029a0b5c529e0b99c9b12d1dd6adaeb40",
+      "normalized_spoken_text": "Elle ouvre le livre dans le train.",
+      "locale": "fr-FR",
+      "pronunciation_overrides": {},
+      "planned_phonemes": [
+        [
+          "ɛ",
+          "l",
+          " ",
+          "ˈ",
+          "u",
+          "v",
+          "ʁ",
+          " ",
+          "l",
+          "ə",
+          "-",
+          " ",
+          "l",
+          "ˈ",
+          "i",
+          "v",
+          "ʁ",
+          " ",
+          "d",
+          "ɑ",
+          "̃",
+          " ",
+          "l",
+          "ə",
+          "-",
+          " ",
+          "t",
+          "ʁ",
+          "ˈ",
+          "ɛ",
+          "̃",
+          "."
+        ]
+      ],
+      "duration_seconds": 1.741497,
+      "sample_rate": 22050,
+      "sample_width": 2,
+      "channels": 1,
+      "bytes": 76844,
+      "quality": {
+        "decoded_pcm": true,
+        "complete_wav_frames": true,
+        "peak_fraction": 0.849945,
+        "rms_fraction": 0.188318,
+        "clipped_sample_fraction": 0.0,
+        "quiet_20ms_window_fraction": 0.147727,
+        "leading_quiet_seconds": 0.08,
+        "trailing_quiet_seconds": 0.12,
+        "human_listening_review": false,
+        "independent_text_audio_agreement": "independent_unconstrained_match",
+        "independent_review_note": "Independent Vosk transcription matches after punctuation/case token normalization.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -897,7 +1003,9 @@
         "leading_quiet_seconds": 0.08,
         "trailing_quiet_seconds": 0.16,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "independent_unconstrained_match",
+        "independent_review_note": "Independent Vosk transcription matches after punctuation/case token normalization.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -954,90 +1062,9 @@
         "leading_quiet_seconds": 0.18,
         "trailing_quiet_seconds": 0.08,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
-      },
-      "alignment": {
-        "status": "whole_utterance_only",
-        "word_timestamps": null,
-        "note": "Replay always uses the original complete utterance. No inferred word boundaries or isolated-word sentence reconstruction."
-      },
-      "rights": {
-        "source_dataset": "SIWIS French Speech Synthesis Database (2017)",
-        "authors": [
-          "Junichi Yamagishi",
-          "Pierre-Edouard Honnet",
-          "Philip Garner",
-          "Alexandros Lazaridis"
-        ],
-        "source_dataset_license": "CC-BY-4.0",
-        "source_dataset_url": "https://doi.org/10.7488/ds/1705",
-        "voice_model_card": "https://huggingface.co/rhasspy/piper-voices/blob/c10ece1aade47bb51c153c893d14e5bf8e5b7117/fr/fr_FR/siwis/medium/MODEL_CARD",
-        "voice_repository_license": "MIT; voice-specific dataset attribution retained",
-        "engine_license": "GPL-3.0-or-later (build tool only; not distributed)",
-        "recording_notice": "Synthetic speech generated for COMULS from original teaching text; attribution retained. No endorsement by the dataset contributors is implied."
-      }
-    },
-    {
-      "audio_id": "sha256:29e71388254eaa700f5f1eba810da292d1ccff9d0ba0b546fd634bd984d8d714",
-      "filename": "comuls_29e71388254eaa700f5f1eba810da292d1ccff9d0ba0b546fd634bd984d8d714.wav",
-      "sha256": "29e71388254eaa700f5f1eba810da292d1ccff9d0ba0b546fd634bd984d8d714",
-      "text": "Elle lit le livre dans le train.",
-      "text_sha256": "252e8f56fa2bd3db9d04b56d5b983cf433aa03c885c9171dc7a2028a138b941f",
-      "source_utterance_id": "text-sha256:252e8f56fa2bd3db9d04b56d5b983cf433aa03c885c9171dc7a2028a138b941f",
-      "normalized_spoken_text": "Elle lit le livre dans le train.",
-      "locale": "fr-FR",
-      "pronunciation_overrides": {},
-      "planned_phonemes": [
-        [
-          "ɛ",
-          "l",
-          " ",
-          "l",
-          "ˈ",
-          "i",
-          " ",
-          "l",
-          "ə",
-          "-",
-          " ",
-          "l",
-          "ˈ",
-          "i",
-          "v",
-          "ʁ",
-          " ",
-          "d",
-          "ɑ",
-          "̃",
-          " ",
-          "l",
-          "ə",
-          "-",
-          " ",
-          "t",
-          "ʁ",
-          "ˈ",
-          "ɛ",
-          "̃",
-          "."
-        ]
-      ],
-      "duration_seconds": 1.451247,
-      "sample_rate": 22050,
-      "sample_width": 2,
-      "channels": 1,
-      "bytes": 64044,
-      "quality": {
-        "decoded_pcm": true,
-        "complete_wav_frames": true,
-        "peak_fraction": 0.849945,
-        "rms_fraction": 0.186965,
-        "clipped_sample_fraction": 0.0,
-        "quiet_20ms_window_fraction": 0.136986,
-        "leading_quiet_seconds": 0.06,
-        "trailing_quiet_seconds": 0.14,
-        "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "independent_unconstrained_match",
+        "independent_review_note": "Independent Vosk transcription matches after punctuation/case token normalization.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -1096,7 +1123,9 @@
         "leading_quiet_seconds": 0.06,
         "trailing_quiet_seconds": 0.2,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "independent_unconstrained_match",
+        "independent_review_note": "Independent Vosk transcription matches after punctuation/case token normalization.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -1171,7 +1200,9 @@
         "leading_quiet_seconds": 0.18,
         "trailing_quiet_seconds": 0.14,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "independent_unconstrained_match",
+        "independent_review_note": "Independent Vosk transcription matches after punctuation/case token normalization.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -1269,7 +1300,9 @@
         "leading_quiet_seconds": 0.18,
         "trailing_quiet_seconds": 0.14,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "independent_unconstrained_match",
+        "independent_review_note": "Independent Vosk transcription matches after punctuation/case token normalization.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -1359,7 +1392,9 @@
         "leading_quiet_seconds": 0.18,
         "trailing_quiet_seconds": 0.16,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "independent_unconstrained_match",
+        "independent_review_note": "Independent Vosk transcription matches after punctuation/case token normalization.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -1446,7 +1481,9 @@
         "leading_quiet_seconds": 0.18,
         "trailing_quiet_seconds": 0.18,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "independent_unconstrained_match",
+        "independent_review_note": "Independent Vosk transcription matches after punctuation/case token normalization.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -1537,7 +1574,9 @@
         "leading_quiet_seconds": 0.0,
         "trailing_quiet_seconds": 0.14,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "independent_unconstrained_match",
+        "independent_review_note": "Independent Vosk transcription matches after punctuation/case token normalization.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -1593,7 +1632,9 @@
         "leading_quiet_seconds": 0.2,
         "trailing_quiet_seconds": 0.14,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "isolated_contrast_verified_with_candidates",
+        "independent_review_note": "Open-vocabulary recognition differs, but the independent recognizer identifies the expected item when offered both actual contrast labels plus unknown. No claim of unrestricted-word recognition is made.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -1688,7 +1729,9 @@
         "leading_quiet_seconds": 0.04,
         "trailing_quiet_seconds": 0.14,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "bounded_manual_adjudication_of_model_outputs",
+        "independent_review_note": "ASR présenter spelling is homophonic with présentez. The tested missing chunk une pièce d’identité matches.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -1746,7 +1789,9 @@
         "leading_quiet_seconds": 0.06,
         "trailing_quiet_seconds": 0.14,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "independent_unconstrained_match",
+        "independent_review_note": "Independent Vosk transcription matches after punctuation/case token normalization.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -1802,7 +1847,9 @@
         "leading_quiet_seconds": 0.18,
         "trailing_quiet_seconds": 0.14,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "independent_unconstrained_match",
+        "independent_review_note": "Independent Vosk transcription matches after punctuation/case token normalization.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -1882,7 +1929,9 @@
         "leading_quiet_seconds": 0.18,
         "trailing_quiet_seconds": 0.12,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "independent_unconstrained_match",
+        "independent_review_note": "Independent Vosk transcription matches after punctuation/case token normalization.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -1970,7 +2019,9 @@
         "leading_quiet_seconds": 0.18,
         "trailing_quiet_seconds": 0.12,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "independent_unconstrained_match",
+        "independent_review_note": "Independent Vosk transcription matches after punctuation/case token normalization.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -2026,7 +2077,9 @@
         "leading_quiet_seconds": 0.16,
         "trailing_quiet_seconds": 0.1,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "isolated_contrast_verified_with_candidates",
+        "independent_review_note": "Open-vocabulary recognition differs, but the independent recognizer identifies the expected item when offered both actual contrast labels plus unknown. No claim of unrestricted-word recognition is made.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -2082,7 +2135,9 @@
         "leading_quiet_seconds": 0.2,
         "trailing_quiet_seconds": 0.16,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "isolated_contrast_verified_with_candidates",
+        "independent_review_note": "Open-vocabulary recognition differs, but the independent recognizer identifies the expected item when offered both actual contrast labels plus unknown. No claim of unrestricted-word recognition is made.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -2165,7 +2220,9 @@
         "leading_quiet_seconds": 0.08,
         "trailing_quiet_seconds": 0.18,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "independent_unconstrained_match",
+        "independent_review_note": "Independent Vosk transcription matches after punctuation/case token normalization.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -2252,7 +2309,9 @@
         "leading_quiet_seconds": 0.18,
         "trailing_quiet_seconds": 0.16,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "bounded_manual_adjudication_of_model_outputs",
+        "independent_review_note": "ASR limité vs limitée is a silent morphological spelling difference; the exercise asks selection between audibly distinct sentences.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -2346,7 +2405,9 @@
         "leading_quiet_seconds": 0.18,
         "trailing_quiet_seconds": 0.1,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "independent_unconstrained_match",
+        "independent_review_note": "Independent Vosk transcription matches after punctuation/case token normalization.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -2433,7 +2494,9 @@
         "leading_quiet_seconds": 0.18,
         "trailing_quiet_seconds": 0.1,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "independent_unconstrained_match",
+        "independent_review_note": "Independent Vosk transcription matches after punctuation/case token normalization.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -2489,7 +2552,9 @@
         "leading_quiet_seconds": 0.18,
         "trailing_quiet_seconds": 0.12,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "isolated_contrast_verified_with_candidates",
+        "independent_review_note": "Open-vocabulary recognition differs, but the independent recognizer identifies the expected item when offered both actual contrast labels plus unknown. No claim of unrestricted-word recognition is made.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -2560,7 +2625,9 @@
         "leading_quiet_seconds": 0.18,
         "trailing_quiet_seconds": 0.16,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "independent_unconstrained_match",
+        "independent_review_note": "Independent Vosk transcription matches after punctuation/case token normalization.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -2669,7 +2736,9 @@
         "leading_quiet_seconds": 0.18,
         "trailing_quiet_seconds": 0.16,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "independent_unconstrained_match",
+        "independent_review_note": "Independent Vosk transcription matches after punctuation/case token normalization.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -2765,7 +2834,9 @@
         "leading_quiet_seconds": 0.14,
         "trailing_quiet_seconds": 0.18,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "independent_unconstrained_match",
+        "independent_review_note": "Independent Vosk transcription matches after punctuation/case token normalization.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -2820,7 +2891,9 @@
         "leading_quiet_seconds": 0.06,
         "trailing_quiet_seconds": 0.1,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "independent_unconstrained_match",
+        "independent_review_note": "Independent Vosk transcription matches after punctuation/case token normalization.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -2878,7 +2951,9 @@
         "leading_quiet_seconds": 0.1,
         "trailing_quiet_seconds": 0.14,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "independent_unconstrained_match",
+        "independent_review_note": "Independent Vosk transcription matches after punctuation/case token normalization.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -2974,7 +3049,9 @@
         "leading_quiet_seconds": 0.18,
         "trailing_quiet_seconds": 0.16,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "independent_unconstrained_match",
+        "independent_review_note": "Independent Vosk transcription matches after punctuation/case token normalization.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -3032,7 +3109,9 @@
         "leading_quiet_seconds": 0.16,
         "trailing_quiet_seconds": 0.14,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "independent_unconstrained_match",
+        "independent_review_note": "Independent Vosk transcription matches after punctuation/case token normalization.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -3121,7 +3200,9 @@
         "leading_quiet_seconds": 0.12,
         "trailing_quiet_seconds": 0.1,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "independent_unconstrained_match",
+        "independent_review_note": "Independent Vosk transcription matches after punctuation/case token normalization.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -3177,7 +3258,9 @@
         "leading_quiet_seconds": 0.16,
         "trailing_quiet_seconds": 0.14,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "isolated_contrast_verified_with_candidates",
+        "independent_review_note": "Open-vocabulary recognition differs, but the independent recognizer identifies the expected item when offered both actual contrast labels plus unknown. No claim of unrestricted-word recognition is made.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -3256,7 +3339,9 @@
         "leading_quiet_seconds": 0.18,
         "trailing_quiet_seconds": 0.1,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "independent_unconstrained_match",
+        "independent_review_note": "Independent Vosk transcription matches after punctuation/case token normalization.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -3341,7 +3426,9 @@
         "leading_quiet_seconds": 0.18,
         "trailing_quiet_seconds": 0.14,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "independent_unconstrained_match",
+        "independent_review_note": "Independent Vosk transcription matches after punctuation/case token normalization.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -3430,7 +3517,9 @@
         "leading_quiet_seconds": 0.16,
         "trailing_quiet_seconds": 0.12,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "bounded_manual_adjudication_of_model_outputs",
+        "independent_review_note": "Vosk acheter vs acheté is a homophone; Whisper recovers the expected wording.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -3522,7 +3611,106 @@
         "leading_quiet_seconds": 0.08,
         "trailing_quiet_seconds": 0.14,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "independent_unconstrained_match",
+        "independent_review_note": "Independent Vosk transcription matches after punctuation/case token normalization.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
+      },
+      "alignment": {
+        "status": "whole_utterance_only",
+        "word_timestamps": null,
+        "note": "Replay always uses the original complete utterance. No inferred word boundaries or isolated-word sentence reconstruction."
+      },
+      "rights": {
+        "source_dataset": "SIWIS French Speech Synthesis Database (2017)",
+        "authors": [
+          "Junichi Yamagishi",
+          "Pierre-Edouard Honnet",
+          "Philip Garner",
+          "Alexandros Lazaridis"
+        ],
+        "source_dataset_license": "CC-BY-4.0",
+        "source_dataset_url": "https://doi.org/10.7488/ds/1705",
+        "voice_model_card": "https://huggingface.co/rhasspy/piper-voices/blob/c10ece1aade47bb51c153c893d14e5bf8e5b7117/fr/fr_FR/siwis/medium/MODEL_CARD",
+        "voice_repository_license": "MIT; voice-specific dataset attribution retained",
+        "engine_license": "GPL-3.0-or-later (build tool only; not distributed)",
+        "recording_notice": "Synthetic speech generated for COMULS from original teaching text; attribution retained. No endorsement by the dataset contributors is implied."
+      }
+    },
+    {
+      "audio_id": "sha256:8684fc04cc1aab7a27a19e707a29a94610a4add9f1d72e18ab713e1f8b2303fa",
+      "filename": "comuls_8684fc04cc1aab7a27a19e707a29a94610a4add9f1d72e18ab713e1f8b2303fa.wav",
+      "sha256": "8684fc04cc1aab7a27a19e707a29a94610a4add9f1d72e18ab713e1f8b2303fa",
+      "text": "Bonjour. Vous êtes prêt à écouter du français.",
+      "text_sha256": "ff3de66ff8a27f11ddde74594e39c754e97d05b88fc1d85d2d8e589d45881df4",
+      "source_utterance_id": "text-sha256:ff3de66ff8a27f11ddde74594e39c754e97d05b88fc1d85d2d8e589d45881df4",
+      "normalized_spoken_text": "Bonjour. Vous êtes prêt à écouter du français.",
+      "locale": "fr-FR",
+      "pronunciation_overrides": {},
+      "planned_phonemes": [
+        [
+          "b",
+          "ɔ",
+          "̃",
+          "ʒ",
+          "ˈ",
+          "u",
+          "ʁ",
+          "."
+        ],
+        [
+          "v",
+          "u",
+          "z",
+          " ",
+          "ɛ",
+          "t",
+          " ",
+          "p",
+          "ʁ",
+          "ˈ",
+          "ɛ",
+          " ",
+          "a",
+          " ",
+          "e",
+          "k",
+          "u",
+          "t",
+          "ˈ",
+          "e",
+          " ",
+          "d",
+          "y",
+          "-",
+          " ",
+          "f",
+          "ʁ",
+          "ɑ",
+          "̃",
+          "s",
+          "ˈ",
+          "ɛ",
+          "."
+        ]
+      ],
+      "duration_seconds": 2.577415,
+      "sample_rate": 22050,
+      "sample_width": 2,
+      "channels": 1,
+      "bytes": 113708,
+      "quality": {
+        "decoded_pcm": true,
+        "complete_wav_frames": true,
+        "peak_fraction": 0.849945,
+        "rms_fraction": 0.145585,
+        "clipped_sample_fraction": 0.0,
+        "quiet_20ms_window_fraction": 0.209302,
+        "leading_quiet_seconds": 0.1,
+        "trailing_quiet_seconds": 0.16,
+        "human_listening_review": false,
+        "independent_text_audio_agreement": "independent_unconstrained_match",
+        "independent_review_note": "Independent Vosk transcription matches after punctuation/case token normalization.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -3626,97 +3814,9 @@
         "leading_quiet_seconds": 0.18,
         "trailing_quiet_seconds": 0.16,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
-      },
-      "alignment": {
-        "status": "whole_utterance_only",
-        "word_timestamps": null,
-        "note": "Replay always uses the original complete utterance. No inferred word boundaries or isolated-word sentence reconstruction."
-      },
-      "rights": {
-        "source_dataset": "SIWIS French Speech Synthesis Database (2017)",
-        "authors": [
-          "Junichi Yamagishi",
-          "Pierre-Edouard Honnet",
-          "Philip Garner",
-          "Alexandros Lazaridis"
-        ],
-        "source_dataset_license": "CC-BY-4.0",
-        "source_dataset_url": "https://doi.org/10.7488/ds/1705",
-        "voice_model_card": "https://huggingface.co/rhasspy/piper-voices/blob/c10ece1aade47bb51c153c893d14e5bf8e5b7117/fr/fr_FR/siwis/medium/MODEL_CARD",
-        "voice_repository_license": "MIT; voice-specific dataset attribution retained",
-        "engine_license": "GPL-3.0-or-later (build tool only; not distributed)",
-        "recording_notice": "Synthetic speech generated for COMULS from original teaching text; attribution retained. No endorsement by the dataset contributors is implied."
-      }
-    },
-    {
-      "audio_id": "sha256:8c1ef1ac34946c454d163e1516ba488f9c7a44472b22fe95f3e4e73bb8cb77cb",
-      "filename": "comuls_8c1ef1ac34946c454d163e1516ba488f9c7a44472b22fe95f3e4e73bb8cb77cb.wav",
-      "sha256": "8c1ef1ac34946c454d163e1516ba488f9c7a44472b22fe95f3e4e73bb8cb77cb",
-      "text": "Bonjour. Écoutez cette phrase en français.",
-      "text_sha256": "77eaa156f1b5a2f183095a6919115cfb2eb4822fb3c6dafa4b757f3d79161226",
-      "source_utterance_id": "text-sha256:77eaa156f1b5a2f183095a6919115cfb2eb4822fb3c6dafa4b757f3d79161226",
-      "normalized_spoken_text": "Bonjour. Écoutez cette phrase en français.",
-      "locale": "fr-FR",
-      "pronunciation_overrides": {},
-      "planned_phonemes": [
-        [
-          "b",
-          "ɔ",
-          "̃",
-          "ʒ",
-          "ˈ",
-          "u",
-          "ʁ",
-          "."
-        ],
-        [
-          "e",
-          "k",
-          "u",
-          "t",
-          "ˈ",
-          "e",
-          " ",
-          "s",
-          "ɛ",
-          "t",
-          " ",
-          "f",
-          "ʁ",
-          "ˈ",
-          "a",
-          "z",
-          " ",
-          "ɑ",
-          "̃",
-          " ",
-          "f",
-          "ʁ",
-          "ɑ",
-          "̃",
-          "s",
-          "ˈ",
-          "ɛ",
-          "."
-        ]
-      ],
-      "duration_seconds": 2.565805,
-      "sample_rate": 22050,
-      "sample_width": 2,
-      "channels": 1,
-      "bytes": 113196,
-      "quality": {
-        "decoded_pcm": true,
-        "complete_wav_frames": true,
-        "peak_fraction": 0.849945,
-        "rms_fraction": 0.145931,
-        "clipped_sample_fraction": 0.0,
-        "quiet_20ms_window_fraction": 0.224806,
-        "leading_quiet_seconds": 0.1,
-        "trailing_quiet_seconds": 0.18,
-        "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "independent_unconstrained_match",
+        "independent_review_note": "Independent Vosk transcription matches after punctuation/case token normalization.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -3805,7 +3905,9 @@
         "leading_quiet_seconds": 0.18,
         "trailing_quiet_seconds": 0.16,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "independent_unconstrained_match",
+        "independent_review_note": "Independent Vosk transcription matches after punctuation/case token normalization.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -3894,7 +3996,9 @@
         "leading_quiet_seconds": 0.18,
         "trailing_quiet_seconds": 0.12,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "independent_unconstrained_match",
+        "independent_review_note": "Independent Vosk transcription matches after punctuation/case token normalization.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -3993,7 +4097,9 @@
         "leading_quiet_seconds": 0.08,
         "trailing_quiet_seconds": 0.16,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "independent_unconstrained_match",
+        "independent_review_note": "Independent Vosk transcription matches after punctuation/case token normalization.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -4091,7 +4197,9 @@
         "leading_quiet_seconds": 0.06,
         "trailing_quiet_seconds": 0.14,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "bounded_manual_adjudication_of_model_outputs",
+        "independent_review_note": "Vosk reste incertaine vs restent incertaines differs only by silent plural endings; grammar and provided options disambiguate written form.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -4170,7 +4278,9 @@
         "leading_quiet_seconds": 0.14,
         "trailing_quiet_seconds": 0.1,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "independent_unconstrained_match",
+        "independent_review_note": "Independent Vosk transcription matches after punctuation/case token normalization.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -4240,7 +4350,9 @@
         "leading_quiet_seconds": 0.18,
         "trailing_quiet_seconds": 0.12,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "independent_unconstrained_match",
+        "independent_review_note": "Independent Vosk transcription matches after punctuation/case token normalization.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -4321,7 +4433,9 @@
         "leading_quiet_seconds": 0.08,
         "trailing_quiet_seconds": 0.14,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "independent_unconstrained_match",
+        "independent_review_note": "Independent Vosk transcription matches after punctuation/case token normalization.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -4380,7 +4494,9 @@
         "leading_quiet_seconds": 0.18,
         "trailing_quiet_seconds": 0.2,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "independent_unconstrained_match",
+        "independent_review_note": "Independent Vosk transcription matches after punctuation/case token normalization.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -4488,7 +4604,9 @@
         "leading_quiet_seconds": 0.14,
         "trailing_quiet_seconds": 0.16,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "independent_unconstrained_match",
+        "independent_review_note": "Independent Vosk transcription matches after punctuation/case token normalization.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -4576,7 +4694,9 @@
         "leading_quiet_seconds": 0.08,
         "trailing_quiet_seconds": 0.16,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "independent_unconstrained_match",
+        "independent_review_note": "Independent Vosk transcription matches after punctuation/case token normalization.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -4678,7 +4798,9 @@
         "leading_quiet_seconds": 0.16,
         "trailing_quiet_seconds": 0.14,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "independent_unconstrained_match",
+        "independent_review_note": "Independent Vosk transcription matches after punctuation/case token normalization.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -4734,7 +4856,9 @@
         "leading_quiet_seconds": 0.16,
         "trailing_quiet_seconds": 0.12,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "independent_unconstrained_match",
+        "independent_review_note": "Independent Vosk transcription matches after punctuation/case token normalization.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -4791,7 +4915,9 @@
         "leading_quiet_seconds": 0.06,
         "trailing_quiet_seconds": 0.12,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "independent_unconstrained_match",
+        "independent_review_note": "Independent Vosk transcription matches after punctuation/case token normalization.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -4872,7 +4998,9 @@
         "leading_quiet_seconds": 0.12,
         "trailing_quiet_seconds": 0.16,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "independent_unconstrained_match",
+        "independent_review_note": "Independent Vosk transcription matches after punctuation/case token normalization.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -4942,7 +5070,9 @@
         "leading_quiet_seconds": 0.18,
         "trailing_quiet_seconds": 0.16,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "independent_unconstrained_match",
+        "independent_review_note": "Independent Vosk transcription matches after punctuation/case token normalization.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -5015,7 +5145,9 @@
         "leading_quiet_seconds": 0.06,
         "trailing_quiet_seconds": 0.1,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "independent_unconstrained_match",
+        "independent_review_note": "Independent Vosk transcription matches after punctuation/case token normalization.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -5112,7 +5244,9 @@
         "leading_quiet_seconds": 0.18,
         "trailing_quiet_seconds": 0.18,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "independent_unconstrained_match",
+        "independent_review_note": "Independent Vosk transcription matches after punctuation/case token normalization.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -5200,7 +5334,9 @@
         "leading_quiet_seconds": 0.16,
         "trailing_quiet_seconds": 0.1,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "bounded_manual_adjudication_of_model_outputs",
+        "independent_review_note": "Reporter vs reporté is homophonic; this is transcript selection between audibly distinct alternatives.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -5268,7 +5404,9 @@
         "leading_quiet_seconds": 0.18,
         "trailing_quiet_seconds": 0.1,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "independent_unconstrained_match",
+        "independent_review_note": "Independent Vosk transcription matches after punctuation/case token normalization.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -5324,105 +5462,9 @@
         "leading_quiet_seconds": 0.18,
         "trailing_quiet_seconds": 0.14,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
-      },
-      "alignment": {
-        "status": "whole_utterance_only",
-        "word_timestamps": null,
-        "note": "Replay always uses the original complete utterance. No inferred word boundaries or isolated-word sentence reconstruction."
-      },
-      "rights": {
-        "source_dataset": "SIWIS French Speech Synthesis Database (2017)",
-        "authors": [
-          "Junichi Yamagishi",
-          "Pierre-Edouard Honnet",
-          "Philip Garner",
-          "Alexandros Lazaridis"
-        ],
-        "source_dataset_license": "CC-BY-4.0",
-        "source_dataset_url": "https://doi.org/10.7488/ds/1705",
-        "voice_model_card": "https://huggingface.co/rhasspy/piper-voices/blob/c10ece1aade47bb51c153c893d14e5bf8e5b7117/fr/fr_FR/siwis/medium/MODEL_CARD",
-        "voice_repository_license": "MIT; voice-specific dataset attribution retained",
-        "engine_license": "GPL-3.0-or-later (build tool only; not distributed)",
-        "recording_notice": "Synthetic speech generated for COMULS from original teaching text; attribution retained. No endorsement by the dataset contributors is implied."
-      }
-    },
-    {
-      "audio_id": "sha256:c724a34fb363ef9242cd46b29bdd72e8b453a845890634dd3dc1a5391916e290",
-      "filename": "comuls_c724a34fb363ef9242cd46b29bdd72e8b453a845890634dd3dc1a5391916e290.wav",
-      "sha256": "c724a34fb363ef9242cd46b29bdd72e8b453a845890634dd3dc1a5391916e290",
-      "text": "Nous avons reporté la réunion faute de temps.",
-      "text_sha256": "1b8d7e7327f7cd5118dad39ead14d8387c1daa4ec6dcd1966676ebff203d4836",
-      "source_utterance_id": "text-sha256:1b8d7e7327f7cd5118dad39ead14d8387c1daa4ec6dcd1966676ebff203d4836",
-      "normalized_spoken_text": "Nous avons reporté la réunion faute de temps.",
-      "locale": "fr-FR",
-      "pronunciation_overrides": {},
-      "planned_phonemes": [
-        [
-          "n",
-          "u",
-          "z",
-          " ",
-          "a",
-          "v",
-          "ˈ",
-          "ɔ",
-          "̃",
-          " ",
-          "ʁ",
-          "ə",
-          "p",
-          "ɔ",
-          "ʁ",
-          "t",
-          "ˈ",
-          "e",
-          " ",
-          "l",
-          "a",
-          "-",
-          " ",
-          "ʁ",
-          "e",
-          "y",
-          "n",
-          "j",
-          "ˈ",
-          "ɔ",
-          "̃",
-          " ",
-          "f",
-          "ˈ",
-          "o",
-          "t",
-          " ",
-          "d",
-          "ə",
-          "-",
-          " ",
-          "t",
-          "ˈ",
-          "ɑ",
-          "̃",
-          "."
-        ]
-      ],
-      "duration_seconds": 2.333605,
-      "sample_rate": 22050,
-      "sample_width": 2,
-      "channels": 1,
-      "bytes": 102956,
-      "quality": {
-        "decoded_pcm": true,
-        "complete_wav_frames": true,
-        "peak_fraction": 0.849945,
-        "rms_fraction": 0.139812,
-        "clipped_sample_fraction": 0.0,
-        "quiet_20ms_window_fraction": 0.162393,
-        "leading_quiet_seconds": 0.18,
-        "trailing_quiet_seconds": 0.14,
-        "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "isolated_contrast_verified_with_candidates",
+        "independent_review_note": "Open-vocabulary recognition differs, but the independent recognizer identifies the expected item when offered both actual contrast labels plus unknown. No claim of unrestricted-word recognition is made.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -5527,7 +5569,9 @@
         "leading_quiet_seconds": 0.06,
         "trailing_quiet_seconds": 0.18,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "independent_unconstrained_match",
+        "independent_review_note": "Independent Vosk transcription matches after punctuation/case token normalization.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -5613,7 +5657,9 @@
         "leading_quiet_seconds": 0.18,
         "trailing_quiet_seconds": 0.14,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "bounded_manual_adjudication_of_model_outputs",
+        "independent_review_note": "Whisper recovers du; coup vs coût is homophonic. The task is English meaning recognition, not ambiguous spelling transcription.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -5683,7 +5729,101 @@
         "leading_quiet_seconds": 0.08,
         "trailing_quiet_seconds": 0.16,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "bounded_manual_adjudication_of_model_outputs",
+        "independent_review_note": "Occupé vs occupée is silent agreement spelling; Whisper recovers expected feminine spelling.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
+      },
+      "alignment": {
+        "status": "whole_utterance_only",
+        "word_timestamps": null,
+        "note": "Replay always uses the original complete utterance. No inferred word boundaries or isolated-word sentence reconstruction."
+      },
+      "rights": {
+        "source_dataset": "SIWIS French Speech Synthesis Database (2017)",
+        "authors": [
+          "Junichi Yamagishi",
+          "Pierre-Edouard Honnet",
+          "Philip Garner",
+          "Alexandros Lazaridis"
+        ],
+        "source_dataset_license": "CC-BY-4.0",
+        "source_dataset_url": "https://doi.org/10.7488/ds/1705",
+        "voice_model_card": "https://huggingface.co/rhasspy/piper-voices/blob/c10ece1aade47bb51c153c893d14e5bf8e5b7117/fr/fr_FR/siwis/medium/MODEL_CARD",
+        "voice_repository_license": "MIT; voice-specific dataset attribution retained",
+        "engine_license": "GPL-3.0-or-later (build tool only; not distributed)",
+        "recording_notice": "Synthetic speech generated for COMULS from original teaching text; attribution retained. No endorsement by the dataset contributors is implied."
+      }
+    },
+    {
+      "audio_id": "sha256:d3a02f7f91f3e0613832d7a1a1a4aa336ba55a288cdbfb0c4f3aa6e48c8a8537",
+      "filename": "comuls_d3a02f7f91f3e0613832d7a1a1a4aa336ba55a288cdbfb0c4f3aa6e48c8a8537.wav",
+      "sha256": "d3a02f7f91f3e0613832d7a1a1a4aa336ba55a288cdbfb0c4f3aa6e48c8a8537",
+      "text": "La réunion est reportée faute de temps.",
+      "text_sha256": "7b2131adc83b47455551577441535d3f288d5508ad677e64b0cdee917de70bf6",
+      "source_utterance_id": "text-sha256:7b2131adc83b47455551577441535d3f288d5508ad677e64b0cdee917de70bf6",
+      "normalized_spoken_text": "La réunion est reportée faute de temps.",
+      "locale": "fr-FR",
+      "pronunciation_overrides": {},
+      "planned_phonemes": [
+        [
+          "l",
+          "a",
+          "-",
+          " ",
+          "ʁ",
+          "e",
+          "y",
+          "n",
+          "j",
+          "ˈ",
+          "ɔ",
+          "̃",
+          " ",
+          "ɛ",
+          " ",
+          "ʁ",
+          "ə",
+          "p",
+          "ɔ",
+          "ʁ",
+          "t",
+          "ˈ",
+          "e",
+          " ",
+          "f",
+          "ˈ",
+          "o",
+          "t",
+          " ",
+          "d",
+          "ə",
+          "-",
+          " ",
+          "t",
+          "ˈ",
+          "ɑ",
+          "̃",
+          "."
+        ]
+      ],
+      "duration_seconds": 2.356825,
+      "sample_rate": 22050,
+      "sample_width": 2,
+      "channels": 1,
+      "bytes": 103980,
+      "quality": {
+        "decoded_pcm": true,
+        "complete_wav_frames": true,
+        "peak_fraction": 0.849945,
+        "rms_fraction": 0.133327,
+        "clipped_sample_fraction": 0.0,
+        "quiet_20ms_window_fraction": 0.177966,
+        "leading_quiet_seconds": 0.18,
+        "trailing_quiet_seconds": 0.1,
+        "human_listening_review": false,
+        "independent_text_audio_agreement": "bounded_manual_adjudication_of_model_outputs",
+        "independent_review_note": "Vosk exactly recovers assessed chunk faute de temps, confidence 1 per word. Carrier et/reporter differs in spelling; printed carrier is supplied. Whisper disagrees on faute (foot); this residual model disagreement is retained and not presented as dual-model agreement.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -5768,7 +5908,9 @@
         "leading_quiet_seconds": 0.18,
         "trailing_quiet_seconds": 0.16,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "independent_unconstrained_match",
+        "independent_review_note": "Independent Vosk transcription matches after punctuation/case token normalization.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -5880,7 +6022,9 @@
         "leading_quiet_seconds": 0.16,
         "trailing_quiet_seconds": 0.16,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "independent_unconstrained_match",
+        "independent_review_note": "Independent Vosk transcription matches after punctuation/case token normalization.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -5968,7 +6112,9 @@
         "leading_quiet_seconds": 0.18,
         "trailing_quiet_seconds": 0.16,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "independent_unconstrained_match",
+        "independent_review_note": "Independent Vosk transcription matches after punctuation/case token normalization.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -6043,7 +6189,9 @@
         "leading_quiet_seconds": 0.18,
         "trailing_quiet_seconds": 0.18,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "independent_unconstrained_match",
+        "independent_review_note": "Independent Vosk transcription matches after punctuation/case token normalization.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -6113,7 +6261,9 @@
         "leading_quiet_seconds": 0.18,
         "trailing_quiet_seconds": 0.12,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "independent_unconstrained_match",
+        "independent_review_note": "Independent Vosk transcription matches after punctuation/case token normalization.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -6210,7 +6360,9 @@
         "leading_quiet_seconds": 0.0,
         "trailing_quiet_seconds": 0.12,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "independent_unconstrained_match",
+        "independent_review_note": "Independent Vosk transcription matches after punctuation/case token normalization.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -6310,7 +6462,9 @@
         "leading_quiet_seconds": 0.18,
         "trailing_quiet_seconds": 0.18,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "independent_unconstrained_match",
+        "independent_review_note": "Independent Vosk transcription matches after punctuation/case token normalization.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -6406,7 +6560,9 @@
         "leading_quiet_seconds": 0.08,
         "trailing_quiet_seconds": 0.12,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "independent_unconstrained_match",
+        "independent_review_note": "Independent Vosk transcription matches after punctuation/case token normalization.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -6464,7 +6620,9 @@
         "leading_quiet_seconds": 0.16,
         "trailing_quiet_seconds": 0.14,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "independent_unconstrained_match",
+        "independent_review_note": "Independent Vosk transcription matches after punctuation/case token normalization.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -6563,7 +6721,9 @@
         "leading_quiet_seconds": 0.18,
         "trailing_quiet_seconds": 0.12,
         "human_listening_review": false,
-        "independent_text_audio_agreement": "not_evaluated"
+        "independent_text_audio_agreement": "independent_unconstrained_match",
+        "independent_review_note": "Independent Vosk transcription matches after punctuation/case token normalization.",
+        "independent_review_report_sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade"
       },
       "alignment": {
         "status": "whole_utterance_only",
@@ -6586,5 +6746,12 @@
         "recording_notice": "Synthetic speech generated for COMULS from original teaching text; attribution retained. No endorsement by the dataset contributors is implied."
       }
     }
-  ]
+  ],
+  "independent_audit": {
+    "filename": "audio_qa_report.json",
+    "sha256": "d01f65fe95d42378b863ca97e394e6064c1241c4eb8814feb1c4ffe285acfade",
+    "status": "completed_with_documented_model_disagreements",
+    "human_reviewed": false,
+    "unadjudicated_flags": 0
+  }
 }

@@ -18,7 +18,7 @@ The seven listening formats comprise 70 target recordings. This review checked t
 | Meaning help presented as non-revealing | `imperial_b1_meaning_recall_05`, `imperial_b2_meaning_recall_01`, `imperial_b2_meaning_recall_03`, `imperial_b2_meaning_recall_05` | Target glosses such as `travel between two places`, `date`, `caused` and `important aspect` expose all or part of the requested meaning. Replace them with non-revealing gaps or mark the help as target-revealing. | Corrected and reread: the four carrier glosses use neutral gaps. |
 | Placeholder carrier support | All ten `grammar_meaning_choice` items | Replace the generic instruction `Read the fixed situation...` with actual help for understanding the French. If a complete translation is supplied, mark it as target-revealing. | Corrected and reread: carrier help now gives lexical glosses without the tested grammar meaning; complete interpretations are confined to preparation support. |
 | Distractor readability not explicitly supported | All ten `audio_transcript_choice` items; all ten `connected_word_recognition` items | Supply accessible glosses for the response labels and alternatives, including above-stage words; retain explicit exact-use understanding declarations. | Corrected and reread: every option has an English gloss and the French listening choices appear with translations in preparation. Whole-utterance targets use direct familiarisation instead of duplicating the target as its own prerequisite. |
-| Sound contrast preparation promises more than the UI plays | All ten `sound_discrimination` items | Make both option recordings available during preparation and feedback; first preparation must cover both. The initial inspected preparation UI only played the correct target. | Assigned to integration/media work; separate UI verification required. |
+| Sound contrast preparation promises more than the UI plays | All ten `sound_discrimination` items | Make both option recordings available during preparation and feedback; first preparation must cover both. The initial inspected preparation UI only played the correct target. | Source reread confirms preparation buttons and first-use checks for both word recordings, plus answer-side contrast buttons. Actual playback remains part of native release verification. |
 | Small explanation defects | B1 meaning/form-recall items | Remove doubled full stops and lower-case English `i`. | Corrected and reread. |
 
 The spelling decision was checked against the Académie française's ninth-edition entry for [connaître](https://www.dictionnaire-academie.fr/article/A9C3636), accessed 9 October 2026. It expressly permits both forms under the 1990 rectifications. This source supports the spelling decision only; no dictionary definition was copied into the pack.
@@ -49,7 +49,16 @@ A support unit is an exact-use declaration, not evidence that every word family 
 
 ## Release disposition
 
-All identified semantic, spelling, answer-contract and textual-support findings have been corrected and independently reread. Final replacement sound pairs `fin`/`vin` and `belle`/`bulle`, their IPA, definitions and cues have been reread in the final JSON. The new French definition of `compromis` and English definition of `fiable` were also reread after the frozen definition-language assignment changed. The targeted content suite passed 13 tests after the corrections. This records coherence of the bounded pilot content, not teacher approval, actual-recording certification, or independent approval of the software release. Preparation and feedback must still demonstrate both sounds as described in the remaining UI/media gate above.
+All identified semantic, spelling, answer-contract and textual-support findings have been corrected and independently reread. Final replacement sound pairs `fin`/`vin` and `belle`/`bulle`, their IPA, definitions and cues have been reread in the final JSON. The new French definition of `compromis` and English definition of `fiable` were also reread after the frozen definition-language assignment changed. The targeted content suite passed 13 tests after the corrections. This records coherence of the bounded pilot content, not teacher approval, actual-recording certification, or independent approval of the software release. Source reread confirms both contrast controls and preparation checks; actual playback remains part of native release verification.
+
+## Final audio-driven sentence revisions
+
+The media team identified two further generated-speech problems after the initial text review. Both replacement texts were approved, then reread in the saved course JSON with their answer/support contracts:
+
+- `imperial_b1_sentence_reconstruction_02`: `Elle ouvre le livre dans le train.` Its alternative grammatical tile order is `Dans le train elle ouvre le livre.` Both are natural and have the same tiles, so the recording still determines the required order.
+- `imperial_b2_partial_dictation_03`: `La réunion est reportée faute de temps.` The printed frame is `La réunion est reportée ___.`; the target remains `faute de temps`, with carrier support `The meeting is postponed [reason].` The agreement and meaning are correct.
+
+The revised onboarding check, `Bonjour. Vous êtes prêt à écouter du français.`, is also natural French. It is an audio check, not an assessment of the written gender agreement.
 
 ## Final reviewed text snapshots
 
@@ -57,5 +66,5 @@ The following SHA-256 values identify the reviewed pedagogical fields, excluding
 
 Fields: `id`, `type`, `prompt`, `answer`, `accepted`, `answer_policy`, `audio_text`, `target_form`, `target_meaning`, `carrier_meaning`, `carrier_help_reveals_target`, `required_construction`, `prerequisites`, `support_units`, `option_glosses`, `target_hint`, `english_support`, `explanation`, `tokens`, `level`, `target_level`, `carrier_level`, `construction_level`, `definition_language`.
 
-- `imperial_b1.json`: `25e564e71f6503cf6601edfaa3190b115a5c58c74e5125f761372de2750e93e9`
-- `imperial_b2.json`: `5f02428b215d8da235e2cbc943c74fe73fe2c16f91ef9809bac4dc99f27469b7`
+- `imperial_b1.json`: `f3b4f4e3105daa2f567dbceec373ace0f9910c41d76282672327c1316f6da374`
+- `imperial_b2.json`: `4a810f289f1d88824ec0ef701fef4fd8cb3b44c69dcd05196b5c24212b0c329e`

@@ -87,6 +87,11 @@ def build(*, require_clean=False):
         assets.update(media.validate_pack_media(pack, src))
     if not assets:
         raise ValueError("Imperial listening content must include bundled recordings")
+    declared_audio = {asset["filename"] for asset in media.load_manifest(src)["assets"]}
+    actual_audio = {path.name for path in (src / "data" / "media").rglob("*") if path.is_file()}
+    if actual_audio != declared_audio:
+        raise ValueError("Bundled media folder differs from its frozen manifest: "
+                         + ", ".join(sorted(actual_audio.symmetric_difference(declared_audio))))
     files = []
     for path in sorted(src.rglob("*")):
         if path.is_symlink():

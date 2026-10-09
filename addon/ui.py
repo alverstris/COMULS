@@ -59,6 +59,23 @@ def note_state(note):
     return json.loads(html.unescape(note["State"] or "{}"))
 
 
+def companion_exposed_today(col, exercise, notes, day):
+    """Defer newly admitted companions after an exact linked exposure today."""
+    groups = set(exercise.get("exposure_groups", []))
+    for note in notes.values():
+        if note["COMULS_ID"] == exercise["id"]:
+            continue
+        other = payload(note)
+        state = evidence_state(col, note)
+        same_unit = other.get("unit_id") == exercise.get("unit_id")
+        linked = bool(groups.intersection(other.get("exposure_groups", [])))
+        if same_unit and str(state.get("familiarised_day")) == str(day):
+            return True
+        if linked and str(state.get("last_exposed_day")) == str(day):
+            return True
+    return False
+
+
 class StudyInteractionFilter(QObject):
     """Track actual preparation input without recording keys or answers."""
     def __init__(self, controller):
@@ -490,6 +507,35 @@ class CourseController:
     def content_error(self, text):
         showWarning(str(text), parent=self.window or mw)
 
+    def ensure_current_controls(self, resume=None):
+        from .collection import template_status, ensure_model
+        status = template_status(mw.col)["status"]
+        if status in ("missing", "current"):
+            return True
+        if status == "upgradable":
+            self.mutate("Upgrade COMULS course controls", ensure_model,
+                        lambda _result: resume() if resume else None)
+        else:
+            showInfo("Your COMULS card template has personal changes. Open Settings → Content manager → "
+                     "Restore current course controls to preserve a backup and install the current controls. "
+                     "Your cards and review history remain available in native Anki.", parent=self.window)
+        return False
+
+    def restore_controls(self):
+        if not self.require_manager():
+            return
+        answer = QMessageBox.question(self.window or mw, "Restore current course controls",
+            "Install the current COMULS card controls? Any customized template will be preserved "
+            "as a separate backup note type. Existing cards and review history are preserved.",
+            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No, QMessageBox.StandardButton.No)
+        if answer != QMessageBox.StandardButton.Yes:
+            return
+        from .collection import restore_course_templates
+        self.mutate("Restore COMULS course controls", restore_course_templates,
+            lambda report: showInfo("Current course controls installed." +
+                (" Backup note type: " + report["backup_note_type"] if report.get("backup_note_type") else ""),
+                parent=self.window))
+
     def mutate(self, name: str, operation: Callable, done=None):
         if self.busy or not mw.col:
             return
@@ -512,6 +558,8 @@ class CourseController:
 
     def study(self):
         if self.busy:
+            return
+        if not self.ensure_current_controls(self.study):
             return
         state = self.state()
         try:
@@ -567,6 +615,8 @@ class CourseController:
     def prepare_next(self, activity=None, repair=False):
         if not self.require_manager() or self.busy:
             return
+        if not self.ensure_current_controls(lambda: self.prepare_next(activity, repair)):
+            return
         state, budget = self.state(), self.budget()
         if not state.get("stage_confirmed", False) or state["stage"] not in COHORTS:
             self.window.tabs.setCurrentIndex(1)
@@ -602,11 +652,8 @@ class CourseController:
             if exercise["type"] in AUDIO_TYPES and exercise.get("audio_file") and not self.media_ready:
                 reasons.append("bundled media unavailable")
             # A reverse/companion card is not an independent retrieval on the same day.
-            for other in notes.values():
-                os = note_state(other)
-                if other["COMULS_ID"] != exercise["id"] and os.get("unit_id") == exercise["unit_id"] and os.get("familiarised_day") == str(day):
-                    reasons.append("companion available next study day")
-                    break
+            if companion_exposed_today(mw.col, exercise, notes, day):
+                reasons.append("companion available next study day")
             if reasons:
                 for reason in reasons:
                     blocked[reason] = blocked.get(reason, 0) + 1
@@ -632,17 +679,15 @@ class CourseController:
         layout.addWidget(label("This is supported preparation, not a test. Read the meaning, hear the example if present, "
                                "and check that the surrounding language makes sense."))
         text = QTextBrowser()
-        text.setPlainText("\n\n".join(str(exercise.get(k, "")) for k in
-            ("prompt", "audio_text", "answer", "target_meaning", "english_support", "carrier_meaning", "explanation") if exercise.get(k)))
+        preparation_text = "\n\n".join(str(exercise.get(k, "")) for k in
+            ("prompt", "audio_text", "answer", "target_meaning", "english_support", "carrier_meaning", "explanation") if exercise.get(k))
         if exercise.get("choices"):
-            text.append("\nResponse labels to understand before practice:\n" +
-                        "\n".join(c["text"] for c in exercise["choices"]))
-        if exercise.get("option_glosses"):
-            glosses = exercise["option_glosses"]
-            if isinstance(glosses, dict):
-                text.append("\n" + "\n".join(str(v) for v in glosses.values()))
-            elif isinstance(glosses, list):
-                text.append("\n" + "\n".join(str(v) for v in glosses))
+            glosses = {g["choice_id"]: g["english"] for g in exercise.get("option_glosses", [])
+                       if isinstance(g, dict) and "choice_id" in g and "english" in g}
+            preparation_text += "\n\nResponse labels to understand before practice:\n" + "\n".join(
+                c["text"] + (" — " + glosses[c["id"]] if c["id"] in glosses else "")
+                for c in exercise["choices"])
+        text.setPlainText(preparation_text)
         layout.addWidget(text)
         support_choices = {}
         already_understood = self.budget()["understood"]
@@ -713,9 +758,12 @@ class CourseController:
         exercise_for_gate = dict(exercise)
         exercise_for_gate["unit_already_introduced"] = exercise["unit_id"] in budget["seen_units"]
         exercise_for_gate["new_unit_cost"] = (0 if exercise_for_gate["unit_already_introduced"] else 1) + len(newly_learned)
+        exercise_for_gate["preparation_complete"] = True
         decision = admission_decision(exercise_for_gate, state["stage"], True,
             budget["understood"] | declared, set(state.get("enabled", EXERCISE_TYPES)), budget)
         reasons = list(decision["reasons"])
+        if companion_exposed_today(mw.col, exercise, exercise_notes(mw.col), mw.col.sched.today):
+            reasons.append("companion available next study day")
         if not self.is_manager():
             reasons.append("course management belongs to another desktop")
         if not repair and exercise.get("cohort", state["stage"]) != state["stage"]:
@@ -723,15 +771,18 @@ class CourseController:
         if exercise["type"] in AUDIO_TYPES and (not state.get("audio_confirmed") or
                 (exercise.get("audio_file") and not self.media_ready)):
             reasons.append("audio needs checking")
-        if reasons:
-            showInfo("Your preparation is complete, but admission is paused: " + ", ".join(reasons), parent=self.window)
-            # Preserve actual familiarisation even when the remaining time is exhausted.
-            self.mutate("Record COMULS preparation", lambda col: mark_familiarised(col, exercise["id"], col.sched.today))
-            return
-        def activate(col):
+        def record_preparation(col):
             declare_understood(col, exercise["id"], list(declared),
                                newly_learned_ids=list(newly_learned), day=col.sched.today)
             mark_familiarised(col, exercise["id"], col.sched.today)
+        if reasons:
+            showInfo("Your preparation is complete, but admission is paused: " + ", ".join(reasons), parent=self.window)
+            # Actual learning still counts when the remaining time is exhausted.
+            if self.is_manager():
+                self.mutate("Record COMULS preparation", record_preparation)
+            return
+        def activate(col):
+            record_preparation(col)
             return activate_exercise(col, exercise, col.sched.today)
         self.mutate("Admit COMULS exercise", activate,
                     lambda _nid: tooltip("Added to Anki practice. Use Study due / new cards when ready.", parent=self.window))
@@ -767,7 +818,8 @@ class CourseController:
             button("Play whole sentence", lambda: self.play_exercise(exercise), layout)
         button("Close", dialog.accept, layout)
         from .collection import record_reference_exposure
-        record_reference_exposure(mw.col, exercise["id"], time.time())
+        record_reference_exposure(mw.col, exercise["id"], time.time(),
+                                  exposure_groups=exercise.get("exposure_groups", []))
         self.on_event({"event": "reference_preview", "exercise_id": exercise["id"]})
         dialog.exec()
         av_player.stop_and_clear_queue()
@@ -850,6 +902,7 @@ class CourseController:
         row = QHBoxLayout(); layout.addLayout(row)
         button("Install course pack…", self.install_pack, row)
         button("Verify / restore bundled audio", self.install_bundled_audio, row)
+        button("Restore current course controls", self.restore_controls, layout)
         if (self.local.root / "pending-pack.json").is_file():
             button("Recover pending update", self.recover_pending_pack, layout)
         button("Close", dialog.accept, row)
@@ -883,6 +936,9 @@ class CourseController:
                 merged[exercise["id"]] = exercise
             combined = dict(self.pack, version=pack["version"], exercises=list(merged.values()))
             combined["last_update"] = {"pack_id": pack["pack_id"], "version": pack["version"]}
+            # A pending recovery file is already the complete staged catalog.
+            if file.resolve() == (self.local.root / "pending-pack.json").resolve():
+                combined = pack
             errors = validate_pack(combined)
             if errors:
                 raise ValueError("\n".join(errors))

@@ -19,7 +19,8 @@ os.environ.setdefault("QT_QPA_PLATFORM", "offscreen")
 
 import pytest
 import aqt
-from aqt.qt import QApplication, QMainWindow, QMenu, QPushButton, QMessageBox
+from aqt.qt import (QApplication, QMainWindow, QMenu, QPushButton, QMessageBox,
+                    QDialog, QDialogButtonBox, QComboBox, QCheckBox)
 from anki.collection import Collection
 
 PACKAGE = "_comuls_ui_test"
@@ -187,7 +188,7 @@ def test_settings_and_entry_level_buttons_write_real_synced_state(course):
 def test_prepare_button_creates_paused_card_without_fabricating_familiarity(course, monkeypatch):
     window = show_window(course)
     exposed = []
-    monkeypatch.setattr(course, "familiarise", lambda exercise: exposed.append(exercise))
+    monkeypatch.setattr(course, "familiarise", lambda exercise, **_kwargs: exposed.append(exercise))
     # Explicit onboarding choice, including confirming the initial B1 route.
     window.stage_box.setCurrentText("B1")
     find_button(window, "Use this level").click()
@@ -348,3 +349,192 @@ def test_profile_lifecycle_and_repeated_menu_open_keep_one_active_reviewer(cours
     ui.on_profile_close()
     assert not current.clock.isActive()
     assert sum(not handle.closed for handle in course._test_registrations) == 0
+
+
+def use_imperial_text_exercise(course, cohort="B1"):
+    """Use the real frozen Imperial payload, retaining the native collection/UI."""
+    path = Path(__file__).resolve().parents[1] / "addon" / "data" / f"imperial_{cohort.lower()}.json"
+    pack = ui.load_pack(path)
+    exercise = next(item for item in pack["exercises"]
+                    if item["type"] == "meaning_recall" and item.get("support_units"))
+    course.pack = pack
+    course.catalog = [exercise]
+    course.by_id = {exercise["id"]: exercise}
+    adapter.stage_change(course._test_mw.col, cohort)
+    state = course.state()
+    state.update(stage_confirmed=True, manager_id=course.local.manager_id,
+                 max_new_units=20, max_new_cards=8, max_preview_units=1)
+    adapter.save_state(course._test_mw.col, state)
+    show_window(course)
+    return exercise
+
+
+def preparation_dialog_driver(monkeypatch, choices="known", before_accept=None):
+    """Choose real dialog controls and press its real connected acceptance button."""
+    observed = {}
+    def complete(dialog):
+        assert dialog.windowTitle() == "Learn this first — COMULS"
+        supports = [widget for widget in dialog.findChildren(QComboBox)
+                    if widget.objectName().startswith("support_")]
+        observed["support_ids"] = {widget.objectName()[len("support_"):] for widget in supports}
+        for widget in supports:
+            if choices is not None:
+                widget.setCurrentIndex(widget.findData(choices))
+        target = next(widget for widget in dialog.findChildren(QCheckBox)
+                      if widget.text().startswith("I understand this target"))
+        target.setChecked(True)
+        if before_accept:
+            before_accept()
+        buttons = dialog.findChild(QDialogButtonBox)
+        buttons.button(QDialogButtonBox.StandardButton.Ok).click()
+        return dialog.result()
+    monkeypatch.setattr(QDialog, "exec", complete)
+    return observed
+
+
+@pytest.mark.parametrize("cohort", ["B1", "B2"])
+@pytest.mark.parametrize("declaration", ["known", "new"])
+def test_imperial_preparation_exact_support_declarations_and_new_unit_accounting(
+        course, monkeypatch, cohort, declaration):
+    exercise = use_imperial_text_exercise(course, cohort)
+    observed = preparation_dialog_driver(monkeypatch, declaration)
+    course.prepare_next("meaning_recall")
+    note = adapter.exercise_notes(course._test_mw.col)[exercise["id"]]
+    state = adapter.note_state(note)
+    expected = ui.prerequisite_ids(exercise)
+    assert observed["support_ids"] == expected
+    assert set(state["understood_support"]) == expected
+    assert state["lifecycle"] == "admitted"
+    assert note.cards()[0].queue == 0 and note.cards()[0].reps == 0
+    assert not course._test_mw.col.get_review_logs(note.cards()[0].id)
+    budget = course.budget()
+    assert expected <= budget["understood"]
+    assert budget["new_units"] == 1 + (len(expected) if declaration == "new" else 0)
+    assert budget["admitted_cards"] == 1
+    assert set(state["support_learned_days"]) == (expected if declaration == "new" else set())
+    assert not [entry for entry in course._test_messages if entry[0] == "warning"]
+
+
+def test_imperial_preparation_does_not_admit_unconfirmed_support(course, monkeypatch):
+    exercise = use_imperial_text_exercise(course)
+    preparation_dialog_driver(monkeypatch, choices=None)
+    course.prepare_next("meaning_recall")
+    note = adapter.exercise_notes(course._test_mw.col)[exercise["id"]]
+    state = adapter.note_state(note)
+    assert state["lifecycle"] == "prepared"
+    assert state["familiarised_day"] is None
+    assert note.cards()[0].queue == -1
+    assert course.budget()["new_units"] == course.budget()["admitted_cards"] == 0
+    assert any("Confirm each supporting use" in text for _kind, text in course._test_messages)
+
+
+def test_finished_preparation_counts_learning_when_budget_expires_inside_dialog(course, monkeypatch):
+    exercise = use_imperial_text_exercise(course)
+    preparation_dialog_driver(monkeypatch, choices="new",
+                              before_accept=lambda: [course.add_active_seconds(225.25) for _ in range(4)])
+    course.prepare_next("meaning_recall")
+    note = adapter.exercise_notes(course._test_mw.col)[exercise["id"]]
+    state = adapter.note_state(note)
+    assert state["lifecycle"] == "prepared" and state["admitted_day"] is None
+    assert state["familiarised_day"] == str(course._test_mw.col.sched.today)
+    assert set(state["understood_support"]) == ui.prerequisite_ids(exercise)
+    assert note.cards()[0].queue == -1 and not course._test_mw.col.get_review_logs(note.cards()[0].id)
+    budget = course.budget()
+    assert budget["new_units"] == 1 + len(ui.prerequisite_ids(exercise))
+    assert budget["admitted_cards"] == 0 and budget["remaining_seconds"] == 0
+    assert any("preparation is complete, but admission is paused" in text for _kind, text in course._test_messages)
+
+
+def test_new_support_cost_cannot_bypass_daily_target_cap_after_preparation(course, monkeypatch):
+    exercise = use_imperial_text_exercise(course)
+    state = course.state(); state["max_new_units"] = 1
+    adapter.save_state(course._test_mw.col, state)
+    preparation_dialog_driver(monkeypatch, choices="new")
+    course.prepare_next("meaning_recall")
+    note = adapter.exercise_notes(course._test_mw.col)[exercise["id"]]
+    assert note.cards()[0].queue == -1
+    assert adapter.note_state(note)["admitted_day"] is None
+    assert course.budget()["new_units"] == 1 + len(ui.prerequisite_ids(exercise))
+    assert any("daily_unit_limit" in text for _kind, text in course._test_messages)
+
+
+def test_accessibility_and_caps_persist_from_real_settings_and_stop_new_admission(course):
+    window = show_window(course)
+    window.font_size.setValue(145)
+    window.accent_row.setChecked(False)
+    window.autoplay.setChecked(True)
+    window.units.setValue(0)
+    window.cards.setValue(3)
+    window.previews.setValue(0)
+    find_button(window, "Save settings").click()
+    state = course.state()
+    assert (state["font_percent"], state["accent_row"], state["audio_autoplay"]) == (145, False, True)
+    assert (state["max_new_units"], state["max_new_cards"], state["max_preview_units"]) == (0, 3, 0)
+    state["stage_confirmed"] = True
+    adapter.save_state(course._test_mw.col, state)
+    course.prepare_next("meaning_recall")
+    assert not adapter.exercise_notes(course._test_mw.col)
+    assert any("daily unit limit" in text for _kind, text in course._test_messages)
+    assert window.font_size.value() == 145 and not window.accent_row.isChecked()
+    assert (window.units.minimum(), window.units.maximum()) == (0, 20)
+    assert (window.cards.minimum(), window.cards.maximum()) == (0, 30)
+    assert (window.previews.minimum(), window.previews.maximum()) == (0, 1)
+
+
+def test_custom_controls_block_managed_entry_then_explicit_restore_preserves_backup(course, monkeypatch):
+    show_window(course)
+    col = course._test_mw.col
+    exercise = first_text_exercise(course)
+    nid = adapter.prepare_exercise(col, exercise, col.sched.today)
+    model = col.models.by_name(adapter.MODEL_NAME)
+    custom = "{{Prompt}} Personal template preserved"
+    model["tmpls"][0]["qfmt"] = custom
+    col.models.update_dict(model)
+    resumed = []
+    assert course.ensure_current_controls(lambda: resumed.append(True)) is False
+    assert not resumed
+    assert col.models.by_name(adapter.MODEL_NAME)["tmpls"][0]["qfmt"] == custom
+    assert any("Restore current course controls" in text for _kind, text in course._test_messages)
+    monkeypatch.setattr(QMessageBox, "question", lambda *_args, **_kwargs: QMessageBox.StandardButton.No)
+    course.restore_controls()
+    assert adapter.template_status(col)["status"] == "customized"
+    monkeypatch.setattr(QMessageBox, "question", lambda *_args, **_kwargs: QMessageBox.StandardButton.Yes)
+    course.restore_controls()
+    assert adapter.template_status(col)["status"] == "current"
+    assert any(model["tmpls"][0]["qfmt"] == custom for model in col.models.all())
+    assert adapter.exercise_notes(col)[exercise["id"]].id == nid
+    assert course.ensure_current_controls() is True
+
+
+def test_known_legacy_control_upgrade_resumes_requested_action(course, monkeypatch):
+    show_window(course)
+    col = course._test_mw.col
+    adapter.ensure_model(col)
+    model = col.models.by_name(adapter.MODEL_NAME)
+    model["tmpls"][0]["qfmt"] = "{{Prompt}} verified previous release"
+    col.models.update_dict(model)
+    monkeypatch.setattr(adapter, "_LEGACY_TEMPLATE_HASHES", {adapter._template_hashes(model)})
+    resumed = []
+    assert course.ensure_current_controls(lambda: resumed.append(True)) is False
+    assert resumed == [True]
+    assert adapter.template_status(col)["status"] == "current"
+
+
+def test_exact_group_exposure_today_defers_new_companion_even_after_yesterday(course):
+    import time
+    col = course._test_mw.col
+    source = copy.deepcopy(first_text_exercise(course))
+    source['exposure_groups'] = ['exact-shared-use']
+    adapter.prepare_exercise(col, source, col.sched.today - 1)
+    note = adapter.exercise_notes(col)[source['id']]
+    past_state = adapter.note_state(note)
+    past_state['familiarised_day'] = str(col.sched.today - 1)
+    adapter._write_json(note, 'State', past_state)
+    col.update_note(note)
+    candidate = dict(source, id='new-companion', unit_id='different-skill-target')
+    notes = adapter.exercise_notes(col)
+    assert not ui.companion_exposed_today(col, candidate, notes, col.sched.today)
+    adapter.record_reference_exposure(col, source['id'], time.time())
+    assert ui.companion_exposed_today(col, candidate, notes, col.sched.today)
+    assert not ui.companion_exposed_today(col, dict(candidate, exposure_groups=['unrelated']), notes, col.sched.today)
+    assert not ui.companion_exposed_today(col, source, notes, col.sched.today)

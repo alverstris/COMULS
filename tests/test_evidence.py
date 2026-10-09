@@ -99,7 +99,7 @@ def test_same_day_two_reviews_and_recent_exposure_never_establish_stability():
 
 
 def test_assistance_and_priming_are_not_independent_and_hints_are_not_understood():
-    for overrides in ({"target_hint": True}, {"carrier_help": True}, {"replays": 1},
+    for overrides in ({"target_hint": True}, {"carrier_help": True},
                       {"capture_phase": "after_exposure"}, {"prior_exposure_today": True},
                       {"prior_exposed_at": None}, {"assistance_known": False}):
         log = native(BASE + 2 * 86400)
@@ -119,6 +119,26 @@ def test_manual_self_comparison_can_supply_unaided_learner_reported_recall():
     log = native(BASE + 2 * 86400)
     result = summary([log], {str(log["id"]): meta(BASE, "2", outcome="self_compare", capture_phase="no_submission")})
     assert result["independent_successes"] == 1
+
+
+def test_normal_listening_replays_preserve_primary_retrieval_evidence():
+    logs = [native(BASE + 2 * 86400), native(BASE + 4 * 86400)]
+    records = {str(logs[0]["id"]): meta(BASE, "2", replays=1),
+               str(logs[1]["id"]): meta(BASE + 2 * 86400, "4", replays=4)}
+    result = summary(logs, records)
+    assert result["stable"] and result["independent_successes"] == 2
+    assert result["assisted_reviews"] == 0
+
+
+def test_nonrevealing_carrier_help_does_not_erase_exact_primary_evidence():
+    log = native(BASE + 2 * 86400)
+    exercise = dict(EXERCISE, carrier_help_reveals_target=False)
+    records = {str(log["id"]): meta(BASE, "2", carrier_help=True)}
+    result = evidence.summarize_exercise(exercise, {"review_evidence": records}, [log], BASE + 10 * 86400)
+    assert result["independent_successes"] == 1 and result["understood"]
+    records[str(log["id"])]["target_hint"] = True
+    result = evidence.summarize_exercise(exercise, {"review_evidence": records}, [log], BASE + 10 * 86400)
+    assert result["independent_successes"] == 0 and not result["understood"]
 
 
 def test_nonreview_administrative_history_and_future_entries_are_ignored():

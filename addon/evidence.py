@@ -104,7 +104,12 @@ def summarize_exercise(exercise: dict[str, Any], state: dict[str, Any],
         if not complete:
             unknown += 1
             continue
-        if info["target_hint"] or info["carrier_help"] or info["replays"] > 0:
+        # Ordinary playback/replay is a permitted listening control. A count of
+        # one can be the learner's first manual play, so it is not target help.
+        # Explicitly non-revealing carrier help also preserves primary-objective
+        # evidence; unknown carrier disclosure stays conservative.
+        revealing_carrier_help = info["carrier_help"] and exercise.get("carrier_help_reveals_target", True)
+        if info["target_hint"] or revealing_carrier_help:
             assisted += 1
             continue
         prior = timestamp(info.get("prior_exposed_at"))

@@ -6,8 +6,12 @@ This module records observational metadata only. It never submits a grade.
 from __future__ import annotations
 
 import html
+import hashlib
 import json
 import secrets
+import time
+import wave
+from pathlib import Path
 from datetime import datetime, timezone
 from typing import Any, Callable
 
@@ -41,6 +45,10 @@ class ReviewerIntegration:
         self._saved_auto_advance: bool | None = None
         self._auto_reviewer: Reviewer | None = None
         self._closed = False
+        self._audio_playback: dict[str, Any] | None = None
+        self._autoplay_pending_card: int | None = None
+        self.blocked_reason: str | None = None
+        self._read_error: str | None = None
 
     def install(self) -> "ReviewerIntegration":
         bindings = (
@@ -56,6 +64,10 @@ class ReviewerIntegration:
             ("audio_will_replay", self._audio_will_replay),
             ("reviewer_will_play_question_sounds", self._question_sounds),
             ("reviewer_will_play_answer_sounds", self._answer_sounds),
+            ("av_player_will_play", self._playback_will_play),
+            ("av_player_did_begin_playing", self._playback_began),
+            ("av_player_did_end_playing", self._playback_ended),
+            ("reviewer_did_show_question", self._playback_question_shown),
         )
         for name, callback in bindings:
             hook = getattr(gui_hooks, name)
@@ -96,12 +108,14 @@ class ReviewerIntegration:
         )
 
     def _read_exercise(self, card: Any) -> dict[str, Any] | None:
+        self._read_error = None
         note = card.note()
         try:
             identity = note["COMULS_ID"]
         except (KeyError, IndexError):
             return None
-        if not isinstance(identity, str) or not identity.strip():
+        if not isinstance(identity, str) or not identity.strip() or len(identity) > 256:
+            self._read_error = "This managed card has no valid exercise identity."
             return None
         try:
             raw = note["Payload"]
@@ -120,8 +134,46 @@ class ReviewerIntegration:
                 raise ValueError(errors[0])
             return exercise
         except (KeyError, IndexError, ValueError, TypeError, UnicodeError, RecursionError):
-            self._error("This COMULS card has invalid exercise data. Check or re-import " + identity + ".")
+            self._read_error = "This card has invalid exercise data. Repair or re-import " + identity + "."
             return None
+
+    def _media_problem(self, exercise: dict[str, Any]) -> str | None:
+        """Check local required bytes before a question or a native rating.
+
+        Reading media is observational. Repair/copying stays in the content
+        manager; unavailable media never becomes a failed learning attempt.
+        """
+        references = [exercise] + [item for item in exercise.get("choices", []) if isinstance(item, dict)]
+        for reference in references:
+            filename = reference.get("audio_file")
+            if not filename:
+                continue  # Legacy TTS-only cards remain a manual client feature.
+            if (not isinstance(filename, str) or filename in (".", "..")
+                    or any(char in filename for char in "/\\:\r\n[]")):
+                return "This card has an invalid recording reference. Repair the course content."
+            try:
+                path = Path(aqt.mw.col.media.dir()) / filename
+                if not path.is_file() or path.stat().st_size == 0:
+                    return "A required recording is unavailable. Finish media sync or restore bundled audio in COMULS Settings."
+                if path.stat().st_size > 16_000_000:
+                    return "A required recording exceeds the supported file limit. Repair the course content."
+                expected = reference.get("audio_sha256")
+                if expected and (not isinstance(expected, str) or hashlib.sha256(path.read_bytes()).hexdigest() != expected):
+                    return "A required recording is damaged. Restore bundled audio in COMULS Settings."
+            except (OSError, AttributeError, TypeError, ValueError):
+                return "The required recordings could not be checked. Restore audio before reviewing this card."
+        return None
+
+    def _unavailable_html(self) -> str:
+        context = json.dumps(self.expected, ensure_ascii=True).replace("<", "\\u003c")
+        return ('<script>window.comulsContext=' + context + ';</script>'
+            '<main class="comuls-card" role="alert"><h2>COMULS card unavailable</h2><p>'
+            + html.escape(self.blocked_reason or "This card needs repair.")
+            + '</p><p>This is a content or audio issue. It will not receive a learning grade. '
+            'Use the ungraded skip, or return to COMULS Settings → Content manager.</p>'
+            '<button type="button" onclick="pycmd(\'comuls:\'+JSON.stringify(Object.assign({},'
+            'window.comulsContext,{event:\'skip\',reason:\'content_unavailable\'})))">'
+            'Skip without grading</button></main>')
 
     def _snapshot_prior_exposure(self, card: Any) -> None:
         """Read exposure before this question's own answer updates synced State."""
@@ -170,6 +222,7 @@ class ReviewerIntegration:
         self.prior_exposed_at = None
         self.pending_skip = False
         self.busy = False
+        self.blocked_reason = None
 
     def _card_will_show(self, text: str, card: Any, kind: str) -> str:
         # Browser previews and template editors must be observationally inert.
@@ -182,7 +235,24 @@ class ReviewerIntegration:
             return text
         if kind == "reviewQuestion":
             exercise = self._read_exercise(card)
+            read_error = self._read_error
+            note = card.note()
+            try:
+                identity = note["COMULS_ID"]
+                managed = True
+            except (KeyError, IndexError):
+                identity, managed = None, False
             if exercise is None:
+                if managed:
+                    self._clear()
+                    self.expected = {"nonce": secrets.token_urlsafe(18), "card_id": int(card.id),
+                        "exercise_id": identity if isinstance(identity, str) and identity.strip() and len(identity) <= 256
+                        else "invalid-managed-" + str(card.id)}
+                    self.latch.reset(self.expected["nonce"])
+                    self.blocked_reason = read_error or "This managed card has invalid data. Repair the course content."
+                    self._disable_auto(mw.reviewer)
+                    av_player.stop_and_clear_queue()
+                    return self._unavailable_html()
                 if self.expected is not None:
                     self._event("foreign_card")
                 self._clear()
@@ -197,6 +267,12 @@ class ReviewerIntegration:
             }
             self.latch.reset(self.expected["nonce"])
             self._disable_auto(mw.reviewer)
+            self.blocked_reason = self._media_problem(exercise)
+            if self.blocked_reason:
+                av_player.stop_and_clear_queue()
+                return self._unavailable_html()
+        elif self._live() and self.blocked_reason:
+            return self._unavailable_html()
         elif not self._live() or self.exercise is None:
             return "<script>window.comulsContext=null;</script>" + text
         # This must precede the template's card.js on BOTH sides.
@@ -213,8 +289,22 @@ class ReviewerIntegration:
         """Control only managed-card autoplay; do not change deck preferences."""
         exercise = self._read_exercise(card)
         if exercise is None:
-            return
+            try:
+                managed = bool(str(card.note()["COMULS_ID"]).strip())
+            except (KeyError, IndexError):
+                managed = False
+            if not managed:
+                return
+        # Native Anki passes the cached tag list itself. Detach that cache
+        # before changing this invocation's autoplay queue; replay indices
+        # must still address the original primary recording afterwards.
+        output = card.render_output()
+        if sounds is output.question_av_tags:
+            output.question_av_tags = list(sounds)
+        self._autoplay_pending_card = int(card.id)
         sounds.clear()
+        if exercise is None:
+            return
         state_reader = getattr(self.controller, "state", None)
         state = state_reader() if callable(state_reader) else {}
         if state.get("audio_autoplay", False) and not getattr(self.controller, "paused", False):
@@ -226,16 +316,85 @@ class ReviewerIntegration:
                 sounds.extend(card.question_av_tags()[:1])
 
     def _answer_sounds(self, card: Any, sounds: list[Any]) -> None:
-        if self._read_exercise(card) is not None:
+        try:
+            managed = bool(str(card.note()["COMULS_ID"]).strip())
+        except (KeyError, IndexError):
+            managed = False
+        if managed:
+            output = card.render_output()
+            if sounds is output.answer_av_tags:
+                output.answer_av_tags = list(sounds)
             sounds.clear()
 
+    def _playback_will_play(self, tag: Any) -> None:
+        """Observe native playback; a click alone never reveals listening tiles."""
+        self._audio_playback = None
+        mw = aqt.mw
+        if self._closed or mw is None or mw.state != "review" or mw.reviewer.state != "question":
+            return
+        card = mw.reviewer.card
+        if card is None:
+            return
+        exercise = self._read_exercise(card)
+        filename = getattr(tag, "filename", None)
+        if not exercise or not filename or filename != exercise.get("audio_file"):
+            return
+        try:
+            with wave.open(str(Path(mw.col.media.dir()) / filename), "rb") as wav:
+                duration = wav.getnframes() / wav.getframerate()
+        except (OSError, ValueError, wave.Error, EOFError):
+            return
+        if duration <= 0:
+            return
+        # Autoplay is requested before Anki renders a new question/context.
+        # Bind that playback to its nonce once the real question is shown.
+        nonce = None
+        if self._autoplay_pending_card != int(card.id) and self._live():
+            nonce = self.expected["nonce"]
+        self._audio_playback = {"card_id": int(card.id), "filename": filename,
+                                "duration": duration, "nonce": nonce,
+                                "started": None, "player_id": None}
+
+    def _playback_question_shown(self, card: Any) -> None:
+        playback = self._audio_playback
+        self._autoplay_pending_card = None
+        if (playback is not None and playback["nonce"] is None
+                and playback["card_id"] == int(card.id) and self._live()):
+            playback["nonce"] = self.expected["nonce"]
+
+    def _playback_began(self, player: Any, tag: Any) -> None:
+        playback = self._audio_playback
+        if playback is None or getattr(tag, "filename", None) != playback["filename"]:
+            return
+        playback["started"] = time.monotonic()
+        playback["player_id"] = id(player)
+        if playback["nonce"] is None and self._live() and self.expected["card_id"] == playback["card_id"]:
+            playback["nonce"] = self.expected["nonce"]
+
+    def _playback_ended(self, player: Any) -> None:
+        playback = self._audio_playback
+        self._audio_playback = None
+        if (playback is None or playback["started"] is None or playback["player_id"] != id(player)
+                or not self._live() or aqt.mw.reviewer.state != "question"
+                or getattr(self.controller, "paused", False)
+                or self.expected["card_id"] != playback["card_id"]
+                or self.expected["nonce"] != playback["nonce"]
+                or time.monotonic() - playback["started"] < playback["duration"] * .85):
+            return
+        nonce = json.dumps(self.expected["nonce"])
+        aqt.mw.reviewer.web.eval("if(window.COMULSPlaybackEnded){window.COMULSPlaybackEnded(" + nonce + ");}")
+
     def _did_show_question(self, card: Any) -> None:
+        if self.blocked_reason:
+            return
         if self._live() and card.id == self.expected["card_id"]:
             self._disable_auto(aqt.mw.reviewer)
             self._event("question", type=self.exercise["type"],
                         prior_exposure_today=self.prior_exposure_today)
 
     def _did_show_answer(self, card: Any) -> None:
+        if self.blocked_reason:
+            return
         if not self._live() or card.id != self.expected["card_id"]:
             return
         self._disable_auto(aqt.mw.reviewer)
@@ -328,6 +487,8 @@ class ReviewerIntegration:
         if event is None:
             return (True, None)
         kind = event["event"]
+        if self.blocked_reason and kind not in ("skip", "report", "pause", "activity"):
+            return (True, None)
         if kind == "attempt":
             if self.latch.accept(event):
                 self.capture_after_exposure = self.exposed
@@ -396,7 +557,13 @@ class ReviewerIntegration:
         if reviewer.auto_advance_enabled:
             self._disable_auto(reviewer)
             return (False, ease_tuple[1])
-        if self.busy:
+        if self.blocked_reason or self.busy:
+            return (False, ease_tuple[1])
+        media_problem = self._media_problem(self.exercise) if self.exercise else None
+        if media_problem:
+            self.blocked_reason = media_problem
+            av_player.stop_and_clear_queue()
+            self._error(media_problem + " Use Anki's Bury Card action or leave review; no grade was recorded.")
             return (False, ease_tuple[1])
         # Manual self-comparison is valid even with no typed submission.
         return ease_tuple

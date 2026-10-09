@@ -9,6 +9,7 @@ from __future__ import annotations
 import hashlib
 import io
 import json
+import math
 from pathlib import Path
 import re
 import wave
@@ -54,6 +55,11 @@ def load_manifest(root: Path) -> dict[str, Any]:
             raise ValueError("Bundled audio must identify its spoken text.")
         if hashlib.sha256(text.encode("utf-8")).hexdigest() != asset.get("text_sha256"):
             raise ValueError("Bundled audio transcript checksum mismatch.")
+        duration = asset.get("duration_seconds")
+        if type(duration) not in (int, float) or not math.isfinite(duration) or not 0.15 <= duration <= 12:
+            raise ValueError("Invalid bundled audio duration.")
+        if any(type(asset.get(key)) is not int for key in ("bytes", "channels", "sample_width", "sample_rate")):
+            raise ValueError("Invalid bundled audio sample-format metadata.")
     if _name(manifest.get("audio_check_file")) not in seen:
         raise ValueError("The French audio check is missing from the manifest.")
     return manifest

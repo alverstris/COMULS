@@ -111,6 +111,7 @@ class ReviewerHookTests(unittest.TestCase):
 
         cls.saved_modules = {}
         for name in ("aqt", "aqt.operations", "aqt.reviewer", "aqt.sound", "aqt.qt",
+                     "anki", "anki.sound",
                      "comuls_review_tests", "comuls_review_tests.bridge",
                      "comuls_review_tests.core", "comuls_review_tests.reviewer",
                      "comuls_review_tests.collection"):
@@ -129,6 +130,7 @@ class ReviewerHookTests(unittest.TestCase):
         class NativeReviewer:
             def __init__(self):
                 self.card = None
+                self.state = "question"
                 self.auto_advance_enabled = False
                 self.auto_calls = 0
                 self.next_calls = 0
@@ -169,7 +171,9 @@ class ReviewerHookTests(unittest.TestCase):
                  "reviewer_did_show_question", "reviewer_did_show_answer",
                  "reviewer_will_answer_card", "reviewer_did_answer_card",
                  "reviewer_will_end", "state_shortcuts_will_change",
-                 "reviewer_will_show_context_menu", "audio_will_replay")
+                 "reviewer_will_show_context_menu", "audio_will_replay",
+                 "reviewer_will_play_question_sounds", "reviewer_will_play_answer_sounds",
+                 "av_player_will_play", "av_player_did_begin_playing", "av_player_did_end_playing")
         aqt_module.gui_hooks = SimpleNamespace(**{name: [] for name in names})
         aqt_module.mw = None
         operations = ModuleType("aqt.operations")
@@ -177,7 +181,15 @@ class ReviewerHookTests(unittest.TestCase):
         reviewer_module = ModuleType("aqt.reviewer")
         reviewer_module.Reviewer = NativeReviewer
         sound = ModuleType("aqt.sound")
-        sound.av_player = SimpleNamespace(stop_and_clear_queue=lambda: None)
+        sound.av_player = SimpleNamespace(stop_and_clear_queue=lambda: None,
+                                          play_tags=lambda tags: None)
+        native_sound = ModuleType("anki.sound")
+        native_sound.SoundOrVideoTag = lambda filename: SimpleNamespace(filename=filename)
+        if "anki" not in sys.modules:
+            native_package = ModuleType("anki")
+            native_package.__path__ = []
+            sys.modules["anki"] = native_package
+        sys.modules["anki.sound"] = native_sound
         qt = ModuleType("aqt.qt")
         qt.QKeySequence = lambda value: value
         for module in (aqt_module, operations, reviewer_module, sound, qt):
@@ -202,12 +214,22 @@ class ReviewerHookTests(unittest.TestCase):
 
     def setUp(self):
         import html
+        import sys
+        from types import ModuleType
         self.events = []
         self.errors = []
+        self.played_audio = []
+        self.module.av_player.play_tags = self.played_audio.extend
         self.controller = SimpleNamespace(on_event=self.events.append,
                                           content_error=self.errors.append)
         self.reviewer = self.NativeReviewer()
-        self.aqt.mw = SimpleNamespace(state="review", reviewer=self.reviewer)
+        self.aqt.mw = SimpleNamespace(state="review", reviewer=self.reviewer,
+                                      col=SimpleNamespace(sched=SimpleNamespace(today=42)))
+        # Every test starts with its own adapter fixture. Do not let an exposure
+        # test's richer stub leak into later reviewer tests through sys.modules.
+        helpers = ModuleType("comuls_review_tests.collection")
+        helpers.evidence_state = lambda col, note: json.loads(html.unescape(note.get("State", "{}")))
+        sys.modules[helpers.__name__] = helpers
         self.exercise = {
             "id": "exercise-1", "type": "french_form_recall", "level": "B1",
             "entry_levels": ["B1"], "prompt": "Write the French noun.",
@@ -231,6 +253,9 @@ class ReviewerHookTests(unittest.TestCase):
                      target_hint=False, carrier_help=False, replays=0)
         value.update(changes)
         return bridge.PREFIX + json.dumps(value)
+
+    def current_event(self, event, **details):
+        return bridge.PREFIX + json.dumps(dict(self.integration.expected, event=event, **details))
 
     def test_preview_is_inert_and_nonce_precedes_both_scripts(self):
         self.assertEqual(self.integration._card_will_show("preview", self.card,
@@ -296,6 +321,79 @@ class ReviewerHookTests(unittest.TestCase):
         self.assertTrue(self.integration.latch.submitted)
         self.assertEqual(self.integration._will_answer_card((True, 3),
                                                            self.reviewer, self.card), (False, 3))
+
+    def test_invalid_managed_card_keeps_auto_off_and_cannot_receive_a_grade(self):
+        self.note["Payload"] = "{invalid"
+        self.reviewer.auto_advance_enabled = True
+        page = self.begin()
+        self.assertIn("COMULS card unavailable", page)
+        self.assertIn("Skip without grading", page)
+        self.assertFalse(self.reviewer.auto_advance_enabled)
+        self.assertTrue(self.integration._live())
+        for grade in (1, 2, 3, 4):
+            self.assertEqual(self.integration._will_answer_card((True, grade), self.reviewer, self.card), (False, grade))
+        self.integration._did_show_question(self.card)
+        self.integration._did_show_answer(self.card)
+        self.integration._web_message((False, None), self.current_message(), self.reviewer)
+        self.assertFalse(self.integration.latch.submitted)
+        self.assertFalse(any(event["event"] in ("question", "answer_exposure", "attempt") for event in self.events))
+        self.assertIn("unavailable", self.integration._card_will_show("back", self.card, "reviewAnswer"))
+        request = dict(self.integration.expected, event="skip", reason="content_unavailable")
+        self.integration._web_message((False, None), bridge.PREFIX + json.dumps(request), self.reviewer)
+        self.assertIsNotNone(self.FakeCollectionOp.latest)
+        self.assertEqual(self.reviewer.next_calls, 0)
+        self.FakeCollectionOp.latest.success_callback(None)
+        self.assertEqual(self.reviewer.next_calls, 1)
+
+    def test_empty_managed_identity_is_unavailable_but_foreign_cards_remain_native(self):
+        self.note["COMULS_ID"] = ""
+        self.assertIn("unavailable", self.begin())
+        self.assertEqual(self.integration._will_answer_card((True, 1), self.reviewer, self.card), (False, 1))
+        del self.note["COMULS_ID"]
+        self.assertIn("<main>template</main>", self.begin())
+        self.assertIsNone(self.integration.expected)
+        self.assertEqual(self.integration._will_answer_card((True, 3), self.reviewer, self.card), (True, 3))
+
+    def test_missing_or_changed_recording_blocks_learning_grade(self):
+        import html
+        import hashlib
+        import tempfile
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / "primary.wav"
+            self.exercise["audio_file"] = path.name
+            self.exercise["audio_sha256"] = hashlib.sha256(b"known-bytes").hexdigest()
+            self.note["Payload"] = html.escape(json.dumps(self.exercise))
+            self.aqt.mw.col = SimpleNamespace(media=SimpleNamespace(dir=lambda: directory))
+            self.assertIn("recording is unavailable", self.begin())
+            self.assertEqual(self.integration._will_answer_card((True, 1), self.reviewer, self.card), (False, 1))
+            path.write_bytes(b"damaged")
+            self.assertIn("recording is damaged", self.begin())
+            path.write_bytes(b"known-bytes")
+            self.assertNotIn("unavailable</h2>", self.begin())
+            self.assertEqual(self.integration._will_answer_card((True, 3), self.reviewer, self.card), (True, 3))
+            path.unlink()
+            self.assertEqual(self.integration._will_answer_card((True, 3), self.reviewer, self.card), (False, 3))
+
+    def test_missing_contrast_recording_blocks_before_question(self):
+        import html
+        import tempfile
+        with tempfile.TemporaryDirectory() as directory:
+            self.exercise.update(type="sound_discrimination", audio_text="rue", answer="rue",
+                choices=[{"id": "rue", "text": "rue", "correct": True, "audio_file": "rue.wav"},
+                         {"id": "roue", "text": "roue", "correct": False, "audio_file": "roue.wav"}])
+            self.note["Payload"] = html.escape(json.dumps(self.exercise))
+            self.aqt.mw.col = SimpleNamespace(media=SimpleNamespace(dir=lambda: directory))
+            (Path(directory) / "rue.wav").write_bytes(b"present")
+            self.assertIn("recording is unavailable", self.begin())
+            self.assertFalse(self.integration.exposed)
+            self.assertEqual(self.integration._will_answer_card((True, 3), self.reviewer, self.card), (False, 3))
+
+    def test_unsafe_media_path_is_not_read(self):
+        import html
+        self.exercise["audio_file"] = "../outside.wav"
+        self.note["Payload"] = html.escape(json.dumps(self.exercise))
+        self.assertIn("invalid recording reference", self.begin())
+        self.assertEqual(self.integration._will_answer_card((True, 3), self.reviewer, self.card), (False, 3))
 
     def test_skip_advances_only_after_successful_native_bury(self):
         self.begin()
@@ -373,15 +471,18 @@ class ReviewerHookTests(unittest.TestCase):
 
     def test_priming_is_snapshotted_before_current_answer(self):
         self.note["State"] = json.dumps({"last_exposed_day": "41",
-                                         "familiarised_day": "40"})
+                                         "familiarised_day": "40", "last_exposed_at": 1700000000.25})
         self.aqt.mw.col = SimpleNamespace(sched=SimpleNamespace(today=42))
         self.begin()
         self.assertFalse(self.integration.prior_exposure_today)
-        self.note["State"] = json.dumps({"last_exposed_day": "42"})
+        self.assertEqual(self.integration.prior_exposed_at, 1700000000.25)
+        self.note["State"] = json.dumps({"last_exposed_day": "42", "last_exposed_at": 1700086400.5})
         self.integration._web_message((False, None), self.current_message(), self.reviewer)
         self.assertFalse(self.events[-1]["prior_exposure_today"])
+        self.assertEqual(self.events[-1]["prior_exposed_at"], 1700000000.25)
         self.begin()
         self.assertTrue(self.integration.prior_exposure_today)
+        self.assertEqual(self.integration.prior_exposed_at, 1700086400.5)
 
     def test_native_keyboard_audio_replay_is_observed(self):
         self.begin()
@@ -417,6 +518,9 @@ class ReviewerHookTests(unittest.TestCase):
         helpers.exercise_notes = lambda col: notes
         helpers.note_payload = lambda note: json.loads(html.unescape(note["Payload"]))
         helpers.note_state = lambda note: json.loads(html.unescape(note["State"]))
+        helpers.evidence_state = lambda col, note: helpers.note_state(note)
+        self.factual_exposures = []
+        helpers.record_reference_exposure = lambda col, identity, when: self.factual_exposures.append((identity, when))
         helpers._write_json = lambda note, field, value: note.__setitem__(
             field, html.escape(json.dumps(value)))
         sys.modules[helpers.__name__] = helpers
@@ -444,6 +548,9 @@ class ReviewerHookTests(unittest.TestCase):
         result = operation.op(collection)
         self.assertEqual(result.undo, 999)
         self.assertEqual(self.bury_calls, [([124], True)])
+        self.assertEqual(len(self.factual_exposures), 1)
+        self.assertEqual(self.factual_exposures[0][0], "exercise-1")
+        self.assertGreater(self.factual_exposures[0][1], 0)
         self.assertEqual([note.id for note in self.updated_notes], [321, 322])
         for note in (source, sibling):
             state = helpers.note_state(note)
@@ -478,6 +585,90 @@ class ReviewerHookTests(unittest.TestCase):
         metadata = self.integration._attempt_metadata()
         self.assertFalse(metadata["submitted"])
         self.assertEqual(metadata["capture_phase"], "no_submission")
+
+    def test_comparison_audio_resolves_only_current_choices_after_reveal(self):
+        self.begin()
+        self.integration.exercise = dict(self.exercise, choices=[
+            {"id": "choice-safe", "audio_file": "bundled-contrast.wav"}])
+        event = self.current_event("play_comparison", choice_id="choice-safe")
+        self.integration._web_message((False, None), event, self.reviewer)
+        self.assertEqual(self.played_audio, [])
+        self.reviewer.state = "answer"
+        self.integration._web_message((False, None),
+            self.current_event("play_comparison", choice_id="../../unknown.wav"), self.reviewer)
+        self.assertEqual(self.played_audio, [])
+        self.integration._web_message((False, None), event, self.reviewer)
+        self.assertEqual([tag.filename for tag in self.played_audio], ["bundled-contrast.wav"])
+        self.assertEqual(self.events[-1]["source"], "comparison")
+        self.assertEqual(self.events[-1]["side"], "back")
+        self.assertEqual(self.integration.replays, 0)
+
+    def test_native_question_replays_survive_later_zero_replay_submission(self):
+        self.begin()
+        self.integration._audio_will_replay(self.reviewer.web, self.card, True)
+        self.integration._audio_will_replay(self.reviewer.web, self.card, True)
+        self.integration._web_message((False, None), self.current_message(replays=0), self.reviewer)
+        self.assertEqual(self.events[-1]["replays"], 2)
+        self.integration._did_answer_card(self.reviewer, self.card, 3)
+        self.assertEqual(self.events[-1]["replays"], 2)
+        self.begin()
+        self.assertEqual(self.integration.replays, 0)
+
+    def test_install_and_close_own_new_audio_hooks_without_leaking_registrations(self):
+        self.integration.install()
+        for name in ("reviewer_will_play_question_sounds", "reviewer_will_play_answer_sounds"):
+            self.assertEqual(len(getattr(self.aqt.gui_hooks, name)), 1)
+        self.integration.close()
+        for name in ("reviewer_will_play_question_sounds", "reviewer_will_play_answer_sounds"):
+            self.assertEqual(getattr(self.aqt.gui_hooks, name), [])
+
+    def test_autoplay_filter_detaches_cached_tags_so_native_replay_remains_available(self):
+        self.controller.state = lambda: {"audio_autoplay": False}
+        question_tag = SimpleNamespace(filename="primary-question.wav")
+        answer_tag = SimpleNamespace(filename="primary-answer.wav")
+        cached = SimpleNamespace(question_av_tags=[question_tag], answer_av_tags=[answer_tag])
+        self.card.render_output = lambda: cached
+        question_queue, answer_queue = cached.question_av_tags, cached.answer_av_tags
+        self.integration._question_sounds(self.card, question_queue)
+        self.integration._answer_sounds(self.card, answer_queue)
+        self.assertEqual(question_queue, [])
+        self.assertEqual(answer_queue, [])
+        self.assertEqual(cached.question_av_tags, [question_tag])
+        self.assertEqual(cached.answer_av_tags, [answer_tag])
+
+    def test_foreign_card_audio_queues_are_untouched(self):
+        card = SimpleNamespace(note=lambda: {"Front": "not COMULS"})
+        sounds = [SimpleNamespace(filename="other-course.wav")]
+        self.integration._question_sounds(card, sounds)
+        self.integration._answer_sounds(card, sounds)
+        self.assertEqual([tag.filename for tag in sounds], ["other-course.wav"])
+
+    def test_audio_completion_requires_current_nonce_player_and_elapsed_playback(self):
+        from unittest.mock import patch
+        self.begin()
+        scripts = []
+        self.reviewer.web = SimpleNamespace(eval=scripts.append)
+        player = object()
+        valid = {"card_id": 123, "nonce": self.integration.expected["nonce"],
+                 "filename": "primary.wav", "duration": 10, "started": 90, "player_id": id(player)}
+        with patch.object(self.module.time, "monotonic", return_value=100):
+            for invalid in (dict(valid, nonce="previous-render"), dict(valid, card_id=124),
+                            dict(valid, started=99), dict(valid, player_id=id(object())),
+                            dict(valid, started=None)):
+                self.integration._audio_playback = invalid
+                self.integration._playback_ended(player)
+                self.assertEqual(scripts, [])
+            self.reviewer.state = "answer"
+            self.integration._audio_playback = dict(valid)
+            self.integration._playback_ended(player)
+            self.assertEqual(scripts, [])
+            self.reviewer.state = "question"
+            self.integration._audio_playback = dict(valid)
+            self.integration._playback_ended(player)
+            self.assertEqual(len(scripts), 1)
+            self.assertIn(self.integration.expected["nonce"], scripts[0])
+            self.integration._playback_ended(player)
+            self.assertEqual(len(scripts), 1)
 
 
 if __name__ == "__main__":

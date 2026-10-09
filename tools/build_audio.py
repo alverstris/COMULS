@@ -26,7 +26,7 @@ MODEL_REVISION = "c10ece1aade47bb51c153c893d14e5bf8e5b7117"
 MODEL_NAME = "fr_FR-siwis-medium.onnx"
 MODEL_SHA = "641d1ab097da2b81128c076810edb052b385decc8be3381814802a64a73baf99"
 CONFIG_SHA = "39479916c2db192b5ac9764daddd0c744d83e023ad890c6976c0633ae4df8959"
-CHECK_TEXT = "Bonjour. Écoutez cette phrase en français."
+CHECK_TEXT = "Bonjour. Vous êtes prêt à écouter du français."
 SYNTHESIS = {"length_scale": 1.0, "noise_scale": 0.0, "noise_w_scale": 0.0,
              "volume": 0.85, "normalize_audio": True}
 REQUIRED_VERSIONS = {"piper-tts": "1.4.2", "onnxruntime": "1.31.0", "numpy": "2.5.3"}
@@ -151,7 +151,7 @@ def render(voice, configuration, text):
         "rights": RIGHTS}
 
 
-def verify(packs, root):
+def verify(packs, root, require_audit=True):
     media = media_module()
     assets = {}
     for pack in packs:
@@ -172,6 +172,22 @@ def verify(packs, root):
         raise ValueError("Bundled manifest, course references, and WAV files must match exactly")
     for filename in assets:
         signal_metrics((root / "data" / "media" / filename).read_bytes())
+    if require_audit:
+        link = manifest.get("independent_audit", {})
+        if link.get("filename") != "audio_qa_report.json":
+            raise ValueError("Attach the independent audio QA report before release verification")
+        report_bytes = (root / "data" / "audio_qa_report.json").read_bytes()
+        if sha(report_bytes) != link.get("sha256"):
+            raise ValueError("Independent audio QA report checksum mismatch")
+        report = json.loads(report_bytes)
+        reviewed = {asset["filename"]: asset for asset in report["assets"]}
+        if set(reviewed) != declared or report.get("summary", {}).get("unadjudicated_flags") != 0:
+            raise ValueError("Independent audio QA is incomplete")
+        for name, asset in assets.items():
+            if reviewed[name]["sha256"] != asset["sha256"] or reviewed[name]["expected"] != asset["text"]:
+                raise ValueError("Independent audio QA refers to superseded recordings/text")
+            if asset.get("quality", {}).get("independent_review_report_sha256") != link["sha256"]:
+                raise ValueError("Media asset does not identify its current independent QA report")
     print(f"Verified {len(assets)} frozen WAVs; {sum(a['bytes'] for a in assets.values())} bytes; no speech engine/network required.")
 
 
@@ -204,8 +220,10 @@ def main():
     output.mkdir(exist_ok=True)
     manifest_path = root / "data" / "media_manifest.json"
     frozen = {}
+    prior_manifest = None
     if manifest_path.is_file():
-        frozen = {a["text"]: a for a in media_module().load_manifest(root)["assets"]}
+        prior_manifest = media_module().load_manifest(root)
+        frozen = {a["text"]: a for a in prior_manifest["assets"]}
     assets = []
     for index, text in enumerate(sorted(text_refs), 1):
         asset = frozen.get(text)
@@ -228,6 +246,9 @@ def main():
         "dependencies": REQUIRED_VERSIONS, "settings": SYNTHESIS, "locale": "fr-FR"},
         "audio_check_file": next(a["filename"] for a in assets if a["text"] == CHECK_TEXT),
         "assets": sorted(assets, key=lambda a: a["filename"])}
+    if prior_manifest and {a["sha256"] for a in assets} == {a["sha256"] for a in prior_manifest["assets"]}:
+        if "independent_audit" in prior_manifest:
+            manifest["independent_audit"] = prior_manifest["independent_audit"]
     if args.prune_unreferenced:
         retained = {asset["filename"] for asset in assets}
         for asset in frozen.values():
@@ -253,7 +274,9 @@ def main():
         for path, pack in zip(paths, current_packs):
             path.write_text(json.dumps(pack, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
         packs = current_packs
-    verify(packs, root)
+    verify(packs, root, require_audit=bool(manifest.get("independent_audit")))
+    if not manifest.get("independent_audit"):
+        print("Audio build integrity passed; independent audio QA is still required before --verify-only/release.")
 
 
 if __name__ == "__main__":

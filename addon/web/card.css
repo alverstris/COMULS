@@ -1,7 +1,7 @@
 
 /* COMULS cards: readable in Anki Desktop and portable in synced note templates. */
 .card { margin: 0; padding: 24px 16px; background: #f4f5f2; color: #26362f; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: calc(20px * var(--comuls-font-scale, 1)); text-align: left; line-height: 1.55; }
-.comuls-card { box-sizing: border-box; max-width: 700px; margin: 0 auto; padding: 26px 28px; border: 1px solid #d9e0d8; border-radius: 14px; background: #fff; }
+.comuls-card { box-sizing: border-box; max-width: 700px; margin: 0 auto; padding: 26px 28px; border: 1px solid #d9e0d8; border-radius: 14px; background: #fff; font-size: calc(20px * var(--comuls-font-scale, 1)); }
 .comuls-card *, .comuls-card *::before, .comuls-card *::after { box-sizing: border-box; }
 .comuls-header { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 24px; font-size: calc(13px * var(--comuls-font-scale, 1)); color: #53665a; }
 .comuls-brand { margin-right: auto; letter-spacing: .12em; }
@@ -60,7 +60,7 @@
 .nightMode .comuls-support-content, .night_mode .comuls-support-content { background: #433f2e; }
 @media (max-width: 520px) {
   .card { padding: 12px 8px; font-size: calc(19px * var(--comuls-font-scale, 1)); }
-  .comuls-card { padding: 20px 16px; border-radius: 10px; }
+  .comuls-card { padding: 20px 16px; border-radius: 10px; font-size: calc(19px * var(--comuls-font-scale, 1)); }
   .comuls-header { margin-bottom: 18px; }
   .comuls-actions > .comuls-primary { flex-grow: 1; }
   .comuls-support { gap: 4px; }

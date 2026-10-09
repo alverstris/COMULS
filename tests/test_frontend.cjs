@@ -10,7 +10,9 @@ const childProcess = require("node:child_process");
 const {JSDOM, VirtualConsole} = require("jsdom");
 
 const repo = path.resolve(__dirname, "..");
-const pack = JSON.parse(fs.readFileSync(path.join(repo, "addon/data/tester.json"), "utf8"));
+const packs = ["tester", "imperial_b1", "imperial_b2"].map(name =>
+  JSON.parse(fs.readFileSync(path.join(repo, "addon/data/" + name + ".json"), "utf8")));
+const pack = {exercises: packs.flatMap(item => item.exercises)};
 const python = process.env.PYTHON || "python";
 const templates = JSON.parse(childProcess.execFileSync(python, ["-c", [
   "import importlib.util,json,pathlib",
@@ -46,7 +48,7 @@ function render(exercise, side) {
     Prompt: escapeHtml(exercise.prompt),
     Answer: escapeHtml(exercise.answer),
     AudioText: AUDIO_TYPES.has(exercise.type) ? escapeHtml(exercise.audio_text || "") : "",
-    AudioFile: "",
+    AudioFile: exercise.audio_file ? '<button class="replay-button" type="button">Replay audio</button>' : "",
     PersonalNotes: "",
     State: "{}"
   };
@@ -77,6 +79,8 @@ function openCard(exercise, side = "front", options = {}) {
       window.__attack = false;
       window.comulsContext = options.noContext ? undefined :
         {...context, exercise_id: exercise.id, ...(options.context || {})};
+      window.comulsPreferences = options.preferences || {};
+      if (options.now) window.Date.now = options.now;
       window.pycmd = message => messages.push(message);
       if (options.stored) window.sessionStorage.setItem(STORE_KEY, options.stored);
     }
@@ -134,6 +138,14 @@ function completeCorrectly(view, exercise) {
     getButton(view, "Check answer").click();
     same(events(view, "attempt")[0].response, String(correct.id), exercise.id + ": choice submits stable ID");
   } else if (shell === "tiles") {
+    const stage = view.document.querySelector(".comuls-tile-stage");
+    check(stage.hidden, exercise.id + ": tiles remain hidden before complete playback");
+    same(view.document.querySelectorAll(".comuls-tile-bank button").length, 0,
+      exercise.id + ": no answer-bearing tile labels rendered before listening");
+    same(view.window.COMULSPlaybackEnded(context.nonce), true,
+      exercise.id + ": current native completion opens the tiles");
+    check(!stage.hidden, exercise.id + ": completion reveals the reconstruction controls");
+    same(events(view, "hint").length, 0, exercise.id + ": completed listening is not target help");
     for (const token of api.tokensFor(exercise)) {
       const button = [...view.document.querySelectorAll(".comuls-tile-bank button")]
         .find(node => !node.disabled && node.textContent === token.text);
@@ -151,7 +163,7 @@ function completeCorrectly(view, exercise) {
   return shell;
 }
 
-check(pack.exercises.length >= 90, "Canonical tester has at least 90 authored exercises");
+same(packs.map(item => item.exercises.length), [90, 65, 65], "Tester and both complete Imperial cohorts are covered");
 same(new Set(pack.exercises.map(exercise => exercise.type)).size, 13, "All 13 exercise types are represented");
 for (const exercise of pack.exercises) {
   const front = openCard(exercise);
@@ -168,7 +180,7 @@ for (const exercise of pack.exercises) {
   if (exercise.explanation && !exercise.prompt.includes(exercise.explanation)) {
     check(!shown.includes(exercise.explanation.replace(/\s+/g, " ")), exercise.id + ": feedback explanation remains hidden");
   }
-  if (exercise.type !== "sentence_reconstruction" && exercise.audio_text && !exercise.prompt.includes(exercise.audio_text) &&
+  if (exercise.audio_text && !exercise.prompt.includes(exercise.audio_text) &&
       !(exercise.choices || []).some(choice => String(choice.text).includes(exercise.audio_text))) {
     check(!shown.includes(exercise.audio_text.replace(/\s+/g, " ")), exercise.id + ": transcript is not exposed");
   }
@@ -188,7 +200,9 @@ const typedExercise = pack.exercises.find(exercise => exercise.type === "french_
 {
   const front = openCard(typedExercise);
   enterText(front, typedExercise.answer, false);
-  same(front.messages.length, 0, "Typing alone emits no reveal or grade");
+  check(events(front).every(event => event.event === "activity"), "Typing alone may report activity but no attempt or reveal");
+  same(front.messages.filter(message => message === "ans").length, 0, "Typing alone never reveals");
+  assertNoGrade(front, "Typing alone");
   const back = openCard(typedExercise, "back", {stored: stored(front)});
   same(events(back, "attempt")[0].response, typedExercise.answer, "Native Show Answer recovers typed candidate");
   same(back.document.querySelector(".comuls-feedback").getAttribute("data-status"), "correct", "Recovered response evaluated");
@@ -313,6 +327,142 @@ const typedExercise = pack.exercises.find(exercise => exercise.type === "french_
 }
 
 // Persist the core helper checks so CI protects normalization and stable IDs.
+{
+  const exercise = packs[1].exercises.find(item => item.type === "sentence_reconstruction");
+  const front = openCard(exercise);
+  const stage = front.document.querySelector(".comuls-tile-stage");
+  check(getButton(front, "Check answer").disabled, "Reconstruction check stays disabled while tiles are locked");
+  getButton(front, "Replay audio").click();
+  check(stage.hidden, "A playback request alone never opens reconstruction tiles");
+  same(front.window.COMULSPlaybackEnded("stale-review-nonce"), false, "Stale completion rejected");
+  check(stage.hidden, "A stale completion cannot reveal tile words");
+  same(front.window.COMULSPlaybackEnded(context.nonce), true, "Current completion unlocks once");
+  same(front.window.COMULSPlaybackEnded(context.nonce), false, "Duplicate completion is idempotent");
+  check(!getButton(front, "Check answer").disabled, "Real completion makes reconstruction usable");
+  same(events(front, "hint").length, 0, "Ordinary listening remains independent of answer support");
+  check(JSON.parse(stored(front)).listen_first_completed, "Transient state records completed first listening");
+  const back = openCard(exercise, "back");
+  same(back.window.COMULSPlaybackEnded(context.nonce), false, "Answer side ignores stale front audio completion");
+  assertNoGrade(front, "Listen-first reconstruction");
+  front.close(); back.close();
+}
+{
+  const exercise = packs[2].exercises.find(item => item.type === "sentence_reconstruction");
+  const front = openCard(exercise);
+  const support = getButton(front, "Show word tiles (support)");
+  support.click(); support.click();
+  same(events(front, "hint").length, 1, "Explicit tile support records one assistance event");
+  same(events(front, "hint")[0].reveals_target, true, "Early tiles count as target assistance");
+  check(!front.document.querySelector(".comuls-tile-stage").hidden, "Support route reveals usable tiles");
+  check(JSON.parse(stored(front)).target_hint, "Assisted tile access excludes independent retrieval credit");
+  same(front.window.COMULSPlaybackEnded(context.nonce), false, "Later playback cannot erase prior assistance");
+  same(events(front, "attempt").length, 0, "Showing support does not fabricate a response");
+  assertNoGrade(front, "Early tile support");
+  front.close();
+
+  const portable = openCard(exercise, "front", {noContext: true});
+  same(portable.window.COMULSPlaybackEnded(context.nonce), false, "Portable card rejects invented native completion");
+  getButton(portable, "Show word tiles (support)").click();
+  check(!portable.document.querySelector(".comuls-tile-stage").hidden, "Portable reconstruction has an explicit usable fallback");
+  check(JSON.parse(stored(portable)).target_hint, "Portable support evidence remains honest locally");
+  same(portable.messages, [], "Portable fallback sends no unsupported native messages");
+  portable.close();
+}
+{
+  const front = openCard(typedExercise, "front", {preferences: {accent_row: true}});
+  const input = front.document.querySelector(".comuls-answer-input");
+  enterText(front, "ete", false);
+  input.setSelectionRange(0, 1);
+  getButton(front, "é").click();
+  same(input.value, "éte", "Accent key replaces the selected character");
+  same(input.selectionStart, 1, "Accent insertion restores the caret after the inserted letter");
+  same(JSON.parse(stored(front)).response, "éte", "Accent edits persist the candidate without checking");
+  same(front.document.activeElement, input, "Accent keys restore typing focus");
+  input.dispatchEvent(new front.window.KeyboardEvent("keydown", {
+    key: "Enter", isComposing: true, bubbles: true, cancelable: true
+  }));
+  same(events(front, "attempt").length, 0, "IME composition Enter never submits the answer");
+  input.dispatchEvent(new front.window.KeyboardEvent("keydown", {
+    key: "Enter", shiftKey: true, bubbles: true, cancelable: true
+  }));
+  same(events(front, "attempt").length, 0, "Shift Enter permits multiline input without checking");
+  assertNoGrade(front, "Accent and IME editing");
+  front.close();
+  const disabled = openCard(typedExercise, "front", {preferences: {accent_row: false}});
+  same(disabled.document.querySelector(".comuls-accent-keys"), null, "Accent-row preference actually removes the controls");
+  check(disabled.document.querySelector(".comuls-answer-input"), "Disabling accent keys preserves ordinary text entry");
+  disabled.close();
+}
+{
+  for (const [percent, expected] of [[145, "1.45"], [60, "0.85"], [240, "1.6"], ["invalid", "1"]]) {
+    const view = openCard(typedExercise, "front", {preferences: {font_percent: percent}});
+    same(view.document.querySelector(".comuls-card").style.getPropertyValue("--comuls-font-scale"), expected,
+      "Font preference applies a bounded, finite scale: " + percent);
+    same(view.errors, [], "Font preference cannot break card rendering");
+    view.close();
+  }
+  check(/\.comuls-card\s*\{[^}]*font-size:\s*calc\(20px\s*\*\s*var\(--comuls-font-scale/.test(templates.css),
+    "The prompt container itself uses the font scale, not only its smaller labels");
+}
+{
+  let now = 10000;
+  const front = openCard(typedExercise, "front", {now: () => now});
+  enterText(front, "a", false); enterText(front, "ab", false);
+  same(events(front, "activity").length, 1, "Rapid typing reports bounded activity rather than one event per keystroke");
+  now += 1000;
+  enterText(front, "abc", false);
+  same(events(front, "activity").length, 2, "Continued interaction renews active-study accounting");
+  same(events(front, "attempt").length, 0, "Activity telemetry cannot submit a response");
+  same(front.messages.filter(message => message === "ans").length, 0, "Activity cannot reveal an answer");
+  getButton(front, "Pause").click();
+  same(events(front, "pause").length, 1, "Pause requests native session suspension without grading");
+  same(JSON.parse(stored(front)).response, "abc", "Pause preserves the current candidate");
+  assertNoGrade(front, "Activity and pause");
+  front.close();
+}
+{
+  for (const side of ["front", "back"]) {
+    const view = openCard(typedExercise, side);
+    const skip = getButton(view, "Skip without grading");
+    skip.click(); skip.click();
+    same(events(view, "skip").length, 1, "Skip is idempotent on the " + side);
+    same(events(view, "skip")[0].side, side, "Skip identifies its actual reviewer side");
+    same(events(view, "attempt").length, 0, "Ungraded skip does not invent an answer attempt");
+    same(view.messages.filter(message => message === "ans").length, 0, "Skip does not reveal or advance through rating");
+    assertNoGrade(view, "Ungraded skip " + side);
+    view.close();
+  }
+  const portable = openCard(typedExercise, "front", {noContext: true});
+  getButton(portable, "Skip without grading").click();
+  check(visibleText(portable).includes("Use Anki’s Bury Card command"), "Portable skip explains the actual supported ungraded action");
+  same(portable.messages, [], "Portable skip has no unsupported mutation path");
+  portable.close();
+}
+{
+  const exercise = packs[1].exercises.find(item => item.type === "french_form_recall");
+  const front = openCard(exercise);
+  getButton(front, "Answer hint").click();
+  check(visibleText(front).includes(exercise.target_hint), "Authored optional letter hint appears only when requested");
+  same(events(front, "hint")[0].reveals_target, true, "Optional letter hint is classified as target assistance");
+  front.close();
+}
+
+// Persist the core helper checks so CI protects normalization and stable IDs.
+{
+  const exercise = packs[2].exercises.find(item => item.type === "french_form_recall" && item.definition_language === "fr");
+  const front = openCard(exercise);
+  check(!visibleText(front).includes(exercise.english_support), "French definition begins without its English bridge");
+  getButton(front, "Meaning support").click();
+  check(visibleText(front).includes(exercise.english_support), "French form recall can explain a forgotten French definition in English");
+  same(events(front, "hint")[0].kind, "carrier", "Definition translation supports the cue without supplying its French answer");
+  same(events(front, "hint")[0].reveals_target, false, "Nonrevealing definition translation remains carrier help");
+  check(!JSON.parse(stored(front)).target_hint, "Definition support does not invent target assistance");
+  front.close();
+  const revealing = openCard({...exercise, carrier_help_reveals_target: true});
+  getButton(revealing, "Meaning support").click();
+  same(events(revealing, "hint")[0].reveals_target, true, "An authored revealing-help flag remains authoritative for definition support");
+  revealing.close();
+}
 {
   const view = openCard(typedExercise), api = view.window.COMULSCard;
   same(api.normalize(" L ’ été ! "), "l'été", "Curly apostrophe and spacing normalization");
