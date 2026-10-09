@@ -1,83 +1,58 @@
-# COMULS — Concurrent Multi Level System
+# COMULS — Imperial French prototype
 
-COMULS is a proposed curriculum and progression system for Anki. It combines retention of earlier language, mastery of the current level, and controlled preparation for upcoming material. The aim is smoother language learning with fewer abrupt jumps between CEFR levels.
+COMULS is an Anki Desktop add-on for separate Imperial French B1 and B2 pilot groups. Version 0.2.0 contains 130 original exercises: 65 per route, with five examples of each of thirteen formats. It prepares new material before practice, offers easier repair and supported listening previews, and leaves scheduling and review ratings to Anki.
 
-**Current stage:** curriculum design and a verified French vocabulary dataset. There is no implemented curriculum engine, generated Anki deck, or released set of cards yet. This README describes the intended system and the vocabulary foundation currently published here. Improved learning speed is a design goal, not an established result.
+[Download version 0.2.0](https://github.com/alverstris/COMULS/releases/tag/imperial-demo-0.2.0) · [Student guide](docs/STUDENT_GUIDE.md) · [Organiser guide](docs/IMPERIAL_STUDY_GUIDE.md)
 
-## How the system is meant to work
+<!-- RELEASE_VERIFICATION_STATUS -->
+Published installers are gated on exact-package tests in Linux Anki 26.09.3. The release includes native verification reports tied to its source commit and file hashes. Windows and macOS installation remain unverified.
 
-The learner has one explicit current curriculum level, while several levels serve different purposes concurrently. At **B1**, the intended window is:
+## Install and start
 
-| Material | Role |
+1. Install [Anki Desktop](https://apps.ankiweb.net/). This prototype targets version 26.09.3; see the verification status above.
+2. Download one installer from the release:
+
+| Course | File |
 | --- | --- |
-| Earlier levels | Retain introduced material through due reviews |
-| B1 | Learn and practise vocabulary, grammar, listening and production |
-| B1+ | Selected spelling-from-audio and phonetic preparation |
-| B2 | Controlled aural exposure, followed by recognition after familiarisation |
-| B2+ and above | Normally locked; occasional ungraded exposure may be appropriate |
+| B1 | `comuls-imperial-b1.ankiaddon` |
+| B2 | `comuls-imperial-b2.ankiaddon` |
+| Choose during setup | `comuls-imperial-demo.ankiaddon` |
 
-The planned progression is `A2-R → A2 → A2+ → B1 → B1+ → B2 → B2+ → C1 → C1+ → C2`. A2-R is an initial recovery stage. Plus stages are project curriculum subdivisions, not separate official CEFR qualifications. In the vocabulary files, **B1/B2 corresponds to B1+**, and **B2/C1 corresponds to B2+**, as a COMULS convention.
+3. In Anki, choose Tools → Add-ons → Install from file…, select the file, and restart.
+4. Open Tools → COMULS. On Levels, choose your course and select Use this level. On Home, run Check French audio and Try the card controls.
+5. Select Prepare one new exercise, complete its preparation, then Study due / new cards in Anki → Study Now.
 
-Progression is **manual**. Readiness indicators may inform the learner's decision, but do not force promotion. Advancing shifts the acquisition and preview window; it does not erase earlier learning or reset review history. Planned rollback pauses additional advanced acquisition while retaining already introduced material for review.
+All installers contain both routes and use the same add-on identity. The B1/B2 filenames set only the initial suggestion for a new profile. Installing a different variant does not overwrite your selected course or progress. Install one variant; choose the route inside COMULS.
 
-### Eligibility, prerequisites and reviews
+## What the pilot provides
 
-A new task normally needs two independent gates: an appropriate curriculum level and adequately learned prerequisites. Reaching B2 alone would not release a compound-subjunctive card if its required construction and verb knowledge were missing.
+The thirteen formats cover meaning recall, French-form recall, vocabulary cloze, grammar cloze, grammar interpretation, sentence transformation, sound discrimination, connected-word recognition, sentence reconstruction, partial dictation, full transcription, transcript choices and meaning choices.
 
-A word's introduction level also does not determine every card's difficulty. A familiar word can appear in increasingly demanding grammar and contexts. Future cards therefore need separate assessments of the selected meaning, construction, surrounding language and complete task.
+Preparation shows the exact use and its support before testing. When asked about surrounding language, distinguish a use you already understand from one you have just learned. New supporting uses count toward the daily target limit. You can choose Not yet instead of admitting an unclear exercise.
 
-COMULS determines **which new material is eligible**. Anki's FSRS determines **when an introduced card is due for review**. Earlier cards remain reviewable after advancement. Targeted remediation can run alongside the main curriculum: a B2 learner may need A2+ listening-segmentation practice without being demoted across every skill.
+The defaults are 15 active minutes, six new targets, eight new cards and at most one new above-stage target per day. Due reviews reserve time first. Level changes govern new admissions and preserve introduced cards and their native history. Lower-level repair is available without changing the main route.
 
-### Preview and English scaffolding
+French synthetic recordings are bundled for offline playback; no French system voice, speech-service account or study-time API is needed. Whole sentences stay intact. Sound contrasts include separate comparison recordings. [Audio provenance and verification](docs/AUDIO_PROVENANCE.md) records the voice and licensing details.
 
-Future vocabulary should initially receive exposure rather than a scored test requiring guesses. The intended sequence moves from hearing an explicitly labelled preview, through transcript-and-meaning support and repeated exposure, to recognition, spelling preparation and formal acquisition. Spelling previews should distinguish a largely correct sound pattern with incorrect orthography from hearing the wrong word.
+Library references, progress by sampled skill, managed pauses, optional local reports and study export are included. COMULS does not upload study data automatically; ordinary Anki sync is a separate service you control. Manage new admissions from one desktop.
 
-English can support early acquisition. Later, French definitions, contextual retrieval, listening and production can provide stronger French-only representations. When these are stable, the original English acquisition card should be suspended with its history preserved. English/French contrast cards remain where contrast is itself the learning objective. This retirement logic is planned; the current dataset does not perform it.
+## Scope and evidence
 
-## French vocabulary dataset
+This is a bounded operational prototype. Its original items have undergone authoring review and [independent agent content review](docs/INDEPENDENT_CONTENT_REVIEW.md), not French-teacher validation. Task levels are provisional routing estimates; plus stages are COMULS subdivisions. Progress labels do not certify CEFR attainment or improved learning effectiveness.
 
-The final selection contains **10,037 distinct word families and 370 expressions**:
+The full vocabulary CSV is source material for later expansion. Its existing expression placements are unchanged, and the pilot does not turn that inventory into a complete course. See the [source audit](docs/source_audit.json) and [implementation specification](docs/IMPLEMENTATION_SPEC.md).
 
-| Introduction band | Word families | Expressions | French-definition share |
-| --- | ---: | ---: | ---: |
-| B1 | 916 | 141 | 0% |
-| B1/B2 | 810 | 0 | 25% |
-| B2 | 2,616 | 177 | 50% |
-| B2/C1 | 2,446 | 13 | 75% |
-| C1 | 3,249 | 39 | 100% |
+Release assets include installer checksums and build provenance. Use the verification evidence attached to the release for the tested source and package; older `tester-0.1.7` results cover a different 90-item prototype.
 
-Definition shares apply to vocabulary parents, rounded to whole entries. Each parent has **one current definition language** across its selected meanings; English and French copies do not inflate the count. Previously introduced English definitions do not automatically change when the learner advances.
+## Working on the add-on
 
-There are **24,153 word sense/usage records and 455 expression records**, totalling **24,608**, grouped within the CSV's parent rows. Multiple meanings, ordinary conjugations, agreement forms and verified spelling variants do not add word families. Distinct grammatical uses can remain separate records within a family; these records are not automatically separate cards. Coverage comprises selected verified senses, not every dictionary subdivision.
+`addon/` contains the add-on, native card integration, course packs and bundled audio. `tests/` covers policy, collection behavior, cards, content and media. `tools/build_addon.py` builds the three installer variants; release builds require committed source and matching native-application evidence.
 
-CEFR placements are tentative curriculum estimates informed by source/model labels and frequency evidence. They are not official word assignments or verified levels for every sense. The [CEFR vocabulary-range descriptors](https://rm.coe.int/common-european-framework-of-reference-for-languages-learning-teaching/16809ea0d4) describe communicative abilities rather than numerical word quotas; 10,000 advanced families is this project's selection target. B1/B2 qualifications are DELF and C1/C2 qualifications are DALF. The CSV retains source references and the basis for its level assignments.
-
-## Getting started
-
-Download the approximately **42 MB** [vocabulary CSV](outputs/french_vocabulary_b1_c1.csv). Each row groups one verified vocabulary parent. Its `definition` field provides a numbered readable summary; `senses_json` retains the individually identified meanings, grammatical constraints and source evidence. Display numbers are not permanent meaning identities.
-
-The file uses UTF-8 with BOM, comma separators, quoted cells and embedded JSON. Embedded newlines are intentional. Use a CSV parser rather than splitting on commas or lines:
-
-```python
-import csv
-import json
-
-with open("outputs/french_vocabulary_b1_c1.csv", encoding="utf-8-sig", newline="") as file:
-    rows = list(csv.DictReader(file))
-print(len(rows))  # 10,407 vocabulary parents
-first_parent_meanings = json.loads(rows[0]["senses_json"])
+```sh
+python -m pytest tests -q
+node tests/test_frontend.cjs
+python tools/build_audio.py --verify-only
+python tools/build_addon.py --require-clean
 ```
 
-The published CSV passed structural checks for identities, counts, language shares, retained source evidence and the verified-word target. These checks do not certify teaching efficacy or official CEFR placement.
-
-## Preparing Anki notes
-
-`entry_id` groups a family; persistent `sense_id` values identify meanings. A future **separate `note_id`** must identify each note, with precise grammatical form/construction and reviewed context identities. Wording edits should preserve those identities and scheduling history.
-
-A bare ambiguous word must not require recall of every meaning. Contextual prompts need one selected sense, an exact answer form and reviewed alternatives. A required adjective form is not interchangeable with its related infinitive. Review the aliases, grammatical realizations, construction restrictions and potential expression overlaps retained in the CSV before generating notes. Current contexts are empty and `card_ready` is false.
-
-## Sources and reuse
-
-Definitions are original paraphrases or translated paraphrases of consulted entries from **Académie française, WordReference and Reverso**, with source URLs, locators and wording provenance retained in the CSV. An English rendering of a French entry remains attributed to its actual dictionary source; it is not presented as a verbatim English dictionary definition.
-
-Underlying lexical sources retain their licences: FLELex **CC BY-NC-SA 4.0**, PolyLexFLE **LGPL-2.1**, Lexique **CC BY-SA 4.0**, and FranceTerme **Licence Ouverte**. No blanket open licence is asserted for dictionary material or this combined dataset. Consult the source terms and retained provenance when reusing or redistributing it.
+See [native application testing](tests/e2e/README.md) before publishing. Keep exercise identities stable for compatible updates; changed retrieval contracts need deliberate migration. Student updates use the same `.ankiaddon` installation menu and preserve compatible cards and personal notes. Study and preparation upgrade recognised old COMULS templates automatically. Custom templates are retained until you explicitly choose Settings → Content manager… → Restore current course controls; confirmation first saves the customised note type as a separate backup, then restores the current controls without replacing the cards.

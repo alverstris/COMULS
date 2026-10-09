@@ -1,0 +1,4994 @@
+{
+  "schema_version": 1,
+  "recognizer": "Vosk 0.3.45, vosk-model-small-fr-0.22",
+  "model_source": "https://alphacephei.com/vosk/models/vosk-model-small-fr-0.22.zip",
+  "model_zip_sha256": "cabf6180e177eb9b3a9a9d43a437bd5e549f3a7d09525e5d69a3fed787be12ad",
+  "limitations": [
+    "ASR is an independent signal-based diagnostic, not a pronunciation-quality certificate.",
+    "Unconstrained French ASR can choose homophones or language-model substitutions.",
+    "Choice-constrained contrast decoding uses the same two options plus unknown for each clip; both directions are tested.",
+    "No human listening, precise forced alignment or phonetic landmark certification is claimed."
+  ],
+  "assets": [
+    {
+      "filename": "comuls_02706e8822bcd22116a1f3a4870b1ae0910861cee63f6d908fc8a82a81be638b.wav",
+      "sha256": "02706e8822bcd22116a1f3a4870b1ae0910861cee63f6d908fc8a82a81be638b",
+      "expected": "dessous",
+      "decoded": "dessous",
+      "exact_normalized_match": true,
+      "token_edits": 0,
+      "word_count": 1,
+      "word_details": [
+        {
+          "conf": 0.899293,
+          "end": 0.63,
+          "start": 0.09,
+          "word": "dessous"
+        }
+      ],
+      "whisper_adjudication": null,
+      "phonetic_measurements": null,
+      "disposition": "independent_unconstrained_match",
+      "review_note": "Independent Vosk transcription matches after punctuation/case token normalization."
+    },
+    {
+      "filename": "comuls_064330772f2436d90e58773a192614a8538d563ed782012ca4467c4ce460d43d.wav",
+      "sha256": "064330772f2436d90e58773a192614a8538d563ed782012ca4467c4ce460d43d",
+      "expected": "Le magasin est fermé jusqu’à nouvel ordre.",
+      "decoded": "le magasin est fermé jusqu'à nouvel ordre",
+      "exact_normalized_match": true,
+      "token_edits": 0,
+      "word_count": 8,
+      "word_details": [
+        {
+          "conf": 1.0,
+          "end": 0.27,
+          "start": 0.0,
+          "word": "le"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.72,
+          "start": 0.27,
+          "word": "magasin"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.81,
+          "start": 0.72,
+          "word": "est"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.17,
+          "start": 0.81,
+          "word": "fermé"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.47,
+          "start": 1.17,
+          "word": "jusqu'à"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.83,
+          "start": 1.47,
+          "word": "nouvel"
+        },
+        {
+          "conf": 1.0,
+          "end": 2.22,
+          "start": 1.83,
+          "word": "ordre"
+        }
+      ],
+      "whisper_adjudication": null,
+      "phonetic_measurements": null,
+      "disposition": "independent_unconstrained_match",
+      "review_note": "Independent Vosk transcription matches after punctuation/case token normalization."
+    },
+    {
+      "filename": "comuls_0828723f8f863f0e66f0348b572a8e8bab194990b08bd1f7ad1342b2ba3e8b9f.wav",
+      "sha256": "0828723f8f863f0e66f0348b572a8e8bab194990b08bd1f7ad1342b2ba3e8b9f",
+      "expected": "Les enfants arrivent.",
+      "decoded": "les enfants arrivent",
+      "exact_normalized_match": true,
+      "token_edits": 0,
+      "word_count": 3,
+      "word_details": [
+        {
+          "conf": 1.0,
+          "end": 0.36,
+          "start": 0.12,
+          "word": "les"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.66,
+          "start": 0.36,
+          "word": "enfants"
+        },
+        {
+          "conf": 0.849176,
+          "end": 1.17,
+          "start": 0.66,
+          "word": "arrivent"
+        }
+      ],
+      "whisper_adjudication": null,
+      "phonetic_measurements": null,
+      "disposition": "independent_unconstrained_match",
+      "review_note": "Independent Vosk transcription matches after punctuation/case token normalization."
+    },
+    {
+      "filename": "comuls_08a490e254e4fcb6c0d66cc3281d8ec0c17a6e548620508f7b90f72a43af7ac0.wav",
+      "sha256": "08a490e254e4fcb6c0d66cc3281d8ec0c17a6e548620508f7b90f72a43af7ac0",
+      "expected": "Pendant le voyage elle nous a raconté son histoire.",
+      "decoded": "pendant le voyage elle nous a raconté son histoire",
+      "exact_normalized_match": true,
+      "token_edits": 0,
+      "word_count": 9,
+      "word_details": [
+        {
+          "conf": 1.0,
+          "end": 0.42,
+          "start": 0.12,
+          "word": "pendant"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.51,
+          "start": 0.42,
+          "word": "le"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.08,
+          "start": 0.51,
+          "word": "voyage"
+        },
+        {
+          "conf": 0.958352,
+          "end": 1.289309,
+          "start": 1.14,
+          "word": "elle"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.41,
+          "start": 1.289309,
+          "word": "nous"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.5,
+          "start": 1.41,
+          "word": "a"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.92,
+          "start": 1.5,
+          "word": "raconté"
+        },
+        {
+          "conf": 1.0,
+          "end": 2.1,
+          "start": 1.92,
+          "word": "son"
+        },
+        {
+          "conf": 1.0,
+          "end": 2.67,
+          "start": 2.1,
+          "word": "histoire"
+        }
+      ],
+      "whisper_adjudication": null,
+      "phonetic_measurements": null,
+      "disposition": "independent_unconstrained_match",
+      "review_note": "Independent Vosk transcription matches after punctuation/case token normalization."
+    },
+    {
+      "filename": "comuls_0c7f774b185936bbd472ab2644ce864d43fd2db354f8f9218aa3f431c67f6867.wav",
+      "sha256": "0c7f774b185936bbd472ab2644ce864d43fd2db354f8f9218aa3f431c67f6867",
+      "expected": "fin",
+      "decoded": "fin",
+      "exact_normalized_match": true,
+      "token_edits": 0,
+      "word_count": 1,
+      "word_details": [
+        {
+          "conf": 0.791539,
+          "end": 0.51,
+          "start": 0.09,
+          "word": "fin"
+        }
+      ],
+      "whisper_adjudication": {
+        "expected": "fin",
+        "sha256": "0c7f774b185936bbd472ab2644ce864d43fd2db354f8f9218aa3f431c67f6867",
+        "filename": "comuls_0c7f774b185936bbd472ab2644ce864d43fd2db354f8f9218aa3f431c67f6867.wav",
+        "decoded": "Faire !",
+        "segments": [
+          {
+            "text": " Faire !",
+            "start": 0.0,
+            "end": 0.5,
+            "avg_logprob": -1.135521133740743,
+            "no_speech_prob": 0.12970636785030365
+          }
+        ]
+      },
+      "phonetic_measurements": {
+        "word": "fin",
+        "sha256": "0c7f774b185936bbd472ab2644ce864d43fd2db354f8f9218aa3f431c67f6867",
+        "peak_energy_time": 0.34,
+        "vowel_sample_interval": [
+          0.32,
+          0.36
+        ],
+        "median_formants_hz": [
+          820.4,
+          1536.4,
+          3063.3
+        ],
+        "onset_interval": [
+          0.17,
+          0.21
+        ],
+        "onset_60_500hz_fraction": 0.00656,
+        "onset_above_1500hz_fraction": 0.94069
+      },
+      "disposition": "independent_unconstrained_match",
+      "review_note": "Independent Vosk transcription matches after punctuation/case token normalization."
+    },
+    {
+      "filename": "comuls_143c585dd7a3fff0f8fce4744182fa2a909ed63a70ebcf063ba7d95d6678144d.wav",
+      "sha256": "143c585dd7a3fff0f8fce4744182fa2a909ed63a70ebcf063ba7d95d6678144d",
+      "expected": "Cette proposition mérite un examen approfondi.",
+      "decoded": "cette proposition mairie un examen approfondi",
+      "exact_normalized_match": false,
+      "token_edits": 1,
+      "word_count": 6,
+      "word_details": [
+        {
+          "conf": 1.0,
+          "end": 0.42,
+          "start": 0.09,
+          "word": "cette"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.08,
+          "start": 0.42,
+          "word": "proposition"
+        },
+        {
+          "conf": 0.851836,
+          "end": 1.41,
+          "start": 1.08,
+          "word": "mairie"
+        },
+        {
+          "conf": 0.941817,
+          "end": 1.47,
+          "start": 1.41,
+          "word": "un"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.95,
+          "start": 1.47,
+          "word": "examen"
+        },
+        {
+          "conf": 1.0,
+          "end": 2.82,
+          "start": 2.07,
+          "word": "approfondi"
+        }
+      ],
+      "whisper_adjudication": {
+        "expected": "Cette proposition mérite un examen approfondi.",
+        "sha256": "143c585dd7a3fff0f8fce4744182fa2a909ed63a70ebcf063ba7d95d6678144d",
+        "filename": "comuls_143c585dd7a3fff0f8fce4744182fa2a909ed63a70ebcf063ba7d95d6678144d.wav",
+        "decoded": "Cette proposition mérite un examen approfondit.",
+        "segments": [
+          {
+            "text": " Cette proposition mérite un examen approfondit.",
+            "start": 0.0,
+            "end": 3.0,
+            "avg_logprob": -0.4020826332271099,
+            "no_speech_prob": 0.00892965029925108
+          }
+        ]
+      },
+      "phonetic_measurements": null,
+      "disposition": "bounded_manual_adjudication_of_model_outputs",
+      "review_note": "Secondary unprompted Whisper correctly recovers mérite; its approfondit spelling is homophonic with approfondi."
+    },
+    {
+      "filename": "comuls_16715179d40741d885a01dd1139dd127504072e6bafe00427276a60fbcfe8f33.wav",
+      "sha256": "16715179d40741d885a01dd1139dd127504072e6bafe00427276a60fbcfe8f33",
+      "expected": "Je voudrais connaître les horaires d’ouverture.",
+      "decoded": "je voudrais connaître les horaires d'ouverture",
+      "exact_normalized_match": true,
+      "token_edits": 0,
+      "word_count": 7,
+      "word_details": [
+        {
+          "conf": 1.0,
+          "end": 0.33,
+          "start": 0.12,
+          "word": "je"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.57,
+          "start": 0.33,
+          "word": "voudrais"
+        },
+        {
+          "conf": 0.890522,
+          "end": 0.99,
+          "start": 0.57,
+          "word": "connaître"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.11,
+          "start": 0.99,
+          "word": "les"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.38,
+          "start": 1.11,
+          "word": "horaires"
+        },
+        {
+          "conf": 0.941609,
+          "end": 2.1,
+          "start": 1.38,
+          "word": "d'ouverture"
+        }
+      ],
+      "whisper_adjudication": null,
+      "phonetic_measurements": null,
+      "disposition": "independent_unconstrained_match",
+      "review_note": "Independent Vosk transcription matches after punctuation/case token normalization."
+    },
+    {
+      "filename": "comuls_16f1f903441f0a5777a1c343ac8424394642fbbde1f609a635fbfc82eda92630.wav",
+      "sha256": "16f1f903441f0a5777a1c343ac8424394642fbbde1f609a635fbfc82eda92630",
+      "expected": "roue",
+      "decoded": "arrow",
+      "exact_normalized_match": false,
+      "token_edits": 1,
+      "word_count": 1,
+      "word_details": [
+        {
+          "conf": 0.260075,
+          "end": 0.42,
+          "start": 0.0,
+          "word": "arrow"
+        }
+      ],
+      "whisper_adjudication": {
+        "expected": "roue",
+        "sha256": "16f1f903441f0a5777a1c343ac8424394642fbbde1f609a635fbfc82eda92630",
+        "filename": "comuls_16f1f903441f0a5777a1c343ac8424394642fbbde1f609a635fbfc82eda92630.wav",
+        "decoded": "Aroum !",
+        "segments": [
+          {
+            "text": " Aroum !",
+            "start": 0.0,
+            "end": 0.5,
+            "avg_logprob": -1.1131700788225447,
+            "no_speech_prob": 0.14613066613674164
+          }
+        ]
+      },
+      "phonetic_measurements": {
+        "word": "roue",
+        "sha256": "16f1f903441f0a5777a1c343ac8424394642fbbde1f609a635fbfc82eda92630",
+        "peak_energy_time": 0.24,
+        "vowel_sample_interval": [
+          0.22,
+          0.26
+        ],
+        "median_formants_hz": [
+          367.9,
+          769.6,
+          3029.8
+        ],
+        "onset_interval": [
+          0.06,
+          0.1
+        ],
+        "onset_60_500hz_fraction": 0.42875,
+        "onset_above_1500hz_fraction": 0.006
+      },
+      "disposition": "isolated_contrast_verified_with_candidates",
+      "contrast_decode": {
+        "expected": "roue",
+        "filename": "comuls_16f1f903441f0a5777a1c343ac8424394642fbbde1f609a635fbfc82eda92630.wav",
+        "sha256": "16f1f903441f0a5777a1c343ac8424394642fbbde1f609a635fbfc82eda92630",
+        "decoded": "roue",
+        "matches": true,
+        "word_details": [
+          {
+            "conf": 1.0,
+            "end": 0.42,
+            "start": 0.06,
+            "word": "roue"
+          }
+        ],
+        "expected_label_identified": true
+      },
+      "review_note": "Open-vocabulary recognition differs, but the independent recognizer identifies the expected item when offered both actual contrast labels plus unknown. No claim of unrestricted-word recognition is made."
+    },
+    {
+      "filename": "comuls_1bfc3da2a348f14d715c3868666b6e0b427a788d180da59b0cd9d3aa6ac17af6.wav",
+      "sha256": "1bfc3da2a348f14d715c3868666b6e0b427a788d180da59b0cd9d3aa6ac17af6",
+      "expected": "Nous vous conseillons de réserver à l’avance.",
+      "decoded": "nous vous conseillons de réserver à l'avance",
+      "exact_normalized_match": true,
+      "token_edits": 0,
+      "word_count": 8,
+      "word_details": [
+        {
+          "conf": 1.0,
+          "end": 0.33,
+          "start": 0.12,
+          "word": "nous"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.45,
+          "start": 0.33,
+          "word": "vous"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.9,
+          "start": 0.45,
+          "word": "conseillons"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.02,
+          "start": 0.9,
+          "word": "de"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.41,
+          "start": 1.02,
+          "word": "réserver"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.44,
+          "start": 1.41,
+          "word": "à"
+        },
+        {
+          "conf": 1.0,
+          "end": 2.01,
+          "start": 1.44,
+          "word": "l'avance"
+        }
+      ],
+      "whisper_adjudication": null,
+      "phonetic_measurements": null,
+      "disposition": "independent_unconstrained_match",
+      "review_note": "Independent Vosk transcription matches after punctuation/case token normalization."
+    },
+    {
+      "filename": "comuls_1c57d6047ce0f5dbd659d47885bad538935b13c6442a004481171d0caaeb8af3.wav",
+      "sha256": "1c57d6047ce0f5dbd659d47885bad538935b13c6442a004481171d0caaeb8af3",
+      "expected": "Nous ne saurions garantir un résultat immédiat.",
+      "decoded": "nous ne saurions garantir un résultat immédiat",
+      "exact_normalized_match": true,
+      "token_edits": 0,
+      "word_count": 7,
+      "word_details": [
+        {
+          "conf": 1.0,
+          "end": 0.33,
+          "start": 0.15,
+          "word": "nous"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.45,
+          "start": 0.33,
+          "word": "ne"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.84,
+          "start": 0.45,
+          "word": "saurions"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.41,
+          "start": 0.84,
+          "word": "garantir"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.47,
+          "start": 1.41,
+          "word": "un"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.89,
+          "start": 1.47,
+          "word": "résultat"
+        },
+        {
+          "conf": 1.0,
+          "end": 2.37,
+          "start": 1.89,
+          "word": "immédiat"
+        }
+      ],
+      "whisper_adjudication": null,
+      "phonetic_measurements": null,
+      "disposition": "independent_unconstrained_match",
+      "review_note": "Independent Vosk transcription matches after punctuation/case token normalization."
+    },
+    {
+      "filename": "comuls_2662db9a578268170acc521cbc2add945e50fdc7934ea15d4996497da93f99cf.wav",
+      "sha256": "2662db9a578268170acc521cbc2add945e50fdc7934ea15d4996497da93f99cf",
+      "expected": "Elle ouvre le livre dans le train.",
+      "decoded": "elle ouvre le livre dans le train",
+      "exact_normalized_match": true,
+      "token_edits": 0,
+      "word_count": 7,
+      "word_details": [
+        {
+          "conf": 1.0,
+          "end": 0.3,
+          "start": 0.06,
+          "word": "elle"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.69,
+          "start": 0.36,
+          "word": "ouvre"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.81,
+          "start": 0.69,
+          "word": "le"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.08,
+          "start": 0.81,
+          "word": "livre"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.2,
+          "start": 1.08,
+          "word": "dans"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.29,
+          "start": 1.2,
+          "word": "le"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.62,
+          "start": 1.29,
+          "word": "train"
+        }
+      ],
+      "whisper_adjudication": {
+        "decoded": "Elle ouvre le livre dans le train."
+      },
+      "phonetic_measurements": null,
+      "disposition": "independent_unconstrained_match",
+      "review_note": "Independent Vosk transcription matches after punctuation/case token normalization."
+    },
+    {
+      "filename": "comuls_27f589da830ebd86fcc704509071234c99da0540989b29f4faaef8ffdfc0c4f1.wav",
+      "sha256": "27f589da830ebd86fcc704509071234c99da0540989b29f4faaef8ffdfc0c4f1",
+      "expected": "Le train part dans dix minutes.",
+      "decoded": "le train part dans dix minutes",
+      "exact_normalized_match": true,
+      "token_edits": 0,
+      "word_count": 6,
+      "word_details": [
+        {
+          "conf": 1.0,
+          "end": 0.27,
+          "start": 0.0,
+          "word": "le"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.48,
+          "start": 0.27,
+          "word": "train"
+        },
+        {
+          "conf": 0.905559,
+          "end": 0.78,
+          "start": 0.48,
+          "word": "part"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.93,
+          "start": 0.78,
+          "word": "dans"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.08,
+          "start": 0.93,
+          "word": "dix"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.59,
+          "start": 1.08,
+          "word": "minutes"
+        }
+      ],
+      "whisper_adjudication": null,
+      "phonetic_measurements": null,
+      "disposition": "independent_unconstrained_match",
+      "review_note": "Independent Vosk transcription matches after punctuation/case token normalization."
+    },
+    {
+      "filename": "comuls_281923d24cec1e304e6a4ac1e55810c4c21b0bbba5c9f8d087ee6b22efc0d11c.wav",
+      "sha256": "281923d24cec1e304e6a4ac1e55810c4c21b0bbba5c9f8d087ee6b22efc0d11c",
+      "expected": "écoute",
+      "decoded": "écoute",
+      "exact_normalized_match": true,
+      "token_edits": 0,
+      "word_count": 1,
+      "word_details": [
+        {
+          "conf": 0.91374,
+          "end": 0.78,
+          "start": 0.15,
+          "word": "écoute"
+        }
+      ],
+      "whisper_adjudication": null,
+      "phonetic_measurements": null,
+      "disposition": "independent_unconstrained_match",
+      "review_note": "Independent Vosk transcription matches after punctuation/case token normalization."
+    },
+    {
+      "filename": "comuls_2b6900b1de26571fc4b4b2a2964e445c8ec062cab1ee97917644243cafe0b261.wav",
+      "sha256": "2b6900b1de26571fc4b4b2a2964e445c8ec062cab1ee97917644243cafe0b261",
+      "expected": "poisson",
+      "decoded": "poisson",
+      "exact_normalized_match": true,
+      "token_edits": 0,
+      "word_count": 1,
+      "word_details": [
+        {
+          "conf": 0.672399,
+          "end": 0.54,
+          "start": 0.0,
+          "word": "poisson"
+        }
+      ],
+      "whisper_adjudication": null,
+      "phonetic_measurements": null,
+      "disposition": "independent_unconstrained_match",
+      "review_note": "Independent Vosk transcription matches after punctuation/case token normalization."
+    },
+    {
+      "filename": "comuls_2c3bba992fcecd2d1c19515a3bc3c6bfa97bcd1ecb9f08b256f5482203ceb97b.wav",
+      "sha256": "2c3bba992fcecd2d1c19515a3bc3c6bfa97bcd1ecb9f08b256f5482203ceb97b",
+      "expected": "Ils en ont parlé hier.",
+      "decoded": "ils en ont parlé hier",
+      "exact_normalized_match": true,
+      "token_edits": 0,
+      "word_count": 5,
+      "word_details": [
+        {
+          "conf": 1.0,
+          "end": 0.39,
+          "start": 0.15,
+          "word": "ils"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.51,
+          "start": 0.39,
+          "word": "en"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.54,
+          "start": 0.51,
+          "word": "ont"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.84,
+          "start": 0.54,
+          "word": "parlé"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.32,
+          "start": 0.84,
+          "word": "hier"
+        }
+      ],
+      "whisper_adjudication": null,
+      "phonetic_measurements": null,
+      "disposition": "independent_unconstrained_match",
+      "review_note": "Independent Vosk transcription matches after punctuation/case token normalization."
+    },
+    {
+      "filename": "comuls_2dade5df49ae8391618a466367f5603a653860b11a438f166e0d4c1cc4cccc0c.wav",
+      "sha256": "2dade5df49ae8391618a466367f5603a653860b11a438f166e0d4c1cc4cccc0c",
+      "expected": "Le financement dépend de plusieurs conditions.",
+      "decoded": "le financement dépend de plusieurs conditions",
+      "exact_normalized_match": true,
+      "token_edits": 0,
+      "word_count": 6,
+      "word_details": [
+        {
+          "conf": 1.0,
+          "end": 0.36,
+          "start": 0.15,
+          "word": "le"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.9,
+          "start": 0.36,
+          "word": "financement"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.17,
+          "start": 0.9,
+          "word": "dépend"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.29,
+          "start": 1.17,
+          "word": "de"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.71,
+          "start": 1.29,
+          "word": "plusieurs"
+        },
+        {
+          "conf": 1.0,
+          "end": 2.28,
+          "start": 1.71,
+          "word": "conditions"
+        }
+      ],
+      "whisper_adjudication": null,
+      "phonetic_measurements": null,
+      "disposition": "independent_unconstrained_match",
+      "review_note": "Independent Vosk transcription matches after punctuation/case token normalization."
+    },
+    {
+      "filename": "comuls_2e03c124952b9fc4de2c401b85e750be329a58bb1e32f5316e2c7773635d731d.wav",
+      "sha256": "2e03c124952b9fc4de2c401b85e750be329a58bb1e32f5316e2c7773635d731d",
+      "expected": "Cette mesure vise à réduire les dépenses.",
+      "decoded": "cette mesure vise à réduire les dépenses",
+      "exact_normalized_match": true,
+      "token_edits": 0,
+      "word_count": 7,
+      "word_details": [
+        {
+          "conf": 1.0,
+          "end": 0.45,
+          "start": 0.09,
+          "word": "cette"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.99,
+          "start": 0.45,
+          "word": "mesure"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.38,
+          "start": 1.02,
+          "word": "vise"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.44,
+          "start": 1.38,
+          "word": "à"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.8,
+          "start": 1.44,
+          "word": "réduire"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.92,
+          "start": 1.8,
+          "word": "les"
+        },
+        {
+          "conf": 1.0,
+          "end": 2.52,
+          "start": 1.92,
+          "word": "dépenses"
+        }
+      ],
+      "whisper_adjudication": null,
+      "phonetic_measurements": null,
+      "disposition": "independent_unconstrained_match",
+      "review_note": "Independent Vosk transcription matches after punctuation/case token normalization."
+    },
+    {
+      "filename": "comuls_2f6e0dbb8b9270a5806cf0532c70eee870e867862f2f3eeea3357658ee1e9197.wav",
+      "sha256": "2f6e0dbb8b9270a5806cf0532c70eee870e867862f2f3eeea3357658ee1e9197",
+      "expected": "Nous vous remercions de votre patience.",
+      "decoded": "nous vous remercions de votre patience",
+      "exact_normalized_match": true,
+      "token_edits": 0,
+      "word_count": 6,
+      "word_details": [
+        {
+          "conf": 1.0,
+          "end": 0.33,
+          "start": 0.15,
+          "word": "nous"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.45,
+          "start": 0.33,
+          "word": "vous"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.93,
+          "start": 0.45,
+          "word": "remercions"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.02,
+          "start": 0.93,
+          "word": "de"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.23,
+          "start": 1.02,
+          "word": "votre"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.95,
+          "start": 1.23,
+          "word": "patience"
+        }
+      ],
+      "whisper_adjudication": null,
+      "phonetic_measurements": null,
+      "disposition": "independent_unconstrained_match",
+      "review_note": "Independent Vosk transcription matches after punctuation/case token normalization."
+    },
+    {
+      "filename": "comuls_31d4328560cc0a8fa1c3c14488df7bca51903cb7b36210596eed11e3dd99ca20.wav",
+      "sha256": "31d4328560cc0a8fa1c3c14488df7bca51903cb7b36210596eed11e3dd99ca20",
+      "expected": "Cette hypothèse demeure difficile à vérifier.",
+      "decoded": "cette hypothèse demeure difficile à vérifier",
+      "exact_normalized_match": true,
+      "token_edits": 0,
+      "word_count": 6,
+      "word_details": [
+        {
+          "conf": 1.0,
+          "end": 0.18,
+          "start": 0.0,
+          "word": "cette"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.6,
+          "start": 0.18,
+          "word": "hypothèse"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.9,
+          "start": 0.6,
+          "word": "demeure"
+        },
+        {
+          "conf": 0.957483,
+          "end": 1.38,
+          "start": 0.9,
+          "word": "difficile"
+        },
+        {
+          "conf": 0.960067,
+          "end": 1.41,
+          "start": 1.38,
+          "word": "à"
+        },
+        {
+          "conf": 0.960067,
+          "end": 1.95,
+          "start": 1.41,
+          "word": "vérifier"
+        }
+      ],
+      "whisper_adjudication": null,
+      "phonetic_measurements": null,
+      "disposition": "independent_unconstrained_match",
+      "review_note": "Independent Vosk transcription matches after punctuation/case token normalization."
+    },
+    {
+      "filename": "comuls_3fbfabd04865501416d470ae05feea6a27ca5add8806b3996cf4602c174e6210.wav",
+      "sha256": "3fbfabd04865501416d470ae05feea6a27ca5add8806b3996cf4602c174e6210",
+      "expected": "pain",
+      "decoded": "pas",
+      "exact_normalized_match": false,
+      "token_edits": 1,
+      "word_count": 1,
+      "word_details": [
+        {
+          "conf": 0.546019,
+          "end": 0.42,
+          "start": 0.15,
+          "word": "pas"
+        }
+      ],
+      "whisper_adjudication": {
+        "expected": "pain",
+        "sha256": "3fbfabd04865501416d470ae05feea6a27ca5add8806b3996cf4602c174e6210",
+        "filename": "comuls_3fbfabd04865501416d470ae05feea6a27ca5add8806b3996cf4602c174e6210.wav",
+        "decoded": "C'est ça ?",
+        "segments": [
+          {
+            "text": " C'est ça ?",
+            "start": 0.0,
+            "end": 2.0,
+            "avg_logprob": -1.1988866478204727,
+            "no_speech_prob": 0.5052200555801392
+          }
+        ]
+      },
+      "phonetic_measurements": null,
+      "disposition": "isolated_contrast_verified_with_candidates",
+      "contrast_decode": {
+        "expected": "pain",
+        "filename": "comuls_3fbfabd04865501416d470ae05feea6a27ca5add8806b3996cf4602c174e6210.wav",
+        "sha256": "3fbfabd04865501416d470ae05feea6a27ca5add8806b3996cf4602c174e6210",
+        "decoded": "pain",
+        "matches": true,
+        "word_details": [
+          {
+            "conf": 0.809245,
+            "end": 0.42,
+            "start": 0.15,
+            "word": "pain"
+          }
+        ],
+        "expected_label_identified": true
+      },
+      "review_note": "Open-vocabulary recognition differs, but the independent recognizer identifies the expected item when offered both actual contrast labels plus unknown. No claim of unrestricted-word recognition is made."
+    },
+    {
+      "filename": "comuls_403b8f20ac73714280aedba70e0b60531b49de763adeef7706e852ddf0dd5e21.wav",
+      "sha256": "403b8f20ac73714280aedba70e0b60531b49de763adeef7706e852ddf0dd5e21",
+      "expected": "Pour entrer, présentez une pièce d’identité.",
+      "decoded": "pour entrer présenter une pièce d'identité",
+      "exact_normalized_match": false,
+      "token_edits": 1,
+      "word_count": 7,
+      "word_details": [
+        {
+          "conf": 1.0,
+          "end": 0.21,
+          "start": 0.0,
+          "word": "pour"
+        },
+        {
+          "conf": 0.858762,
+          "end": 0.66,
+          "start": 0.21,
+          "word": "entrer"
+        },
+        {
+          "conf": 0.950894,
+          "end": 1.35,
+          "start": 0.81,
+          "word": "présenter"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.44,
+          "start": 1.35,
+          "word": "une"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.71,
+          "start": 1.44,
+          "word": "pièce"
+        },
+        {
+          "conf": 1.0,
+          "end": 2.34,
+          "start": 1.71,
+          "word": "d'identité"
+        }
+      ],
+      "whisper_adjudication": {
+        "expected": "Pour entrer, présentez une pièce d’identité.",
+        "sha256": "403b8f20ac73714280aedba70e0b60531b49de763adeef7706e852ddf0dd5e21",
+        "filename": "comuls_403b8f20ac73714280aedba70e0b60531b49de763adeef7706e852ddf0dd5e21.wav",
+        "decoded": "pour entrer présenter une pièce d'identité.",
+        "segments": [
+          {
+            "text": " pour entrer présenter une pièce d'identité.",
+            "start": 0.0,
+            "end": 2.4,
+            "avg_logprob": -0.3399552684277296,
+            "no_speech_prob": 0.004339371807873249
+          }
+        ]
+      },
+      "phonetic_measurements": null,
+      "disposition": "bounded_manual_adjudication_of_model_outputs",
+      "review_note": "ASR présenter spelling is homophonic with présentez. The tested missing chunk une pièce d’identité matches."
+    },
+    {
+      "filename": "comuls_41aece44baf6c92e598339e89d1cd3cb92757a32eed69e9245008ca47ce4d715.wav",
+      "sha256": "41aece44baf6c92e598339e89d1cd3cb92757a32eed69e9245008ca47ce4d715",
+      "expected": "désert",
+      "decoded": "désert",
+      "exact_normalized_match": true,
+      "token_edits": 0,
+      "word_count": 1,
+      "word_details": [
+        {
+          "conf": 0.954063,
+          "end": 0.78,
+          "start": 0.0,
+          "word": "désert"
+        }
+      ],
+      "whisper_adjudication": null,
+      "phonetic_measurements": null,
+      "disposition": "independent_unconstrained_match",
+      "review_note": "Independent Vosk transcription matches after punctuation/case token normalization."
+    },
+    {
+      "filename": "comuls_42c6732af6d0997a138dbb781b5cf934f494263e0e927ba5fff74243b1accf24.wav",
+      "sha256": "42c6732af6d0997a138dbb781b5cf934f494263e0e927ba5fff74243b1accf24",
+      "expected": "peur",
+      "decoded": "peur",
+      "exact_normalized_match": true,
+      "token_edits": 0,
+      "word_count": 1,
+      "word_details": [
+        {
+          "conf": 0.97409,
+          "end": 0.57,
+          "start": 0.12,
+          "word": "peur"
+        }
+      ],
+      "whisper_adjudication": null,
+      "phonetic_measurements": {
+        "word": "peur",
+        "sha256": "42c6732af6d0997a138dbb781b5cf934f494263e0e927ba5fff74243b1accf24",
+        "peak_energy_time": 0.255,
+        "vowel_sample_interval": [
+          0.235,
+          0.275
+        ],
+        "median_formants_hz": [
+          662.7,
+          1777.7,
+          3042.1
+        ],
+        "onset_interval": [
+          0.185,
+          0.225
+        ],
+        "onset_60_500hz_fraction": 0.92603,
+        "onset_above_1500hz_fraction": 0.01594
+      },
+      "disposition": "independent_unconstrained_match",
+      "review_note": "Independent Vosk transcription matches after punctuation/case token normalization."
+    },
+    {
+      "filename": "comuls_43493d28e2adb158d6bfe4bd75daf94b461b780ee7e2664704233ab4f02b1a9e.wav",
+      "sha256": "43493d28e2adb158d6bfe4bd75daf94b461b780ee7e2664704233ab4f02b1a9e",
+      "expected": "Le cours commence à neuf heures.",
+      "decoded": "le cours commence à neuf heures",
+      "exact_normalized_match": true,
+      "token_edits": 0,
+      "word_count": 6,
+      "word_details": [
+        {
+          "conf": 1.0,
+          "end": 0.33,
+          "start": 0.12,
+          "word": "le"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.69,
+          "start": 0.33,
+          "word": "cours"
+        },
+        {
+          "conf": 0.871103,
+          "end": 1.08,
+          "start": 0.69,
+          "word": "commence"
+        },
+        {
+          "conf": 0.967418,
+          "end": 1.14,
+          "start": 1.08,
+          "word": "à"
+        },
+        {
+          "conf": 0.949058,
+          "end": 1.35,
+          "start": 1.14,
+          "word": "neuf"
+        },
+        {
+          "conf": 0.897206,
+          "end": 1.68,
+          "start": 1.35,
+          "word": "heures"
+        }
+      ],
+      "whisper_adjudication": null,
+      "phonetic_measurements": null,
+      "disposition": "independent_unconstrained_match",
+      "review_note": "Independent Vosk transcription matches after punctuation/case token normalization."
+    },
+    {
+      "filename": "comuls_437b96e085830ec1ad3b076a52802d74fe4898d36a90a935b4efa8ab2a5111fb.wav",
+      "sha256": "437b96e085830ec1ad3b076a52802d74fe4898d36a90a935b4efa8ab2a5111fb",
+      "expected": "Les frais de livraison sont inclus.",
+      "decoded": "les frais de livraison sont inclus",
+      "exact_normalized_match": true,
+      "token_edits": 0,
+      "word_count": 6,
+      "word_details": [
+        {
+          "conf": 1.0,
+          "end": 0.36,
+          "start": 0.12,
+          "word": "les"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.57,
+          "start": 0.36,
+          "word": "frais"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.66,
+          "start": 0.57,
+          "word": "de"
+        },
+        {
+          "conf": 0.925317,
+          "end": 1.08,
+          "start": 0.66,
+          "word": "livraison"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.26,
+          "start": 1.08,
+          "word": "sont"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.68,
+          "start": 1.26,
+          "word": "inclus"
+        }
+      ],
+      "whisper_adjudication": null,
+      "phonetic_measurements": null,
+      "disposition": "independent_unconstrained_match",
+      "review_note": "Independent Vosk transcription matches after punctuation/case token normalization."
+    },
+    {
+      "filename": "comuls_4647809669cddc63cbe658791f5557b98257ac0f9333a8d19710dc74086d648d.wav",
+      "sha256": "4647809669cddc63cbe658791f5557b98257ac0f9333a8d19710dc74086d648d",
+      "expected": "égout",
+      "decoded": "et vous",
+      "exact_normalized_match": false,
+      "token_edits": 2,
+      "word_count": 1,
+      "word_details": [
+        {
+          "conf": 1.0,
+          "end": 0.3,
+          "start": 0.15,
+          "word": "et"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.54,
+          "start": 0.3,
+          "word": "vous"
+        }
+      ],
+      "whisper_adjudication": {
+        "expected": "égout",
+        "sha256": "4647809669cddc63cbe658791f5557b98257ac0f9333a8d19710dc74086d648d",
+        "filename": "comuls_4647809669cddc63cbe658791f5557b98257ac0f9333a8d19710dc74086d648d.wav",
+        "decoded": "Et vous.",
+        "segments": [
+          {
+            "text": " Et vous.",
+            "start": 0.0,
+            "end": 1.0,
+            "avg_logprob": -0.7271523276964823,
+            "no_speech_prob": 0.05507742241024971
+          }
+        ]
+      },
+      "phonetic_measurements": null,
+      "disposition": "isolated_contrast_verified_with_candidates",
+      "contrast_decode": {
+        "expected": "égout",
+        "filename": "comuls_4647809669cddc63cbe658791f5557b98257ac0f9333a8d19710dc74086d648d.wav",
+        "sha256": "4647809669cddc63cbe658791f5557b98257ac0f9333a8d19710dc74086d648d",
+        "decoded": "égout",
+        "matches": true,
+        "word_details": [
+          {
+            "conf": 1.0,
+            "end": 0.54,
+            "start": 0.15,
+            "word": "égout"
+          }
+        ],
+        "expected_label_identified": true
+      },
+      "review_note": "Open-vocabulary recognition differs, but the independent recognizer identifies the expected item when offered both actual contrast labels plus unknown. No claim of unrestricted-word recognition is made."
+    },
+    {
+      "filename": "comuls_48a43bbcdb65d2d1df400ca28dffda63ab9aaf4a919a32306623055df69ebf65.wav",
+      "sha256": "48a43bbcdb65d2d1df400ca28dffda63ab9aaf4a919a32306623055df69ebf65",
+      "expected": "pur",
+      "decoded": "pire",
+      "exact_normalized_match": false,
+      "token_edits": 1,
+      "word_count": 1,
+      "word_details": [
+        {
+          "conf": 0.684337,
+          "end": 0.57,
+          "start": 0.15,
+          "word": "pire"
+        }
+      ],
+      "whisper_adjudication": {
+        "expected": "pur",
+        "sha256": "48a43bbcdb65d2d1df400ca28dffda63ab9aaf4a919a32306623055df69ebf65",
+        "filename": "comuls_48a43bbcdb65d2d1df400ca28dffda63ab9aaf4a919a32306623055df69ebf65.wav",
+        "decoded": "Pire !",
+        "segments": [
+          {
+            "text": " Pire !",
+            "start": 0.0,
+            "end": 0.5,
+            "avg_logprob": -0.788127581278483,
+            "no_speech_prob": 0.22223667800426483
+          }
+        ]
+      },
+      "phonetic_measurements": {
+        "word": "pur",
+        "sha256": "48a43bbcdb65d2d1df400ca28dffda63ab9aaf4a919a32306623055df69ebf65",
+        "peak_energy_time": 0.315,
+        "vowel_sample_interval": [
+          0.295,
+          0.335
+        ],
+        "median_formants_hz": [
+          269.0,
+          2513.6,
+          2864.0
+        ],
+        "onset_interval": [
+          0.205,
+          0.245
+        ],
+        "onset_60_500hz_fraction": 0.53102,
+        "onset_above_1500hz_fraction": 0.43753
+      },
+      "disposition": "isolated_contrast_verified_with_candidates",
+      "contrast_decode": {
+        "expected": "pur",
+        "filename": "comuls_48a43bbcdb65d2d1df400ca28dffda63ab9aaf4a919a32306623055df69ebf65.wav",
+        "sha256": "48a43bbcdb65d2d1df400ca28dffda63ab9aaf4a919a32306623055df69ebf65",
+        "decoded": "pur",
+        "matches": true,
+        "word_details": [
+          {
+            "conf": 1.0,
+            "end": 0.57,
+            "start": 0.15,
+            "word": "pur"
+          }
+        ],
+        "expected_label_identified": true
+      },
+      "review_note": "Open-vocabulary recognition differs, but the independent recognizer identifies the expected item when offered both actual contrast labels plus unknown. No claim of unrestricted-word recognition is made."
+    },
+    {
+      "filename": "comuls_4fb1ad6f37d0d913a21fa14f6e12f8dc4ac11b9c83d677bfd941142b556de1be.wav",
+      "sha256": "4fb1ad6f37d0d913a21fa14f6e12f8dc4ac11b9c83d677bfd941142b556de1be",
+      "expected": "Si tu veux, nous pouvons attendre.",
+      "decoded": "si tu veux nous pouvons attendre",
+      "exact_normalized_match": true,
+      "token_edits": 0,
+      "word_count": 6,
+      "word_details": [
+        {
+          "conf": 1.0,
+          "end": 0.27,
+          "start": 0.0,
+          "word": "si"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.42,
+          "start": 0.27,
+          "word": "tu"
+        },
+        {
+          "conf": 0.955369,
+          "end": 0.69,
+          "start": 0.42,
+          "word": "veux"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.99,
+          "start": 0.81,
+          "word": "nous"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.26,
+          "start": 0.99,
+          "word": "pouvons"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.89,
+          "start": 1.26,
+          "word": "attendre"
+        }
+      ],
+      "whisper_adjudication": null,
+      "phonetic_measurements": null,
+      "disposition": "independent_unconstrained_match",
+      "review_note": "Independent Vosk transcription matches after punctuation/case token normalization."
+    },
+    {
+      "filename": "comuls_5418dd36175621fc5204527a51dea411fd09812b234d559f29e06ddbffdde7f4.wav",
+      "sha256": "5418dd36175621fc5204527a51dea411fd09812b234d559f29e06ddbffdde7f4",
+      "expected": "La portée de cet accord est limitée.",
+      "decoded": "la portée de cet accord est limité",
+      "exact_normalized_match": false,
+      "token_edits": 1,
+      "word_count": 7,
+      "word_details": [
+        {
+          "conf": 1.0,
+          "end": 0.33,
+          "start": 0.12,
+          "word": "la"
+        },
+        {
+          "conf": 0.963326,
+          "end": 0.69,
+          "start": 0.33,
+          "word": "portée"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.78,
+          "start": 0.69,
+          "word": "de"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.96,
+          "start": 0.78,
+          "word": "cet"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.26,
+          "start": 0.96,
+          "word": "accord"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.32,
+          "start": 1.26,
+          "word": "est"
+        },
+        {
+          "conf": 0.551387,
+          "end": 1.83,
+          "start": 1.32,
+          "word": "limité"
+        }
+      ],
+      "whisper_adjudication": {
+        "expected": "La portée de cet accord est limitée.",
+        "sha256": "5418dd36175621fc5204527a51dea411fd09812b234d559f29e06ddbffdde7f4",
+        "filename": "comuls_5418dd36175621fc5204527a51dea411fd09812b234d559f29e06ddbffdde7f4.wav",
+        "decoded": "La portée de cet accord est limitée.",
+        "segments": [
+          {
+            "text": " La portée de cet accord est limitée.",
+            "start": 0.0,
+            "end": 2.0,
+            "avg_logprob": -0.2788754885013287,
+            "no_speech_prob": 0.011483599431812763
+          }
+        ]
+      },
+      "phonetic_measurements": null,
+      "disposition": "bounded_manual_adjudication_of_model_outputs",
+      "review_note": "ASR limité vs limitée is a silent morphological spelling difference; the exercise asks selection between audibly distinct sentences."
+    },
+    {
+      "filename": "comuls_5829b5692ca44c0320c8d92d318e24351dc18a356cc0895a051046d02156b106.wav",
+      "sha256": "5829b5692ca44c0320c8d92d318e24351dc18a356cc0895a051046d02156b106",
+      "expected": "Les travaux seront achevés avant vendredi.",
+      "decoded": "les travaux seront achevés avant vendredi",
+      "exact_normalized_match": true,
+      "token_edits": 0,
+      "word_count": 6,
+      "word_details": [
+        {
+          "conf": 1.0,
+          "end": 0.33,
+          "start": 0.12,
+          "word": "les"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.66,
+          "start": 0.33,
+          "word": "travaux"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.93,
+          "start": 0.66,
+          "word": "seront"
+        },
+        {
+          "conf": 0.639032,
+          "end": 1.29,
+          "start": 0.93,
+          "word": "achevés"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.47,
+          "start": 1.29,
+          "word": "avant"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.98,
+          "start": 1.47,
+          "word": "vendredi"
+        }
+      ],
+      "whisper_adjudication": null,
+      "phonetic_measurements": null,
+      "disposition": "independent_unconstrained_match",
+      "review_note": "Independent Vosk transcription matches after punctuation/case token normalization."
+    },
+    {
+      "filename": "comuls_58662975e96e0d3efd6e265795e9c8f05d6c785b31ca642bb049951dc8c6aab7.wav",
+      "sha256": "58662975e96e0d3efd6e265795e9c8f05d6c785b31ca642bb049951dc8c6aab7",
+      "expected": "La décision sera annoncée demain.",
+      "decoded": "la décision sera annoncée demain",
+      "exact_normalized_match": true,
+      "token_edits": 0,
+      "word_count": 5,
+      "word_details": [
+        {
+          "conf": 1.0,
+          "end": 0.33,
+          "start": 0.12,
+          "word": "la"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.75,
+          "start": 0.33,
+          "word": "décision"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.02,
+          "start": 0.75,
+          "word": "sera"
+        },
+        {
+          "conf": 0.501134,
+          "end": 1.44,
+          "start": 1.02,
+          "word": "annoncée"
+        },
+        {
+          "conf": 0.930691,
+          "end": 1.77,
+          "start": 1.44,
+          "word": "demain"
+        }
+      ],
+      "whisper_adjudication": null,
+      "phonetic_measurements": null,
+      "disposition": "independent_unconstrained_match",
+      "review_note": "Independent Vosk transcription matches after punctuation/case token normalization."
+    },
+    {
+      "filename": "comuls_5a7c0f2e50261e8b0f7ce63f38ad13bb0d8d49dc95847a62eedc990c131d2395.wav",
+      "sha256": "5a7c0f2e50261e8b0f7ce63f38ad13bb0d8d49dc95847a62eedc990c131d2395",
+      "expected": "bulle",
+      "decoded": "ville",
+      "exact_normalized_match": false,
+      "token_edits": 1,
+      "word_count": 1,
+      "word_details": [
+        {
+          "conf": 0.871639,
+          "end": 0.63,
+          "start": 0.12,
+          "word": "ville"
+        }
+      ],
+      "whisper_adjudication": {
+        "expected": "bulle",
+        "sha256": "5a7c0f2e50261e8b0f7ce63f38ad13bb0d8d49dc95847a62eedc990c131d2395",
+        "filename": "comuls_5a7c0f2e50261e8b0f7ce63f38ad13bb0d8d49dc95847a62eedc990c131d2395.wav",
+        "decoded": "Ville.",
+        "segments": [
+          {
+            "text": " Ville.",
+            "start": 0.0,
+            "end": 1.0,
+            "avg_logprob": -0.8314734200636545,
+            "no_speech_prob": 0.12644235789775848
+          }
+        ]
+      },
+      "phonetic_measurements": {
+        "word": "bulle",
+        "sha256": "5a7c0f2e50261e8b0f7ce63f38ad13bb0d8d49dc95847a62eedc990c131d2395",
+        "peak_energy_time": 0.395,
+        "vowel_sample_interval": [
+          0.375,
+          0.415
+        ],
+        "median_formants_hz": [
+          278.5,
+          2372.4,
+          2849.2
+        ],
+        "onset_interval": [
+          0.17,
+          0.21
+        ],
+        "onset_60_500hz_fraction": 0.99639,
+        "onset_above_1500hz_fraction": 0.00015
+      },
+      "disposition": "isolated_contrast_verified_with_candidates",
+      "contrast_decode": {
+        "expected": "bulle",
+        "filename": "comuls_5a7c0f2e50261e8b0f7ce63f38ad13bb0d8d49dc95847a62eedc990c131d2395.wav",
+        "sha256": "5a7c0f2e50261e8b0f7ce63f38ad13bb0d8d49dc95847a62eedc990c131d2395",
+        "decoded": "bulle",
+        "matches": true,
+        "word_details": [
+          {
+            "conf": 1.0,
+            "end": 0.63,
+            "start": 0.15,
+            "word": "bulle"
+          }
+        ],
+        "expected_label_identified": true
+      },
+      "review_note": "Open-vocabulary recognition differs, but the independent recognizer identifies the expected item when offered both actual contrast labels plus unknown. No claim of unrestricted-word recognition is made."
+    },
+    {
+      "filename": "comuls_5af0901f585cbac814d0ad130b4731bb427428b02c881b0e42c3e223e1916ead.wav",
+      "sha256": "5af0901f585cbac814d0ad130b4731bb427428b02c881b0e42c3e223e1916ead",
+      "expected": "On arrive bientôt.",
+      "decoded": "on arrive bientôt",
+      "exact_normalized_match": true,
+      "token_edits": 0,
+      "word_count": 3,
+      "word_details": [
+        {
+          "conf": 1.0,
+          "end": 0.33,
+          "start": 0.18,
+          "word": "on"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.63,
+          "start": 0.33,
+          "word": "arrive"
+        },
+        {
+          "conf": 0.917945,
+          "end": 1.14,
+          "start": 0.63,
+          "word": "bientôt"
+        }
+      ],
+      "whisper_adjudication": null,
+      "phonetic_measurements": null,
+      "disposition": "independent_unconstrained_match",
+      "review_note": "Independent Vosk transcription matches after punctuation/case token normalization."
+    },
+    {
+      "filename": "comuls_5cd1d7fb5dfc0e577cec4d76207834876eaa2860ec12ea70ef42e8580b4fe640.wav",
+      "sha256": "5cd1d7fb5dfc0e577cec4d76207834876eaa2860ec12ea70ef42e8580b4fe640",
+      "expected": "Cette décision risque de compromettre la suite du projet.",
+      "decoded": "cette décision risque de compromettre la suite du projet",
+      "exact_normalized_match": true,
+      "token_edits": 0,
+      "word_count": 9,
+      "word_details": [
+        {
+          "conf": 1.0,
+          "end": 0.45,
+          "start": 0.12,
+          "word": "cette"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.93,
+          "start": 0.45,
+          "word": "décision"
+        },
+        {
+          "conf": 0.722951,
+          "end": 1.29,
+          "start": 0.931577,
+          "word": "risque"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.38,
+          "start": 1.29,
+          "word": "de"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.98,
+          "start": 1.38,
+          "word": "compromettre"
+        },
+        {
+          "conf": 1.0,
+          "end": 2.07,
+          "start": 1.98,
+          "word": "la"
+        },
+        {
+          "conf": 1.0,
+          "end": 2.37,
+          "start": 2.07,
+          "word": "suite"
+        },
+        {
+          "conf": 1.0,
+          "end": 2.46,
+          "start": 2.37,
+          "word": "du"
+        },
+        {
+          "conf": 1.0,
+          "end": 2.97,
+          "start": 2.46,
+          "word": "projet"
+        }
+      ],
+      "whisper_adjudication": null,
+      "phonetic_measurements": null,
+      "disposition": "independent_unconstrained_match",
+      "review_note": "Independent Vosk transcription matches after punctuation/case token normalization."
+    },
+    {
+      "filename": "comuls_6208d988b5388dd68a2394ae0c3f016a1a1060302e2cc101441305fd49a338cc.wav",
+      "sha256": "6208d988b5388dd68a2394ae0c3f016a1a1060302e2cc101441305fd49a338cc",
+      "expected": "L’accès est réservé aux personnes munies d’un billet.",
+      "decoded": "l'accès est réservé aux personnes munies d'un billet",
+      "exact_normalized_match": true,
+      "token_edits": 0,
+      "word_count": 10,
+      "word_details": [
+        {
+          "conf": 1.0,
+          "end": 0.6,
+          "start": 0.09,
+          "word": "l'accès"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.63,
+          "start": 0.6,
+          "word": "est"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.11,
+          "start": 0.63,
+          "word": "réservé"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.2,
+          "start": 1.11,
+          "word": "aux"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.62,
+          "start": 1.2,
+          "word": "personnes"
+        },
+        {
+          "conf": 0.951645,
+          "end": 1.86,
+          "start": 1.62,
+          "word": "munies"
+        },
+        {
+          "conf": 1.0,
+          "end": 2.04,
+          "start": 1.86,
+          "word": "d'un"
+        },
+        {
+          "conf": 1.0,
+          "end": 2.43,
+          "start": 2.04,
+          "word": "billet"
+        }
+      ],
+      "whisper_adjudication": null,
+      "phonetic_measurements": null,
+      "disposition": "independent_unconstrained_match",
+      "review_note": "Independent Vosk transcription matches after punctuation/case token normalization."
+    },
+    {
+      "filename": "comuls_6749093a63d2b1170533e1674908bcdf213e495aa3a78d973267d50893943b6c.wav",
+      "sha256": "6749093a63d2b1170533e1674908bcdf213e495aa3a78d973267d50893943b6c",
+      "expected": "rue",
+      "decoded": "rue",
+      "exact_normalized_match": true,
+      "token_edits": 0,
+      "word_count": 1,
+      "word_details": [
+        {
+          "conf": 0.455433,
+          "end": 0.39,
+          "start": 0.122951,
+          "word": "rue"
+        }
+      ],
+      "whisper_adjudication": {
+        "expected": "rue",
+        "sha256": "6749093a63d2b1170533e1674908bcdf213e495aa3a78d973267d50893943b6c",
+        "filename": "comuls_6749093a63d2b1170533e1674908bcdf213e495aa3a78d973267d50893943b6c.wav",
+        "decoded": "Arrête !",
+        "segments": [
+          {
+            "text": " Arrête !",
+            "start": 0.0,
+            "end": 0.5,
+            "avg_logprob": -0.7454550095966884,
+            "no_speech_prob": 0.2133968472480774
+          }
+        ]
+      },
+      "phonetic_measurements": {
+        "word": "rue",
+        "sha256": "6749093a63d2b1170533e1674908bcdf213e495aa3a78d973267d50893943b6c",
+        "peak_energy_time": 0.24,
+        "vowel_sample_interval": [
+          0.22,
+          0.26
+        ],
+        "median_formants_hz": [
+          366.0,
+          2152.1,
+          2925.4
+        ],
+        "onset_interval": [
+          0.06,
+          0.1
+        ],
+        "onset_60_500hz_fraction": 0.39836,
+        "onset_above_1500hz_fraction": 0.03109
+      },
+      "disposition": "independent_unconstrained_match",
+      "review_note": "Independent Vosk transcription matches after punctuation/case token normalization."
+    },
+    {
+      "filename": "comuls_67de6832a04f8d90f84a3f83b6d224ab012c667bd2c4e2e040bf15142c2646ec.wav",
+      "sha256": "67de6832a04f8d90f84a3f83b6d224ab012c667bd2c4e2e040bf15142c2646ec",
+      "expected": "dessert",
+      "decoded": "dessert",
+      "exact_normalized_match": true,
+      "token_edits": 0,
+      "word_count": 1,
+      "word_details": [
+        {
+          "conf": 0.632555,
+          "end": 0.78,
+          "start": 0.06,
+          "word": "dessert"
+        }
+      ],
+      "whisper_adjudication": null,
+      "phonetic_measurements": null,
+      "disposition": "independent_unconstrained_match",
+      "review_note": "Independent Vosk transcription matches after punctuation/case token normalization."
+    },
+    {
+      "filename": "comuls_6842e64dd71e743cfcaf49bb7dc898653514fe5e6fd8391cf8cc84219c1a79e8.wav",
+      "sha256": "6842e64dd71e743cfcaf49bb7dc898653514fe5e6fd8391cf8cc84219c1a79e8",
+      "expected": "Nous souhaitons privilégier une solution durable.",
+      "decoded": "nous souhaitons privilégier une solution durable",
+      "exact_normalized_match": true,
+      "token_edits": 0,
+      "word_count": 6,
+      "word_details": [
+        {
+          "conf": 1.0,
+          "end": 0.33,
+          "start": 0.15,
+          "word": "nous"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.63,
+          "start": 0.33,
+          "word": "souhaitons"
+        },
+        {
+          "conf": 0.602973,
+          "end": 1.23,
+          "start": 0.63,
+          "word": "privilégier"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.29,
+          "start": 1.23,
+          "word": "une"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.74,
+          "start": 1.29,
+          "word": "solution"
+        },
+        {
+          "conf": 1.0,
+          "end": 2.31,
+          "start": 1.74,
+          "word": "durable"
+        }
+      ],
+      "whisper_adjudication": null,
+      "phonetic_measurements": null,
+      "disposition": "independent_unconstrained_match",
+      "review_note": "Independent Vosk transcription matches after punctuation/case token normalization."
+    },
+    {
+      "filename": "comuls_6c831d06f1168dcc244a8deb1fc449c4d25b08ca1388e47749d1e8c0f146ebc4.wav",
+      "sha256": "6c831d06f1168dcc244a8deb1fc449c4d25b08ca1388e47749d1e8c0f146ebc4",
+      "expected": "cousin",
+      "decoded": "cousin",
+      "exact_normalized_match": true,
+      "token_edits": 0,
+      "word_count": 1,
+      "word_details": [
+        {
+          "conf": 0.667524,
+          "end": 0.6,
+          "start": 0.12,
+          "word": "cousin"
+        }
+      ],
+      "whisper_adjudication": null,
+      "phonetic_measurements": null,
+      "disposition": "independent_unconstrained_match",
+      "review_note": "Independent Vosk transcription matches after punctuation/case token normalization."
+    },
+    {
+      "filename": "comuls_7033ad059d0b1d60cc3f00cb2c36981e95c1921cf58aa3466da465071b5edab8.wav",
+      "sha256": "7033ad059d0b1d60cc3f00cb2c36981e95c1921cf58aa3466da465071b5edab8",
+      "expected": "Cette offre est valable pendant une semaine.",
+      "decoded": "cette offre est valable pendant une semaine",
+      "exact_normalized_match": true,
+      "token_edits": 0,
+      "word_count": 7,
+      "word_details": [
+        {
+          "conf": 1.0,
+          "end": 0.39,
+          "start": 0.06,
+          "word": "cette"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.6,
+          "start": 0.39,
+          "word": "offre"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.66,
+          "start": 0.6,
+          "word": "est"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.11,
+          "start": 0.66,
+          "word": "valable"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.38,
+          "start": 1.11,
+          "word": "pendant"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.5,
+          "start": 1.38,
+          "word": "une"
+        },
+        {
+          "conf": 1.0,
+          "end": 2.04,
+          "start": 1.5,
+          "word": "semaine"
+        }
+      ],
+      "whisper_adjudication": null,
+      "phonetic_measurements": null,
+      "disposition": "independent_unconstrained_match",
+      "review_note": "Independent Vosk transcription matches after punctuation/case token normalization."
+    },
+    {
+      "filename": "comuls_726e5407bcf4bbe60911c4327c5e00fe4d215de78506bb1b63adc780b7d573e5.wav",
+      "sha256": "726e5407bcf4bbe60911c4327c5e00fe4d215de78506bb1b63adc780b7d573e5",
+      "expected": "bain",
+      "decoded": "ben",
+      "exact_normalized_match": false,
+      "token_edits": 1,
+      "word_count": 1,
+      "word_details": [
+        {
+          "conf": 0.436828,
+          "end": 0.45,
+          "start": 0.12,
+          "word": "ben"
+        }
+      ],
+      "whisper_adjudication": {
+        "expected": "bain",
+        "sha256": "726e5407bcf4bbe60911c4327c5e00fe4d215de78506bb1b63adc780b7d573e5",
+        "filename": "comuls_726e5407bcf4bbe60911c4327c5e00fe4d215de78506bb1b63adc780b7d573e5.wav",
+        "decoded": "D'où ?",
+        "segments": [
+          {
+            "text": " D'où ?",
+            "start": 0.0,
+            "end": 0.5,
+            "avg_logprob": -1.068581908941269,
+            "no_speech_prob": 0.3774207532405853
+          }
+        ]
+      },
+      "phonetic_measurements": null,
+      "disposition": "isolated_contrast_verified_with_candidates",
+      "contrast_decode": {
+        "expected": "bain",
+        "filename": "comuls_726e5407bcf4bbe60911c4327c5e00fe4d215de78506bb1b63adc780b7d573e5.wav",
+        "sha256": "726e5407bcf4bbe60911c4327c5e00fe4d215de78506bb1b63adc780b7d573e5",
+        "decoded": "bain",
+        "matches": true,
+        "word_details": [
+          {
+            "conf": 1.0,
+            "end": 0.45,
+            "start": 0.12,
+            "word": "bain"
+          }
+        ],
+        "expected_label_identified": true
+      },
+      "review_note": "Open-vocabulary recognition differs, but the independent recognizer identifies the expected item when offered both actual contrast labels plus unknown. No claim of unrestricted-word recognition is made."
+    },
+    {
+      "filename": "comuls_768e30d61da8ede97f9628d4e1ebda0e60be0d06ed3c42b87818b85d77783d2f.wav",
+      "sha256": "768e30d61da8ede97f9628d4e1ebda0e60be0d06ed3c42b87818b85d77783d2f",
+      "expected": "Nous prenons le bus demain.",
+      "decoded": "nous prenons le bus demain",
+      "exact_normalized_match": true,
+      "token_edits": 0,
+      "word_count": 5,
+      "word_details": [
+        {
+          "conf": 1.0,
+          "end": 0.36,
+          "start": 0.15,
+          "word": "nous"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.69,
+          "start": 0.36,
+          "word": "prenons"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.78,
+          "start": 0.69,
+          "word": "le"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.99,
+          "start": 0.78,
+          "word": "bus"
+        },
+        {
+          "conf": 0.971464,
+          "end": 1.32,
+          "start": 0.99,
+          "word": "demain"
+        }
+      ],
+      "whisper_adjudication": null,
+      "phonetic_measurements": null,
+      "disposition": "independent_unconstrained_match",
+      "review_note": "Independent Vosk transcription matches after punctuation/case token normalization."
+    },
+    {
+      "filename": "comuls_7a730f2c11bb9add9a9671f78d5b2f060befbde45065d4a7152f25392f222421.wav",
+      "sha256": "7a730f2c11bb9add9a9671f78d5b2f060befbde45065d4a7152f25392f222421",
+      "expected": "Je lui parlerai après le cours.",
+      "decoded": "je lui parlerai après le cours",
+      "exact_normalized_match": true,
+      "token_edits": 0,
+      "word_count": 6,
+      "word_details": [
+        {
+          "conf": 1.0,
+          "end": 0.36,
+          "start": 0.12,
+          "word": "je"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.48,
+          "start": 0.36,
+          "word": "lui"
+        },
+        {
+          "conf": 0.805753,
+          "end": 0.96,
+          "start": 0.48,
+          "word": "parlerai"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.17,
+          "start": 0.96,
+          "word": "après"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.26,
+          "start": 1.17,
+          "word": "le"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.68,
+          "start": 1.26,
+          "word": "cours"
+        }
+      ],
+      "whisper_adjudication": null,
+      "phonetic_measurements": null,
+      "disposition": "independent_unconstrained_match",
+      "review_note": "Independent Vosk transcription matches after punctuation/case token normalization."
+    },
+    {
+      "filename": "comuls_7e4eaae36ebd9626b5ad3a26846bf9000848907858aa86c47fde1e5bfee691c1.wav",
+      "sha256": "7e4eaae36ebd9626b5ad3a26846bf9000848907858aa86c47fde1e5bfee691c1",
+      "expected": "Ce matin nous avons acheté du pain.",
+      "decoded": "ce matin nous avons acheter du pain",
+      "exact_normalized_match": false,
+      "token_edits": 1,
+      "word_count": 7,
+      "word_details": [
+        {
+          "conf": 1.0,
+          "end": 0.33,
+          "start": 0.09,
+          "word": "ce"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.66,
+          "start": 0.33,
+          "word": "matin"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.81,
+          "start": 0.66,
+          "word": "nous"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.02,
+          "start": 0.81,
+          "word": "avons"
+        },
+        {
+          "conf": 0.560494,
+          "end": 1.29,
+          "start": 1.02,
+          "word": "acheter"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.44,
+          "start": 1.29,
+          "word": "du"
+        },
+        {
+          "conf": 0.932533,
+          "end": 1.68,
+          "start": 1.44,
+          "word": "pain"
+        }
+      ],
+      "whisper_adjudication": {
+        "expected": "Ce matin nous avons acheté du pain.",
+        "sha256": "7e4eaae36ebd9626b5ad3a26846bf9000848907858aa86c47fde1e5bfee691c1",
+        "filename": "comuls_7e4eaae36ebd9626b5ad3a26846bf9000848907858aa86c47fde1e5bfee691c1.wav",
+        "decoded": "Ce matin nous avons acheté du pain.",
+        "segments": [
+          {
+            "text": " Ce matin nous avons acheté du pain.",
+            "start": 0.0,
+            "end": 2.0,
+            "avg_logprob": -0.2812476282318433,
+            "no_speech_prob": 0.01595321297645569
+          }
+        ]
+      },
+      "phonetic_measurements": null,
+      "disposition": "bounded_manual_adjudication_of_model_outputs",
+      "review_note": "Vosk acheter vs acheté is a homophone; Whisper recovers the expected wording."
+    },
+    {
+      "filename": "comuls_84fee78d424800e65c268da70267625e8215bb707c4f69c156e48726780fa3ef.wav",
+      "sha256": "84fee78d424800e65c268da70267625e8215bb707c4f69c156e48726780fa3ef",
+      "expected": "Le prochain bus arrive dans cinq minutes.",
+      "decoded": "le prochain bus arrive dans cinq minutes",
+      "exact_normalized_match": true,
+      "token_edits": 0,
+      "word_count": 7,
+      "word_details": [
+        {
+          "conf": 1.0,
+          "end": 0.24,
+          "start": 0.0,
+          "word": "le"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.57,
+          "start": 0.24,
+          "word": "prochain"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.81,
+          "start": 0.57,
+          "word": "bus"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.17,
+          "start": 0.81,
+          "word": "arrive"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.32,
+          "start": 1.17,
+          "word": "dans"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.53,
+          "start": 1.32,
+          "word": "cinq"
+        },
+        {
+          "conf": 1.0,
+          "end": 2.01,
+          "start": 1.53,
+          "word": "minutes"
+        }
+      ],
+      "whisper_adjudication": null,
+      "phonetic_measurements": null,
+      "disposition": "independent_unconstrained_match",
+      "review_note": "Independent Vosk transcription matches after punctuation/case token normalization."
+    },
+    {
+      "filename": "comuls_8684fc04cc1aab7a27a19e707a29a94610a4add9f1d72e18ab713e1f8b2303fa.wav",
+      "sha256": "8684fc04cc1aab7a27a19e707a29a94610a4add9f1d72e18ab713e1f8b2303fa",
+      "expected": "Bonjour. Vous êtes prêt à écouter du français.",
+      "decoded": "bonjour vous êtes prêt à écouter du français",
+      "exact_normalized_match": true,
+      "token_edits": 0,
+      "word_count": 8,
+      "word_details": [
+        {
+          "conf": 1.0,
+          "end": 0.78,
+          "start": 0.06,
+          "word": "bonjour"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.23,
+          "start": 0.96,
+          "word": "vous"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.35,
+          "start": 1.23,
+          "word": "êtes"
+        },
+        {
+          "conf": 0.957331,
+          "end": 1.56,
+          "start": 1.35,
+          "word": "prêt"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.59,
+          "start": 1.56,
+          "word": "à"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.89,
+          "start": 1.59,
+          "word": "écouter"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.98,
+          "start": 1.89,
+          "word": "du"
+        },
+        {
+          "conf": 1.0,
+          "end": 2.46,
+          "start": 1.98,
+          "word": "français"
+        }
+      ],
+      "whisper_adjudication": {
+        "decoded": "Bonjour, vous êtes prêt à écouter du français."
+      },
+      "phonetic_measurements": null,
+      "disposition": "independent_unconstrained_match",
+      "review_note": "Independent Vosk transcription matches after punctuation/case token normalization."
+    },
+    {
+      "filename": "comuls_86b0a082b2ab5eaefd79273e0822b1820ea729c90605b060f0b3ef2423c1ac64.wav",
+      "sha256": "86b0a082b2ab5eaefd79273e0822b1820ea729c90605b060f0b3ef2423c1ac64",
+      "expected": "Les résultats doivent être interprétés avec prudence.",
+      "decoded": "les résultats doivent être interprétés avec prudence",
+      "exact_normalized_match": true,
+      "token_edits": 0,
+      "word_count": 7,
+      "word_details": [
+        {
+          "conf": 1.0,
+          "end": 0.33,
+          "start": 0.12,
+          "word": "les"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.93,
+          "start": 0.33,
+          "word": "résultats"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.29,
+          "start": 0.99,
+          "word": "doivent"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.5,
+          "start": 1.32,
+          "word": "être"
+        },
+        {
+          "conf": 0.588801,
+          "end": 2.01,
+          "start": 1.5,
+          "word": "interprétés"
+        },
+        {
+          "conf": 1.0,
+          "end": 2.22,
+          "start": 2.01,
+          "word": "avec"
+        },
+        {
+          "conf": 1.0,
+          "end": 2.85,
+          "start": 2.22,
+          "word": "prudence"
+        }
+      ],
+      "whisper_adjudication": null,
+      "phonetic_measurements": null,
+      "disposition": "independent_unconstrained_match",
+      "review_note": "Independent Vosk transcription matches after punctuation/case token normalization."
+    },
+    {
+      "filename": "comuls_8c2f484bdc108d78053d4924107c9495f2c6fff83d03d07ba2a07e2e62428d0d.wav",
+      "sha256": "8c2f484bdc108d78053d4924107c9495f2c6fff83d03d07ba2a07e2e62428d0d",
+      "expected": "Cette conclusion appelle quelques réserves.",
+      "decoded": "cette conclusion appelle quelques réserves",
+      "exact_normalized_match": true,
+      "token_edits": 0,
+      "word_count": 5,
+      "word_details": [
+        {
+          "conf": 1.0,
+          "end": 0.42,
+          "start": 0.12,
+          "word": "cette"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.9,
+          "start": 0.42,
+          "word": "conclusion"
+        },
+        {
+          "conf": 0.398293,
+          "end": 1.17,
+          "start": 0.9,
+          "word": "appelle"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.47,
+          "start": 1.17,
+          "word": "quelques"
+        },
+        {
+          "conf": 0.970994,
+          "end": 2.07,
+          "start": 1.47,
+          "word": "réserves"
+        }
+      ],
+      "whisper_adjudication": null,
+      "phonetic_measurements": null,
+      "disposition": "independent_unconstrained_match",
+      "review_note": "Independent Vosk transcription matches after punctuation/case token normalization."
+    },
+    {
+      "filename": "comuls_8c472b59e3184a86ea5cdf4c55bf4d6f6e631bb3384ed96ba27484225677c46b.wav",
+      "sha256": "8c472b59e3184a86ea5cdf4c55bf4d6f6e631bb3384ed96ba27484225677c46b",
+      "expected": "Cette démarche nécessite une autorisation.",
+      "decoded": "cette démarche nécessite une autorisation",
+      "exact_normalized_match": true,
+      "token_edits": 0,
+      "word_count": 5,
+      "word_details": [
+        {
+          "conf": 1.0,
+          "end": 0.51,
+          "start": 0.12,
+          "word": "cette"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.02,
+          "start": 0.51,
+          "word": "démarche"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.5,
+          "start": 1.02,
+          "word": "nécessite"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.62,
+          "start": 1.5,
+          "word": "une"
+        },
+        {
+          "conf": 1.0,
+          "end": 2.37,
+          "start": 1.62,
+          "word": "autorisation"
+        }
+      ],
+      "whisper_adjudication": null,
+      "phonetic_measurements": null,
+      "disposition": "independent_unconstrained_match",
+      "review_note": "Independent Vosk transcription matches after punctuation/case token normalization."
+    },
+    {
+      "filename": "comuls_8dfbe48a797fe0f9a37b7b0b797bb216f8700c54c91d1ac9dfe2036b1206b3ea.wav",
+      "sha256": "8dfbe48a797fe0f9a37b7b0b797bb216f8700c54c91d1ac9dfe2036b1206b3ea",
+      "expected": "Votre demande sera traitée dans les meilleurs délais.",
+      "decoded": "votre demande sera traitée dans les meilleurs délais",
+      "exact_normalized_match": true,
+      "token_edits": 0,
+      "word_count": 8,
+      "word_details": [
+        {
+          "conf": 1.0,
+          "end": 0.39,
+          "start": 0.0,
+          "word": "votre"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.69,
+          "start": 0.39,
+          "word": "demande"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.93,
+          "start": 0.69,
+          "word": "sera"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.23,
+          "start": 0.93,
+          "word": "traitée"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.35,
+          "start": 1.23,
+          "word": "dans"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.44,
+          "start": 1.35,
+          "word": "les"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.74,
+          "start": 1.44,
+          "word": "meilleurs"
+        },
+        {
+          "conf": 1.0,
+          "end": 2.07,
+          "start": 1.74,
+          "word": "délais"
+        }
+      ],
+      "whisper_adjudication": null,
+      "phonetic_measurements": null,
+      "disposition": "independent_unconstrained_match",
+      "review_note": "Independent Vosk transcription matches after punctuation/case token normalization."
+    },
+    {
+      "filename": "comuls_8e73dfff508898b472137a4c4637a07533c998a183b1bdf1d156be82be7c13b6.wav",
+      "sha256": "8e73dfff508898b472137a4c4637a07533c998a183b1bdf1d156be82be7c13b6",
+      "expected": "Les retombées de cette réforme restent incertaines.",
+      "decoded": "les retombées de cette réforme reste incertaine",
+      "exact_normalized_match": false,
+      "token_edits": 2,
+      "word_count": 7,
+      "word_details": [
+        {
+          "conf": 1.0,
+          "end": 0.24,
+          "start": 0.0,
+          "word": "les"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.69,
+          "start": 0.24,
+          "word": "retombées"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.78,
+          "start": 0.69,
+          "word": "de"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.96,
+          "start": 0.78,
+          "word": "cette"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.41,
+          "start": 0.96,
+          "word": "réforme"
+        },
+        {
+          "conf": 0.856182,
+          "end": 1.68,
+          "start": 1.41,
+          "word": "reste"
+        },
+        {
+          "conf": 0.856182,
+          "end": 2.4,
+          "start": 1.68,
+          "word": "incertaine"
+        }
+      ],
+      "whisper_adjudication": {
+        "expected": "Les retombées de cette réforme restent incertaines.",
+        "sha256": "8e73dfff508898b472137a4c4637a07533c998a183b1bdf1d156be82be7c13b6",
+        "filename": "comuls_8e73dfff508898b472137a4c4637a07533c998a183b1bdf1d156be82be7c13b6.wav",
+        "decoded": "Les retombées de cette réforme restent un certaine.",
+        "segments": [
+          {
+            "text": " Les retombées de cette réforme restent un certaine.",
+            "start": 0.0,
+            "end": 2.4,
+            "avg_logprob": -0.34974805046530333,
+            "no_speech_prob": 0.0074109178967773914
+          }
+        ]
+      },
+      "phonetic_measurements": null,
+      "disposition": "bounded_manual_adjudication_of_model_outputs",
+      "review_note": "Vosk reste incertaine vs restent incertaines differs only by silent plural endings; grammar and provided options disambiguate written form."
+    },
+    {
+      "filename": "comuls_8f2a7549bc2c97b28d9e44e58f1e83633e0363639fc5e7d4fcf7cc29af576f6a.wav",
+      "sha256": "8f2a7549bc2c97b28d9e44e58f1e83633e0363639fc5e7d4fcf7cc29af576f6a",
+      "expected": "Le magasin ferme à midi.",
+      "decoded": "le magasin ferme à midi",
+      "exact_normalized_match": true,
+      "token_edits": 0,
+      "word_count": 5,
+      "word_details": [
+        {
+          "conf": 1.0,
+          "end": 0.3,
+          "start": 0.09,
+          "word": "le"
+        },
+        {
+          "conf": 0.87338,
+          "end": 0.75,
+          "start": 0.3,
+          "word": "magasin"
+        },
+        {
+          "conf": 0.48639,
+          "end": 1.02,
+          "start": 0.75,
+          "word": "ferme"
+        },
+        {
+          "conf": 0.68783,
+          "end": 1.08,
+          "start": 1.02,
+          "word": "à"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.47,
+          "start": 1.08,
+          "word": "midi"
+        }
+      ],
+      "whisper_adjudication": null,
+      "phonetic_measurements": null,
+      "disposition": "independent_unconstrained_match",
+      "review_note": "Independent Vosk transcription matches after punctuation/case token normalization."
+    },
+    {
+      "filename": "comuls_903751ed98acec58dae6c82e94e893d0e99b67a6b90199d583b9864e7f12d571.wav",
+      "sha256": "903751ed98acec58dae6c82e94e893d0e99b67a6b90199d583b9864e7f12d571",
+      "expected": "Nous nous en souvenons.",
+      "decoded": "nous nous en souvenons",
+      "exact_normalized_match": true,
+      "token_edits": 0,
+      "word_count": 4,
+      "word_details": [
+        {
+          "conf": 1.0,
+          "end": 0.39,
+          "start": 0.15,
+          "word": "nous"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.551131,
+          "start": 0.39,
+          "word": "nous"
+        },
+        {
+          "conf": 0.505169,
+          "end": 0.644797,
+          "start": 0.551131,
+          "word": "en"
+        },
+        {
+          "conf": 0.620763,
+          "end": 1.11,
+          "start": 0.644797,
+          "word": "souvenons"
+        }
+      ],
+      "whisper_adjudication": null,
+      "phonetic_measurements": null,
+      "disposition": "independent_unconstrained_match",
+      "review_note": "Independent Vosk transcription matches after punctuation/case token normalization."
+    },
+    {
+      "filename": "comuls_90cd9af5928fcdd0944449dc2a67486ad2efd990f5ba665ceaf3f1d09c1d4ba8.wav",
+      "sha256": "90cd9af5928fcdd0944449dc2a67486ad2efd990f5ba665ceaf3f1d09c1d4ba8",
+      "expected": "Après le cours tu peux venir.",
+      "decoded": "après le cours tu peux venir",
+      "exact_normalized_match": true,
+      "token_edits": 0,
+      "word_count": 6,
+      "word_details": [
+        {
+          "conf": 1.0,
+          "end": 0.39,
+          "start": 0.09,
+          "word": "après"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.48,
+          "start": 0.39,
+          "word": "le"
+        },
+        {
+          "conf": 0.965714,
+          "end": 0.69,
+          "start": 0.48,
+          "word": "cours"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.84,
+          "start": 0.69,
+          "word": "tu"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.99,
+          "start": 0.84,
+          "word": "peux"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.53,
+          "start": 0.99,
+          "word": "venir"
+        }
+      ],
+      "whisper_adjudication": null,
+      "phonetic_measurements": null,
+      "disposition": "independent_unconstrained_match",
+      "review_note": "Independent Vosk transcription matches after punctuation/case token normalization."
+    },
+    {
+      "filename": "comuls_93de9869229508b1e4ca6c937203ca0f1f0ae95ce96d72cc256107d1aa5b8473.wav",
+      "sha256": "93de9869229508b1e4ca6c937203ca0f1f0ae95ce96d72cc256107d1aa5b8473",
+      "expected": "poison",
+      "decoded": "poison",
+      "exact_normalized_match": true,
+      "token_edits": 0,
+      "word_count": 1,
+      "word_details": [
+        {
+          "conf": 0.915965,
+          "end": 0.63,
+          "start": 0.12,
+          "word": "poison"
+        }
+      ],
+      "whisper_adjudication": null,
+      "phonetic_measurements": null,
+      "disposition": "independent_unconstrained_match",
+      "review_note": "Independent Vosk transcription matches after punctuation/case token normalization."
+    },
+    {
+      "filename": "comuls_984b3fd6de013dd781ca1fffbfd685b795e4c325486dc3ae8d4d91627f4cc289.wav",
+      "sha256": "984b3fd6de013dd781ca1fffbfd685b795e4c325486dc3ae8d4d91627f4cc289",
+      "expected": "Il importe de ne pas confondre corrélation et causalité.",
+      "decoded": "il importe de ne pas confondre corrélation et causalité",
+      "exact_normalized_match": true,
+      "token_edits": 0,
+      "word_count": 9,
+      "word_details": [
+        {
+          "conf": 1.0,
+          "end": 0.33,
+          "start": 0.12,
+          "word": "il"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.75,
+          "start": 0.33,
+          "word": "importe"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.87,
+          "start": 0.75,
+          "word": "de"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.96,
+          "start": 0.87,
+          "word": "ne"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.11,
+          "start": 0.96,
+          "word": "pas"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.62,
+          "start": 1.11,
+          "word": "confondre"
+        },
+        {
+          "conf": 1.0,
+          "end": 2.28,
+          "start": 1.62,
+          "word": "corrélation"
+        },
+        {
+          "conf": 1.0,
+          "end": 2.46,
+          "start": 2.34,
+          "word": "et"
+        },
+        {
+          "conf": 1.0,
+          "end": 3.15,
+          "start": 2.46,
+          "word": "causalité"
+        }
+      ],
+      "whisper_adjudication": null,
+      "phonetic_measurements": null,
+      "disposition": "independent_unconstrained_match",
+      "review_note": "Independent Vosk transcription matches after punctuation/case token normalization."
+    },
+    {
+      "filename": "comuls_9d364c42ee215786114da30d3f8801f9d2a021d2dad773597fcf6872aa1a3f6c.wav",
+      "sha256": "9d364c42ee215786114da30d3f8801f9d2a021d2dad773597fcf6872aa1a3f6c",
+      "expected": "Hier nous avons envoyé le dossier.",
+      "decoded": "hier nous avons envoyé le dossier",
+      "exact_normalized_match": true,
+      "token_edits": 0,
+      "word_count": 6,
+      "word_details": [
+        {
+          "conf": 1.0,
+          "end": 0.42,
+          "start": 0.06,
+          "word": "hier"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.57,
+          "start": 0.42,
+          "word": "nous"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.78,
+          "start": 0.57,
+          "word": "avons"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.11,
+          "start": 0.78,
+          "word": "envoyé"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.2,
+          "start": 1.11,
+          "word": "le"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.68,
+          "start": 1.2,
+          "word": "dossier"
+        }
+      ],
+      "whisper_adjudication": null,
+      "phonetic_measurements": null,
+      "disposition": "independent_unconstrained_match",
+      "review_note": "Independent Vosk transcription matches after punctuation/case token normalization."
+    },
+    {
+      "filename": "comuls_a5a592bae03778404fcd09f62301679febfa36d3ad0d301da2421ad910d1be77.wav",
+      "sha256": "a5a592bae03778404fcd09f62301679febfa36d3ad0d301da2421ad910d1be77",
+      "expected": "La réservation est obligatoire pour ce spectacle.",
+      "decoded": "la réservation est obligatoire pour ce spectacle",
+      "exact_normalized_match": true,
+      "token_edits": 0,
+      "word_count": 7,
+      "word_details": [
+        {
+          "conf": 1.0,
+          "end": 0.33,
+          "start": 0.12,
+          "word": "la"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.87,
+          "start": 0.33,
+          "word": "réservation"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.99,
+          "start": 0.87,
+          "word": "est"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.65,
+          "start": 0.99,
+          "word": "obligatoire"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.8,
+          "start": 1.65,
+          "word": "pour"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.92,
+          "start": 1.8,
+          "word": "ce"
+        },
+        {
+          "conf": 1.0,
+          "end": 2.61,
+          "start": 1.92,
+          "word": "spectacle"
+        }
+      ],
+      "whisper_adjudication": null,
+      "phonetic_measurements": null,
+      "disposition": "independent_unconstrained_match",
+      "review_note": "Independent Vosk transcription matches after punctuation/case token normalization."
+    },
+    {
+      "filename": "comuls_a6a87a33d26eee24819e635c1e8945bbeb0c6d0a6f08150640476e9500e50968.wav",
+      "sha256": "a6a87a33d26eee24819e635c1e8945bbeb0c6d0a6f08150640476e9500e50968",
+      "expected": "belle",
+      "decoded": "belle",
+      "exact_normalized_match": true,
+      "token_edits": 0,
+      "word_count": 1,
+      "word_details": [
+        {
+          "conf": 0.87095,
+          "end": 0.6,
+          "start": 0.12,
+          "word": "belle"
+        }
+      ],
+      "whisper_adjudication": {
+        "expected": "belle",
+        "sha256": "a6a87a33d26eee24819e635c1e8945bbeb0c6d0a6f08150640476e9500e50968",
+        "filename": "comuls_a6a87a33d26eee24819e635c1e8945bbeb0c6d0a6f08150640476e9500e50968.wav",
+        "decoded": "d'elle",
+        "segments": [
+          {
+            "text": " d'elle",
+            "start": 0.0,
+            "end": 2.0,
+            "avg_logprob": -0.8982215325037638,
+            "no_speech_prob": 0.18433670699596405
+          }
+        ]
+      },
+      "phonetic_measurements": {
+        "word": "belle",
+        "sha256": "a6a87a33d26eee24819e635c1e8945bbeb0c6d0a6f08150640476e9500e50968",
+        "peak_energy_time": 0.32,
+        "vowel_sample_interval": [
+          0.3,
+          0.34
+        ],
+        "median_formants_hz": [
+          655.3,
+          1992.0,
+          3033.1
+        ],
+        "onset_interval": [
+          0.16,
+          0.2
+        ],
+        "onset_60_500hz_fraction": 0.99776,
+        "onset_above_1500hz_fraction": 2e-05
+      },
+      "disposition": "independent_unconstrained_match",
+      "review_note": "Independent Vosk transcription matches after punctuation/case token normalization."
+    },
+    {
+      "filename": "comuls_a7c4e98785bd64f7b5a1164a920b501d6e0b69e6225bf1515e6d5d48b6a52521.wav",
+      "sha256": "a7c4e98785bd64f7b5a1164a920b501d6e0b69e6225bf1515e6d5d48b6a52521",
+      "expected": "dessus",
+      "decoded": "dessus",
+      "exact_normalized_match": true,
+      "token_edits": 0,
+      "word_count": 1,
+      "word_details": [
+        {
+          "conf": 0.679897,
+          "end": 0.57,
+          "start": 0.0,
+          "word": "dessus"
+        }
+      ],
+      "whisper_adjudication": null,
+      "phonetic_measurements": null,
+      "disposition": "independent_unconstrained_match",
+      "review_note": "Independent Vosk transcription matches after punctuation/case token normalization."
+    },
+    {
+      "filename": "comuls_accc678ac01336493a535ac6c50395b754bf10c13a9c0f1456b3b9f75e902394.wav",
+      "sha256": "accc678ac01336493a535ac6c50395b754bf10c13a9c0f1456b3b9f75e902394",
+      "expected": "Je préfère payer en espèces.",
+      "decoded": "je préfère payer en espèces",
+      "exact_normalized_match": true,
+      "token_edits": 0,
+      "word_count": 5,
+      "word_details": [
+        {
+          "conf": 1.0,
+          "end": 0.3,
+          "start": 0.06,
+          "word": "je"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.66,
+          "start": 0.3,
+          "word": "préfère"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.9,
+          "start": 0.66,
+          "word": "payer"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.99,
+          "start": 0.9,
+          "word": "en"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.59,
+          "start": 0.99,
+          "word": "espèces"
+        }
+      ],
+      "whisper_adjudication": null,
+      "phonetic_measurements": null,
+      "disposition": "independent_unconstrained_match",
+      "review_note": "Independent Vosk transcription matches after punctuation/case token normalization."
+    },
+    {
+      "filename": "comuls_ad6f4c144d6705595e773c6ddd7d2fc9ec69f4ddf5f32144660d7d374e79c51b.wav",
+      "sha256": "ad6f4c144d6705595e773c6ddd7d2fc9ec69f4ddf5f32144660d7d374e79c51b",
+      "expected": "Nous allons à pied.",
+      "decoded": "nous allons à pied",
+      "exact_normalized_match": true,
+      "token_edits": 0,
+      "word_count": 4,
+      "word_details": [
+        {
+          "conf": 1.0,
+          "end": 0.39,
+          "start": 0.15,
+          "word": "nous"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.6,
+          "start": 0.39,
+          "word": "allons"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.66,
+          "start": 0.6,
+          "word": "à"
+        },
+        {
+          "conf": 0.819777,
+          "end": 0.99,
+          "start": 0.66,
+          "word": "pied"
+        }
+      ],
+      "whisper_adjudication": null,
+      "phonetic_measurements": null,
+      "disposition": "independent_unconstrained_match",
+      "review_note": "Independent Vosk transcription matches after punctuation/case token normalization."
+    },
+    {
+      "filename": "comuls_ae7a1e3bb1d3e8ff3f939e1b18bfb24121c920a5596dfff02e4e774b6790c573.wav",
+      "sha256": "ae7a1e3bb1d3e8ff3f939e1b18bfb24121c920a5596dfff02e4e774b6790c573",
+      "expected": "Vous leur avez répondu.",
+      "decoded": "vous leur avez répondu",
+      "exact_normalized_match": true,
+      "token_edits": 0,
+      "word_count": 4,
+      "word_details": [
+        {
+          "conf": 0.970427,
+          "end": 0.27,
+          "start": 0.0,
+          "word": "vous"
+        },
+        {
+          "conf": 0.970427,
+          "end": 0.45,
+          "start": 0.27,
+          "word": "leur"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.6,
+          "start": 0.45,
+          "word": "avez"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.17,
+          "start": 0.6,
+          "word": "répondu"
+        }
+      ],
+      "whisper_adjudication": null,
+      "phonetic_measurements": null,
+      "disposition": "independent_unconstrained_match",
+      "review_note": "Independent Vosk transcription matches after punctuation/case token normalization."
+    },
+    {
+      "filename": "comuls_af2a49e71c88c4a717def9fea07fd279c79c36589cee87c639a08f7f52dd7f67.wav",
+      "sha256": "af2a49e71c88c4a717def9fea07fd279c79c36589cee87c639a08f7f52dd7f67",
+      "expected": "Nous avons pris cette décision à la majorité.",
+      "decoded": "nous avons pris cette décision à la majorité",
+      "exact_normalized_match": true,
+      "token_edits": 0,
+      "word_count": 8,
+      "word_details": [
+        {
+          "conf": 1.0,
+          "end": 0.36,
+          "start": 0.15,
+          "word": "nous"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.57,
+          "start": 0.36,
+          "word": "avons"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.75,
+          "start": 0.57,
+          "word": "pris"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.93,
+          "start": 0.75,
+          "word": "cette"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.35,
+          "start": 0.93,
+          "word": "décision"
+        },
+        {
+          "conf": 0.81272,
+          "end": 1.41,
+          "start": 1.35,
+          "word": "à"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.5,
+          "start": 1.41,
+          "word": "la"
+        },
+        {
+          "conf": 1.0,
+          "end": 2.13,
+          "start": 1.5,
+          "word": "majorité"
+        }
+      ],
+      "whisper_adjudication": null,
+      "phonetic_measurements": null,
+      "disposition": "independent_unconstrained_match",
+      "review_note": "Independent Vosk transcription matches after punctuation/case token normalization."
+    },
+    {
+      "filename": "comuls_b7ffab856f3614a9fc583300c3669307a4eefe22dfe986d74db014e14c8c80f8.wav",
+      "sha256": "b7ffab856f3614a9fc583300c3669307a4eefe22dfe986d74db014e14c8c80f8",
+      "expected": "Le départ a été reporté à demain.",
+      "decoded": "le départ a été reporter à demain",
+      "exact_normalized_match": false,
+      "token_edits": 1,
+      "word_count": 7,
+      "word_details": [
+        {
+          "conf": 1.0,
+          "end": 0.3,
+          "start": 0.12,
+          "word": "le"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.87,
+          "start": 0.3,
+          "word": "départ"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.08,
+          "start": 0.96,
+          "word": "a"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.29,
+          "start": 1.08,
+          "word": "été"
+        },
+        {
+          "conf": 0.555255,
+          "end": 1.8,
+          "start": 1.29,
+          "word": "reporter"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.89,
+          "start": 1.8,
+          "word": "à"
+        },
+        {
+          "conf": 1.0,
+          "end": 2.22,
+          "start": 1.89,
+          "word": "demain"
+        }
+      ],
+      "whisper_adjudication": {
+        "expected": "Le départ a été reporté à demain.",
+        "sha256": "b7ffab856f3614a9fc583300c3669307a4eefe22dfe986d74db014e14c8c80f8",
+        "filename": "comuls_b7ffab856f3614a9fc583300c3669307a4eefe22dfe986d74db014e14c8c80f8.wav",
+        "decoded": "Le départ a été reporter à demain.",
+        "segments": [
+          {
+            "text": " Le départ a été reporter à demain.",
+            "start": 0.0,
+            "end": 2.0,
+            "avg_logprob": -0.3933149576187134,
+            "no_speech_prob": 0.048814550042152405
+          }
+        ]
+      },
+      "phonetic_measurements": null,
+      "disposition": "bounded_manual_adjudication_of_model_outputs",
+      "review_note": "Reporter vs reporté is homophonic; this is transcript selection between audibly distinct alternatives."
+    },
+    {
+      "filename": "comuls_c49478c7f8fa53362abe8c5e47973a45638f3bdb0504d80f9521d09657686a0a.wav",
+      "sha256": "c49478c7f8fa53362abe8c5e47973a45638f3bdb0504d80f9521d09657686a0a",
+      "expected": "J’ai un rendez-vous.",
+      "decoded": "j'ai un rendez-vous",
+      "exact_normalized_match": true,
+      "token_edits": 0,
+      "word_count": 5,
+      "word_details": [
+        {
+          "conf": 1.0,
+          "end": 0.42,
+          "start": 0.15,
+          "word": "j'ai"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.51,
+          "start": 0.42,
+          "word": "un"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.05,
+          "start": 0.51,
+          "word": "rendez-vous"
+        }
+      ],
+      "whisper_adjudication": null,
+      "phonetic_measurements": null,
+      "disposition": "independent_unconstrained_match",
+      "review_note": "Independent Vosk transcription matches after punctuation/case token normalization."
+    },
+    {
+      "filename": "comuls_c5445d72ff8f44336a6ceb701a3b1655e145f66e7a860db05301b2ba2ebfda27.wav",
+      "sha256": "c5445d72ff8f44336a6ceb701a3b1655e145f66e7a860db05301b2ba2ebfda27",
+      "expected": "vin",
+      "decoded": "vingt",
+      "exact_normalized_match": false,
+      "token_edits": 1,
+      "word_count": 1,
+      "word_details": [
+        {
+          "conf": 0.874448,
+          "end": 0.51,
+          "start": 0.15,
+          "word": "vingt"
+        }
+      ],
+      "whisper_adjudication": {
+        "expected": "vin",
+        "sha256": "c5445d72ff8f44336a6ceb701a3b1655e145f66e7a860db05301b2ba2ebfda27",
+        "filename": "comuls_c5445d72ff8f44336a6ceb701a3b1655e145f66e7a860db05301b2ba2ebfda27.wav",
+        "decoded": "20",
+        "segments": [
+          {
+            "text": " 20",
+            "start": 0.0,
+            "end": 1.0,
+            "avg_logprob": -0.7768481969833374,
+            "no_speech_prob": 0.3587011992931366
+          }
+        ]
+      },
+      "phonetic_measurements": {
+        "word": "vin",
+        "sha256": "c5445d72ff8f44336a6ceb701a3b1655e145f66e7a860db05301b2ba2ebfda27",
+        "peak_energy_time": 0.355,
+        "vowel_sample_interval": [
+          0.335,
+          0.375
+        ],
+        "median_formants_hz": [
+          759.1,
+          1664.3,
+          3251.5
+        ],
+        "onset_interval": [
+          0.17,
+          0.21
+        ],
+        "onset_60_500hz_fraction": 0.88354,
+        "onset_above_1500hz_fraction": 0.02465
+      },
+      "disposition": "isolated_contrast_verified_with_candidates",
+      "contrast_decode": {
+        "expected": "vin",
+        "filename": "comuls_c5445d72ff8f44336a6ceb701a3b1655e145f66e7a860db05301b2ba2ebfda27.wav",
+        "sha256": "c5445d72ff8f44336a6ceb701a3b1655e145f66e7a860db05301b2ba2ebfda27",
+        "decoded": "vin",
+        "matches": true,
+        "word_details": [
+          {
+            "conf": 1.0,
+            "end": 0.51,
+            "start": 0.15,
+            "word": "vin"
+          }
+        ],
+        "expected_label_identified": true
+      },
+      "review_note": "Open-vocabulary recognition differs, but the independent recognizer identifies the expected item when offered both actual contrast labels plus unknown. No claim of unrestricted-word recognition is made."
+    },
+    {
+      "filename": "comuls_c8348b3de70cfbbb4bc34f00c2ea83c18e3c040de645e2f463e1282317e199cf.wav",
+      "sha256": "c8348b3de70cfbbb4bc34f00c2ea83c18e3c040de645e2f463e1282317e199cf",
+      "expected": "Nous devrions vérifier les résultats avant de partir.",
+      "decoded": "nous devrions vérifier les résultats avant de partir",
+      "exact_normalized_match": true,
+      "token_edits": 0,
+      "word_count": 8,
+      "word_details": [
+        {
+          "conf": 1.0,
+          "end": 0.21,
+          "start": 0.06,
+          "word": "nous"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.63,
+          "start": 0.21,
+          "word": "devrions"
+        },
+        {
+          "conf": 0.669248,
+          "end": 1.11,
+          "start": 0.63,
+          "word": "vérifier"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.17,
+          "start": 1.11,
+          "word": "les"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.59,
+          "start": 1.17,
+          "word": "résultats"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.74,
+          "start": 1.59,
+          "word": "avant"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.83,
+          "start": 1.74,
+          "word": "de"
+        },
+        {
+          "conf": 1.0,
+          "end": 2.43,
+          "start": 1.83,
+          "word": "partir"
+        }
+      ],
+      "whisper_adjudication": null,
+      "phonetic_measurements": null,
+      "disposition": "independent_unconstrained_match",
+      "review_note": "Independent Vosk transcription matches after punctuation/case token normalization."
+    },
+    {
+      "filename": "comuls_d2a46965bdc45e68231e77f3bd15b9d59116d576164d2a68f8c958970845b5c7.wav",
+      "sha256": "d2a46965bdc45e68231e77f3bd15b9d59116d576164d2a68f8c958970845b5c7",
+      "expected": "Il faut tenir compte du coût total.",
+      "decoded": "il faut tenir compte de coût total",
+      "exact_normalized_match": false,
+      "token_edits": 1,
+      "word_count": 7,
+      "word_details": [
+        {
+          "conf": 1.0,
+          "end": 0.33,
+          "start": 0.15,
+          "word": "il"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.48,
+          "start": 0.33,
+          "word": "faut"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.9,
+          "start": 0.48,
+          "word": "tenir"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.2,
+          "start": 0.9,
+          "word": "compte"
+        },
+        {
+          "conf": 0.643677,
+          "end": 1.29,
+          "start": 1.2,
+          "word": "de"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.41,
+          "start": 1.29,
+          "word": "coût"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.98,
+          "start": 1.41,
+          "word": "total"
+        }
+      ],
+      "whisper_adjudication": {
+        "expected": "Il faut tenir compte du coût total.",
+        "sha256": "d2a46965bdc45e68231e77f3bd15b9d59116d576164d2a68f8c958970845b5c7",
+        "filename": "comuls_d2a46965bdc45e68231e77f3bd15b9d59116d576164d2a68f8c958970845b5c7.wav",
+        "decoded": "Il faut tenir compte du coup total.",
+        "segments": [
+          {
+            "text": " Il faut tenir compte du coup total.",
+            "start": 0.0,
+            "end": 2.0,
+            "avg_logprob": -0.2705568887970664,
+            "no_speech_prob": 0.015809139236807823
+          }
+        ]
+      },
+      "phonetic_measurements": null,
+      "disposition": "bounded_manual_adjudication_of_model_outputs",
+      "review_note": "Whisper recovers du; coup vs coût is homophonic. The task is English meaning recognition, not ambiguous spelling transcription."
+    },
+    {
+      "filename": "comuls_d36b4715f174b6cf5735ab8538442ae12f53dfa800652df294aa94aef0e2d9d2.wav",
+      "sha256": "d36b4715f174b6cf5735ab8538442ae12f53dfa800652df294aa94aef0e2d9d2",
+      "expected": "Elle s’en est occupée.",
+      "decoded": "elle s'en est occupé",
+      "exact_normalized_match": false,
+      "token_edits": 1,
+      "word_count": 5,
+      "word_details": [
+        {
+          "conf": 0.957629,
+          "end": 0.24,
+          "start": 0.06,
+          "word": "elle"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.42,
+          "start": 0.24,
+          "word": "s'en"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.57,
+          "start": 0.42,
+          "word": "est"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.05,
+          "start": 0.57,
+          "word": "occupé"
+        }
+      ],
+      "whisper_adjudication": {
+        "expected": "Elle s’en est occupée.",
+        "sha256": "d36b4715f174b6cf5735ab8538442ae12f53dfa800652df294aa94aef0e2d9d2",
+        "filename": "comuls_d36b4715f174b6cf5735ab8538442ae12f53dfa800652df294aa94aef0e2d9d2.wav",
+        "decoded": "Elle s'en est occupée.",
+        "segments": [
+          {
+            "text": " Elle s'en est occupée.",
+            "start": 0.0,
+            "end": 2.0,
+            "avg_logprob": -0.3634101694280451,
+            "no_speech_prob": 0.01426717173308134
+          }
+        ]
+      },
+      "phonetic_measurements": null,
+      "disposition": "bounded_manual_adjudication_of_model_outputs",
+      "review_note": "Occupé vs occupée is silent agreement spelling; Whisper recovers expected feminine spelling."
+    },
+    {
+      "filename": "comuls_d3a02f7f91f3e0613832d7a1a1a4aa336ba55a288cdbfb0c4f3aa6e48c8a8537.wav",
+      "sha256": "d3a02f7f91f3e0613832d7a1a1a4aa336ba55a288cdbfb0c4f3aa6e48c8a8537",
+      "expected": "La réunion est reportée faute de temps.",
+      "decoded": "la réunion et reporter faute de temps",
+      "exact_normalized_match": false,
+      "token_edits": 2,
+      "word_count": 7,
+      "word_details": [
+        {
+          "conf": 1.0,
+          "end": 0.33,
+          "start": 0.12,
+          "word": "la"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.84,
+          "start": 0.33,
+          "word": "réunion"
+        },
+        {
+          "conf": 0.719842,
+          "end": 1.046353,
+          "start": 0.9,
+          "word": "et"
+        },
+        {
+          "conf": 0.55089,
+          "end": 1.59,
+          "start": 1.046353,
+          "word": "reporter"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.86,
+          "start": 1.59,
+          "word": "faute"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.98,
+          "start": 1.86,
+          "word": "de"
+        },
+        {
+          "conf": 1.0,
+          "end": 2.25,
+          "start": 1.98,
+          "word": "temps"
+        }
+      ],
+      "whisper_adjudication": {
+        "decoded": "La réunion est reporter foot de temps."
+      },
+      "phonetic_measurements": null,
+      "disposition": "bounded_manual_adjudication_of_model_outputs",
+      "review_note": "Vosk exactly recovers assessed chunk faute de temps, confidence 1 per word. Carrier et/reporter differs in spelling; printed carrier is supplied. Whisper disagrees on faute (foot); this residual model disagreement is retained and not presented as dual-model agreement."
+    },
+    {
+      "filename": "comuls_d69eac16ced2af9bebe3632bd60bbbeac5731feaaa674fc0d883741c91541630.wav",
+      "sha256": "d69eac16ced2af9bebe3632bd60bbbeac5731feaaa674fc0d883741c91541630",
+      "expected": "Je prépare le repas avec Paul.",
+      "decoded": "je prépare le repas avec paul",
+      "exact_normalized_match": true,
+      "token_edits": 0,
+      "word_count": 6,
+      "word_details": [
+        {
+          "conf": 1.0,
+          "end": 0.36,
+          "start": 0.12,
+          "word": "je"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.78,
+          "start": 0.36,
+          "word": "prépare"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.87,
+          "start": 0.78,
+          "word": "le"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.17,
+          "start": 0.87,
+          "word": "repas"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.41,
+          "start": 1.17,
+          "word": "avec"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.86,
+          "start": 1.41,
+          "word": "paul"
+        }
+      ],
+      "whisper_adjudication": null,
+      "phonetic_measurements": null,
+      "disposition": "independent_unconstrained_match",
+      "review_note": "Independent Vosk transcription matches after punctuation/case token normalization."
+    },
+    {
+      "filename": "comuls_d6e07b246a37c0020fa57f70c61c00c6d9ff3b62b92d68808baeb269585c640e.wav",
+      "sha256": "d6e07b246a37c0020fa57f70c61c00c6d9ff3b62b92d68808baeb269585c640e",
+      "expected": "Ce choix est acceptable dans la mesure où il reste réversible.",
+      "decoded": "ce choix est acceptable dans la mesure où il reste réversible",
+      "exact_normalized_match": true,
+      "token_edits": 0,
+      "word_count": 11,
+      "word_details": [
+        {
+          "conf": 1.0,
+          "end": 0.36,
+          "start": 0.09,
+          "word": "ce"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.57,
+          "start": 0.36,
+          "word": "choix"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.69,
+          "start": 0.57,
+          "word": "est"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.32,
+          "start": 0.69,
+          "word": "acceptable"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.44,
+          "start": 1.32,
+          "word": "dans"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.53,
+          "start": 1.44,
+          "word": "la"
+        },
+        {
+          "conf": 1.0,
+          "end": 2.04,
+          "start": 1.53,
+          "word": "mesure"
+        },
+        {
+          "conf": 1.0,
+          "end": 2.25,
+          "start": 2.1,
+          "word": "où"
+        },
+        {
+          "conf": 0.705644,
+          "end": 2.37,
+          "start": 2.25,
+          "word": "il"
+        },
+        {
+          "conf": 0.705644,
+          "end": 2.64,
+          "start": 2.37,
+          "word": "reste"
+        },
+        {
+          "conf": 0.770228,
+          "end": 3.45,
+          "start": 2.64,
+          "word": "réversible"
+        }
+      ],
+      "whisper_adjudication": null,
+      "phonetic_measurements": null,
+      "disposition": "independent_unconstrained_match",
+      "review_note": "Independent Vosk transcription matches after punctuation/case token normalization."
+    },
+    {
+      "filename": "comuls_dc9f353a666e3b27a28322f61d61637f8434aa7c55268dfbaac5d2f3a1495568.wav",
+      "sha256": "dc9f353a666e3b27a28322f61d61637f8434aa7c55268dfbaac5d2f3a1495568",
+      "expected": "Nous allons mettre en œuvre ce projet.",
+      "decoded": "nous allons mettre en œuvre ce projet",
+      "exact_normalized_match": true,
+      "token_edits": 0,
+      "word_count": 7,
+      "word_details": [
+        {
+          "conf": 1.0,
+          "end": 0.36,
+          "start": 0.15,
+          "word": "nous"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.54,
+          "start": 0.36,
+          "word": "allons"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.78,
+          "start": 0.54,
+          "word": "mettre"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.9,
+          "start": 0.78,
+          "word": "en"
+        },
+        {
+          "conf": 0.932993,
+          "end": 1.14,
+          "start": 0.9,
+          "word": "œuvre"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.26,
+          "start": 1.14,
+          "word": "ce"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.74,
+          "start": 1.26,
+          "word": "projet"
+        }
+      ],
+      "whisper_adjudication": null,
+      "phonetic_measurements": null,
+      "disposition": "independent_unconstrained_match",
+      "review_note": "Independent Vosk transcription matches after punctuation/case token normalization."
+    },
+    {
+      "filename": "comuls_dce9286431dacb5c4020d39f14851eeb94cb441a25fe8fd37bba2b4cdf0eafba.wav",
+      "sha256": "dce9286431dacb5c4020d39f14851eeb94cb441a25fe8fd37bba2b4cdf0eafba",
+      "expected": "Il n’y a plus de place.",
+      "decoded": "il n'y a plus de place",
+      "exact_normalized_match": true,
+      "token_edits": 0,
+      "word_count": 7,
+      "word_details": [
+        {
+          "conf": 1.0,
+          "end": 0.33,
+          "start": 0.15,
+          "word": "il"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.45,
+          "start": 0.33,
+          "word": "n'y"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.48,
+          "start": 0.45,
+          "word": "a"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.63,
+          "start": 0.48,
+          "word": "plus"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.75,
+          "start": 0.63,
+          "word": "de"
+        },
+        {
+          "conf": 0.894418,
+          "end": 1.26,
+          "start": 0.75,
+          "word": "place"
+        }
+      ],
+      "whisper_adjudication": null,
+      "phonetic_measurements": null,
+      "disposition": "independent_unconstrained_match",
+      "review_note": "Independent Vosk transcription matches after punctuation/case token normalization."
+    },
+    {
+      "filename": "comuls_e4472847e67acb435ef63d613300afbb7014ebf528436c65d7ad968e327050d8.wav",
+      "sha256": "e4472847e67acb435ef63d613300afbb7014ebf528436c65d7ad968e327050d8",
+      "expected": "Vous avez le temps.",
+      "decoded": "vous avez le temps",
+      "exact_normalized_match": true,
+      "token_edits": 0,
+      "word_count": 4,
+      "word_details": [
+        {
+          "conf": 1.0,
+          "end": 0.39,
+          "start": 0.15,
+          "word": "vous"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.6,
+          "start": 0.39,
+          "word": "avez"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.69,
+          "start": 0.6,
+          "word": "le"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.96,
+          "start": 0.69,
+          "word": "temps"
+        }
+      ],
+      "whisper_adjudication": null,
+      "phonetic_measurements": null,
+      "disposition": "independent_unconstrained_match",
+      "review_note": "Independent Vosk transcription matches after punctuation/case token normalization."
+    },
+    {
+      "filename": "comuls_ead5475a0032d33513d5c7a9826acb8c08de610fdf39b310964e2be98e81dd03.wav",
+      "sha256": "ead5475a0032d33513d5c7a9826acb8c08de610fdf39b310964e2be98e81dd03",
+      "expected": "Cette chambre est disponible à partir de lundi.",
+      "decoded": "cette chambre est disponible à partir de lundi",
+      "exact_normalized_match": true,
+      "token_edits": 0,
+      "word_count": 8,
+      "word_details": [
+        {
+          "conf": 0.929795,
+          "end": 0.21,
+          "start": 0.0,
+          "word": "cette"
+        },
+        {
+          "conf": 0.929795,
+          "end": 0.540666,
+          "start": 0.21,
+          "word": "chambre"
+        },
+        {
+          "conf": 0.676603,
+          "end": 0.57,
+          "start": 0.540666,
+          "word": "est"
+        },
+        {
+          "conf": 0.904502,
+          "end": 1.08,
+          "start": 0.57,
+          "word": "disponible"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.11,
+          "start": 1.08,
+          "word": "à"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.47,
+          "start": 1.11,
+          "word": "partir"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.56,
+          "start": 1.47,
+          "word": "de"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.98,
+          "start": 1.56,
+          "word": "lundi"
+        }
+      ],
+      "whisper_adjudication": null,
+      "phonetic_measurements": null,
+      "disposition": "independent_unconstrained_match",
+      "review_note": "Independent Vosk transcription matches after punctuation/case token normalization."
+    },
+    {
+      "filename": "comuls_ed6a25eb13aa79389ed1214a83b9142aa06826c77dbd57c5cff4c8bb31d91f33.wav",
+      "sha256": "ed6a25eb13aa79389ed1214a83b9142aa06826c77dbd57c5cff4c8bb31d91f33",
+      "expected": "Un bilan sera publié à l’issue de cette période.",
+      "decoded": "un bilan sera publié à l'issue de cette période",
+      "exact_normalized_match": true,
+      "token_edits": 0,
+      "word_count": 10,
+      "word_details": [
+        {
+          "conf": 1.0,
+          "end": 0.33,
+          "start": 0.18,
+          "word": "un"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.66,
+          "start": 0.33,
+          "word": "bilan"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.9,
+          "start": 0.66,
+          "word": "sera"
+        },
+        {
+          "conf": 0.971295,
+          "end": 1.26,
+          "start": 0.9,
+          "word": "publié"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.29,
+          "start": 1.26,
+          "word": "à"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.59,
+          "start": 1.29,
+          "word": "l'issue"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.68,
+          "start": 1.59,
+          "word": "de"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.86,
+          "start": 1.68,
+          "word": "cette"
+        },
+        {
+          "conf": 1.0,
+          "end": 2.49,
+          "start": 1.86,
+          "word": "période"
+        }
+      ],
+      "whisper_adjudication": null,
+      "phonetic_measurements": null,
+      "disposition": "independent_unconstrained_match",
+      "review_note": "Independent Vosk transcription matches after punctuation/case token normalization."
+    },
+    {
+      "filename": "comuls_ef8c22760528d633c42ede68438efbe1bcf171468b2832d9f38ac2dde218d7da.wav",
+      "sha256": "ef8c22760528d633c42ede68438efbe1bcf171468b2832d9f38ac2dde218d7da",
+      "expected": "Il convient de nuancer cette interprétation.",
+      "decoded": "il convient de nuancer cette interprétation",
+      "exact_normalized_match": true,
+      "token_edits": 0,
+      "word_count": 6,
+      "word_details": [
+        {
+          "conf": 1.0,
+          "end": 0.27,
+          "start": 0.0,
+          "word": "il"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.69,
+          "start": 0.27,
+          "word": "convient"
+        },
+        {
+          "conf": 1.0,
+          "end": 0.81,
+          "start": 0.69,
+          "word": "de"
+        },
+        {
+          "conf": 0.707996,
+          "end": 1.2,
+          "start": 0.81,
+          "word": "nuancer"
+        },
+        {
+          "conf": 0.959553,
+          "end": 1.379545,
+          "start": 1.2,
+          "word": "cette"
+        },
+        {
+          "conf": 1.0,
+          "end": 2.22,
+          "start": 1.379545,
+          "word": "interprétation"
+        }
+      ],
+      "whisper_adjudication": null,
+      "phonetic_measurements": null,
+      "disposition": "independent_unconstrained_match",
+      "review_note": "Independent Vosk transcription matches after punctuation/case token normalization."
+    },
+    {
+      "filename": "comuls_f32cd909e44db92f22c168148d3c3c7f289216ff59ada1385192fecd19e9e95d.wav",
+      "sha256": "f32cd909e44db92f22c168148d3c3c7f289216ff59ada1385192fecd19e9e95d",
+      "expected": "coussin",
+      "decoded": "coussin",
+      "exact_normalized_match": true,
+      "token_edits": 0,
+      "word_count": 1,
+      "word_details": [
+        {
+          "conf": 0.851792,
+          "end": 0.6,
+          "start": 0.12,
+          "word": "coussin"
+        }
+      ],
+      "whisper_adjudication": null,
+      "phonetic_measurements": null,
+      "disposition": "independent_unconstrained_match",
+      "review_note": "Independent Vosk transcription matches after punctuation/case token normalization."
+    },
+    {
+      "filename": "comuls_f585719b017a129de1a6cf4254ad6c34465984df9686d6ef42305ab4290cb743.wav",
+      "sha256": "f585719b017a129de1a6cf4254ad6c34465984df9686d6ef42305ab4290cb743",
+      "expected": "Le remboursement est soumis à certaines conditions.",
+      "decoded": "le remboursement est soumis à certaines conditions",
+      "exact_normalized_match": true,
+      "token_edits": 0,
+      "word_count": 7,
+      "word_details": [
+        {
+          "conf": 1.0,
+          "end": 0.36,
+          "start": 0.15,
+          "word": "le"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.02,
+          "start": 0.36,
+          "word": "remboursement"
+        },
+        {
+          "conf": 0.924851,
+          "end": 1.11,
+          "start": 1.02,
+          "word": "est"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.53,
+          "start": 1.11,
+          "word": "soumis"
+        },
+        {
+          "conf": 1.0,
+          "end": 1.59,
+          "start": 1.53,
+          "word": "à"
+        },
+        {
+          "conf": 1.0,
+          "end": 2.07,
+          "start": 1.59,
+          "word": "certaines"
+        },
+        {
+          "conf": 1.0,
+          "end": 2.7,
+          "start": 2.07,
+          "word": "conditions"
+        }
+      ],
+      "whisper_adjudication": null,
+      "phonetic_measurements": null,
+      "disposition": "independent_unconstrained_match",
+      "review_note": "Independent Vosk transcription matches after punctuation/case token normalization."
+    }
+  ],
+  "sound_contrasts": [
+    {
+      "exercise_id": "imperial_b1_sound_discrimination_01",
+      "grammar": [
+        "rue",
+        "roue",
+        "[unk]"
+      ],
+      "alternatives": [
+        {
+          "expected": "rue",
+          "filename": "comuls_6749093a63d2b1170533e1674908bcdf213e495aa3a78d973267d50893943b6c.wav",
+          "sha256": "6749093a63d2b1170533e1674908bcdf213e495aa3a78d973267d50893943b6c",
+          "decoded": "rue [unk]",
+          "matches": false,
+          "word_details": [
+            {
+              "conf": 1.0,
+              "end": 0.3739,
+              "start": 0.06,
+              "word": "rue"
+            },
+            {
+              "conf": 0.536676,
+              "end": 0.44464,
+              "start": 0.39,
+              "word": "[unk]"
+            }
+          ],
+          "expected_label_identified": true
+        },
+        {
+          "expected": "roue",
+          "filename": "comuls_16f1f903441f0a5777a1c343ac8424394642fbbde1f609a635fbfc82eda92630.wav",
+          "sha256": "16f1f903441f0a5777a1c343ac8424394642fbbde1f609a635fbfc82eda92630",
+          "decoded": "roue",
+          "matches": true,
+          "word_details": [
+            {
+              "conf": 1.0,
+              "end": 0.42,
+              "start": 0.06,
+              "word": "roue"
+            }
+          ],
+          "expected_label_identified": true
+        }
+      ],
+      "both_sides_match": false,
+      "both_labels_identified": true
+    },
+    {
+      "exercise_id": "imperial_b1_sound_discrimination_02",
+      "grammar": [
+        "dessus",
+        "dessous",
+        "[unk]"
+      ],
+      "alternatives": [
+        {
+          "expected": "dessus",
+          "filename": "comuls_a7c4e98785bd64f7b5a1164a920b501d6e0b69e6225bf1515e6d5d48b6a52521.wav",
+          "sha256": "a7c4e98785bd64f7b5a1164a920b501d6e0b69e6225bf1515e6d5d48b6a52521",
+          "decoded": "dessus",
+          "matches": true,
+          "word_details": [
+            {
+              "conf": 0.987237,
+              "end": 0.567157,
+              "start": 0.0,
+              "word": "dessus"
+            }
+          ],
+          "expected_label_identified": true
+        },
+        {
+          "expected": "dessous",
+          "filename": "comuls_02706e8822bcd22116a1f3a4870b1ae0910861cee63f6d908fc8a82a81be638b.wav",
+          "sha256": "02706e8822bcd22116a1f3a4870b1ae0910861cee63f6d908fc8a82a81be638b",
+          "decoded": "dessous",
+          "matches": true,
+          "word_details": [
+            {
+              "conf": 0.975405,
+              "end": 0.63,
+              "start": 0.09,
+              "word": "dessous"
+            }
+          ],
+          "expected_label_identified": true
+        }
+      ],
+      "both_sides_match": true,
+      "both_labels_identified": true
+    },
+    {
+      "exercise_id": "imperial_b1_sound_discrimination_03",
+      "grammar": [
+        "poisson",
+        "poison",
+        "[unk]"
+      ],
+      "alternatives": [
+        {
+          "expected": "poisson",
+          "filename": "comuls_2b6900b1de26571fc4b4b2a2964e445c8ec062cab1ee97917644243cafe0b261.wav",
+          "sha256": "2b6900b1de26571fc4b4b2a2964e445c8ec062cab1ee97917644243cafe0b261",
+          "decoded": "poisson",
+          "matches": true,
+          "word_details": [
+            {
+              "conf": 1.0,
+              "end": 0.54,
+              "start": 0.0,
+              "word": "poisson"
+            }
+          ],
+          "expected_label_identified": true
+        },
+        {
+          "expected": "poison",
+          "filename": "comuls_93de9869229508b1e4ca6c937203ca0f1f0ae95ce96d72cc256107d1aa5b8473.wav",
+          "sha256": "93de9869229508b1e4ca6c937203ca0f1f0ae95ce96d72cc256107d1aa5b8473",
+          "decoded": "poison",
+          "matches": true,
+          "word_details": [
+            {
+              "conf": 1.0,
+              "end": 0.63,
+              "start": 0.12,
+              "word": "poison"
+            }
+          ],
+          "expected_label_identified": true
+        }
+      ],
+      "both_sides_match": true,
+      "both_labels_identified": true
+    },
+    {
+      "exercise_id": "imperial_b1_sound_discrimination_04",
+      "grammar": [
+        "pain",
+        "bain",
+        "[unk]"
+      ],
+      "alternatives": [
+        {
+          "expected": "pain",
+          "filename": "comuls_3fbfabd04865501416d470ae05feea6a27ca5add8806b3996cf4602c174e6210.wav",
+          "sha256": "3fbfabd04865501416d470ae05feea6a27ca5add8806b3996cf4602c174e6210",
+          "decoded": "pain",
+          "matches": true,
+          "word_details": [
+            {
+              "conf": 0.809245,
+              "end": 0.42,
+              "start": 0.15,
+              "word": "pain"
+            }
+          ],
+          "expected_label_identified": true
+        },
+        {
+          "expected": "bain",
+          "filename": "comuls_726e5407bcf4bbe60911c4327c5e00fe4d215de78506bb1b63adc780b7d573e5.wav",
+          "sha256": "726e5407bcf4bbe60911c4327c5e00fe4d215de78506bb1b63adc780b7d573e5",
+          "decoded": "bain",
+          "matches": true,
+          "word_details": [
+            {
+              "conf": 1.0,
+              "end": 0.45,
+              "start": 0.12,
+              "word": "bain"
+            }
+          ],
+          "expected_label_identified": true
+        }
+      ],
+      "both_sides_match": true,
+      "both_labels_identified": true
+    },
+    {
+      "exercise_id": "imperial_b1_sound_discrimination_05",
+      "grammar": [
+        "fin",
+        "vin",
+        "[unk]"
+      ],
+      "alternatives": [
+        {
+          "expected": "fin",
+          "filename": "comuls_0c7f774b185936bbd472ab2644ce864d43fd2db354f8f9218aa3f431c67f6867.wav",
+          "sha256": "0c7f774b185936bbd472ab2644ce864d43fd2db354f8f9218aa3f431c67f6867",
+          "decoded": "fin",
+          "matches": true,
+          "word_details": [
+            {
+              "conf": 1.0,
+              "end": 0.51,
+              "start": 0.09,
+              "word": "fin"
+            }
+          ],
+          "expected_label_identified": true
+        },
+        {
+          "expected": "vin",
+          "filename": "comuls_c5445d72ff8f44336a6ceb701a3b1655e145f66e7a860db05301b2ba2ebfda27.wav",
+          "sha256": "c5445d72ff8f44336a6ceb701a3b1655e145f66e7a860db05301b2ba2ebfda27",
+          "decoded": "vin",
+          "matches": true,
+          "word_details": [
+            {
+              "conf": 1.0,
+              "end": 0.51,
+              "start": 0.15,
+              "word": "vin"
+            }
+          ],
+          "expected_label_identified": true
+        }
+      ],
+      "both_sides_match": true,
+      "both_labels_identified": true
+    },
+    {
+      "exercise_id": "imperial_b2_sound_discrimination_01",
+      "grammar": [
+        "coussin",
+        "cousin",
+        "[unk]"
+      ],
+      "alternatives": [
+        {
+          "expected": "coussin",
+          "filename": "comuls_f32cd909e44db92f22c168148d3c3c7f289216ff59ada1385192fecd19e9e95d.wav",
+          "sha256": "f32cd909e44db92f22c168148d3c3c7f289216ff59ada1385192fecd19e9e95d",
+          "decoded": "coussin",
+          "matches": true,
+          "word_details": [
+            {
+              "conf": 1.0,
+              "end": 0.6,
+              "start": 0.12,
+              "word": "coussin"
+            }
+          ],
+          "expected_label_identified": true
+        },
+        {
+          "expected": "cousin",
+          "filename": "comuls_6c831d06f1168dcc244a8deb1fc449c4d25b08ca1388e47749d1e8c0f146ebc4.wav",
+          "sha256": "6c831d06f1168dcc244a8deb1fc449c4d25b08ca1388e47749d1e8c0f146ebc4",
+          "decoded": "cousin",
+          "matches": true,
+          "word_details": [
+            {
+              "conf": 1.0,
+              "end": 0.6,
+              "start": 0.12,
+              "word": "cousin"
+            }
+          ],
+          "expected_label_identified": true
+        }
+      ],
+      "both_sides_match": true,
+      "both_labels_identified": true
+    },
+    {
+      "exercise_id": "imperial_b2_sound_discrimination_02",
+      "grammar": [
+        "désert",
+        "dessert",
+        "[unk]"
+      ],
+      "alternatives": [
+        {
+          "expected": "désert",
+          "filename": "comuls_41aece44baf6c92e598339e89d1cd3cb92757a32eed69e9245008ca47ce4d715.wav",
+          "sha256": "41aece44baf6c92e598339e89d1cd3cb92757a32eed69e9245008ca47ce4d715",
+          "decoded": "désert",
+          "matches": true,
+          "word_details": [
+            {
+              "conf": 1.0,
+              "end": 0.78,
+              "start": 0.0,
+              "word": "désert"
+            }
+          ],
+          "expected_label_identified": true
+        },
+        {
+          "expected": "dessert",
+          "filename": "comuls_67de6832a04f8d90f84a3f83b6d224ab012c667bd2c4e2e040bf15142c2646ec.wav",
+          "sha256": "67de6832a04f8d90f84a3f83b6d224ab012c667bd2c4e2e040bf15142c2646ec",
+          "decoded": "dessert",
+          "matches": true,
+          "word_details": [
+            {
+              "conf": 1.0,
+              "end": 0.78,
+              "start": 0.06,
+              "word": "dessert"
+            }
+          ],
+          "expected_label_identified": true
+        }
+      ],
+      "both_sides_match": true,
+      "both_labels_identified": true
+    },
+    {
+      "exercise_id": "imperial_b2_sound_discrimination_03",
+      "grammar": [
+        "égout",
+        "écoute",
+        "[unk]"
+      ],
+      "alternatives": [
+        {
+          "expected": "égout",
+          "filename": "comuls_4647809669cddc63cbe658791f5557b98257ac0f9333a8d19710dc74086d648d.wav",
+          "sha256": "4647809669cddc63cbe658791f5557b98257ac0f9333a8d19710dc74086d648d",
+          "decoded": "égout",
+          "matches": true,
+          "word_details": [
+            {
+              "conf": 1.0,
+              "end": 0.54,
+              "start": 0.15,
+              "word": "égout"
+            }
+          ],
+          "expected_label_identified": true
+        },
+        {
+          "expected": "écoute",
+          "filename": "comuls_281923d24cec1e304e6a4ac1e55810c4c21b0bbba5c9f8d087ee6b22efc0d11c.wav",
+          "sha256": "281923d24cec1e304e6a4ac1e55810c4c21b0bbba5c9f8d087ee6b22efc0d11c",
+          "decoded": "écoute",
+          "matches": true,
+          "word_details": [
+            {
+              "conf": 1.0,
+              "end": 0.78,
+              "start": 0.15,
+              "word": "écoute"
+            }
+          ],
+          "expected_label_identified": true
+        }
+      ],
+      "both_sides_match": true,
+      "both_labels_identified": true
+    },
+    {
+      "exercise_id": "imperial_b2_sound_discrimination_04",
+      "grammar": [
+        "peur",
+        "pur",
+        "[unk]"
+      ],
+      "alternatives": [
+        {
+          "expected": "peur",
+          "filename": "comuls_42c6732af6d0997a138dbb781b5cf934f494263e0e927ba5fff74243b1accf24.wav",
+          "sha256": "42c6732af6d0997a138dbb781b5cf934f494263e0e927ba5fff74243b1accf24",
+          "decoded": "peur",
+          "matches": true,
+          "word_details": [
+            {
+              "conf": 1.0,
+              "end": 0.57,
+              "start": 0.12,
+              "word": "peur"
+            }
+          ],
+          "expected_label_identified": true
+        },
+        {
+          "expected": "pur",
+          "filename": "comuls_48a43bbcdb65d2d1df400ca28dffda63ab9aaf4a919a32306623055df69ebf65.wav",
+          "sha256": "48a43bbcdb65d2d1df400ca28dffda63ab9aaf4a919a32306623055df69ebf65",
+          "decoded": "pur",
+          "matches": true,
+          "word_details": [
+            {
+              "conf": 1.0,
+              "end": 0.57,
+              "start": 0.15,
+              "word": "pur"
+            }
+          ],
+          "expected_label_identified": true
+        }
+      ],
+      "both_sides_match": true,
+      "both_labels_identified": true
+    },
+    {
+      "exercise_id": "imperial_b2_sound_discrimination_05",
+      "grammar": [
+        "belle",
+        "bulle",
+        "[unk]"
+      ],
+      "alternatives": [
+        {
+          "expected": "belle",
+          "filename": "comuls_a6a87a33d26eee24819e635c1e8945bbeb0c6d0a6f08150640476e9500e50968.wav",
+          "sha256": "a6a87a33d26eee24819e635c1e8945bbeb0c6d0a6f08150640476e9500e50968",
+          "decoded": "belle",
+          "matches": true,
+          "word_details": [
+            {
+              "conf": 1.0,
+              "end": 0.6,
+              "start": 0.12,
+              "word": "belle"
+            }
+          ],
+          "expected_label_identified": true
+        },
+        {
+          "expected": "bulle",
+          "filename": "comuls_5a7c0f2e50261e8b0f7ce63f38ad13bb0d8d49dc95847a62eedc990c131d2395.wav",
+          "sha256": "5a7c0f2e50261e8b0f7ce63f38ad13bb0d8d49dc95847a62eedc990c131d2395",
+          "decoded": "bulle",
+          "matches": true,
+          "word_details": [
+            {
+              "conf": 1.0,
+              "end": 0.63,
+              "start": 0.15,
+              "word": "bulle"
+            }
+          ],
+          "expected_label_identified": true
+        }
+      ],
+      "both_sides_match": true,
+      "both_labels_identified": true
+    }
+  ],
+  "summary": {
+    "assets": 81,
+    "exact_unconstrained": 65,
+    "contrast_pairs": 10,
+    "both_sides_match": 9,
+    "both_labels_identified": 10,
+    "unadjudicated_flags": 0
+  },
+  "disposition_scope": "Automated prototype-release signal diagnostics with explicit uncertainty. This is not a French pronunciation/CEFR certificate or a human listening review.",
+  "secondary_model": "OpenAI Whisper base, CTranslate2 via faster-whisper 1.2.1",
+  "signal_method": {
+    "engine": "Praat Burg via praat-parselmouth 0.4.7",
+    "method": "5 formants below 5500 Hz, 25-ms analysis half-window, 5-ms steps, 50-Hz preemphasis; median around max 30-ms RMS energy",
+    "method_documentation": "https://parselmouth.readthedocs.io/en/stable/api_reference.html#parselmouth.Sound.to_formant_burg",
+    "interpretation": "Descriptive acoustic differences independently extracted from WAVs. No thresholds fitted or pass/fail labels assigned.",
+    "limitations": [
+      "Peak-energy windows are reproducible sampling, not certified phoneme boundaries.",
+      "Automatic LPC formant estimates can mistrack; no physiological or phoneme-identity certification is claimed.",
+      "Onset energy is a rough voicing cue and can include transitions; it does not replace actual phonetic alignment."
+    ],
+    "assets": [
+      {
+        "word": "rue",
+        "sha256": "6749093a63d2b1170533e1674908bcdf213e495aa3a78d973267d50893943b6c",
+        "peak_energy_time": 0.24,
+        "vowel_sample_interval": [
+          0.22,
+          0.26
+        ],
+        "median_formants_hz": [
+          366.0,
+          2152.1,
+          2925.4
+        ],
+        "onset_interval": [
+          0.06,
+          0.1
+        ],
+        "onset_60_500hz_fraction": 0.39836,
+        "onset_above_1500hz_fraction": 0.03109
+      },
+      {
+        "word": "roue",
+        "sha256": "16f1f903441f0a5777a1c343ac8424394642fbbde1f609a635fbfc82eda92630",
+        "peak_energy_time": 0.24,
+        "vowel_sample_interval": [
+          0.22,
+          0.26
+        ],
+        "median_formants_hz": [
+          367.9,
+          769.6,
+          3029.8
+        ],
+        "onset_interval": [
+          0.06,
+          0.1
+        ],
+        "onset_60_500hz_fraction": 0.42875,
+        "onset_above_1500hz_fraction": 0.006
+      },
+      {
+        "word": "belle",
+        "sha256": "a6a87a33d26eee24819e635c1e8945bbeb0c6d0a6f08150640476e9500e50968",
+        "peak_energy_time": 0.32,
+        "vowel_sample_interval": [
+          0.3,
+          0.34
+        ],
+        "median_formants_hz": [
+          655.3,
+          1992.0,
+          3033.1
+        ],
+        "onset_interval": [
+          0.16,
+          0.2
+        ],
+        "onset_60_500hz_fraction": 0.99776,
+        "onset_above_1500hz_fraction": 2e-05
+      },
+      {
+        "word": "bulle",
+        "sha256": "5a7c0f2e50261e8b0f7ce63f38ad13bb0d8d49dc95847a62eedc990c131d2395",
+        "peak_energy_time": 0.395,
+        "vowel_sample_interval": [
+          0.375,
+          0.415
+        ],
+        "median_formants_hz": [
+          278.5,
+          2372.4,
+          2849.2
+        ],
+        "onset_interval": [
+          0.17,
+          0.21
+        ],
+        "onset_60_500hz_fraction": 0.99639,
+        "onset_above_1500hz_fraction": 0.00015
+      },
+      {
+        "word": "fin",
+        "sha256": "0c7f774b185936bbd472ab2644ce864d43fd2db354f8f9218aa3f431c67f6867",
+        "peak_energy_time": 0.34,
+        "vowel_sample_interval": [
+          0.32,
+          0.36
+        ],
+        "median_formants_hz": [
+          820.4,
+          1536.4,
+          3063.3
+        ],
+        "onset_interval": [
+          0.17,
+          0.21
+        ],
+        "onset_60_500hz_fraction": 0.00656,
+        "onset_above_1500hz_fraction": 0.94069
+      },
+      {
+        "word": "vin",
+        "sha256": "c5445d72ff8f44336a6ceb701a3b1655e145f66e7a860db05301b2ba2ebfda27",
+        "peak_energy_time": 0.355,
+        "vowel_sample_interval": [
+          0.335,
+          0.375
+        ],
+        "median_formants_hz": [
+          759.1,
+          1664.3,
+          3251.5
+        ],
+        "onset_interval": [
+          0.17,
+          0.21
+        ],
+        "onset_60_500hz_fraction": 0.88354,
+        "onset_above_1500hz_fraction": 0.02465
+      },
+      {
+        "word": "peur",
+        "sha256": "42c6732af6d0997a138dbb781b5cf934f494263e0e927ba5fff74243b1accf24",
+        "peak_energy_time": 0.255,
+        "vowel_sample_interval": [
+          0.235,
+          0.275
+        ],
+        "median_formants_hz": [
+          662.7,
+          1777.7,
+          3042.1
+        ],
+        "onset_interval": [
+          0.185,
+          0.225
+        ],
+        "onset_60_500hz_fraction": 0.92603,
+        "onset_above_1500hz_fraction": 0.01594
+      },
+      {
+        "word": "pur",
+        "sha256": "48a43bbcdb65d2d1df400ca28dffda63ab9aaf4a919a32306623055df69ebf65",
+        "peak_energy_time": 0.315,
+        "vowel_sample_interval": [
+          0.295,
+          0.335
+        ],
+        "median_formants_hz": [
+          269.0,
+          2513.6,
+          2864.0
+        ],
+        "onset_interval": [
+          0.205,
+          0.245
+        ],
+        "onset_60_500hz_fraction": 0.53102,
+        "onset_above_1500hz_fraction": 0.43753
+      }
+    ]
+  },
+  "repairs": [
+    "tout/doux and gâche/cache did not distinguish both labels in independent constrained ASR; replaced by fin/vin and belle/bulle.",
+    "Elle lit le livre... replaced by Elle ouvre le livre... after two independent recognizers disagreed on lit.",
+    "Audio-check sentence changed to Bonjour. Vous êtes prêt à écouter du français., recognized exactly by both models.",
+    "Nous avons reporté la réunion... replaced by La réunion est reportée... to remove an agreed spurious à; target faute de temps independently identified."
+  ],
+  "phonetic_measurements": [
+    {
+      "word": "rue",
+      "sha256": "6749093a63d2b1170533e1674908bcdf213e495aa3a78d973267d50893943b6c",
+      "peak_energy_time": 0.24,
+      "vowel_sample_interval": [
+        0.22,
+        0.26
+      ],
+      "median_formants_hz": [
+        366.0,
+        2152.1,
+        2925.4
+      ],
+      "onset_interval": [
+        0.06,
+        0.1
+      ],
+      "onset_60_500hz_fraction": 0.39836,
+      "onset_above_1500hz_fraction": 0.03109
+    },
+    {
+      "word": "roue",
+      "sha256": "16f1f903441f0a5777a1c343ac8424394642fbbde1f609a635fbfc82eda92630",
+      "peak_energy_time": 0.24,
+      "vowel_sample_interval": [
+        0.22,
+        0.26
+      ],
+      "median_formants_hz": [
+        367.9,
+        769.6,
+        3029.8
+      ],
+      "onset_interval": [
+        0.06,
+        0.1
+      ],
+      "onset_60_500hz_fraction": 0.42875,
+      "onset_above_1500hz_fraction": 0.006
+    },
+    {
+      "word": "belle",
+      "sha256": "a6a87a33d26eee24819e635c1e8945bbeb0c6d0a6f08150640476e9500e50968",
+      "peak_energy_time": 0.32,
+      "vowel_sample_interval": [
+        0.3,
+        0.34
+      ],
+      "median_formants_hz": [
+        655.3,
+        1992.0,
+        3033.1
+      ],
+      "onset_interval": [
+        0.16,
+        0.2
+      ],
+      "onset_60_500hz_fraction": 0.99776,
+      "onset_above_1500hz_fraction": 2e-05
+    },
+    {
+      "word": "bulle",
+      "sha256": "5a7c0f2e50261e8b0f7ce63f38ad13bb0d8d49dc95847a62eedc990c131d2395",
+      "peak_energy_time": 0.395,
+      "vowel_sample_interval": [
+        0.375,
+        0.415
+      ],
+      "median_formants_hz": [
+        278.5,
+        2372.4,
+        2849.2
+      ],
+      "onset_interval": [
+        0.17,
+        0.21
+      ],
+      "onset_60_500hz_fraction": 0.99639,
+      "onset_above_1500hz_fraction": 0.00015
+    },
+    {
+      "word": "fin",
+      "sha256": "0c7f774b185936bbd472ab2644ce864d43fd2db354f8f9218aa3f431c67f6867",
+      "peak_energy_time": 0.34,
+      "vowel_sample_interval": [
+        0.32,
+        0.36
+      ],
+      "median_formants_hz": [
+        820.4,
+        1536.4,
+        3063.3
+      ],
+      "onset_interval": [
+        0.17,
+        0.21
+      ],
+      "onset_60_500hz_fraction": 0.00656,
+      "onset_above_1500hz_fraction": 0.94069
+    },
+    {
+      "word": "vin",
+      "sha256": "c5445d72ff8f44336a6ceb701a3b1655e145f66e7a860db05301b2ba2ebfda27",
+      "peak_energy_time": 0.355,
+      "vowel_sample_interval": [
+        0.335,
+        0.375
+      ],
+      "median_formants_hz": [
+        759.1,
+        1664.3,
+        3251.5
+      ],
+      "onset_interval": [
+        0.17,
+        0.21
+      ],
+      "onset_60_500hz_fraction": 0.88354,
+      "onset_above_1500hz_fraction": 0.02465
+    },
+    {
+      "word": "peur",
+      "sha256": "42c6732af6d0997a138dbb781b5cf934f494263e0e927ba5fff74243b1accf24",
+      "peak_energy_time": 0.255,
+      "vowel_sample_interval": [
+        0.235,
+        0.275
+      ],
+      "median_formants_hz": [
+        662.7,
+        1777.7,
+        3042.1
+      ],
+      "onset_interval": [
+        0.185,
+        0.225
+      ],
+      "onset_60_500hz_fraction": 0.92603,
+      "onset_above_1500hz_fraction": 0.01594
+    },
+    {
+      "word": "pur",
+      "sha256": "48a43bbcdb65d2d1df400ca28dffda63ab9aaf4a919a32306623055df69ebf65",
+      "peak_energy_time": 0.315,
+      "vowel_sample_interval": [
+        0.295,
+        0.335
+      ],
+      "median_formants_hz": [
+        269.0,
+        2513.6,
+        2864.0
+      ],
+      "onset_interval": [
+        0.205,
+        0.245
+      ],
+      "onset_60_500hz_fraction": 0.53102,
+      "onset_above_1500hz_fraction": 0.43753
+    }
+  ],
+  "media_build_manifest_sha256": "5c6db1bec63ea5b00d067f93fd5614953c558944ef6fd06e6944597fe368ebda",
+  "media_build_manifest_note": "Hash of the media-build manifest before attaching these diagnostic dispositions; audio byte hashes below are authoritative. This avoids a circular audit/manifest hash."
+}

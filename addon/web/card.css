@@ -1,0 +1,71 @@
+
+/* COMULS cards: readable in Anki Desktop and portable in synced note templates. */
+.card { margin: 0; padding: 24px 16px; background: #f4f5f2; color: #26362f; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: calc(20px * var(--comuls-font-scale, 1)); text-align: left; line-height: 1.55; }
+.comuls-card { box-sizing: border-box; max-width: 700px; margin: 0 auto; padding: 26px 28px; border: 1px solid #d9e0d8; border-radius: 14px; background: #fff; font-size: calc(20px * var(--comuls-font-scale, 1)); }
+.comuls-card *, .comuls-card *::before, .comuls-card *::after { box-sizing: border-box; }
+.comuls-header { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 24px; font-size: calc(13px * var(--comuls-font-scale, 1)); color: #53665a; }
+.comuls-brand { margin-right: auto; letter-spacing: .12em; }
+.comuls-badge { padding: 3px 9px; border: 1px solid #d9e0d8; border-radius: 20px; }
+.comuls-prompt { white-space: pre-wrap; overflow-wrap: anywhere; margin: 12px 0 20px; }
+.comuls-audio { margin: 12px 0; }
+.comuls-audio:empty { display: none; }
+.comuls-audio .replay-button svg { width: 38px; height: 38px; }
+.comuls-data { display: none !important; }
+.comuls-instruction, .comuls-muted, .comuls-help { font-size: calc(15px * var(--comuls-font-scale, 1)); color: #53665a; }
+.comuls-instruction { margin: 0 0 12px; }
+.comuls-muted { margin-top: 16px; }
+.comuls-field-label { display: block; font-size: calc(15px * var(--comuls-font-scale, 1)); margin-bottom: 8px; }
+.comuls-answer-input { width: 100%; min-height: 54px; padding: 12px 14px; border: 1px solid #93a89a; border-radius: 8px; background: #fff; color: #26362f; font: inherit; line-height: 1.45; resize: vertical; }
+.comuls-card button { appearance: none; -webkit-appearance: none; font: inherit; color: inherit; background: #f4f5f2; border: 1px solid #bdcabe; border-radius: 8px; padding: 10px 14px; cursor: pointer; min-height: 44px; line-height: 1.35; }
+.comuls-card button:hover { background: #e9f0e9; }
+.comuls-card button:disabled { opacity: .55; cursor: default; }
+.comuls-card :focus-visible { outline: 3px solid #da923a; outline-offset: 3px; }
+.comuls-card .comuls-primary { background: #284f3e; border-color: #284f3e; color: #fff; }
+.comuls-card .comuls-primary:hover { background: #34614d; }
+.comuls-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; align-items: center; }
+.comuls-actions button, .comuls-support button { font-size: calc(16px * var(--comuls-font-scale, 1)); }
+.comuls-choice-list { display: grid; gap: 10px; }
+.comuls-choice-list button { text-align: left; width: 100%; }
+.comuls-choice-list button[aria-pressed="true"] { background: #e6efe7; border: 2px solid #34614d; padding: 9px 13px; }
+.comuls-support { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+.comuls-card .comuls-quiet { background: transparent; color: #53665a; border-color: transparent; text-decoration: underline; text-underline-offset: 3px; }
+.comuls-support-content { margin: 10px 0; padding: 12px; font-size: calc(17px * var(--comuls-font-scale, 1)); background: #f5f3e9; border-left: 3px solid #ba923c; white-space: pre-wrap; overflow-wrap: anywhere; }
+.comuls-tile-area { min-height: 72px; padding: 12px; border: 1px dashed #93a89a; border-radius: 8px; display: flex; flex-wrap: wrap; gap: 8px; align-content: flex-start; }
+.comuls-tile-bank { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.comuls-tile-bank button, .comuls-tile-area button { font-size: calc(18px * var(--comuls-font-scale, 1)); min-width: 40px; }
+.comuls-tile-empty { font-size: calc(15px * var(--comuls-font-scale, 1)); color: #53665a; align-self: center; }
+.comuls-listen-first { margin: 14px 0; padding: 12px 14px; border: 1px solid #bdcabe; border-radius: 8px; }
+.comuls-listen-first .comuls-instruction { margin-bottom: 6px; }
+.comuls-card [hidden] { display: none !important; }
+.comuls-feedback { padding: 12px 14px; margin: 18px 0; border-left: 3px solid #7c927f; background: #f0f4ef; font-size: calc(17px * var(--comuls-font-scale, 1)); }
+.comuls-feedback[data-status="incorrect"] { border-left-color: #b2703e; background: #fbf3e9; }
+.comuls-reference-label { font-size: calc(14px * var(--comuls-font-scale, 1)); color: #53665a; margin: 20px 0 6px; }
+.comuls-reference { white-space: pre-wrap; overflow-wrap: anywhere; font-size: calc(23px * var(--comuls-font-scale, 1)); padding: 12px 0; }
+.comuls-response { white-space: pre-wrap; overflow-wrap: anywhere; }
+.comuls-explanation { font-size: calc(17px * var(--comuls-font-scale, 1)); margin-top: 16px; white-space: pre-wrap; overflow-wrap: anywhere; }
+.comuls-rating-guide { font-size: calc(14px * var(--comuls-font-scale, 1)); color: #53665a; border-top: 1px solid #d9e0d8; margin-top: 24px; padding-top: 16px; }
+.comuls-personal { margin-top: 24px; font-size: calc(16px * var(--comuls-font-scale, 1)); }
+.comuls-personal summary { cursor: pointer; }
+.comuls-hidden { display: none !important; }
+.nightMode.card, .night_mode.card { background: #17211c; color: #e7eee8; }
+.nightMode .comuls-card, .night_mode .comuls-card { background: #1f2c24; color: #e7eee8; border-color: #45594c; }
+.nightMode .comuls-answer-input, .night_mode .comuls-answer-input { background: #17211c; color: #e7eee8; border-color: #789180; }
+.nightMode .comuls-card button, .night_mode .comuls-card button { background: #2a3c30; color: #e7eee8; border-color: #67826e; }
+.nightMode .comuls-card button:hover, .night_mode .comuls-card button:hover { background: #354c3d; }
+.nightMode .comuls-card button[aria-pressed="true"], .night_mode .comuls-card button[aria-pressed="true"] { background: #405d48; border-color: #a0c6aa; }
+.nightMode .comuls-muted, .nightMode .comuls-header, .nightMode .comuls-instruction, .nightMode .comuls-help, .nightMode .comuls-reference-label, .nightMode .comuls-field-label, .nightMode .comuls-rating-guide, .nightMode .comuls-tile-empty, .nightMode .comuls-card .comuls-quiet,
+.night_mode .comuls-muted, .night_mode .comuls-header, .night_mode .comuls-instruction, .night_mode .comuls-help, .night_mode .comuls-reference-label, .night_mode .comuls-field-label, .night_mode .comuls-rating-guide, .night_mode .comuls-tile-empty, .night_mode .comuls-card .comuls-quiet { color: #b9cebd; }
+.nightMode .comuls-feedback, .night_mode .comuls-feedback { background: #2c3e31; }
+.nightMode .comuls-feedback[data-status="incorrect"], .night_mode .comuls-feedback[data-status="incorrect"] { background: #493b2e; }
+.nightMode .comuls-support-content, .night_mode .comuls-support-content { background: #433f2e; }
+@media (max-width: 520px) {
+  .card { padding: 12px 8px; font-size: calc(19px * var(--comuls-font-scale, 1)); }
+  .comuls-card { padding: 20px 16px; border-radius: 10px; font-size: calc(19px * var(--comuls-font-scale, 1)); }
+  .comuls-header { margin-bottom: 18px; }
+  .comuls-actions > .comuls-primary { flex-grow: 1; }
+  .comuls-support { gap: 4px; }
+}
+@media (prefers-reduced-motion: reduce) { .comuls-card * { animation: none !important; transition: none !important; } }
+
+.comuls-accent-keys { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 10px; }
+.comuls-accent-keys button { min-width: 36px; min-height: 38px; padding: 5px 9px; font-size: calc(17px * var(--comuls-font-scale, 1)); }
