@@ -36,6 +36,7 @@ def front_template() -> str:
         + '<div class="comuls-prompt">{{Prompt}}</div>'
         + _AUDIO
         + '<div class="comuls-data" id="comuls-data" aria-hidden="true">{{Payload}}</div>'
+        + '<div class="comuls-data" aria-hidden="true">{{MediaRefs}}</div>'
         + '<div data-comuls-mount></div>'
         + '<div class="comuls-muted" data-comuls-fallback>Think of your answer, then use Anki’s Show Answer.</div>'
         + _NOTES + "</main>" + _script()
@@ -49,6 +50,7 @@ def back_template() -> str:
         + '<div class="comuls-prompt">{{Prompt}}</div>'
         + _AUDIO
         + '<div class="comuls-data" id="comuls-data" aria-hidden="true">{{Payload}}</div>'
+        + '<div class="comuls-data" aria-hidden="true">{{MediaRefs}}</div>'
         + '<div data-comuls-mount></div>'
         + '<div class="comuls-reference-label">Reference answer</div>'
         + '<div class="comuls-reference" lang="fr">{{Answer}}</div>'

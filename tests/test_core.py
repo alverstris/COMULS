@@ -37,6 +37,13 @@ def pack(*items):
             "exercises": list(items or (exercise(),))}
 
 
+def support(identity="carrier:listen", requires=None, level="A2", scope="fixed_carrier_use"):
+    return {"id": identity, "kind": "construction", "label": "A request",
+            "text": "s'il vous plaît", "english": "please", "level": level,
+            "requires": requires or [], "minimum_state": "understood",
+            "modality": "reading", "scope": scope}
+
+
 def admission(item, stage="B1", familiarised=True, understood=None, budget=None):
     return core.admission_decision(
         item, stage, familiarised, understood or set(), set(core.EXERCISE_TYPES),
@@ -94,6 +101,10 @@ class AdmissionTests(unittest.TestCase):
         for reason in ("entry_level_unavailable", "content_not_ready", "exercise_disabled"):
             self.assertIn(reason, result["reasons"])
 
+    def test_retired_and_blocked_catalog_items_cannot_be_admitted(self):
+        for changes in ({"retired": True}, {"content_status": "retired"}, {"content_status": "content_blocked"}):
+            self.assertIn("content_blocked", admission(dict(exercise(), **changes), budget={"override": True})["reasons"])
+
     def test_pure_level_gate_ignores_budget_and_familiarity(self):
         item = exercise("sentence_transcription", "B1+")
         item["qa"]["ready"] = False
@@ -111,6 +122,54 @@ class AdmissionTests(unittest.TestCase):
         self.assertTrue(admission(item, budget={"new_units": 6})["allowed"])
         self.assertIn("daily_card_limit",
                       admission(item, budget={"admitted_cards": 8})["reasons"])
+
+    def test_configured_zero_and_reduced_caps_are_enforced(self):
+        item = exercise()
+        self.assertIn("daily_card_limit", admission(item, budget={"max_new_cards": 0})["reasons"])
+        self.assertIn("daily_unit_limit", admission(item, budget={"max_new_units": 0})["reasons"])
+        self.assertIn("daily_card_limit", admission(item, budget={"max_new_cards": 2, "admitted_cards": 2})["reasons"])
+        self.assertIn("daily_unit_limit", admission(item, budget={"max_new_units": 2, "new_units": 2})["reasons"])
+        self.assertTrue(admission(item, budget={"max_new_cards": 10, "admitted_cards": 8,
+                                                "max_new_units": 9, "new_units": 7})["allowed"])
+        item["unit_already_introduced"] = True
+        self.assertTrue(admission(item, budget={"max_new_units": 0, "new_units": 2})["allowed"])
+
+    def test_preview_cap_is_separate_and_cannot_be_overridden(self):
+        item = exercise("sentence_transcription", "B1+")
+        self.assertIn("daily_preview_limit", admission(item, budget={"preview_units": 1})["reasons"])
+        self.assertIn("daily_preview_limit", admission(item, budget={"max_preview_units": 0, "override": True})["reasons"])
+        item["unit_already_introduced"] = True
+        self.assertTrue(admission(item, budget={"max_preview_units": 0})["allowed"])
+
+    def test_support_acquisition_cannot_hide_extra_units_in_one_card(self):
+        item = exercise()
+        item["new_unit_cost"] = 3
+        self.assertIn("daily_unit_limit", admission(item, budget={"max_new_units": 6, "new_units": 4})["reasons"])
+        item["new_unit_cost"] = 0
+        self.assertIn("daily_unit_limit", admission(item, budget={"max_new_units": 0})["reasons"])
+
+    def test_invalid_count_settings_fail_closed(self):
+        for field in ("new_units", "admitted_cards", "preview_units", "max_new_units", "max_new_cards", "max_preview_units"):
+            for value in (-1, 0.5, True, "2", None):
+                self.assertIn("invalid_budget", admission(exercise(), budget={field: value})["reasons"])
+
+    def test_transitive_prerequisite_must_be_understood(self):
+        item = exercise()
+        item["support_units"] = [support("outer", ["inner"]), support("inner")]
+        item["prerequisites"] = ["outer"]
+        result = admission(item, understood={"outer"})
+        self.assertEqual(result["missing_prerequisites"], ["inner"])
+        self.assertTrue(admission(item, understood={"outer", "inner"})["allowed"])
+
+    def test_malformed_live_admission_fails_without_raising(self):
+        for field in ("type", "qa", "entry_levels", "prerequisites", "support_units"):
+            item = exercise()
+            item[field] = None
+            self.assertFalse(admission(item)["allowed"])
+        item = exercise()
+        item["type"] = []
+        self.assertFalse(admission(item)["allowed"])
+        self.assertFalse(core.level_eligible(dict(item, entry_levels=None), "B1"))
 
     def test_override_does_not_bypass_learning_or_daily_caps(self):
         item = exercise()
@@ -211,6 +270,40 @@ class PackTests(unittest.TestCase):
         self.assertTrue(any("duplicates" in error for error in errors))
         self.assertTrue(any("qa.ready" in error for error in errors))
 
+    def test_exact_support_closure_is_portable_and_requires_english_bridge(self):
+        item = exercise()
+        item["support_units"] = [support()]
+        item["prerequisites"] = ["carrier:listen"]
+        self.assertEqual(core.validate_pack(pack(item)), [])
+        item["support_units"][0]["english"] = ""
+        self.assertTrue(any("english" in error for error in core.validate_pack(pack(item))))
+
+    def test_missing_cyclic_and_target_dependencies_are_rejected(self):
+        item = exercise()
+        item["prerequisites"] = ["missing"]
+        self.assertTrue(any("unresolved" in error for error in core.validate_pack(pack(item))))
+        item["support_units"] = [support("a", ["b"]), support("b", ["a"])]
+        item["prerequisites"] = ["a"]
+        self.assertTrue(any("cycle" in error for error in core.validate_pack(pack(item))))
+        item["support_units"] = [support(item["unit_id"])]
+        item["prerequisites"] = [item["unit_id"]]
+        self.assertTrue(any("trained target" in error for error in core.validate_pack(pack(item))))
+
+    def test_support_levels_do_not_inherit_listening_preview_allowance(self):
+        item = exercise("audio_meaning_choice", "B2", ["B1"])
+        item["support_units"] = [support(level="B1+")]
+        item["prerequisites"] = ["carrier:listen"]
+        self.assertTrue(any("support ceiling" in error for error in core.validate_pack(pack(item))))
+        item["support_units"] = [support(level="B1", scope="definition_support")]
+        self.assertTrue(any("support ceiling" in error for error in core.validate_pack(pack(item))))
+        item["support_units"][0]["level"] = "A2"
+        self.assertEqual(core.validate_pack(pack(item)), [])
+
+    def test_identical_choice_labels_do_not_form_an_assessable_question(self):
+        item = exercise("sound_discrimination")
+        item["choices"][1]["text"] = "LISTEN."
+        self.assertTrue(any("indistinguishable" in error for error in core.validate_pack(pack(item))))
+
     def test_advertised_entry_levels_must_respect_all_task_dimensions(self):
         item = exercise("vocabulary_cloze", "A2+")
         item["carrier_level"] = "B1"
@@ -257,6 +350,13 @@ class PackTests(unittest.TestCase):
         item = exercise()
         item["unit_id"] = "a-different-sense"
         self.assertNotEqual(core.semantic_hash(item), before)
+
+    def test_hash_tracks_contrast_audio_even_when_choice_wording_is_unchanged(self):
+        for field in ("audio_file", "audio_sha256", "audio_text"):
+            item = exercise("sound_discrimination")
+            before = core.semantic_hash(item)
+            item["choices"][1][field] = "changed-alternative-recording"
+            self.assertNotEqual(core.semantic_hash(item), before)
 
 
 if __name__ == "__main__":

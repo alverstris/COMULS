@@ -83,10 +83,17 @@
   catch (_) { return; } // Static Prompt/Answer remain useful if a payload is damaged.
   if (!payload || typeof payload.id !== "string" || !payload.id) return;
   card.setAttribute("data-comuls-mounted", "true");
+  var preferences = root.comulsPreferences || {};
+  var fontPercent = Number(preferences.font_percent || 100);
+  if (!Number.isFinite(fontPercent)) fontPercent = 100;
+  card.style.setProperty("--comuls-font-scale", String(Math.min(160, Math.max(85, fontPercent)) / 100));
   var mount = card.querySelector("[data-comuls-mount]");
   var fallback = card.querySelector("[data-comuls-fallback]");
   if (fallback) fallback.classList.add("comuls-hidden");
   var side = card.getAttribute("data-comuls-side");
+  // A native completion belongs to one mounted front and one review nonce.
+  // Reset this on every side/card so an old audio callback cannot open new tiles.
+  root.COMULSPlaybackEnded = function () { return false; };
   var typeBadge = card.querySelector("[data-comuls-type]");
   if (typeBadge) typeBadge.textContent = TYPE_NAMES[payload.type] || "Practice";
   var levelBadge = card.querySelector("[data-comuls-level]");
@@ -115,6 +122,15 @@
     root.pycmd("comuls:" + JSON.stringify(message));
     return true;
   }
+  var lastActivity = 0;
+  function activity() {
+    if (Date.now() - lastActivity >= 1000) {
+      lastActivity = Date.now(); emit("activity", {});
+    }
+  }
+  ["input", "keydown", "pointerdown"].forEach(function (name) {
+    card.addEventListener(name, activity, true);
+  });
   function el(tag, className, text) {
     var node = document.createElement(tag);
     if (className) node.className = className;
@@ -134,6 +150,16 @@
     return {response: state.response, selected_ids: state.selected_ids || [], submitted: true,
       target_hint: !!state.target_hint, carrier_help: !!state.carrier_help,
       replays: state.replays || 0, presentation_seed: state.seed};
+  }
+  function sessionActions(container) {
+    container.appendChild(button("Skip without grading", "comuls-quiet", function () {
+      if (!emit("skip", {reason: "student_skip", side: side})) {
+        mount.appendChild(el("div", "comuls-muted", "Use Anki’s Bury Card command to skip without a rating."));
+      }
+    }));
+    if (context().nonce) {
+      container.appendChild(button("Pause", "comuls-quiet", function () { emit("pause", {}); }));
+    }
   }
   var state = side === "front" ? {
     created_at: Date.now(), exercise_id: payload.id, context_nonce: context().nonce || null,
@@ -187,6 +213,12 @@
       explanationMount.appendChild(el("div", "comuls-muted", "Repair: read the transcript, hide the text, then replay the complete phrase. Notice where the words join without adding pauses."));
     }
     var backActions = el("div", "comuls-actions");
+    (payload.choices || []).forEach(function (choice) {
+      if (!choice.audio_file || !context().nonce) return;
+      backActions.appendChild(button("Hear “" + choice.text + "”", "comuls-quiet", function () {
+        emit("play_comparison", {choice_id: String(choice.id)});
+      }));
+    });
     if (payload.audio_text) {
       var repairHidden = false;
       var repairButton = button("Hide text and listen again", "comuls-quiet", function () {
@@ -202,12 +234,13 @@
     var reportButton = button("Report this card", "comuls-quiet", function () {
       reportButton.disabled = true;
       if (emit("report", {reason: "card_quality", side: "back"})) {
-        mount.appendChild(el("div", "comuls-muted", "Flagged for review. You can also add details in COMULS → Feedback."));
+        mount.appendChild(el("div", "comuls-muted", "Recorded locally. Share it through COMULS → Progress → Export study data if you choose."));
       } else {
-        mount.appendChild(el("div", "comuls-muted", "Use COMULS → Feedback on Anki Desktop and include this card ID: " + payload.id));
+        mount.appendChild(el("div", "comuls-muted", "Tell your course organiser what happened and include this card ID: " + payload.id));
       }
     });
     backActions.appendChild(reportButton);
+    sessionActions(backActions);
     mount.appendChild(backActions);
     return;
   }
@@ -253,6 +286,20 @@
       if (event.key === "Enter" && !event.shiftKey && !event.isComposing) { event.preventDefault(); reveal(); }
     });
     mount.appendChild(label); mount.appendChild(input);
+    if (preferences.accent_row !== false) {
+      var accents = el("div", "comuls-accent-keys");
+      accents.setAttribute("role", "group"); accents.setAttribute("aria-label", "French accent keys");
+      "àâçéèêëîïôùûüœ".split("").forEach(function (letter) {
+        var accent = button(letter, "", function () {
+          var start = input.selectionStart == null ? input.value.length : input.selectionStart;
+          var end = input.selectionEnd == null ? start : input.selectionEnd;
+          input.value = input.value.slice(0, start) + letter + input.value.slice(end);
+          input.focus(); input.setSelectionRange(start + 1, start + 1); saveResponse(input.value);
+        });
+        accent.setAttribute("aria-label", "Insert " + letter); accents.appendChild(accent);
+      });
+      mount.appendChild(accents);
+    }
   } else if (shell === "choice") {
     var list = el("div", "comuls-choice-list");
     list.setAttribute("role", "group"); list.setAttribute("aria-label", "Answer choices");
@@ -267,9 +314,19 @@
     mount.appendChild(list);
   } else if (shell === "tiles") {
     var allTokens = tokensFor(payload), selected = [], bankOrder = shuffled(allTokens, state.seed);
+    var tilesUnlocked = false;
+    var listenGate = el("div", "comuls-listen-first");
+    var listenStatus = el("div", "comuls-instruction", context().nonce ?
+      "Listen to the complete recording before arranging the words." :
+      "Play the recording first. If this device cannot detect when it finishes, use the support button to show the words.");
+    listenStatus.setAttribute("role", "status");
+    listenGate.appendChild(listenStatus);
+    var tileStage = el("div", "comuls-tile-stage comuls-hidden");
+    tileStage.hidden = true;
     var area = el("div", "comuls-tile-area"); area.setAttribute("aria-label", "Your sentence"); area.setAttribute("aria-live", "polite");
     var bank = el("div", "comuls-tile-bank"); bank.setAttribute("aria-label", "Available words");
     function paintTiles() {
+      if (!tilesUnlocked) return;
       area.replaceChildren(); bank.replaceChildren();
       if (!selected.length) area.appendChild(el("span", "comuls-tile-empty", "Your sentence appears here"));
       selected.forEach(function (token, index) {
@@ -282,15 +339,43 @@
       });
       saveResponse(selected.map(function (token) { return token.text; }).join(" "), selected.map(function (token) { return token.id; }));
     }
-    mount.appendChild(area); mount.appendChild(bank);
+    function unlockTiles(assisted) {
+      if (tilesUnlocked || submitted) return false;
+      tilesUnlocked = true;
+      if (assisted) {
+        state.target_hint = true;
+        emit("hint", {kind: "target", reveals_target: true, carrier_help: false});
+      } else {
+        state.listen_first_completed = true;
+      }
+      persist(state);
+      tileStage.hidden = false; tileStage.classList.remove("comuls-hidden");
+      showTiles.disabled = true; showTiles.hidden = true;
+      listenStatus.textContent = assisted ? "Word tiles shown with support." : "Recording finished. Arrange the words in the order heard.";
+      if (checkButton) checkButton.disabled = false;
+      paintTiles();
+      return true;
+    }
+    var showTiles = button("Show word tiles (support)", "comuls-quiet", function () { unlockTiles(true); });
+    listenGate.appendChild(showTiles);
+    root.COMULSPlaybackEnded = function (nonce) {
+      var ctx = context();
+      if (!nonce || nonce !== ctx.nonce || nonce !== state.context_nonce ||
+          ctx.exercise_id !== payload.id || card.getAttribute("data-comuls-side") !== "front") return false;
+      return unlockTiles(false);
+    };
+    mount.appendChild(listenGate);
+    tileStage.appendChild(area); tileStage.appendChild(bank);
     var tileTools = el("div", "comuls-actions");
     tileTools.appendChild(button("Undo word", "comuls-quiet", function () { selected.pop(); paintTiles(); }));
     tileTools.appendChild(button("Clear", "comuls-quiet", function () { selected = []; paintTiles(); }));
-    mount.appendChild(tileTools); paintTiles();
+    tileStage.appendChild(tileTools); mount.appendChild(tileStage);
   }
   var actions = el("div", "comuls-actions");
   checkButton = button(shell === "reveal" ? "Show answer" : "Check answer", "comuls-primary", reveal);
+  if (shell === "tiles" && !tilesUnlocked) checkButton.disabled = true;
   actions.appendChild(checkButton); mount.appendChild(actions);
+  sessionActions(actions);
   var support = el("div", "comuls-support");
   function addSupport(label, content, kind) {
     if (!content) return;
@@ -312,7 +397,7 @@
     support.appendChild(control); mount.appendChild(supportText);
   }
   addSupport("Meaning support", payload.carrier_meaning, "carrier");
-  addSupport("Answer hint", payload.target_meaning, "target");
+  addSupport("Answer hint", payload.target_hint || payload.target_meaning, "target");
   if (support.children.length) mount.appendChild(support);
   mount.appendChild(el("div", "comuls-muted", "No timer. Anki’s Show Answer and rating buttons always remain available."));
 })();

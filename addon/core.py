@@ -49,6 +49,7 @@ CEILING_OFFSETS = {
 DEFAULT_SESSION_SECONDS = 15 * 60
 MAX_NEW_UNITS = 6
 MAX_NEW_CARDS = 8
+MAX_PREVIEW_UNITS = 1
 POLICIES = frozenset(("strict", "punctuation"))
 
 _TRANSLATION = str.maketrans({
@@ -84,6 +85,100 @@ def _nonempty(value: Any) -> bool:
 
 def _finite_number(value: Any) -> bool:
     return isinstance(value, (int, float)) and not isinstance(value, bool) and math.isfinite(value)
+
+
+def _string_list(value: Any) -> bool:
+    return isinstance(value, list) and all(_nonempty(item) for item in value)
+
+
+def _support_errors(exercise: dict[str, Any]) -> list[str]:
+    """Check the complete portable exact-use support graph for one exercise.
+
+    A saved card must remain verifiable without the installed catalog. Therefore
+    prerequisite definitions and their closure travel with its own payload.
+    Supporting-use declarations are never evidence for the trained target.
+    """
+    errors: list[str] = []
+    units = exercise.get("support_units", [])
+    prerequisites = exercise.get("prerequisites", [])
+    if not isinstance(units, list):
+        return ["support_units must be a list"]
+    known: dict[str, dict[str, Any]] = {}
+    for index, unit in enumerate(units):
+        prefix = "support_units[" + str(index) + "]"
+        if not isinstance(unit, dict):
+            errors.append(prefix + " must be an object")
+            continue
+        identity = unit.get("id")
+        if not _nonempty(identity):
+            errors.append(prefix + ".id must be nonempty text")
+        elif identity in known:
+            errors.append(prefix + ".id duplicates " + identity)
+        else:
+            known[identity] = unit
+        for field in ("label", "text", "english"):
+            if not _nonempty(unit.get(field)):
+                errors.append(prefix + "." + field + " must be nonempty text")
+        if unit.get("kind") not in ("sense", "construction", "form", "phonetic"):
+            errors.append(prefix + ".kind is unsupported")
+        if unit.get("level") not in LEVELS:
+            errors.append(prefix + ".level is unsupported")
+        if unit.get("scope") not in ("fixed_carrier_use", "definition_support", "response_label"):
+            errors.append(prefix + ".scope is unsupported")
+        if unit.get("minimum_state") != "understood":
+            errors.append(prefix + ".minimum_state must be understood")
+        if unit.get("modality") not in ("reading", "listening"):
+            errors.append(prefix + ".modality is unsupported")
+        if not _string_list(unit.get("requires")):
+            errors.append(prefix + ".requires must be a list of nonempty strings")
+        elif len(set(unit["requires"])) != len(unit["requires"]):
+            errors.append(prefix + ".requires must be unique")
+    if not _string_list(prerequisites):
+        return errors  # The ordinary prerequisite schema reports this error.
+    target = exercise.get("unit_id")
+    if isinstance(target, str) and (target in prerequisites or target in known):
+        errors.append("prerequisites must not require or declare the trained target")
+    for identity in prerequisites:
+        if identity not in known:
+            errors.append("prerequisites has unresolved support " + identity)
+    graph = {identity: unit.get("requires", []) for identity, unit in known.items()
+             if _string_list(unit.get("requires"))}
+    for identity, dependencies in graph.items():
+        for dependency in dependencies:
+            if dependency not in known:
+                errors.append("support " + identity + " has unresolved dependency " + dependency)
+    # Iterative topological elimination handles maliciously deep graphs safely.
+    pending = {identity: set(dependencies).intersection(graph) for identity, dependencies in graph.items()}
+    while pending:
+        leaves = {identity for identity, dependencies in pending.items() if not dependencies}
+        if not leaves:
+            errors.append("support_units contains a dependency cycle")
+            break
+        pending = {identity: dependencies - leaves for identity, dependencies in pending.items() if identity not in leaves}
+    entries = exercise.get("entry_levels", [])
+    if isinstance(entries, list):
+        for stage in entries:
+            if stage not in ENTRY_LEVELS:
+                continue
+            for identity, unit in known.items():
+                level = unit.get("level")
+                ceiling = LEVELS.index(stage) - (2 if unit.get("scope") == "definition_support" else 0)
+                if level in LEVELS and LEVELS.index(level) > ceiling:
+                    errors.append("support " + identity + " exceeds " + stage + " support ceiling")
+    return errors
+
+
+def prerequisite_ids(exercise: dict[str, Any]) -> set[str]:
+    """Return every exact required use, including transitive dependencies."""
+    required = set(exercise.get("prerequisites", []))
+    graph = {unit["id"]: unit.get("requires", []) for unit in exercise.get("support_units", [])}
+    pending = list(required)
+    while pending:
+        for identity in graph.get(pending.pop(), []):
+            if identity not in required:
+                required.add(identity)
+                pending.append(identity)
+    return required
 
 
 def validate_pack(pack: Any) -> list[str]:
@@ -131,9 +226,12 @@ def validate_pack(pack: Any) -> list[str]:
                 errors.append(prefix + "." + field + " must be nonempty text")
         for field in ("prerequisites", "exposure_groups", "accepted"):
             items = exercise.get(field, [])
-            if not isinstance(items, list) or any(not _nonempty(v) for v in items):
+            if not _string_list(items):
                 errors.append(prefix + "." + field + " must be a list of nonempty strings")
-        if exercise.get("answer_policy", "strict") not in POLICIES:
+            elif len(set(items)) != len(items):
+                errors.append(prefix + "." + field + " must be unique")
+        errors.extend(prefix + "." + error for error in _support_errors(exercise))
+        if exercise.get("answer_policy", "strict") not in ("strict", "punctuation"):
             errors.append(prefix + ".answer_policy is unsupported")
         qa = exercise.get("qa")
         if not isinstance(qa, dict) or qa.get("ready") is not True:
@@ -175,6 +273,10 @@ def validate_pack(pack: Any) -> list[str]:
                     correct += 1
             if correct != 1:
                 errors.append(prefix + ".choices requires exactly one correct option")
+            texts = [normalize_answer(option["text"]) for option in choices
+                     if isinstance(option, dict) and _nonempty(option.get("text"))]
+            if len(set(texts)) != len(texts):
+                errors.append(prefix + ".choices has indistinguishable option text")
         if "tokens" in exercise:
             tokens = exercise["tokens"]
             if not isinstance(tokens, list) or not tokens:
@@ -216,15 +318,49 @@ def level_eligible(exercise: dict[str, Any], stage: str) -> bool:
     This can withdraw an admitted but never-reviewed card on a stage change.
     It must never be used to hide already reviewed cards from Anki's due queue.
     """
+    if not isinstance(exercise, dict):
+        return False
     kind = exercise.get("type")
     if stage not in ENTRY_LEVELS or kind not in EXERCISE_TYPES:
         return False
-    if stage not in exercise.get("entry_levels", []):
+    entries = exercise.get("entry_levels", [])
+    if not isinstance(entries, list) or stage not in entries:
         return False
-    ceiling = LEVELS.index(stage) + CEILING_OFFSETS[kind]
+    ceiling = min(len(LEVELS) - 1, LEVELS.index(stage) + CEILING_OFFSETS[kind])
     levels = [exercise.get(field, exercise.get("level"))
               for field in ("level", "target_level", "carrier_level", "construction_level")]
     return all(level in LEVELS and LEVELS.index(level) <= ceiling for level in levels)
+
+
+def admission_forecast(exercise: dict[str, Any], budget: dict[str, Any]) -> dict[str, float]:
+    """Forecast pending work, separately from recorded active study time.
+
+    Reserve the first native attempt and one possible relearning attempt. Before
+    the preparation panel, also reserve a target preparation and twenty seconds
+    per newly acquired supporting use. These are conservative product priors,
+    not experimentally measured durations or a competing review schedule.
+
+    The UI sets preparation_complete=True only after measuring actual completed
+    preparation; its elapsed time has already reduced remaining_seconds then.
+    new_unit_cost includes the primary target plus actually new supports.
+    """
+    timings = budget.get("timings", {})
+    if not isinstance(timings, dict):
+        raise ValueError("Invalid forecast timings")
+    kind = exercise.get("type")
+    review = timings.get(kind, exercise.get("estimated_seconds", 25)) if isinstance(kind, str) else 25
+    if not _finite_number(review) or review <= 0:
+        raise ValueError("Invalid review-duration forecast")
+    primary_cost = 0 if exercise.get("unit_already_introduced") is True else 1
+    unit_cost = exercise.get("new_unit_cost", primary_cost)
+    if type(unit_cost) is not int or unit_cost < 0:
+        raise ValueError("Invalid supporting-use forecast")
+    complete = exercise.get("preparation_complete") is True
+    preparation = 0.0 if complete else max(15.0, float(review))
+    support = 0.0 if complete else max(0, unit_cost - primary_cost) * 20.0
+    return {"first_review_seconds": float(review), "relearning_allowance_seconds": float(review),
+            "preparation_seconds": preparation, "support_seconds": support,
+            "required_seconds": preparation + support + 2 * float(review)}
 
 
 def admission_decision(
@@ -239,19 +375,25 @@ def admission_decision(
     content readiness, prerequisites, level ceilings or daily caps.
     """
     reasons: list[str] = []
+    if not isinstance(exercise, dict) or not isinstance(budget, dict):
+        return {"allowed": False, "reasons": ["invalid_schema"], "missing_prerequisites": []}
     kind = exercise.get("type")
     if stage not in ENTRY_LEVELS:
         reasons.append("unsupported_stage")
     if kind not in EXERCISE_TYPES:
         reasons.append("unsupported_type")
-    if kind not in enabled:
+    if not isinstance(kind, str) or kind not in enabled:
         reasons.append("exercise_disabled")
-    if stage not in exercise.get("entry_levels", []):
+    entries = exercise.get("entry_levels", [])
+    if not isinstance(entries, list) or stage not in entries:
         reasons.append("entry_level_unavailable")
-    if exercise.get("qa", {}).get("ready") is not True:
+    qa = exercise.get("qa")
+    if not isinstance(qa, dict) or qa.get("ready") is not True:
         reasons.append("content_not_ready")
-    if stage in ENTRY_LEVELS and kind in CEILING_OFFSETS:
-        ceiling = LEVELS.index(stage) + CEILING_OFFSETS[kind]
+    if exercise.get("retired") is True or exercise.get("content_status") in ("retired", "content_blocked"):
+        reasons.append("content_blocked")
+    if stage in ENTRY_LEVELS and isinstance(kind, str) and kind in CEILING_OFFSETS:
+        ceiling = min(len(LEVELS) - 1, LEVELS.index(stage) + CEILING_OFFSETS[kind])
         for field in ("level", "target_level", "carrier_level", "construction_level"):
             level = exercise.get(field, exercise.get("level"))
             if level not in LEVELS:
@@ -261,37 +403,62 @@ def admission_decision(
     if not familiarised:
         reasons.append("familiarisation_required")
     prerequisites = exercise.get("prerequisites", [])
-    if not isinstance(prerequisites, list):
+    if not _string_list(prerequisites):
         reasons.append("invalid_prerequisites")
         missing = []
     else:
-        missing = sorted({value for value in prerequisites
-                          if isinstance(value, str) and value not in understood})
-        if any(not isinstance(value, str) for value in prerequisites):
+        if len(set(prerequisites)) != len(prerequisites):
             reasons.append("invalid_prerequisites")
+        support_errors = _support_errors(exercise)
+        if support_errors:
+            reasons.append("invalid_support")
+        required = set(prerequisites) if support_errors else prerequisite_ids(exercise)
+        missing = sorted(required - understood)
         if missing:
             reasons.append("prerequisites_missing")
     remaining = budget.get("remaining_seconds", DEFAULT_SESSION_SECONDS)
     due = budget.get("due_seconds", 0)
     used_units = budget.get("new_units", 0)
     used_cards = budget.get("admitted_cards", 0)
-    estimate = exercise.get("estimated_seconds", 25)
+    used_previews = budget.get("preview_units", 0)
+    max_units = budget.get("max_new_units", MAX_NEW_UNITS)
+    max_cards = budget.get("max_new_cards", MAX_NEW_CARDS)
+    max_previews = budget.get("max_preview_units", MAX_PREVIEW_UNITS)
+    forecast = None
+    try:
+        forecast = admission_forecast(exercise, budget)
+        estimate = forecast["required_seconds"]
+    except ValueError:
+        estimate = None
+    already_introduced = exercise.get("unit_already_introduced") is True
+    # UI can include actually acquired supports in the same bounded preparation.
+    unit_cost = exercise.get("new_unit_cost", 0 if already_introduced else 1)
     if any(not _finite_number(value) or value < 0
-           for value in (remaining, due, used_units, used_cards, estimate)):
+           for value in (remaining, due, estimate)) or (estimate is not None and estimate <= 0) or any(
+               type(value) is not int or value < 0
+               for value in (used_units, used_cards, used_previews, max_units,
+                             max_cards, max_previews, unit_cost)):
         reasons.append("invalid_budget")
     else:
         if remaining <= 0 or estimate > remaining:
             reasons.append("session_budget_exhausted")
-        if used_cards >= MAX_NEW_CARDS:
+        if used_cards >= max_cards:
             reasons.append("daily_card_limit")
-        if not exercise.get("unit_already_introduced", False) and used_units >= MAX_NEW_UNITS:
+        unit_cost = max(unit_cost, 0 if already_introduced else 1)
+        if unit_cost and used_units + unit_cost > max_units:
             reasons.append("daily_unit_limit")
+        target_level = exercise.get("target_level", exercise.get("level"))
+        above_stage = (stage in ENTRY_LEVELS and target_level in LEVELS
+                       and LEVELS.index(target_level) > LEVELS.index(stage))
+        if above_stage and not already_introduced and used_previews >= max_previews:
+            reasons.append("daily_preview_limit")
         if not budget.get("override", False):
             if budget.get("pause_new", False):
                 reasons.append("new_admission_paused")
             if due > 0 and due + estimate > remaining:
                 reasons.append("review_backlog")
-    return {"allowed": not reasons, "reasons": reasons, "missing_prerequisites": missing}
+    return {"allowed": not reasons, "reasons": reasons, "missing_prerequisites": missing,
+            "forecast": forecast}
 
 
 def _response_text(exercise: dict[str, Any], response: Any) -> str | None:
@@ -359,7 +526,8 @@ def semantic_hash(exercise: dict[str, Any]) -> str:
     contract["answer_policy"] = exercise.get("answer_policy", "strict")
     contract["accepted"] = sorted(exercise.get("accepted", []))
     contract["choices"] = sorted(
-        ({"id": option.get("id"), "text": option.get("text"), "correct": option.get("correct")}
+        ({field: option.get(field) for field in
+          ("id", "text", "correct", "audio_file", "audio_sha256", "audio_text")}
          for option in exercise.get("choices", [])), key=lambda option: str(option["id"]),
     )
     contract["tokens"] = sorted(

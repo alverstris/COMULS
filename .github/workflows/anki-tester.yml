@@ -1,62 +1,114 @@
-name: Anki tester
+name: Imperial Anki prototype
 on:
   push:
     branches: [codex/anki-tester, main]
-    paths: ['addon/**', 'tests/**', 'tools/**', 'outputs/french_vocabulary_b1_c1.csv', 'docs/VERIFICATION.md', '.github/workflows/anki-tester.yml']
+    paths: ['addon/**', 'tests/**', 'tools/**', 'outputs/french_vocabulary_b1_c1.csv', 'docs/**', '.github/workflows/anki-tester.yml']
   workflow_dispatch:
+    inputs:
+      publish:
+        description: Publish this exact verified commit as an Imperial prototype prerelease
+        type: boolean
+        default: false
 permissions:
   contents: read
 jobs:
   verify:
     runs-on: ubuntu-latest
+    timeout-minutes: 60
     env:
       QT_QPA_PLATFORM: offscreen
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
         with:
           python-version: '3.13'
-      - name: Install Qt runtime libraries
+      - name: Install Qt, native desktop and audio runtime
         run: |
           sudo apt-get update -qq
-          sudo apt-get install -y --no-install-recommends libegl1 libopengl0 libxcb-cursor0 libxkbcommon-x11-0 libxcb-xinerama0 libnss3 libasound2t64
-      - name: Install Anki test dependencies
+          sudo apt-get install -y --no-install-recommends libegl1 libgl1 libopengl0 libxcb-cursor0 libxkbcommon-x11-0 libxcb-xinerama0 libnss3 libasound2t64 libpulse0 xvfb xauth openbox mpv pulseaudio pulseaudio-utils ffmpeg
+      - name: Install pinned Anki dependencies
         run: python -m pip install anki==26.9.3 aqt==26.9.3 pytest==8.3.5
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: '22'
-      - name: Install card DOM test dependency
+      - name: Install pinned card DOM dependency
         run: npm install --no-save jsdom@22.1.0
       - name: Compile all Python files
         run: python -m compileall -q addon tools tests
+      - name: Verify immutable bundled French recordings
+        run: python tools/build_audio.py --verify-only
       - name: Run policy and real Anki collection tests
         run: python -m pytest tests -q
       - name: Exercise all card interfaces
         run: node tests/test_frontend.cjs
       - name: Audit unchanged source vocabulary
         run: python tools/audit_sources.py --out dist/source_audit.json
-      - name: Build installable add-on
-        run: python tools/build_addon.py
-      - uses: actions/upload-artifact@v4
+      - name: Build general, B1 and B2 installers
+        run: python tools/build_addon.py --require-clean
+      - name: Verify the packaged add-ons in real Anki Desktop
+        env:
+          QT_QPA_PLATFORM: xcb
+          QTWEBENGINE_DISABLE_SANDBOX: '1'
+          QTWEBENGINE_CHROMIUM_FLAGS: --no-sandbox --disable-gpu
+          LIBGL_ALWAYS_SOFTWARE: '1'
+          QT_QUICK_BACKEND: software
+        run: |
+          mkdir -p artifacts/anki-e2e
+          pulseaudio --start --exit-idle-time=-1
+          pactl load-module module-null-sink sink_name=comuls_ci sink_properties=device.description=COMULS_CI
+          pactl set-default-sink comuls_ci
+          xvfb-run -a -s "-screen 0 1440x1000x24" bash -euo pipefail <<'E2E'
+          openbox > artifacts/anki-e2e/openbox.log 2>&1 &
+          python tools/run_anki_e2e.py --addon dist/comuls-imperial-demo.ankiaddon --output artifacts/anki-e2e/general --expect-source "$GITHUB_SHA"
+          python tools/run_anki_e2e.py --addon dist/comuls-imperial-b1.ankiaddon --stages B1 --smoke --output artifacts/anki-e2e/b1-installer --upgrade-addon dist/comuls-imperial-b2.ankiaddon --expect-source "$GITHUB_SHA"
+          python tools/run_anki_e2e.py --addon dist/comuls-imperial-b2.ankiaddon --stages B2 --smoke --output artifacts/anki-e2e/b2-installer --upgrade-addon dist/comuls-imperial-b1.ankiaddon --expect-source "$GITHUB_SHA"
+          E2E
+      - name: Bind native verification to the downloadable installer bytes
+        run: |
+          mkdir -p dist/native-verification
+          cp artifacts/anki-e2e/general/summary.json dist/native-verification/general.json
+          cp artifacts/anki-e2e/b1-installer/summary.json dist/native-verification/b1-installer.json
+          cp artifacts/anki-e2e/b2-installer/summary.json dist/native-verification/b2-installer.json
+          python tools/build_addon.py --verify-release dist --source-commit "$GITHUB_SHA"
+      - name: Retain native application evidence, including failures
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: comuls-native-verification
+          path: |
+            artifacts/anki-e2e/
+            dist/source_audit.json
+            dist/build_manifest.json
+            addon/data/media_manifest.json
+          if-no-files-found: warn
+          retention-days: 14
+      - name: Retain verified installers
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: comuls-anki-tester
           path: dist/*
           if-no-files-found: error
+          retention-days: 30
 
   release:
     needs: verify
-    if: github.ref == 'refs/heads/codex/anki-tester' && startsWith(github.event.head_commit.message, 'Release Anki tester')
+    if: >-
+      (github.ref == 'refs/heads/codex/anki-tester' || github.ref == 'refs/heads/main') &&
+      (startsWith(github.event.head_commit.message, 'Release Imperial prototype') ||
+       (github.event_name == 'workflow_dispatch' && inputs.publish))
     runs-on: ubuntu-latest
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/download-artifact@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
           name: comuls-anki-tester
           path: dist
-      - name: Publish downloadable tester
+      - name: Publish verified Imperial French demo
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh release create "tester-0.1.$GITHUB_RUN_NUMBER" dist/comuls-tester.ankiaddon dist/SHA256SUMS dist/source_audit.json --prerelease --target "$GITHUB_SHA" --title "COMULS Anki tester 0.1.$GITHUB_RUN_NUMBER" --notes-file docs/TESTER_RELEASE.md
+          python tools/build_addon.py --verify-release dist --source-commit "$GITHUB_SHA"
+          version=$(python -c 'import json; print(json.load(open("dist/build_manifest.json"))["addon_version"])')
+          gh release create "imperial-demo-$version" dist/comuls-imperial-demo.ankiaddon dist/comuls-imperial-b1.ankiaddon dist/comuls-imperial-b2.ankiaddon dist/comuls-tester.ankiaddon dist/SHA256SUMS dist/source_audit.json dist/build_manifest.json dist/native-verification/*.json --prerelease --target "$GITHUB_SHA" --title "COMULS Imperial French prototype $version" --notes-file docs/TESTER_RELEASE.md

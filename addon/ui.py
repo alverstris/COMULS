@@ -20,9 +20,10 @@ from aqt.sound import av_player
 from anki.sound import TTSTag, SoundOrVideoTag
 
 from .core import (AUDIO_TYPES, ENTRY_LEVELS, EXERCISE_TYPES, LEVELS,
-    admission_decision, level_eligible, load_pack, validate_pack)
+    admission_decision, level_eligible, load_pack, validate_pack, prerequisite_ids)
 from .collection import (get_state, save_state, exercise_notes, prepare_exercise,
-    mark_familiarised, activate_exercise, ensure_deck, stage_change, stats)
+    mark_familiarised, activate_exercise, ensure_deck, stage_change, stats,
+    evidence_state, record_review_evidence, declare_understood)
 from .telemetry import LocalData
 from .course import COHORTS, load_course, route_candidates, suggested_cohort
 from .version import VERSION
@@ -58,6 +59,21 @@ def note_state(note):
     return json.loads(html.unescape(note["State"] or "{}"))
 
 
+class StudyInteractionFilter(QObject):
+    """Track actual preparation input without recording keys or answers."""
+    def __init__(self, controller):
+        super().__init__(mw)
+        self.controller = controller
+
+    def eventFilter(self, watched, event):
+        if event.type() in (QEvent.Type.KeyPress, QEvent.Type.MouseButtonPress,
+                            QEvent.Type.Wheel, QEvent.Type.TouchBegin):
+            dialog = self.controller.prepare_dialog
+            if dialog and isinstance(watched, QWidget) and (watched is dialog or dialog.isAncestorOf(watched)):
+                self.controller.last_interaction = time.monotonic()
+        return False
+
+
 class CourseController:
     def __init__(self):
         profile_hash = hashlib.sha256(mw.pm.profileFolder().encode()).hexdigest()[:20]
@@ -86,6 +102,8 @@ class CourseController:
         self.clock.setInterval(1000)
         self.clock.timeout.connect(self.tick)
         self.clock.start()
+        self.interaction_filter = StudyInteractionFilter(self)
+        QApplication.instance().installEventFilter(self.interaction_filter)
         from .reviewer import register
         self.reviewer = register(self)
         self.install_bundled_audio()
@@ -166,7 +184,7 @@ class CourseController:
         for note in exercise_notes(mw.col).values():
             exercise = payload(note)
             logs = [entry for card in note.cards() for entry in mw.col.get_review_logs(card.id)]
-            summaries[exercise["id"]] = summarize_exercise(exercise, note_state(note), logs, time.time())
+            summaries[exercise["id"]] = summarize_exercise(exercise, evidence_state(mw.col, note), logs, time.time())
         return summaries
 
     def progress_text(self):
@@ -353,6 +371,9 @@ class CourseController:
             if ns.get("declared_understood") or ns.get("understood"):
                 understood.add(unit)
             understood.update(ns.get("understood_support", []))
+            for support_id, learned_day in ns.get("support_learned_days", {}).items():
+                first_days[support_id] = min(int(learned_day), first_days.get(support_id, int(learned_day)))
+                seen_units.add(support_id)
             if ns.get("admitted_day") == str(day):
                 admitted += 1
             admission_stage = ns.get("admission_stage", state["stage"])
@@ -368,7 +389,7 @@ class CourseController:
         from .evidence import summarize_exercise
         for note in notes.values():
             logs = [entry for card in note.cards() for entry in mw.col.get_review_logs(card.id)]
-            summary = summarize_exercise(payload(note), note_state(note), logs, time.time())
+            summary = summarize_exercise(payload(note), evidence_state(mw.col, note), logs, time.time())
             if summary.get("understood"):
                 understood.add(payload(note)["unit_id"])
         units = {unit for unit, first_day in first_days.items() if first_day == day}
@@ -411,6 +432,7 @@ class CourseController:
             elif self.hard_streak >= 3 and event.get("type") in ("sentence_transcription", "sentence_transformation"):
                 QTimer.singleShot(0, self.offer_break)
         elif event.get("event") == "native_grade":
+            record_review_evidence(mw.col, event["exercise_id"], event)
             kind = self.by_id.get(event.get("exercise_id"), {}).get("type")
             self.hard_streak = self.hard_streak + 1 if kind in ("sentence_transcription", "sentence_transformation") else 0
             self.flush_time()
@@ -569,8 +591,11 @@ class CourseController:
             if note and (any(c.reps > 0 for c in note.cards()) or ns.get("lifecycle") == "admitted"):
                 continue
             exercise["unit_already_introduced"] = exercise["unit_id"] in budget["seen_units"]
+            # Preparation can explain embedded supporting uses. This temporary
+            # set grants no learner evidence and is never used for admission.
+            preparable = {unit["id"] for unit in exercise.get("support_units", [])}
             decision = admission_decision(exercise, state["stage"], True,
-                budget["understood"], set(state.get("enabled", EXERCISE_TYPES)), budget)
+                budget["understood"] | preparable, set(state.get("enabled", EXERCISE_TYPES)), budget)
             reasons = list(decision["reasons"])
             if exercise["type"] in AUDIO_TYPES and not state.get("audio_confirmed"):
                 reasons.append("French audio check required")
@@ -596,9 +621,9 @@ class CourseController:
         exercise = sorted(candidates, key=lambda row: row[:3])[0][3]
         exercise.pop("unit_already_introduced", None)
         self.mutate("Prepare COMULS exercise", lambda col: prepare_exercise(col, exercise, day),
-                    lambda _nid: self.familiarise(exercise))
+                    lambda _nid: self.familiarise(exercise, repair=repair))
 
-    def familiarise(self, exercise):
+    def familiarise(self, exercise, repair=False):
         dialog = QDialog(self.window or mw)
         dialog.setWindowTitle("Learn this first — COMULS")
         dialog.resize(660, 540)
@@ -609,13 +634,50 @@ class CourseController:
         text = QTextBrowser()
         text.setPlainText("\n\n".join(str(exercise.get(k, "")) for k in
             ("prompt", "audio_text", "answer", "target_meaning", "english_support", "carrier_meaning", "explanation") if exercise.get(k)))
+        if exercise.get("choices"):
+            text.append("\nResponse labels to understand before practice:\n" +
+                        "\n".join(c["text"] for c in exercise["choices"]))
+        if exercise.get("option_glosses"):
+            glosses = exercise["option_glosses"]
+            if isinstance(glosses, dict):
+                text.append("\n" + "\n".join(str(v) for v in glosses.values()))
+            elif isinstance(glosses, list):
+                text.append("\n" + "\n".join(str(v) for v in glosses))
         layout.addWidget(text)
+        support_choices = {}
+        already_understood = self.budget()["understood"]
+        needed = prerequisite_ids(exercise) - already_understood
+        if needed:
+            support_scroll = QScrollArea(); support_scroll.setWidgetResizable(True)
+            support_body = QWidget(); support_layout = QVBoxLayout(support_body)
+            for unit in exercise.get("support_units", []):
+                if unit["id"] not in needed:
+                    continue
+                support_layout.addWidget(label(unit["label"] + "\n" + unit["text"] + "\n" + unit["english"]))
+                choice = QComboBox()
+                choice.setObjectName("support_" + unit["id"])
+                choice.addItem("Choose after reading this exact use", None)
+                choice.addItem("I already understand this use", "known")
+                choice.addItem("I have just learned this use", "new")
+                support_layout.addWidget(choice)
+                support_choices[unit["id"]] = choice
+            support_scroll.setWidget(support_body); support_scroll.setMaximumHeight(200)
+            layout.addWidget(support_scroll)
+            layout.addWidget(label("A newly learned supporting use counts toward today's new-target limit. "
+                                   "Your confirmation records understanding of this use, not mastery."))
         heard = {"value": exercise["type"] not in AUDIO_TYPES}
         if exercise.get("audio_text") or exercise.get("audio_file"):
             def play():
                 self.play_exercise(exercise)
                 heard["value"] = True
             button("Hear the whole sentence", play, layout)
+        heard_choices = set()
+        for choice in exercise.get("choices", []):
+            if choice.get("audio_file"):
+                def play_choice(option=choice):
+                    av_player.play_tags([SoundOrVideoTag(filename=option["audio_file"])])
+                    heard_choices.add(option["id"])
+                button("Hear “" + choice["text"] + "”", play_choice, layout)
         understood = QCheckBox("I understand this target and the words/construction used in this example.")
         layout.addWidget(understood)
         layout.addWidget(label("The first review may be helped by this exposure. COMULS does not count it as independent mastery."))
@@ -625,6 +687,13 @@ class CourseController:
         def accept():
             if not understood.isChecked() or not heard["value"]:
                 showInfo("Read the explanation and, for listening, play the audio before confirming.", parent=dialog)
+                return
+            if any(choice.currentData() is None for choice in support_choices.values()):
+                showInfo("Confirm each supporting use, or choose Not yet to return later.", parent=dialog)
+                return
+            required_audio = {c["id"] for c in exercise.get("choices", []) if c.get("audio_file")}
+            if not required_audio <= heard_choices:
+                showInfo("Listen to both contrast examples before adding the exercise.", parent=dialog)
                 return
             dialog.accept()
         buttons.accepted.connect(accept)
@@ -638,16 +707,30 @@ class CourseController:
         if result != QDialog.DialogCode.Accepted:
             return
         state, budget = self.state(), self.budget()
+        declared = set(support_choices)
+        newly_learned = {identity for identity, choice in support_choices.items()
+                         if choice.currentData() == "new" and identity not in budget["seen_units"]}
         exercise_for_gate = dict(exercise)
         exercise_for_gate["unit_already_introduced"] = exercise["unit_id"] in budget["seen_units"]
+        exercise_for_gate["new_unit_cost"] = (0 if exercise_for_gate["unit_already_introduced"] else 1) + len(newly_learned)
         decision = admission_decision(exercise_for_gate, state["stage"], True,
-            budget["understood"], set(state.get("enabled", EXERCISE_TYPES)), budget)
-        if not decision["allowed"]:
-            showInfo("Your preparation is complete, but admission is paused: " + ", ".join(decision["reasons"]), parent=self.window)
+            budget["understood"] | declared, set(state.get("enabled", EXERCISE_TYPES)), budget)
+        reasons = list(decision["reasons"])
+        if not self.is_manager():
+            reasons.append("course management belongs to another desktop")
+        if not repair and exercise.get("cohort", state["stage"]) != state["stage"]:
+            reasons.append("course changed during preparation")
+        if exercise["type"] in AUDIO_TYPES and (not state.get("audio_confirmed") or
+                (exercise.get("audio_file") and not self.media_ready)):
+            reasons.append("audio needs checking")
+        if reasons:
+            showInfo("Your preparation is complete, but admission is paused: " + ", ".join(reasons), parent=self.window)
             # Preserve actual familiarisation even when the remaining time is exhausted.
             self.mutate("Record COMULS preparation", lambda col: mark_familiarised(col, exercise["id"], col.sched.today))
             return
         def activate(col):
+            declare_understood(col, exercise["id"], list(declared),
+                               newly_learned_ids=list(newly_learned), day=col.sched.today)
             mark_familiarised(col, exercise["id"], col.sched.today)
             return activate_exercise(col, exercise, col.sched.today)
         self.mutate("Admit COMULS exercise", activate,
@@ -746,10 +829,19 @@ class CourseController:
             identity = selected()
             if not identity:
                 return
-            from .collection import set_managed_pause
+            from .collection import set_managed_pause, restore_retired
+            def apply(col):
+                note = exercise_notes(col)[identity]
+                if action == "restore" and note_state(note).get("lifecycle") == "retired":
+                    return restore_retired(col, identity)
+                return set_managed_pause(col, [identity], action == "pause", "user")
+            def done(report):
+                refresh()
+                if isinstance(report, dict) and report.get("preserved"):
+                    showInfo("The existing pause was preserved. This card may be paused in Anki or require "
+                             "preparation before admission. Inspect it in Anki's Browse window before changing its suspension.", parent=dialog)
             self.mutate("Change COMULS managed pause",
-                lambda col: set_managed_pause(col, [identity], action == "pause", "user"),
-                lambda _result: refresh())
+                apply, done)
         row = QHBoxLayout(); layout.addLayout(row)
         button("Pause selected", lambda: change("pause"), row)
         button("Restore selected", lambda: change("restore"), row)
@@ -847,6 +939,7 @@ class CourseController:
         self.flush_time()
         self.closed = True
         self.clock.stop()
+        QApplication.instance().removeEventFilter(self.interaction_filter)
         av_player.stop_and_clear_queue()
         if hasattr(self.reviewer, "close"):
             self.reviewer.close()
@@ -943,7 +1036,7 @@ class CourseWindow(QDialog):
             "The included course is an original pilot pack. Vocabulary source levels are unchanged; exercise-level "
             "estimates are provisional. Lower-level synthesis and supported higher-level listening are intentional.\n\n"
             "French recordings are bundled for offline playback. The audio manifest records the voice, licence and "
-            "exact file hashes. Answer-side listening uses recorded whole utterances and available aligned chunks.\n\n"
+            "exact file hashes. Answer-side listening replays whole utterances; no word-level alignment is claimed.\n\n"
             "Anki sync carries cards, media and native review history. Manage admissions from one desktop. "
             "Mobile review has reduced management, assistance and timing coverage.\n\n"
             "No study data is uploaded automatically. Reports stay on this computer until you export them. "

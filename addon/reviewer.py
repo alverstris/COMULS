@@ -35,6 +35,8 @@ class ReviewerIntegration:
         self.exposed = False
         self.capture_after_exposure = False
         self.prior_exposure_today: bool | None = None
+        self.prior_exposed_at: str | float | None = None
+        self.pending_skip = False
         self.busy = False
         self._saved_auto_advance: bool | None = None
         self._auto_reviewer: Reviewer | None = None
@@ -52,6 +54,8 @@ class ReviewerIntegration:
             ("state_shortcuts_will_change", self._shortcuts_will_change),
             ("reviewer_will_show_context_menu", self._context_menu),
             ("audio_will_replay", self._audio_will_replay),
+            ("reviewer_will_play_question_sounds", self._question_sounds),
+            ("reviewer_will_play_answer_sounds", self._answer_sounds),
         )
         for name, callback in bindings:
             hook = getattr(gui_hooks, name)
@@ -122,9 +126,11 @@ class ReviewerIntegration:
     def _snapshot_prior_exposure(self, card: Any) -> None:
         """Read exposure before this question's own answer updates synced State."""
         try:
-            state = json.loads(html.unescape(card.note()["State"]))
+            from .collection import evidence_state
+            state = evidence_state(aqt.mw.col, card.note())
             day = str(aqt.mw.col.sched.today)
             if isinstance(state, dict):
+                self.prior_exposed_at = state.get("last_exposed_at") or state.get("familiarised_at")
                 self.prior_exposure_today = (
                     str(state.get("last_exposed_day")) == day
                     or str(state.get("familiarised_day")) == day
@@ -161,6 +167,8 @@ class ReviewerIntegration:
         self.exposed = False
         self.capture_after_exposure = False
         self.prior_exposure_today = None
+        self.prior_exposed_at = None
+        self.pending_skip = False
         self.busy = False
 
     def _card_will_show(self, text: str, card: Any, kind: str) -> str:
@@ -194,7 +202,32 @@ class ReviewerIntegration:
         # This must precede the template's card.js on BOTH sides.
         serialized = json.dumps(self.expected, ensure_ascii=True, separators=(",", ":"))
         serialized = serialized.replace("<", "\\u003c").replace(">", "\\u003e").replace("&", "\\u0026")
-        return "<script>window.comulsContext=" + serialized + ";</script>" + text
+        state_reader = getattr(self.controller, "state", None)
+        state = state_reader() if callable(state_reader) else {}
+        preferences = {"font_percent": min(160, max(85, int(state.get("font_percent", 100)))),
+                       "accent_row": state.get("accent_row", True) is True}
+        return ("<script>window.comulsContext=" + serialized
+                + ";window.comulsPreferences=" + json.dumps(preferences) + ";</script>" + text)
+
+    def _question_sounds(self, card: Any, sounds: list[Any]) -> None:
+        """Control only managed-card autoplay; do not change deck preferences."""
+        exercise = self._read_exercise(card)
+        if exercise is None:
+            return
+        sounds.clear()
+        state_reader = getattr(self.controller, "state", None)
+        state = state_reader() if callable(state_reader) else {}
+        if state.get("audio_autoplay", False) and not getattr(self.controller, "paused", False):
+            # Only the primary recording belongs in question autoplay.
+            from anki.sound import SoundOrVideoTag
+            if exercise.get("audio_file"):
+                sounds.append(SoundOrVideoTag(filename=exercise["audio_file"]))
+            elif exercise.get("audio_text"):
+                sounds.extend(card.question_av_tags()[:1])
+
+    def _answer_sounds(self, card: Any, sounds: list[Any]) -> None:
+        if self._read_exercise(card) is not None:
+            sounds.clear()
 
     def _did_show_question(self, card: Any) -> None:
         if self._live() and card.id == self.expected["card_id"]:
@@ -218,7 +251,8 @@ class ReviewerIntegration:
         visible; no grade is possible until it finishes. Only declared exposure
         groups cause cross-note burial. A shared word alone creates no link.
         """
-        from .collection import _write_json, exercise_notes, note_payload, note_state
+        from .collection import (_write_json, exercise_notes, note_payload, note_state,
+                                 record_reference_exposure)
 
         mw = aqt.mw
         reviewer = mw.reviewer
@@ -232,6 +266,9 @@ class ReviewerIntegration:
             source_note = col.get_note(note_id)
             if source_note["COMULS_ID"] != expected["exercise_id"]:
                 raise ValueError("COMULS exposure identity changed")
+            # Factual exposure survives native undo. It is not achievement credit.
+            record_reference_exposure(col, expected["exercise_id"],
+                                      datetime.fromisoformat(now).timestamp())
             notes = [source_note]
             if groups:
                 for candidate in exercise_notes(col).values():
@@ -262,6 +299,9 @@ class ReviewerIntegration:
         def success(result: Any) -> None:
             if self.expected == expected:
                 self.busy = False
+                if self.pending_skip:
+                    self.pending_skip = False
+                    self._skip_current()
 
         def failure(exception: Exception) -> None:
             if self.expected == expected:
@@ -307,6 +347,7 @@ class ReviewerIntegration:
                 self.target_hint = True
             else:
                 self.carrier_help = True
+            self.carrier_help = self.carrier_help or event.get("carrier_help", False)
             self._event("hint", kind=event["kind"], reveals_target=event["reveals_target"])
         elif kind == "replay":
             if event.get("side", "front") == "front":
@@ -317,6 +358,21 @@ class ReviewerIntegration:
                         side=event.get("side", "front"))
         elif kind == "skip":
             self._skip_current()
+        elif kind == "activity":
+            self._event("activity")
+        elif kind == "pause":
+            self.controller.pause("manual")
+        elif kind == "play_comparison":
+            # Resolve the ID in trusted current content; never accept a path
+            # supplied by the webview and never reveal alternatives on fronts.
+            if aqt.mw.reviewer.state != "answer":
+                return (True, None)
+            for choice in self.exercise.get("choices", []):
+                if choice.get("id") == event["choice_id"] and choice.get("audio_file"):
+                    from anki.sound import SoundOrVideoTag
+                    av_player.play_tags([SoundOrVideoTag(filename=choice["audio_file"])])
+                    self._event("replay", side="back", source="comparison")
+                    break
         return (True, None)
 
     def _attempt_metadata(self) -> dict[str, Any]:
@@ -327,6 +383,7 @@ class ReviewerIntegration:
             "capture_phase": ("after_exposure" if self.capture_after_exposure
                               else "question" if self.latch.submitted else "no_submission"),
             "prior_exposure_today": self.prior_exposure_today,
+            "prior_exposed_at": self.prior_exposed_at,
         }
 
     def _will_answer_card(
@@ -353,7 +410,10 @@ class ReviewerIntegration:
         self._clear()
 
     def _skip_current(self) -> None:
-        if not self._live() or self.busy:
+        if not self._live():
+            return
+        if self.busy:
+            self.pending_skip = True
             return
         mw = aqt.mw
         reviewer = mw.reviewer

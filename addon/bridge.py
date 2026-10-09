@@ -9,17 +9,20 @@ import json
 from typing import Any
 
 PREFIX = "comuls:"
-EVENTS = frozenset(("attempt", "hint", "replay", "report", "skip"))
+EVENTS = frozenset(("attempt", "hint", "replay", "report", "skip", "activity", "pause", "play_comparison"))
 _IDENTITY = frozenset(("event", "nonce", "card_id", "exercise_id"))
 _FIELDS = {
     "attempt": _IDENTITY | frozenset((
         "response", "selected_ids", "submitted", "target_hint",
         "carrier_help", "replays", "presentation_seed",
     )),
-    "hint": _IDENTITY | frozenset(("kind", "reveals_target")),
+    "hint": _IDENTITY | frozenset(("kind", "reveals_target", "carrier_help")),
     "replay": _IDENTITY | frozenset(("side",)),
     "report": _IDENTITY | frozenset(("reason", "side")),
     "skip": _IDENTITY | frozenset(("reason", "side")),
+    "activity": _IDENTITY,
+    "pause": _IDENTITY,
+    "play_comparison": _IDENTITY | frozenset(("choice_id",)),
 }
 
 
@@ -108,6 +111,12 @@ def validate_message(
         if (value.get("kind") not in ("target", "carrier")
                 or type(value.get("reveals_target")) is not bool
                 or value["reveals_target"] != (value["kind"] == "target")):
+            return None
+        if "carrier_help" in value and (type(value["carrier_help"]) is not bool
+                or (value["kind"] == "carrier" and value["carrier_help"] is not True)):
+            return None
+    elif event == "play_comparison":
+        if not _text(value.get("choice_id"), 128, True):
             return None
     elif event in ("report", "skip"):
         if "reason" in value and not _text(value["reason"], 200, True):

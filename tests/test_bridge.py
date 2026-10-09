@@ -69,6 +69,16 @@ class BridgeTests(unittest.TestCase):
         self.assertIsNone(bridge.validate_message(message("report", reason="x" * 201), EXPECTED))
         self.assertIsNone(bridge.validate_message(message("replay", side="browser"), EXPECTED))
 
+    def test_hint_messages_match_the_portable_card_emitter(self):
+        for kind, reveals, carrier in (("target", True, False), ("carrier", False, True), ("target", True, True)):
+            event = bridge.validate_message(message("hint", kind=kind, reveals_target=reveals,
+                                                    carrier_help=carrier), EXPECTED)
+            self.assertIsNotNone(event)
+            self.assertEqual(event["carrier_help"], carrier)
+        self.assertIsNone(bridge.validate_message(message("hint", carrier_help="true"), EXPECTED))
+        self.assertIsNone(bridge.validate_message(message("hint", kind="carrier", reveals_target=False,
+                                                         carrier_help=False), EXPECTED))
+
     def test_context_identity_and_live_card_are_required(self):
         class Reviewer:
             def __init__(self, card_id):
