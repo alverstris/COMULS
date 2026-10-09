@@ -791,6 +791,10 @@ class CourseController:
                 merged[exercise["id"]] = exercise
             combined = dict(self.pack, version=pack["version"], exercises=list(merged.values()))
             combined["last_update"] = {"pack_id": pack["pack_id"], "version": pack["version"]}
+            if file.resolve() == (self.local.root / "pending-pack.json").resolve():
+                # The pending file is already the complete merged catalog.
+                # Preserve its bytes/receipt identity when resuming activation.
+                combined = pack
             errors = validate_pack(combined)
             if errors:
                 raise ValueError("\n".join(errors))
