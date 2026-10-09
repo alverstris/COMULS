@@ -1,0 +1,13 @@
+.venv/
+.audio-venv/
+node_modules/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+dist/
+artifacts/
+build/
+addon/user_files/
+.runtime/
+*.egg-info/
+
